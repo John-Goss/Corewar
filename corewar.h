@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/16 12:42:35 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/16 15:04:53 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,11 @@ typedef struct				s_data
 	int						flag_visu;
 	int						cycle;
 	int						cycle_to_die;
+	int						live_cpt;
 	int 					cycle_to_die_nbr;
 	t_list					*begin;
 	t_desc					*desc;
+	char					map[MEM_SIZE];
 	int						tab_live[MAX_PLAYERS + 1];
 	int						statut_champ[MAX_PLAYERS + 1];
 	int						nb_champ;

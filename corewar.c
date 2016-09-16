@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/16 12:46:16 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/16 15:04:51 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int			main(int argc, char **argv)
 
 void		parse_map(int argc, char **argv, t_data *data)
 {
-	
+	bzero(data->map, MEM_SIZE);
+
 }
 
 void		turn(t_data *data)
@@ -58,7 +59,7 @@ void		turn(t_data *data)
 //		process_action(data, elem);
 		elem = elem->next;
 	}
-			return ;
+	return ;
 }
 
 t_list		*destroy_elem(t_list *elem)
@@ -196,6 +197,7 @@ void		init_struct(t_data *data)
 	data->desc = NULL;
 	data->desc = create_desc(data->desc);
 	data->nb_champ = 0;
+	data->live_cpt = 0;
 	while (i <= MAX_PLAYERS + 1)
 	{
 		data->statut_champ[i] = 0;
