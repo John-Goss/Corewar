@@ -6,11 +6,12 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/15 17:00:46 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/16 12:46:16 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include <ncurses.h>
 
 int			main(int argc, char **argv)
 {
@@ -22,8 +23,12 @@ int			main(int argc, char **argv)
 	check_flag(argc, argv, &data);
 //	parse_map(argc, argv, &data);
 	verif_valid(argc, argv, &data);
-//	if (data.flag_visu)
-//		init_vis(&data);
+	if (data.flag_visu)
+	{
+		initscr();
+		if (getch() == ' ')
+			data.flag_slowmode = 1;
+	}
 	while (42)
 	{
 		turn(&data);
@@ -34,6 +39,7 @@ int			main(int argc, char **argv)
 	}
 //	end(data);
 }
+
 
 void		parse_map(int argc, char **argv, t_data *data)
 {
@@ -47,6 +53,8 @@ void		turn(t_data *data)
 	elem = data->begin;
 	while (elem)
 	{
+		if (data->flag_slowmode == 1)
+			getch();
 //		process_action(data, elem);
 		elem = elem->next;
 	}
@@ -178,13 +186,15 @@ void		init_struct(t_data *data)
 	int		i;
 
 	i = 0;
+	data->flag_slowmode = 0;
 	data->flag_visu = 0;
 	data->cycle = 0;
 	data->cycle_to_die = CYCLE_TO_DIE;
 	data->cycle_to_die_nbr = 1;
 	data->begin = NULL;
 	data->begin = create_elem(data->begin, 0, 0);
-	data->size_champ = 0;
+	data->desc = NULL;
+	data->desc = create_desc(data->desc);
 	data->nb_champ = 0;
 	while (i <= MAX_PLAYERS + 1)
 	{
@@ -195,9 +205,14 @@ void		init_struct(t_data *data)
 
 int			verif_valid(int argc, char **argv, t_data *data)
 {
+	t_desc *elem;
 	if (data->nb_champ > MAX_PLAYERS + 1)
 		exit(write(1, "Nombre de champions incorrect\n", 30));
-	if (data->size_champ)
-		exit(write(1, "Taille champion incorrecte\n", 27));
+	while (elem)
+	{
+		if (elem->size > CHAMP_MAX_SIZE)
+			exit(write(1, "Taille champion incorrecte\n", 27));
+		elem = elem->next;
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/15 17:00:52 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/16 12:42:35 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ typedef struct				s_desc
 
 typedef struct				s_data
 {
+	int						flag_slowmode;
 	int						flag_visu;
 	int						cycle;
 	int						cycle_to_die;
 	int 					cycle_to_die_nbr;
 	t_list					*begin;
 	t_desc					*desc;
-	int						size_champ;
 	int						tab_live[MAX_PLAYERS + 1];
 	int						statut_champ[MAX_PLAYERS + 1];
 	int						nb_champ;
