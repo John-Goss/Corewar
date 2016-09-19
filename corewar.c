@@ -6,12 +6,11 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/16 15:04:51 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/19 15:00:58 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include <ncurses.h>
 
 int			main(int argc, char **argv)
 {
@@ -44,7 +43,6 @@ int			main(int argc, char **argv)
 void		parse_map(int argc, char **argv, t_data *data)
 {
 	bzero(data->map, MEM_SIZE);
-
 }
 
 void		turn(t_data *data)
@@ -122,7 +120,8 @@ t_desc		*create_desc(t_desc *desc)
 
 	if (!desc)
 	{
-		desc = (t_desc *)malloc(sizeof(t_desc));
+		if (!(desc = (t_desc *)malloc(sizeof(t_desc))))
+			return (NULL);
 		desc->next = NULL;
 		desc->name = NULL;
 		desc->size = 0;
@@ -131,7 +130,8 @@ t_desc		*create_desc(t_desc *desc)
 	}
 	while (elem)
 		elem = elem->next;
-	elem = (t_desc *)malloc(sizeof(t_desc));
+	if (!(elem = (t_desc *)malloc(sizeof(t_desc))))
+		return (NULL);
 	elem->next = NULL;
 	elem->name = NULL;
 	elem->size = 0;
@@ -145,7 +145,8 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 
 	if (!begin)
 	{
-		begin = (t_list *)malloc(sizeof(t_list));
+		if (!(begin = (t_list *)malloc(sizeof(t_list))))
+			return (NULL);
 		begin->prev = NULL;
 		begin->next = NULL;
 		begin->pc = 0;
@@ -156,7 +157,8 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 		return (begin);
 	}
 	elem = begin;
-	elem->prev = (t_list *)malloc(sizeof(t_list));
+	if (!(elem->prev = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
 	elem->prev->next = elem;
 	elem->prev->prev = NULL;
 	elem->prev->pc = pc; // besoin du pc

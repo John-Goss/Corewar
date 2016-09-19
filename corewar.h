@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/16 15:04:53 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/16 15:29:50 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef char				t_arg_type;
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <ncurses.h>
 #include <stdlib.h>
 #include <string.h>
 
