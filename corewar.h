@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/16 15:29:50 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/19 15:52:01 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef char				t_arg_type;
  * **
  * */
 
+# define BUFF_SIZE			(4 + PROG_NAME_LENGTH + 4 + COMMENT_LENGTH)
 # define PROG_NAME_LENGTH	(128)
 # define COMMENT_LENGTH		(2048)
 # define COREWAR_EXEC_MAGIC	0xea83f3
@@ -70,12 +71,13 @@ typedef char				t_arg_type;
 #include <ncurses.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 
 typedef struct				header_s
 {
 	unsigned int			magic;
 	char					prog_name[PROG_NAME_LENGTH + 1];
-	unsigned				intprog_size;
+	unsigned int			prog_size;
 	char					comment[COMMENT_LENGTH + 1];
 }							header_t;
 
