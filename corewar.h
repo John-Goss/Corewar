@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/16 15:29:50 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/19 16:46:19 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct				header_s
 {
 	unsigned int			magic;
 	char					prog_name[PROG_NAME_LENGTH + 1];
-	unsigned				intprog_size;
+	unsigned int			prog_size;
 	char					comment[COMMENT_LENGTH + 1];
 }							header_t;
 
@@ -95,7 +95,7 @@ typedef struct				s_desc
 {
 	char					*name;
 	char					*desc;
-	int						size;
+	unsigned int			size;
 	struct s_desc			*next;
 }							t_desc;
 
@@ -129,4 +129,3 @@ void						check_who_is_alive(t_data *data);
 void						parse_map(int argc, char **argv, t_data *data);
 
 t_list						*create_elem(t_list *begin, int champ_nb, int pc);
-
