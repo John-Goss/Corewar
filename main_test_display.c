@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   main_test_display.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/07 12:54:31 by jle-quer          #+#    #+#             */
-/*   Updated: 2015/12/07 16:34:15 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/09/22 14:22:47 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/09/22 14:23:52 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "corewar.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+int	main()
 {
-	new->next = *alst;
-	*alst = new;
+	aff_window();
+	return (0);
 }

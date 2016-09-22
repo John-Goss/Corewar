@@ -6,7 +6,11 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/09/22 17:23:57 by jle-quer         ###   ########.fr       */
+=======
+/*   Updated: 2016/09/22 16:58:30 by lbaudran         ###   ########.fr       */
+>>>>>>> 33d953d099b989d2bd1b49af284c930230a9ef45
 /*   Updated: 2016/09/19 15:52:01 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -74,6 +78,7 @@ typedef char				t_arg_type;
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
+#include "Libft/INCLUDES/libft.h"
 
 typedef struct				header_s
 {
@@ -133,6 +138,7 @@ void						check_who_is_alive(t_data *data);
 void						parse_map(int argc, char **argv, t_data *data);
 
 t_list						*create_elem(t_list **begin, int champ_nb, int pc);
+t_desc						*create_desc(t_desc **desc);
 
 /*
  * PROTOTYPE DISPLAY

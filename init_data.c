@@ -6,11 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/09/22 13:31:36 by jle-quer         ###   ########.fr       */
-=======
-/*   Updated: 2016/09/22 13:46:03 by lbaudran         ###   ########.fr       */
->>>>>>> 154a70d42b116c4188ffc5507526755ad88278a7
+/*   Updated: 2016/09/22 16:58:32 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +22,9 @@ t_desc		*create_desc(t_desc **desc)
 		if (!(*desc = (t_desc *)malloc(sizeof(t_desc))))
 			return (NULL);
 		(*desc)->next = NULL;
-		(*desc)->name = NULL;
+		(*desc)->name = (char *)malloc(129 *sizeof(char));
 		(*desc)->size = 0;
-		(*desc)->desc = NULL;
+		(*desc)->desc = (char *)malloc(2049 *sizeof(char));
 		return (*desc);
 	}
 	while (elem)
@@ -36,9 +32,9 @@ t_desc		*create_desc(t_desc **desc)
 	if (!(elem = (t_desc *)malloc(sizeof(t_desc))))
 		return (NULL);
 	elem->next = NULL;
-	elem->name = NULL;
+	elem->name = (char *)malloc(129 * sizeof(char));
 	elem->size = 0;
-	elem->desc = NULL;
+	elem->desc = (char *)malloc(2049 * sizeof(char));
 	return (elem);
 }
 
@@ -78,7 +74,7 @@ int			check_flag(int argc, char **argv, t_data *data)
 	int	i;
 
 	i = 1;
-	while (i <= argc)
+	while (i < argc)
 	{
 		if (!strcmp(argv[1], "-n"))
 			data->flag_visu = 1;
