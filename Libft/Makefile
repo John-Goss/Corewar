@@ -6,7 +6,7 @@
 #    By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/03 14:39:27 by jle-quer          #+#    #+#              #
-#    Updated: 2016/06/07 17:51:01 by jle-quer         ###   ########.fr        #
+#    Updated: 2016/09/22 14:23:20 by lbaudran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,12 +64,6 @@ SRC_NAME =	ft_atoi.c \
 			ft_strtrim.c \
 			ft_tolower.c \
 			ft_toupper.c \
-			ft_lstnew.c \
-			ft_lstdelone.c \
-			ft_lstdel.c \
-			ft_lstadd.c \
-			ft_lstiter.c \
-			ft_lstmap.c \
 			ft_words.c \
 			ft_isspace.c \
 			ft_count.c \
@@ -107,8 +101,6 @@ SRC_NAME =	ft_atoi.c \
 			set_d_norm.c \
 			get_next_line.c \
 			ft_atoi_long.c \
-			ft_lstpushback.c \
-			ft_lstpushfront.c \
 			ft_isint.c \
 			ft_strndup.c
 

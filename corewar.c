@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/22 14:11:53 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:17:11 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			main(int argc, char **argv)
 
 void		stock_desc(t_data *data, char *buf)
 {
-	create_desc()
+	create_desc();
 }
 
 void		recup_champ(t_data *data, char **argv, int i)

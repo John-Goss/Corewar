@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/22 12:43:48 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:20:55 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/09/19 15:52:01 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -74,6 +74,7 @@ typedef char				t_arg_type;
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
+#include "Libft/INCLUDES/libft.h"
 
 typedef struct				header_s
 {
