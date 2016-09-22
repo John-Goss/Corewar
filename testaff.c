@@ -6,14 +6,14 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/01/31 22:05:35 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/22 12:52:47 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ncurses.h>
-#include "thegame.h"
+#include "corewar.h"
 
-static WINDOW		*create_subwin(int lines, int cols, int **tab, int y)
+/*
+static WINDOW		*create_subwin(int lines, int cols, int y)
 {
 	WINDOW	*sub_window;
 	int		starthauteur;
@@ -33,8 +33,8 @@ static WINDOW		*create_subwin(int lines, int cols, int **tab, int y)
 	refresh();
 	return (sub_window);
 }
-
-static WINDOW		*create_win(int lines, int cols, int **tab)
+*/
+static WINDOW		*create_win(int lines, int cols)
 {
 	WINDOW	*test_window;
 	int		height;
@@ -46,8 +46,8 @@ static WINDOW		*create_win(int lines, int cols, int **tab)
 	box(test_window, '|', '-');
 	wrefresh(test_window);
 	width = 0;
-	while (width != 16)
-		create_subwin(lines, cols, tab, width++);
+//	while (width != 16)
+//		create_subwin(lines, cols, width++);
 	refresh();
 	return (test_window);
 }
@@ -59,7 +59,7 @@ static void			delete_win(WINDOW *test_window)
 	refresh();
 }
 
-static int			getch_aff(WINDOW *test, int lines, int col, int **t)
+static int			getch_aff(WINDOW *test, int lines, int col)
 {
 	int	i;
 
@@ -75,7 +75,7 @@ static int			getch_aff(WINDOW *test, int lines, int col, int **t)
 			if (col <= 15)
 				printw("Taille trop petite");
 			else
-				test = create_win(lines, col, t);
+				test = create_win(lines, col);
 		}
 		if ((i == KEY_DOWN) || (i == KEY_UP) || (i == KEY_RIGHT)
 				|| (i == KEY_LEFT) || (i == 27))
@@ -87,7 +87,7 @@ static int			getch_aff(WINDOW *test, int lines, int col, int **t)
 	}
 }
 
-int					aff_window(int **tab)
+int					aff_window()
 {
 	WINDOW	*test_window;
 	int		lines;
@@ -104,6 +104,6 @@ int					aff_window(int **tab)
 	if (cols <= 15)
 		printw("Taille trop petite");
 	else
-		test_window = create_win(lines, cols, tab);
-	return (i = getch_aff(test_window, lines, cols, tab));
+		test_window = create_win(lines, cols);
+	return (i = getch_aff(test_window, lines, cols));
 }

@@ -6,11 +6,8 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/09/19 16:46:19 by jle-quer         ###   ########.fr       */
-=======
+/*   Updated: 2016/09/22 12:43:48 by jle-quer         ###   ########.fr       */
 /*   Updated: 2016/09/19 15:52:01 by lbaudran         ###   ########.fr       */
->>>>>>> 7764a5099f5aa7c95fb94e96e5e301830386dd77
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +70,7 @@ typedef char				t_arg_type;
 #include <stdlib.h>
 #include <unistd.h>
 #include <ncurses.h>
+#include <curses.h>
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
@@ -134,4 +132,10 @@ int							verif_end(t_data *data);
 void						check_who_is_alive(t_data *data);
 void						parse_map(int argc, char **argv, t_data *data);
 
-t_list						*create_elem(t_list *begin, int champ_nb, int pc);
+t_list						*create_elem(t_list **begin, int champ_nb, int pc);
+
+/*
+ * PROTOTYPE DISPLAY
+ */
+
+int							aff_window(void);

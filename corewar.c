@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/19 16:46:21 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/22 12:44:11 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ int			main(int argc, char **argv)
 	verif_valid(argc, argv, &data);
 	if (data.flag_visu)
 	{
-		initscr();
-		if (getch() == ' ')
-			data.flag_slowmode = 1;
+		aff_window();
+//		initscr();
+//		if (getch() == ' ')
+//			data.flag_slowmode = 1;
 	}
 	while (42)
 	{
@@ -40,10 +41,12 @@ int			main(int argc, char **argv)
 }
 
 
+/*
 void		parse_map(int argc, char **argv, t_data *data)
 {
-}
 
+}
+*/
 void		turn(t_data *data)
 {
 	t_list *elem;
@@ -116,6 +119,10 @@ int			verif_end(t_data *data)
 int			verif_valid(int argc, char **argv, t_data *data)
 {
 	t_desc *elem;
+
+	(void)argc;
+	(void)argv;
+	elem = data->desc;;
 	if (data->nb_champ > MAX_PLAYERS + 1)
 		exit(write(1, "Nombre de champions incorrect\n", 30));
 	while (elem)
