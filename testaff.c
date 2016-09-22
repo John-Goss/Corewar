@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/22 12:52:47 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:09:42 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int			getch_aff(WINDOW *test, int lines, int col)
 {
 	int	i;
 
-	while (1)
+	while (42)
 	{
 		i = getch();
 		if (i == 410)
@@ -77,13 +77,18 @@ static int			getch_aff(WINDOW *test, int lines, int col)
 			else
 				test = create_win(lines, col);
 		}
-		if ((i == KEY_DOWN) || (i == KEY_UP) || (i == KEY_RIGHT)
-				|| (i == KEY_LEFT) || (i == 27))
+		if (i == 27)
 		{
-			clear();
-			refresh();
-			return (i);
+			endwin();
+			exit(0);
 		}
+//		else if ((i == KEY_DOWN) || (i == KEY_UP) || (i == KEY_RIGHT)
+//				|| (i == KEY_LEFT))
+//		{
+//			clear();
+//			refresh();
+//			return (i);
+//		}
 	}
 }
 
