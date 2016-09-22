@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/22 13:27:36 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:11:53 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int			main(int argc, char **argv)
 	i = 1;
 	init_struct(&data);
 	check_flag(argc, argv, &data);
-//	parse_map(argc, argv, &data);
+	parse_map(argc, argv, &data);
+	exit(0);
 	verif_valid(argc, argv, &data);
 	if (data.flag_visu)
 	{
@@ -40,7 +41,12 @@ int			main(int argc, char **argv)
 //	end(data);
 }
 
-void recup_champ(t_data * data, char **argv, int i)
+void		stock_desc(t_data *data, char *buf)
+{
+	create_desc()
+}
+
+void		recup_champ(t_data *data, char **argv, int i)
 {
 	int			fd;
 	char		buf[BUFF_SIZE + 1];
@@ -49,7 +55,7 @@ void recup_champ(t_data * data, char **argv, int i)
 	buf[BUFF_SIZE] = '\0';
 	fd = open(argv[i], O_RDONLY);
 	read(fd, buf, BUFF_SIZE);
-
+	stock_desc(data, buf);
 	while(!(read(fd, data->map + n, 1)) && n <= MEM_SIZE)
 		n++;
 	if (n > MEM_SIZE)
