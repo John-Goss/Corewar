@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/22 14:20:55 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/22 16:58:30 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/09/19 15:52:01 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -134,6 +134,7 @@ void						check_who_is_alive(t_data *data);
 void						parse_map(int argc, char **argv, t_data *data);
 
 t_list						*create_elem(t_list **begin, int champ_nb, int pc);
+t_desc						*create_desc(t_desc **desc);
 
 /*
  * PROTOTYPE DISPLAY
