@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/22 12:44:11 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/22 14:11:53 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int			main(int argc, char **argv)
 	i = 1;
 	init_struct(&data);
 	check_flag(argc, argv, &data);
-//	parse_map(argc, argv, &data);
+	parse_map(argc, argv, &data);
+	exit(0);
 	verif_valid(argc, argv, &data);
 	if (data.flag_visu)
 	{
@@ -40,13 +41,41 @@ int			main(int argc, char **argv)
 //	end(data);
 }
 
+void		stock_desc(t_data *data, char *buf)
+{
+	create_desc()
+}
 
-/*
+void		recup_champ(t_data *data, char **argv, int i)
+{
+	int			fd;
+	char		buf[BUFF_SIZE + 1];
+	static int	n = 0;
+
+	buf[BUFF_SIZE] = '\0';
+	fd = open(argv[i], O_RDONLY);
+	read(fd, buf, BUFF_SIZE);
+	stock_desc(data, buf);
+	while(!(read(fd, data->map + n, 1)) && n <= MEM_SIZE)
+		n++;
+	if (n > MEM_SIZE)
+		exit(write(1, "Taille champion incorrecte\n", 27));
+	if (n % CHAMP_MAX_SIZE)
+		n = ((n / CHAMP_MAX_SIZE)+ 1) * CHAMP_MAX_SIZE;
+	n++;
+}
+
+
 void		parse_map(int argc, char **argv, t_data *data)
 {
+	int		i;
+
+	i = 1 + data->flag_visu;
+	while (i < argc)
+		recup_champ(data, argv, i++);
 
 }
-*/
+
 void		turn(t_data *data)
 {
 	t_list *elem;

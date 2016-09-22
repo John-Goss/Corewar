@@ -6,7 +6,11 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2016/09/22 13:31:36 by jle-quer         ###   ########.fr       */
+=======
+/*   Updated: 2016/09/22 13:46:03 by lbaudran         ###   ########.fr       */
+>>>>>>> 154a70d42b116c4188ffc5507526755ad88278a7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +101,6 @@ void		init_struct(t_data *data)
 	data->begin = NULL;
 	data->begin = create_elem(&data->begin, 0, 0);
 	data->desc = NULL;
-	data->desc = create_desc(&data->desc);
 	data->nb_champ = 0;
 	data->live_cpt = 0;
 	while (i <= MAX_PLAYERS + 1)
