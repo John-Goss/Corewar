@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/22 14:09:42 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/22 17:08:59 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ static void			delete_win(WINDOW *test_window)
 
 static int			getch_aff(WINDOW *test, int lines, int col)
 {
-	int	i;
+	int			i;
+	static int	i_line = 1;
+	static int	i_col = 1;
 
 	while (42)
 	{
@@ -73,22 +75,30 @@ static int			getch_aff(WINDOW *test, int lines, int col)
 				delete_win(test);
 			getmaxyx(stdscr, col, lines);
 			if (col <= 15)
-				printw("Taille trop petite");
+				printw("Too Short Size.");
 			else
 				test = create_win(lines, col);
 		}
-		if (i == 27)
+		else if (i == 27)
 		{
 			endwin();
 			exit(0);
 		}
-//		else if ((i == KEY_DOWN) || (i == KEY_UP) || (i == KEY_RIGHT)
-//				|| (i == KEY_LEFT))
-//		{
-//			clear();
-//			refresh();
-//			return (i);
-//		}
+		else if ((i == KEY_DOWN) || (i == KEY_UP) || (i == KEY_RIGHT)
+				|| (i == KEY_LEFT))
+		{
+			attron(A_STANDOUT);
+			mvprintw(lines + i_line, col + i_col, "HELLO !");
+			attroff(A_STANDOUT);
+			i_line++;
+			if (i_line >= LINES - 1)
+			{
+				i_line = 1;
+				i_col += strlen("HELLO !") + 1;
+			}
+			refresh();
+			continue ;
+		}
 	}
 }
 
@@ -107,8 +117,8 @@ int					aff_window()
 	test_window = NULL;
 	getmaxyx(stdscr, cols, lines);
 	if (cols <= 15)
-		printw("Taille trop petite");
+		printw("Too Short Size.");
 	else
 		test_window = create_win(lines, cols);
-	return (i = getch_aff(test_window, lines, cols));
+	return (i = getch_aff(test_window, lines - lines, cols - cols));
 }
