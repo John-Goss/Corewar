@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/26 17:57:14 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/27 14:30:57 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ static WINDOW		*create_win()
 
 //	height = COLS - (COLS / 90);
 //	width = LINES - (LINES / 90);
-	test_window = newwin(LINES, COLS, 0, 0);
+	test_window = newwin(51, COLS, 0, 0);
 	box(test_window, ACS_VLINE, ACS_HLINE);
 	wrefresh(test_window);
 //	width = 0;
 //	while (width != 16)
-//		create_subwin(lines, cols, width++);
+//		create_subwin(LINES - 56, cols, width++);
 	refresh();
 	return (test_window);
 }
@@ -85,13 +85,19 @@ static int			getch_aff(WINDOW *test, char *mem)
 				getmaxyx(stdscr, LINES, COLS);
 				getch();
 				if (LINES > 50 && COLS > 50)
+				{
+					move(1, 1);
+					if (test)
+						delete_win(test);
 					break ;
+				}
 			}
 			test = create_win();
 			continue ;
 		}
 		else if (i == 27)
 		{
+			clear();
 			endwin();
 			exit(0);
 		}
