@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/22 18:04:39 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/27 18:36:43 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,14 @@ int			main(int argc, char **argv)
 {
 	t_data	data;
 	int		i;
-
+/*
+	printf("header = %lu\n", sizeof(header_t));
+	printf("unsigned = %lu\n", sizeof(unsigned int));
+	printf("PROG_NAME_LENGTH =%d\n", PROG_NAME_LENGTH + 1);
+	printf("unsigned = %lu\n", sizeof(unsigned int));
+	printf("COMMENT_LENGTH =%d\n", COMMENT_LENGTH + 1);
+	printf("BUFF SIZE = %d\n", BUFF_SIZE);
+	exit(0);*/
 	i = 1;
 	init_struct(&data);
 	check_flag(argc, argv, &data);
@@ -55,6 +62,7 @@ void		stock_desc(t_data *data, char *buf)
 	ft_strncpy(elem->name, buf + 4, 128);
 	elem->size = (buf[136] << 24 & 0xff000000) | (buf[137] << 16 & 0xff0000) |
 		(buf[138] << 8 & 0xff00) | (buf[139] & 0xff);
+	printf("%d\n", elem->size);
 	ft_strcpy(elem->desc, buf + 140);
 }
 
@@ -68,9 +76,10 @@ void		recup_champ(t_data *data, char **argv, int i)
 	fd = open(argv[i], O_RDONLY);
 	read(fd, buf, BUFF_SIZE);
 	stock_desc(data, buf);
-	while(!(read(fd, data->map + n, 1)) && n <= MEM_SIZE)
+	while((read(fd, data->map + n, 1)) && n <= MEM_SIZE)
 		n++;
-	printf("%d\n", (unsigned int)data->map + 3);
+	printf("%d\n", n);
+	printf("%hhx\n", data->map[2]);
 	if (n > MEM_SIZE)
 		exit(write(1, "Taille champion incorrecte\n", 27));
 	if (n % CHAMP_MAX_SIZE)

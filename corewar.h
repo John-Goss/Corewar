@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/26 15:39:42 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/27 17:35:22 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/09/22 16:58:30 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/09/19 15:52:01 by lbaudran         ###   ########.fr       */
 /*                                                                            */
@@ -63,10 +63,10 @@ typedef char				t_arg_type;
  * **
  * */
 
-# define BUFF_SIZE			(4 + PROG_NAME_LENGTH + 4 + COMMENT_LENGTH)
 # define PROG_NAME_LENGTH	(128)
 # define COMMENT_LENGTH		(2048)
 # define COREWAR_EXEC_MAGIC	0xea83f3
+# define BUFF_SIZE			(4 + PROG_NAME_LENGTH + 4 + COMMENT_LENGTH + 2 + 6)
 
 #include <stdlib.h>
 #include <unistd.h>

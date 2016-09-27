@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/22 16:58:32 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/27 15:38:09 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,21 @@ int			check_flag(int argc, char **argv, t_data *data)
 	return (0);
 }
 
+void		put_zero(char *str, int n)
+{
+	int		i;
+
+	i = 0;
+	while(i < n)
+		str[i++] = '0';
+}
+
 void		init_struct(t_data *data)
 {
 	int		i;
 
 	i = 0;
-	bzero(data->map, MEM_SIZE);
+	put_zero(data->map, MEM_SIZE);
 	data->flag_slowmode = 0;
 	data->flag_visu = 0;
 	data->cycle = 0;
