@@ -6,6 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
+/*   Updated: 2016/09/26 15:39:42 by jle-quer         ###   ########.fr       */
 /*   Updated: 2016/09/22 16:58:30 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/09/19 15:52:01 by lbaudran         ###   ########.fr       */
 /*                                                                            */
@@ -140,4 +141,4 @@ t_desc						*create_desc(t_desc **desc);
  * PROTOTYPE DISPLAY
  */
 
-int							aff_window(void);
+int							aff_window(char *mem);
