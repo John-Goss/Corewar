@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/27 14:30:57 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/09/28 17:40:09 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,25 @@ static WINDOW		*create_subwin(int lines, int cols, int y)
 */
 static WINDOW		*create_win()
 {
-	WINDOW	*test_window;
-//	int		height;
-//	int		width;
+	WINDOW	*tmp;
 
-//	height = COLS - (COLS / 90);
-//	width = LINES - (LINES / 90);
-	test_window = newwin(51, COLS, 0, 0);
-	box(test_window, ACS_VLINE, ACS_HLINE);
-	wrefresh(test_window);
-//	width = 0;
-//	while (width != 16)
-//		create_subwin(LINES - 56, cols, width++);
+	tmp = NULL;
+	tmp = initscr();
+	newwin(0, 0, 0, 0);
+	box(tmp, ACS_VLINE, ACS_HLINE);
 	refresh();
-	return (test_window);
+	return (tmp);
 }
 
 static void			delete_win(WINDOW *test_window)
 {
+	delwin(test_window);
 	box(test_window, ACS_VLINE, ACS_HLINE);
-	wrefresh(test_window);
+	move(0, 0);
 	refresh();
 }
 
-static int			getch_aff(WINDOW *test, char *mem)
+static int			getch_aff(WINDOW *window, char *mem)
 {
 	int			i;
 	int			n;
@@ -71,33 +66,31 @@ static int			getch_aff(WINDOW *test, char *mem)
 	while (42)
 	{
 		i = getch();
-		if (i == 410)
+		if (i == 28)
 		{
 			refresh();
-			if (test)
-				delete_win(test);
-			getmaxyx(stdscr, LINES, COLS);
+			if (window)
+				delete_win(window);
 			while (COLS <= 50 || LINES <= 50)
 			{
 				clear();
 				mvprintw(LINES / 2, COLS / 2, "UP SIZE");
 				refresh();
-				getmaxyx(stdscr, LINES, COLS);
-				getch();
 				if (LINES > 50 && COLS > 50)
 				{
 					move(1, 1);
-					if (test)
-						delete_win(test);
+					if (window)
+						delete_win(window);
 					break ;
 				}
 			}
-			test = create_win();
+			window = create_win();
 			continue ;
 		}
 		else if (i == 27)
 		{
 			clear();
+			delete_win(window);
 			endwin();
 			exit(0);
 		}
@@ -119,17 +112,16 @@ static int			getch_aff(WINDOW *test, char *mem)
 
 int					aff_window(char *mem)
 {
-	WINDOW	*test_window;
+	WINDOW	*window;
 	int		i;
 
-	initscr();
+	window = NULL;
+	window = create_win();
 	noecho();
 	raw();
 	refresh();
-	keypad(stdscr, TRUE);
-	test_window = NULL;
-	getmaxyx(stdscr, LINES, COLS);
-	while (COLS <= 50 || LINES <= 50)
+	keypad(window, TRUE);
+/*	while (COLS <= 50 || LINES <= 50)
 	{
 		clear();
 		mvprintw(LINES / 2, COLS / 2, "UP SIZE");
@@ -139,6 +131,5 @@ int					aff_window(char *mem)
 		if (LINES > 50 && COLS > 50)
 			break ;
 	}
-	test_window = create_win();
-	return (i = getch_aff(test_window, mem));
+*/	return (i = getch_aff(window, mem));
 }
