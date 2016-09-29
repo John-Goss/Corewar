@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/27 17:35:22 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/29 13:50:04 by jle-quer         ###   ########.fr       */
 /*   Updated: 2016/09/22 16:58:30 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/09/19 15:52:01 by lbaudran         ###   ########.fr       */
 /*                                                                            */
@@ -74,6 +74,7 @@ typedef char				t_arg_type;
 #include <curses.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 #include <fcntl.h>
 #include "Libft/INCLUDES/libft.h"
 
@@ -133,6 +134,9 @@ void						turn(t_data *data);
 int							verif_end(t_data *data);
 void						check_who_is_alive(t_data *data);
 void						parse_map(int argc, char **argv, t_data *data);
+
+char						*get_str_addr(char *mem);
+WINDOW						*get_win_addr(WINDOW *window);
 
 t_list						*create_elem(t_list **begin, int champ_nb, int pc);
 t_desc						*create_desc(t_desc **desc);
