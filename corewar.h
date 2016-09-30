@@ -6,9 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/29 13:50:04 by jle-quer         ###   ########.fr       */
-/*   Updated: 2016/09/22 16:58:30 by lbaudran         ###   ########.fr       */
-/*   Updated: 2016/09/19 15:52:01 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/30 14:20:49 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +15,8 @@
  * ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
  * */
 
-#define IND_SIZE			4
-#define REG_SIZE			8
+#define IND_SIZE			2
+#define REG_SIZE			4
 #define DIR_SIZE			REG_SIZE
 
 # define REG_CODE			1
@@ -96,6 +94,7 @@ typedef struct				s_list
 	int						live;
 	int						carry;
 	int						action_time;
+	int						reg_number[REG_NUMBER];
 }							t_list;
 
 typedef struct				s_desc

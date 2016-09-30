@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/27 15:38:09 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/30 14:19:31 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,22 @@ t_list		*create_elem(t_list **begin, int champ_nb, int pc)
 		(*begin)->prev = NULL;
 		(*begin)->next = NULL;
 		(*begin)->pc = 0;
-		(*begin)->champ_nb = champ_nb;
+		(*begin)->reg_number[0] = champ_nb;
 		(*begin)->carry = 0;
 		(*begin)->process_nb = 0;
 		(*begin)->action_time = 0;
 		return (*begin);
 	}
-	elem = *begin;
-	if (!(elem->prev = (t_list *)malloc(sizeof(t_list))))
+	if (!((*begin)->prev = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
-	elem->prev->next = elem;
-	elem->prev->prev = NULL;
-	elem->prev->pc = pc; // besoin du pc
-	elem->prev->champ_nb = pc; // besoin du champ_nb
-	elem->prev->carry = 0;
-	elem->prev->process_nb = elem->process_nb + 1;
-	elem->prev->action_time = 0;
-	*begin = elem->prev;
+	(*begin)->prev->next = (*begin);
+	(*begin)->prev->prev = NULL;
+	(*begin)->prev->pc = pc; // besoin du pc
+	(*begin)->prev->reg_number[0] = champ_nb; // besoin du champ_nb
+	(*begin)->prev->carry = 0;
+	(*begin)->prev->process_nb = elem->process_nb + 1;
+	(*begin)->prev->action_time = 0;
+	*begin = (*begin)->prev;
 	return (*begin);
 }
 
