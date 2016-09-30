@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/27 18:36:43 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/28 14:57:10 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,10 @@
 int			main(int argc, char **argv)
 {
 	t_data	data;
-	int		i;
-/*
-	printf("header = %lu\n", sizeof(header_t));
-	printf("unsigned = %lu\n", sizeof(unsigned int));
-	printf("PROG_NAME_LENGTH =%d\n", PROG_NAME_LENGTH + 1);
-	printf("unsigned = %lu\n", sizeof(unsigned int));
-	printf("COMMENT_LENGTH =%d\n", COMMENT_LENGTH + 1);
-	printf("BUFF SIZE = %d\n", BUFF_SIZE);
-	exit(0);*/
-	i = 1;
+
 	init_struct(&data);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
-	exit(0);
 //	verif_valid(argc, argv, &data);
 //	if (data.flag_visu)
 //	{
@@ -48,7 +38,7 @@ int			main(int argc, char **argv)
 //	end(data);
 }
 
-void		stock_desc(t_data *data, char *buf)
+int			stock_desc(t_data *data, char *buf)
 {
 	unsigned int		i;
 	t_desc				*elem;
@@ -62,8 +52,8 @@ void		stock_desc(t_data *data, char *buf)
 	ft_strncpy(elem->name, buf + 4, 128);
 	elem->size = (buf[136] << 24 & 0xff000000) | (buf[137] << 16 & 0xff0000) |
 		(buf[138] << 8 & 0xff00) | (buf[139] & 0xff);
-	printf("%d\n", elem->size);
 	ft_strcpy(elem->desc, buf + 140);
+	return (elem->size);
 }
 
 void		recup_champ(t_data *data, char **argv, int i)
@@ -71,17 +61,20 @@ void		recup_champ(t_data *data, char **argv, int i)
 	int			fd;
 	char		buf[BUFF_SIZE + 1];
 	static int	n = 0;
+	int			size[2];
 
 	buf[BUFF_SIZE] = '\0';
 	fd = open(argv[i], O_RDONLY);
 	read(fd, buf, BUFF_SIZE);
-	stock_desc(data, buf);
+	size[0] = stock_desc(data, buf);
+	size[1] = n;
 	while((read(fd, data->map + n, 1)) && n <= MEM_SIZE)
 		n++;
-	printf("%d\n", n);
-	printf("%hhx\n", data->map[2]);
 	if (n > MEM_SIZE)
 		exit(write(1, "Taille champion incorrecte\n", 27));
+	size[1] = n - size[1];
+	if (size[0] != size[1])
+		exit(write(1, "Taille indiquee incorrecte\n", 27));
 	if (n % CHAMP_MAX_SIZE)
 		n = ((n / CHAMP_MAX_SIZE)+ 1) * CHAMP_MAX_SIZE;
 	n++;
@@ -157,16 +150,19 @@ int			verif_end(t_data *data)
 	data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->cycle_to_die_nbr);
 	data->cycle_to_die_nbr++;
 	check_who_is_alive(data);
-	while (i < data->nb_champ)
-	{
-		if (data->statut_champ[i++] == 0)
-			j++;
-		if (j >= 2)
-			return (0);
-	}
-	return (1);
+	if (data->begin)
+		return (0);
+	return(1);
+//	while (i < data->nb_champ)
+//	{
+//		if (data->statut_champ[i++] == 0)
+//			j++;
+//		if (j >= 2)
+//			return (0);
+//	}
+//	return (1);
 }
-
+/*
 int			verif_valid(int argc, char **argv, t_data *data)
 {
 	t_desc *elem;
@@ -183,4 +179,4 @@ int			verif_valid(int argc, char **argv, t_data *data)
 		elem = elem->next;
 	}
 	return (0);
-}
+}*/
