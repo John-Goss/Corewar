@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/28 14:57:10 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/30 15:56:48 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 int			main(int argc, char **argv)
 {
 	t_data	data;
+	int i = 0;
 
 	init_struct(&data);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
+	while (i <= MEM_SIZE)
+	{
+	printf("%.2hhx ",data.map[i++]);
+	}
 //	verif_valid(argc, argv, &data);
 //	if (data.flag_visu)
 //	{
@@ -69,15 +74,20 @@ void		recup_champ(t_data *data, char **argv, int i)
 	size[0] = stock_desc(data, buf);
 	size[1] = n;
 	while((read(fd, data->map + n, 1)) && n <= MEM_SIZE)
+	{
 		n++;
+	}
 	if (n > MEM_SIZE)
 		exit(write(1, "Taille champion incorrecte\n", 27));
 	size[1] = n - size[1];
 	if (size[0] != size[1])
 		exit(write(1, "Taille indiquee incorrecte\n", 27));
-	if (n % CHAMP_MAX_SIZE)
-		n = ((n / CHAMP_MAX_SIZE)+ 1) * CHAMP_MAX_SIZE;
-	n++;
+	if (size[0] > CHAMP_MAX_SIZE)
+			exit(write(1, "Taille champion incorrecte\n", 27));
+	n = (n / (MEM_SIZE / data->nb_champ) + 1) * (MEM_SIZE / data->nb_champ);
+//	if (n % CHAMP_MAX_SIZE)
+//		n = ((n / CHAMP_MAX_SIZE)+ 1) * CHAMP_MAX_SIZE;
+//	n++;
 }
 
 
@@ -86,9 +96,10 @@ void		parse_map(int argc, char **argv, t_data *data)
 	int		i;
 
 	i = 1 + data->flag_visu;
+	data->nb_champ = argc - 1 - data->flag_visu ;
 	while (i < argc)
 		recup_champ(data, argv, i++);
-
+//	exit(0);
 }
 
 void		turn(t_data *data)
@@ -124,12 +135,6 @@ void		check_who_is_alive(t_data *data)
 
 	elem = data->begin;
 	i = 1;
-	while (i < data->nb_champ)
-	{
-		if (data->tab_live[i] < NBR_LIVE)
-			data->statut_champ[i] = 1;
-		i++;
-	}
 	while (elem)
 	{
 		if (elem->live == 0)
@@ -147,10 +152,16 @@ int			verif_end(t_data *data)
 
 	i = 1;
 	j = 0;
-	data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->cycle_to_die_nbr);
-	data->cycle_to_die_nbr++;
-	check_who_is_alive(data);
-	if (data->begin)
+	if (data->check == MAX_CHECKS || data->live_cpt >= NBR_LIVE)
+	{
+		data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->cycle_to_die_nbr);
+		data->cycle_to_die_nbr++;
+		check_who_is_alive(data);
+	}
+	else
+		(data->check)++;
+	data->live_cpt = 0;
+	if (!data->begin)
 		return (0);
 	return(1);
 //	while (i < data->nb_champ)
