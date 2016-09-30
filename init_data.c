@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/30 14:19:31 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/30 14:35:56 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_list		*create_elem(t_list **begin, int champ_nb, int pc)
 	{
 		if (!(*begin = (t_list *)malloc(sizeof(t_list))))
 			return (NULL);
+		ft_bzero((*begin)->reg_number, REG_NUMBER);
 		(*begin)->prev = NULL;
 		(*begin)->next = NULL;
 		(*begin)->pc = 0;
@@ -57,10 +58,11 @@ t_list		*create_elem(t_list **begin, int champ_nb, int pc)
 	}
 	if (!((*begin)->prev = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
+	ft_bzero((*begin)->reg_number, REG_NUMBER);
 	(*begin)->prev->next = (*begin);
 	(*begin)->prev->prev = NULL;
-	(*begin)->prev->pc = pc; // besoin du pc
-	(*begin)->prev->reg_number[0] = champ_nb; // besoin du champ_nb
+	(*begin)->prev->pc = pc;
+	(*begin)->prev->reg_number[0] = champ_nb;
 	(*begin)->prev->carry = 0;
 	(*begin)->prev->process_nb = elem->process_nb + 1;
 	(*begin)->prev->action_time = 0;
@@ -82,21 +84,12 @@ int			check_flag(int argc, char **argv, t_data *data)
 	return (0);
 }
 
-void		put_zero(char *str, int n)
-{
-	int		i;
-
-	i = 0;
-	while(i < n)
-		str[i++] = '0';
-}
-
 void		init_struct(t_data *data)
 {
 	int		i;
 
 	i = 0;
-	put_zero(data->map, MEM_SIZE);
+	ft_bzero(data->map, MEM_SIZE);
 	data->flag_slowmode = 0;
 	data->flag_visu = 0;
 	data->cycle = 0;

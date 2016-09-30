@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/30 14:20:49 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/09/30 14:24:35 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ typedef struct				s_list
 	struct s_list			*next;
 	struct s_list			*prev;
 	int						pc;
-	int						champ_nb;
 	int						process_nb;
 	int						live;
 	int						carry;
