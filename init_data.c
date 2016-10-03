@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/30 14:35:56 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/03 15:26:33 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ t_desc		*create_desc(t_desc **desc)
 
 t_list		*create_elem(t_list **begin, int champ_nb, int pc)
 {
-	t_list	*elem;
-
 	if (!*begin)
 	{
 		if (!(*begin = (t_list *)malloc(sizeof(t_list))))
@@ -64,7 +62,7 @@ t_list		*create_elem(t_list **begin, int champ_nb, int pc)
 	(*begin)->prev->pc = pc;
 	(*begin)->prev->reg_number[0] = champ_nb;
 	(*begin)->prev->carry = 0;
-	(*begin)->prev->process_nb = elem->process_nb + 1;
+	(*begin)->prev->process_nb++;
 	(*begin)->prev->action_time = 0;
 	*begin = (*begin)->prev;
 	return (*begin);
