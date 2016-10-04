@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 12:01:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/04 17:06:39 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/04 17:07:52 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		apply_sub(t_data *data, t_list *elem)
 
 //deteermining the paramater types below
 
+
 char *conv_dec_to_bin(int n)
 {
     char *bin_nbr;
@@ -65,6 +66,11 @@ char *conv_dec_to_bin(int n)
         i *= 10;
         k++;
     }
+  	while (k < 8)
+ 	{
+ 		bin_nbr[k] = '0';
+   		k++;
+ 	}
     return (bin_nbr);
 }
 
