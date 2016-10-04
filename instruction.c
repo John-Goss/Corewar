@@ -58,8 +58,6 @@ void		apply_live(t_data *data, t_list *elem)
 }
 
 //deteermining the paramater types below
-
-
 char *conv_dec_to_bin(int n)
 {
     char *bin_nbr;
@@ -88,21 +86,90 @@ char *conv_dec_to_bin(int n)
    		k++;
  	}
     return (bin_nbr);
-}
+}//this gives me a string with a converted reversed binary
 
-char 	*det_types(unsigned int parameter_types)
+char        *rev_str(char *string)
+{
+    int i;
+    int k;
+    char *rev_str;
+
+    i = 0;
+    k = 0;
+    while (string[k] != '\0')
+        k++;
+    k--;
+    rev_str = ft_strnew(k);
+    while (k >= 0)
+    {
+        rev_str[i] = string[k];
+        i++;
+        k--;
+    }
+    return (rev_str);
+}//this function reverses my reversed binary so I can 
+    //have the proper binary
+
+int             extr_typ_from_bin(char *para_bi)
+{
+    if (ft_strcmp(para_bi, "01") == 0)
+        return (1); //register
+    else if (ft_strcmp(para_bi, "10") == 0)
+        return (2); //direct
+    else if (ft_strcmp(para_bi, "11") == 0)
+        return (3); //indirect
+    else
+        return (0);
+}// this function returns a value which will determine the
+//parameter type
+
+int     *type_tab_make(char *types_bin, int *type_tab)
+{
+    int i; //counter for binary
+    int k;  //counter for pairs of bits
+    char *para_bi;//two bits which we will interpret as param types
+    int ty; //counter index for param types array
+
+    i = 0;
+    ty = 0;
+    para_bi = ft_strnew(2);
+    while (types_bin[i] != '\0')
+    {
+        k = 0;
+        while (k <= 1)
+        {
+            para_bi[k] = types_bin[i];
+            i++;
+            k++;
+        }
+        type_tab[ty] = extr_typ_from_bin(para_bi);
+        printf("\n\n(%d)\n", type_tab[ty]);
+        ty++;
+    }
+    ft_strdel(&para_bi);
+    return (type_tab);
+}//this function extracts the parameter types out of the given binary
+    //and puts it 
+
+int     *det_types(unsigned int parameter_types)
 {
 	unsigned int determine;
 	int types;
 	char *types_bin;
+    int *type_tab;
 
 	determine = 255;
 	types = parameter_types & determine;
 	types_bin = conv_dec_to_bin(types);
-	return (types_bin);
-}
+    types_bin = rev_str(types_bin);
+    if ((!(type_tab = (int *)malloc(sizeof(int) * 4))))
+        return (NULL);
+    type_tab = type_tab_make(types_bin, type_tab);
+	return (type_tab);
+}//this function makes an int array with the parameter types of the instruction
+    //in order!
 
-//determining the parameter types above
+//determining the parameter types above 
 
 
 
