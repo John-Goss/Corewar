@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 12:01:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/04 17:07:52 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/04 17:57:24 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@ void		apply_sub(t_data *data, t_list *elem)
 	elem->pc = (elem->pc + 4) % MEM_SIZE;
 }//same as add but subtraction
 //add & sub functions above
+
+void		apply_live(t_data *data, t_list *elem)
+{
+	t_desc	*desc;
+	int		nb_champ;
+
+	nb_champ = data->map[(elem->pc + 1) % MEM_SIZE];
+	elem->pc = (elem->pc + 2) % MEM_SIZE;
+	data->live_cpt++;
+	while (desc)
+	{
+		if (nb_champ == desc->nb_champ)
+			data->last_live_nb_champ = nb_champ;
+		desc = desc->next;
+	}
+}
 
 //deteermining the paramater types below
 
@@ -91,12 +107,6 @@ char 	*det_types(unsigned int parameter_types)
 
 
 
-
-//void		apply_live(t_data *data, t_list *elem)
-//{
-//
-//}
-//
 //void		apply_ld(t_data *data, t_list *elem)
 //{
 //

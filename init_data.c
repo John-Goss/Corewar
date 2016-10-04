@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/04 14:08:42 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/04 17:56:21 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,37 @@ void		init_pt_tab(void (**tab)(t_data *data, t_list *elem))
 	tab[16] = &apply_aff;
 }
 
-t_desc		*create_desc(t_desc **desc)
+t_desc		*create_desc2(t_desc **desc, int nb, int *used_nb)
 {
 	t_desc	*elem;
-
 	elem = *desc;
+
+	while (elem)
+		elem = elem->next;
+	if (!(elem = (t_desc *)malloc(sizeof(t_desc))))
+		return (NULL);
+	elem->next = NULL;
+	elem->name = (char *)malloc(129 * sizeof(char));
+	if (nb)
+	{
+		if (nb <= *used_nb)
+			exit(write(1, "numero de champion deja utilise\n", 31));
+		elem->nb_champ = nb;
+	}
+	else
+	{
+		elem->nb_champ = (*used_nb) + 1;
+		(*used_nb)++;
+	}
+	elem->size = 0;
+	elem->desc = (char *)malloc(2049 * sizeof(char));
+	return (elem);
+}
+
+t_desc		*create_desc(t_desc **desc, int nb)
+{
+	static int used_nb;
+
 	if (!*desc)
 	{
 		if (!(*desc = (t_desc *)malloc(sizeof(t_desc))))
@@ -44,18 +70,14 @@ t_desc		*create_desc(t_desc **desc)
 		(*desc)->next = NULL;
 		(*desc)->name = (char *)malloc(129 *sizeof(char));
 		(*desc)->size = 0;
+		if (nb)
+			(*desc)->nb_champ = nb;
+		if (nb == 1)
+			used_nb = 1;
 		(*desc)->desc = (char *)malloc(2049 *sizeof(char));
 		return (*desc);
 	}
-	while (elem)
-		elem = elem->next;
-	if (!(elem = (t_desc *)malloc(sizeof(t_desc))))
-		return (NULL);
-	elem->next = NULL;
-	elem->name = (char *)malloc(129 * sizeof(char));
-	elem->size = 0;
-	elem->desc = (char *)malloc(2049 * sizeof(char));
-	return (elem);
+	return(create_desc2(desc, nb, &used_nb));
 }
 
 t_list		*create_elem(t_list **begin, int champ_nb, int pc)
@@ -121,7 +143,8 @@ void		init_struct(t_data *data)
 	init_pt_tab(data->tab);
 	while (i <= MAX_PLAYERS + 1)
 	{
-		data->statut_champ[i] = 0;
-		data->tab_live[i++] = 0;
+//		data->statut_champ[i] = 0;
+//		data->tab_live[i++] = 0;
+		i++;
 	}
 }

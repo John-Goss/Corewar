@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/04 14:08:55 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/04 17:47:51 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct				s_desc
 {
 	char					*name;
 	char					*desc;
+	int						nb_champ;
 	unsigned int			size;
 	struct s_desc			*next;
 }							t_desc;
@@ -117,8 +118,8 @@ typedef struct				s_data
 	t_desc					*desc;
 	int						check;
 	char					map[MEM_SIZE];
-	int						tab_live[MAX_PLAYERS + 1];
-	int						statut_champ[MAX_PLAYERS + 1];
+	int						last_live_nb_champ;
+	int						champ[MAX_PLAYERS + 1];
 	int						nb_champ;
 }							t_data;
 
@@ -147,7 +148,7 @@ char						*get_str_addr(char *mem);
 WINDOW						*get_win_addr(WINDOW *window);
 
 t_list						*create_elem(t_list **begin, int champ_nb, int pc);
-t_desc						*create_desc(t_desc **desc);
+t_desc						*create_desc(t_desc **desc, int nb);
 
 /*
  *	PROTOTYPE INSTRUCTIONS

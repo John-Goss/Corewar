@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/04 15:52:36 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/04 18:00:23 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int			main(int argc, char **argv)
 //	end(data);
 }
 
-int			stock_desc(t_data *data, char *buf)
+int			stock_desc(t_data *data, char *buf, int nb)
 {
 	unsigned int		i;
 	t_desc				*elem;
 
 	i = 0;
-	elem = create_desc(&data->desc);
+	elem = create_desc(&data->desc, nb);
 	i = (buf[0] << 24 & 0xff000000) | (buf[1] << 16 & 0xff0000) |
 		(buf[2] << 8 & 0xff00) | (buf[3] & 0xff);
 	if (i != COREWAR_EXEC_MAGIC)
@@ -63,7 +63,7 @@ int			stock_desc(t_data *data, char *buf)
 	return (elem->size);
 }
 
-void		recup_champ(t_data *data, char **argv, int i)
+void		recup_champ(t_data *data, char **argv, int i, int nb)
 {
 	int			fd;
 	char		buf[BUFF_SIZE + 1];
@@ -73,7 +73,7 @@ void		recup_champ(t_data *data, char **argv, int i)
 	buf[BUFF_SIZE] = '\0';
 	fd = open(argv[i], O_RDONLY);
 	read(fd, buf, BUFF_SIZE);
-	size[0] = stock_desc(data, buf);
+	size[0] = stock_desc(data, buf, nb);
 	size[1] = n;
 	while((read(fd, data->map + n, 1)) && n <= MEM_SIZE)
 	{
@@ -96,11 +96,21 @@ void		recup_champ(t_data *data, char **argv, int i)
 void		parse_map(int argc, char **argv, t_data *data)
 {
 	int		i;
+	int		nb;
 
+	nb = 0;
 	i = 1 + data->flag_visu;
 	data->nb_champ = argc - 1 - data->flag_visu ;
 	while (i < argc)
-		recup_champ(data, argv, i++);
+	{
+		if (!(ft_strcmp(argv[i], "-n")))
+			{
+				i++;
+				nb = ft_atoi(argv[i]);
+				i++;
+			}
+		recup_champ(data, argv, i++, nb);
+	}
 //	exit(0);
 }
 
