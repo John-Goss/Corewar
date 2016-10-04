@@ -43,6 +43,7 @@ void		apply_sub(t_data *data, t_list *elem)
 
 //deteermining the paramater types below
 
+
 char *conv_dec_to_bin(int n)
 {
     char *bin_nbr;
@@ -65,6 +66,11 @@ char *conv_dec_to_bin(int n)
         i *= 10;
         k++;
     }
+  	while (k < 8)
+ 	{
+ 		bin_nbr[k] = '0';
+   		k++;
+ 	}
     return (bin_nbr);
 }
 
