@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/29 14:09:20 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/03 18:57:59 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,12 @@ static void			delete_win(WINDOW *test_window)
 	refresh();
 }
 
-static WINDOW		*create_win(WINDOW *win)
+static void			create_win(t_display display)
 {
-	WINDOW	*tmp;
-
-	tmp = NULL;
-	if (win)
-		delwin(win);
-	tmp = initscr();
-	newwin(0, 0, 0, 0);
-	box(tmp, ACS_VLINE, ACS_HLINE);
-	get_win_addr(tmp);
-	refresh();
-	return (tmp);
+	display.screen = initscr();
+	display.win = subwin(display.screen, 66, 130, 0, 0);
+	box(display.win, ACS_VLINE, ACS_HLINE);
+	display.mem = get_str_addr(NULL);
 }
 
 static void			print_str(char *mem)
@@ -43,29 +36,17 @@ static void			print_str(char *mem)
 
 	ptr = 0;
 	j = 1;
-	while (ptr <= (MEM_SIZE - COLS - 2))
+	while (ptr < MEM_SIZE * 2)
 	{
-		n = COLS - 2;
-		mvaddnstr(LINES - LINES + j, COLS - COLS + 1, mem + ptr, n);
+		n = 130 - 2;
+		mvprintw(j, 1, "%.*hhx", 130 - 2, mem + ptr);
 		ptr += n;
 		j++;
 	}
 	refresh();
 }
 
-/*static WINDOW		*rest_wsize(WINDOW *window, char *mem)
-{
-	WINDOW	*tmp;
-
-	tmp = NULL;
-	clear();
-	if (window)
-		delete_win(window);
-	tmp = create_win();
-	print_str(mem);
-	return (tmp);
-}
-*/
+/*
 static void			signal_catch(int sig_num)
 {
 	WINDOW	*tmp;
@@ -78,12 +59,13 @@ static void			signal_catch(int sig_num)
 	tmp = create_win(tmp);
 	print_str(mem);
 }
+*/
 
-static int			getch_aff(WINDOW *window, char *mem)
+static int			getch_aff(t_display display)
 {
 	int			i;
 
-	signal(SIGWINCH, &signal_catch);
+	print_str(display.mem);
 	while (42)
 	{
 		i = getch();
@@ -112,29 +94,29 @@ static int			getch_aff(WINDOW *window, char *mem)
 		else */if (i == 27)
 		{
 			clear();
-			delete_win(window);
+			delete_win(display.win);
 			endwin();
 			exit(0);
 		}
 		else if ((i == KEY_DOWN) || (i == KEY_UP) || (i == KEY_RIGHT)
 			|| (i == KEY_LEFT))
 		{
-			print_str(get_str_addr(mem));
+			print_str(display.mem);
 			continue ;
 		}
 	}
 }
 
-int					aff_window(char *mem)
+int					aff_window()
 {
-	WINDOW	*window;
-	int		i;
+	t_display	display;
+	int			i;
 
-	window = NULL;
-	window = create_win(NULL);
+	display = (t_display){NULL, NULL, NULL};
+	create_win(display);
 	noecho();
 	raw();
 	refresh();
-	keypad(window, TRUE);
-	return (i = getch_aff(window, mem));
+	keypad(display.win, TRUE);
+	return (i = getch_aff(display));
 }

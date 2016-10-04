@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/04 14:02:00 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/04 14:08:55 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,12 @@ typedef struct				s_data
 	int						nb_champ;
 }							t_data;
 
+typedef struct				s_display
+{
+	WINDOW					*screen;
+	WINDOW					*win;
+	char					*mem;
+}							t_display;
 
 /*
  * PROTOTYPE
@@ -168,7 +174,11 @@ void		apply_aff(t_data *data, t_list *elem);
  * PROTOTYPE DISPLAY
  */
 
+<<<<<<< HEAD
 int							aff_window(char *mem);
 
 
 
+=======
+int							aff_window();
+>>>>>>> 1408be772afcf91b67726ab19c51fa116a51d3e2
