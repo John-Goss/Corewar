@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/30 15:56:48 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/04 13:40:46 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,17 @@ void		parse_map(int argc, char **argv, t_data *data)
 //	exit(0);
 }
 
+void		process_action(t_data *data, t_list *elem)
+{
+	if (!(data->map[elem->pc] >= 0x01 && data->map[elem->pc] <= 0x10))
+	{
+		(elem->pc)++;
+		return ;
+	}
+	else
+		(data->tab)[data->map[elem->pc]](data, elem);
+}
+
 void		turn(t_data *data)
 {
 	t_list *elem;
@@ -111,7 +122,7 @@ void		turn(t_data *data)
 	{
 //		if (data->flag_slowmode == 1)
 //			getch();
-//		process_action(data, elem);
+		process_action(data, elem);
 		elem = elem->next;
 	}
 	return ;

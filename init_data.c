@@ -6,11 +6,31 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/30 14:35:56 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/04 13:41:41 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+void		init_pt_tab(void (**tab)(t_data *data, t_list *elem))
+{
+	tab[1] = &apply_live;
+	tab[2] = &apply_ld;
+	tab[3] = &apply_st;
+	tab[4] = &apply_add;
+	tab[5] = &apply_sub;
+	tab[6] = &apply_and;
+	tab[7] = &apply_or;
+	tab[8] = &apply_xor;
+	tab[9] = &apply_zjmp;
+	tab[10] = &apply_ldi;
+	tab[11] = &apply_sti;
+	tab[12] = &apply_fork;
+	tab[13] = &apply_lld;
+	tab[14] = &apply_lldi;
+	tab[15] = &apply_lfork;
+	tab[16] = &apply_aff;
+}
 
 t_desc		*create_desc(t_desc **desc)
 {
@@ -100,6 +120,7 @@ void		init_struct(t_data *data)
 	data->desc = NULL;
 	data->nb_champ = 0;
 	data->live_cpt = 0;
+	init_pt_tab(data->tab);
 	while (i <= MAX_PLAYERS + 1)
 	{
 		data->statut_champ[i] = 0;

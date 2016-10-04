@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/09/30 14:54:44 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/04 14:02:00 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct				s_desc
 
 typedef struct				s_data
 {
+	void					(*tab[17])(struct s_data *data, t_list *elem);
 	int						flag_slowmode;
 	int						flag_visu;
 	int						cycle;
@@ -133,6 +134,8 @@ void						turn(t_data *data);
 int							verif_end(t_data *data);
 void						check_who_is_alive(t_data *data);
 void						parse_map(int argc, char **argv, t_data *data);
+void						init_pt_tab(void (**tab)(t_data *data,
+							t_list *elem));
 
 char						*get_str_addr(char *mem);
 WINDOW						*get_win_addr(WINDOW *window);
@@ -141,7 +144,31 @@ t_list						*create_elem(t_list **begin, int champ_nb, int pc);
 t_desc						*create_desc(t_desc **desc);
 
 /*
+ *	PROTOTYPE INSTRUCTIONS
+ */
+
+void		apply_live(t_data *data, t_list *elem);
+void		apply_ld(t_data *data, t_list *elem);
+void		apply_st(t_data *data, t_list *elem);
+void		apply_add(t_data *data, t_list *elem);
+void		apply_sub(t_data *data, t_list *elem);
+void		apply_and(t_data *data, t_list *elem);
+void		apply_or(t_data *data, t_list *elem);
+void		apply_xor(t_data *data, t_list *elem);
+void		apply_zjmp(t_data *data, t_list *elem);
+void		apply_ldi(t_data *data, t_list *elem);
+void		apply_sti(t_data *data, t_list *elem);
+void		apply_fork(t_data *data, t_list *elem);
+void		apply_lld(t_data *data, t_list *elem);
+void		apply_lldi(t_data *data, t_list *elem);
+void		apply_lfork(t_data *data, t_list *elem);
+void		apply_aff(t_data *data, t_list *elem);
+
+/*
  * PROTOTYPE DISPLAY
  */
 
 int							aff_window(char *mem);
+
+
+
