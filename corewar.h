@@ -174,11 +174,4 @@ void		apply_aff(t_data *data, t_list *elem);
  * PROTOTYPE DISPLAY
  */
 
-<<<<<<< HEAD
-int							aff_window(char *mem);
-
-
-
-=======
 int							aff_window();
->>>>>>> 1408be772afcf91b67726ab19c51fa116a51d3e2

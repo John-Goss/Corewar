@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/04 14:09:14 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/04 15:52:36 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int			main(int argc, char **argv)
 {
 	t_data	data;
-//	int i = 0;
+	int i = 0;
 
 	init_struct(&data);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
-//	while (i <= MEM_SIZE)
-//	{
-//	printf("%.2hhx ",data.map[i++]);
-//	}
+	while (i <= MEM_SIZE)
+	{
+	printf("%.2hhx ",data.map[i++]);
+	}
 //	verif_valid(argc, argv, &data);
 //	if (data.flag_visu)
 //	{
@@ -32,8 +32,8 @@ int			main(int argc, char **argv)
 //		if (getch() == ' ')
 //			data.flag_slowmode = 1;
 //	}
-	get_str_addr(data.map);
-	aff_window();
+//	get_str_addr(data.map);
+//	aff_window();
 	while (42)
 	{
 		turn(&data);
@@ -104,15 +104,47 @@ void		parse_map(int argc, char **argv, t_data *data)
 //	exit(0);
 }
 
+void		adjust_action_time(t_list *elem, char pc)
+{
+	if (pc == 0x01 || pc == 0x04 || pc == 0x05 || pc == 0x0D)
+		elem->action_time = 10;
+	else if (pc == 0x02 || pc == 0x03)
+		elem->action_time = 5;
+	else if (pc == 0x06 || pc == 0x07 || pc == 0x08)
+		elem->action_time = 6;
+	else if (pc == 0x0A || pc == 0x0B)
+		elem->action_time = 25;
+	else if (pc == 0x09)
+		elem->action_time = 20;
+	else if (pc == 0x0C)
+		elem->action_time = 800;
+	else if (pc == 0x0E)
+		elem->action_time = 50;
+	else if (pc == 0x0F)
+		elem->action_time = 1000;
+	else if (pc == 0x10)
+		elem->action_time = 2;
+}
+
 void		process_action(t_data *data, t_list *elem)
 {
-	if (!(data->map[elem->pc] >= 0x01 && data->map[elem->pc] <= 0x10))
+	if ((!(data->map[elem->pc] >= 0x01 && data->map[elem->pc] <= 0x10)) &&
+			!elem->action_time)
 	{
 		(elem->pc)++;
 		return ;
 	}
 	else
-		(data->tab)[data->map[elem->pc]](data, elem);
+	{
+		if (!(elem->action_time))
+			adjust_action_time(elem, data->map[elem->pc]);
+		else if (elem->action_time)
+		{
+			elem->action_time--;
+			if (!(elem->action_time))
+				(data->tab)[data->map[elem->pc]](data, elem);
+		}
+	}
 }
 
 void		turn(t_data *data)

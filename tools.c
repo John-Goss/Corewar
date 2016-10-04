@@ -29,3 +29,40 @@ WINDOW	*get_win_addr(WINDOW *window)
 		ptr = window;
 	return (ptr);
 }
+
+void	print_hex(unsigned char c)
+{
+	if (c / 16 < 10)
+		ft_putnbr(c / 16);
+	else
+		ft_putchar('a' + (c / 16 - 10));
+	if (c % 16 < 10)
+		ft_putnbr(c % 16);
+	else
+		ft_putchar('a' + (c % 16 - 10));
+	ft_putchar(' ');
+}
+
+int		ft_sqrt(int c)
+{
+	int x;
+
+	x = 0;
+	while (x * x < c)
+		x++;
+	return (x); 
+}
+
+void	ft_print_mem(unsigned char *str)
+{
+	int	x;
+
+	x = 0;
+	while (x < MEM_SIZE)
+	{
+		print_hex(str[x]);
+		if ((x + 1) % ft_sqrt(MEM_SIZE) == 0)
+			ft_putchar('\n');
+		x++;
+	}
+}
