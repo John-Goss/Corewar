@@ -39,7 +39,7 @@ static void			print_str(char *mem)
 	while (ptr < MEM_SIZE * 2)
 	{
 		n = 130 - 2;
-		mvprintw(j, 1, "%.*hhx", 130 - 2, mem + ptr);
+		mvprintw(j, 1, "%.2hhx ", 130 - 2, mem + ptr);
 		ptr += n;
 		j++;
 	}
