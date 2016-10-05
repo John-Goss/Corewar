@@ -33,13 +33,13 @@ static void			print_str(t_display *display, t_data *data)
 	int	i;
 	int	x;
 	int	y;
+	int	*pc;
 
+	pc = NULL;
 	i = 0;
 	x = 1;
 	y = 1;
-	/*
-	 * Tableau de PC trier dans l'ordre a faire pour surligner les PC
-	 */
+	pc = set_array_pc(data);
 	while (y < 65)
 	{
 		while (x < 129)

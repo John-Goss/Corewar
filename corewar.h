@@ -175,5 +175,5 @@ void		apply_aff(t_data *data, t_list *elem);
  * PROTOTYPE DISPLAY
  */
 
-void						ft_print_mem(unsigned char *str);
+int							*set_array_pc(t_data *data);
 int							aff_window(t_data *data);

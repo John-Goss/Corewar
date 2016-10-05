@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-
+/*
 void		init_pt_tab(void (**tab)(t_data *data, t_list *elem))
 {
 	tab[1] = &apply_live;
@@ -31,7 +31,7 @@ void		init_pt_tab(void (**tab)(t_data *data, t_list *elem))
 	tab[15] = &apply_lfork;
 	tab[16] = &apply_aff;
 }
-
+*/
 t_desc		*create_desc2(t_desc **desc, int nb, int *used_nb)
 {
 	t_desc	*elem;
@@ -140,7 +140,7 @@ void		init_struct(t_data *data)
 	data->desc = NULL;
 	data->nb_champ = 0;
 	data->live_cpt = 0;
-	init_pt_tab(data->tab);
+//	init_pt_tab(data->tab);
 	while (i <= MAX_PLAYERS + 1)
 	{
 //		data->statut_champ[i] = 0;

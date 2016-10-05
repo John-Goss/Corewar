@@ -30,39 +30,28 @@ WINDOW			*get_win_addr(WINDOW *window)
 	return (ptr);
 }
 
-static void		print_hex(unsigned char c)
+int				*set_array_pc(t_data *data)
 {
-	if (c / 16 < 10)
-		ft_putnbr(c / 16);
-	else
-		ft_putchar('a' + (c / 16 - 10));
-	if (c % 16 < 10)
-		ft_putnbr(c % 16);
-	else
-		ft_putchar('a' + (c % 16 - 10));
-	ft_putchar(' ');
-}
+	t_list	*tmp;
+	int		*pc;
+	int		i;
 
-static int		ft_sqrt(int c)
-{
-	int x;
-
-	x = 0;
-	while (x * x < c)
-		x++;
-	return (x); 
-}
-
-void			ft_print_mem(unsigned char *str)
-{
-	int	x;
-
-	x = 0;
-	while (x < MEM_SIZE)
+	pc = NULL;
+	i = 0;
+	tmp = data->begin;
+	while (tmp)
 	{
-		print_hex(str[x]);
-		if ((x + 1) % ft_sqrt(MEM_SIZE) == 0)
-			ft_putchar('\n');
-		x++;
+		i++;
+		tmp = tmp->next;
 	}
+	if (!(pc = (int *)malloc(sizeof(int) * i)))
+		return (NULL);
+	i = 0;
+	tmp = data->begin;
+	while (tmp)
+	{
+		pc[i++] = tmp->pc;
+		tmp = tmp->next;
+	}
+	return (pc);
 }
