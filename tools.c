@@ -6,22 +6,22 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/29 13:48:23 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/05 13:52:29 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-char	*get_str_addr(char *mem)
+unsigned char	*get_str_addr(unsigned char *mem)
 {
-	static char	*ptr = NULL;
+	static unsigned char	*ptr = NULL;
 
 	if (mem)
 		ptr = mem;
 	return (ptr);
 }
 
-WINDOW	*get_win_addr(WINDOW *window)
+WINDOW			*get_win_addr(WINDOW *window)
 {
 	static WINDOW	*ptr = NULL;
 
@@ -30,7 +30,7 @@ WINDOW	*get_win_addr(WINDOW *window)
 	return (ptr);
 }
 
-void	print_hex(unsigned char c)
+static void		print_hex(unsigned char c)
 {
 	if (c / 16 < 10)
 		ft_putnbr(c / 16);
@@ -43,7 +43,7 @@ void	print_hex(unsigned char c)
 	ft_putchar(' ');
 }
 
-int		ft_sqrt(int c)
+static int		ft_sqrt(int c)
 {
 	int x;
 
@@ -53,7 +53,7 @@ int		ft_sqrt(int c)
 	return (x); 
 }
 
-void	ft_print_mem(unsigned char *str)
+void			ft_print_mem(unsigned char *str)
 {
 	int	x;
 

@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/04 17:47:51 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/05 15:52:01 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct				s_data
 	t_list					*begin;
 	t_desc					*desc;
 	int						check;
-	char					map[MEM_SIZE];
+	unsigned char			map[MEM_SIZE];
 	int						last_live_nb_champ;
 	int						champ[MAX_PLAYERS + 1];
 	int						nb_champ;
@@ -127,7 +127,7 @@ typedef struct				s_display
 {
 	WINDOW					*screen;
 	WINDOW					*win;
-	char					*mem;
+	unsigned char			*mem;
 }							t_display;
 
 /*
@@ -144,7 +144,7 @@ void						parse_map(int argc, char **argv, t_data *data);
 void						init_pt_tab(void (**tab)(t_data *data,
 							t_list *elem));
 
-char						*get_str_addr(char *mem);
+unsigned char				*get_str_addr(unsigned char *mem);
 WINDOW						*get_win_addr(WINDOW *window);
 
 t_list						*create_elem(t_list **begin, int champ_nb, int pc);
@@ -175,4 +175,5 @@ void		apply_aff(t_data *data, t_list *elem);
  * PROTOTYPE DISPLAY
  */
 
-int							aff_window();
+void						ft_print_mem(unsigned char *str);
+int							aff_window(t_data *data);
