@@ -100,19 +100,20 @@ void		apply_live(t_data *data, t_list *elem)
 	}
 }
 
-void		apply_ld(t_data *data, t_list *elem, int *params)
+void		apply_ld(t_data *data, t_list *elem, int *params, int *param_types)
 {
     //value of first parameter into register
-    elem->reg_number[params[1]] = params[0]// param[0] is the first parameter
+    if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
+        elem->reg_number[params[1]] = data->map[params[0]];// param[0] is the first parameter
+    else if (param_types[0] == REG_CODE)
+    elem->reg_number[params[1]] = elem->reg_number[params[0]];
     //params[1] is the vnumber of the register we need
 }
 
 void		apply_st(t_data *data, t_list *elem, int *params, int *param_types)
 {
-
-   
     if (param_types[1] == IND_CODE)//go to the address (PC plus value) and store first value
-        data->map[params[1] % MEM_SIZE] =  elem->reg_number[params[0]]; //value to copy into the other place
+        data->map[params[1]] =  elem->reg_number[params[0]]; //value to copy into the other place
     else if (param_types[1] == REG_CODE)//put the value to be copied into the register
         elem->reg_number[params[1]] = elem->reg_number[params[0]]; //value to copy into the other place
 }//this takes the value of a register and STORES it at either an address or another register
@@ -126,12 +127,15 @@ void		apply_and(t_data *data,t_list *elem, int *param, int *param_types)
     unsigned int value_two;
 
     if (params_type[0] == REG_CODE)
-        value_one = 
-    else if (params_type[0] == DIR_CODE)
-
-    else if (params_type[0] == IND_CODE)
-
-
+        value_one = elem->reg_number[params[0]];
+    else if (params_type[0] == IND_CODE || params_type[0] == DIR_CODE)
+        value_one = data->map[params[0]];
+    if (params_type[1] == REG_CODE)
+        value_two = elem->reg_number[params[1]];
+    else if (params_type[1] == IND_CODE || params_type[1] == DIR_CODE)
+        value_two = data->map[params[1]];
+    //so now we got the two values which we need to stock
+    elem->reg_number[params[2]] = value_one & value_two;
 }//the bit operation & is executed on the first two and then stored at the third which is a register
 
 //void		apply_or(t_data *data, t_list *elem)
@@ -323,7 +327,7 @@ int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp
         if (par_types[i] == REG_CODE)
             params[i] = elem->reg_number[data->map[(elem->pc + (i + 2)) % MEM_SIZE]]; //getting the register number
         else if (par_types[i] == DIR_CODE)
-            params[i] = data->map[(elem->pc + (i + 2)) % MEM_SIZE];
+            params[i] = (elem->pc + (i + 2)) % MEM_SIZE];
         else if (par_types[i] == IND_CODE)
             params[i] = get_ind_value(data, elem, i + 2);
         i++;
