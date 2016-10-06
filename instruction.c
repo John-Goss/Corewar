@@ -35,9 +35,9 @@ void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_typ
     else if (pc == 0x06)
         apply_and(data, elem, params, param_types);
     else if (pc == 0x07)
-        //or
+        apply_or(data, elem, params, param_types);
     else if (pc == 0x08)
-        //xor
+        apply_xor(data, elem, params, param_types);
     else if (pc == 0x10)
         //aff
     else if (pc == 0x0A)
@@ -52,21 +52,18 @@ void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_typ
         //lld
 }
 
-
-
-
 void		apply_add(t_data *data, t_list *elem)
 {
 	int store;
 	int reg_one;
 	int reg_two;
 
-	reg_one = data->map[(elem->pc + 2) % MEM_SIZE];
-	reg_two = data->map[(elem->pc + 3) % MEM_SIZE];
-	store = data->map[(elem->pc + 4) % MEM_SIZE];
+	reg_one = data->map[(elem->pc + (2 % IDX_MOD)) % MEM_SIZE];
+	reg_two = data->map[(elem->pc + (3 % IDX_MOD)) % MEM_SIZE];
+	store = data->map[(elem->pc + (4 % IDX_MOD)) % MEM_SIZE];
 	elem->reg_number[store] = elem->reg_number[reg_one] + elem->reg_number[reg_two];
 	elem->carry = 1;
-	elem->pc = (elem->pc + 4) % MEM_SIZE;
+	elem->pc = ((elem->pc + (4 % IDX_MOD)) % MEM_SIZE);
 }
 
 void		apply_sub(t_data *data, t_list *elem)
@@ -74,10 +71,9 @@ void		apply_sub(t_data *data, t_list *elem)
 	int store;
 	int reg_one;
 	int reg_two;
-
-	reg_one = (int)data->map[(elem->pc + 2) % MEM_SIZE];
-	reg_two = (int)data->map[(elem->pc + 3) % MEM_SIZE];
-	store = (int)data->map[(elem->pc + 4) % MEM_SIZE];
+    reg_one = data->map[(elem->pc + (2 % IDX_MOD)) % MEM_SIZE];
+    reg_two = data->map[(elem->pc + (3 % IDX_MOD)) % MEM_SIZE];
+    store = data->map[(elem->pc + (4 % IDX_MOD)) % MEM_SIZE];
 	elem->reg_number[store] = elem->reg_number[reg_one] - elem->reg_number[reg_two];
 	elem->carry = 1;
 	elem->pc = (elem->pc + 4) % MEM_SIZE;
@@ -89,7 +85,7 @@ void		apply_live(t_data *data, t_list *elem)
 	t_desc	*desc;
 	int		nb_champ;
 
-	nb_champ = data->map[(elem->pc + 1) % MEM_SIZE];
+	nb_champ = data->map[(elem->pc + (1 % IDX_MOD)) % MEM_SIZE];
 	elem->pc = (elem->pc + 2) % MEM_SIZE;
 	data->live_cpt++;
 	while (desc)
@@ -138,21 +134,48 @@ void		apply_and(t_data *data,t_list *elem, int *param, int *param_types)
     elem->reg_number[params[2]] = value_one & value_two;
 }//the bit operation & is executed on the first two and then stored at the third which is a register
 
-//void		apply_or(t_data *data, t_list *elem)
-//{
-//
-//}
-//
-//void		apply_xor(t_data *data, t_list *elem)
-//{
-//
-//}
-//
-//void		apply_zjmp(t_data *data, t_list *elem)
-//{
-//
-//}
-//
+void		apply_or(t_data *data, t_list *elem)
+{
+    unsigned int value_one; //param values
+    unsigned int value_two;
+
+    if (params_type[0] == REG_CODE)
+        value_one = elem->reg_number[params[0]];
+    else if (params_type[0] == IND_CODE || params_type[0] == DIR_CODE)
+        value_one = data->map[params[0]];
+    if (params_type[1] == REG_CODE)
+        value_two = elem->reg_number[params[1]];
+    else if (params_type[1] == IND_CODE || params_type[1] == DIR_CODE)
+        value_two = data->map[params[1]];
+    //so now we got the two values which we need to stock
+    elem->reg_number[params[2]] = value_one | value_two;
+}
+
+void		apply_xor(t_data *data, t_list *elem)
+{
+    unsigned int value_one; //param values
+    unsigned int value_two;
+
+    if (params_type[0] == REG_CODE)
+        value_one = elem->reg_number[params[0]];
+    else if (params_type[0] == IND_CODE || params_type[0] == DIR_CODE)
+        value_one = data->map[params[0]];
+    if (params_type[1] == REG_CODE)
+        value_two = elem->reg_number[params[1]];
+    else if (params_type[1] == IND_CODE || params_type[1] == DIR_CODE)
+        value_two = data->map[params[1]];
+    //so now we got the two values which we need to stock
+    elem->reg_number[params[2]] = value_one ^ value_two;
+
+
+}
+
+void		apply_zjmp(t_data *data, t_list *elem, int indx)
+{
+    if (elem->carry == 1)
+            elem->pc = (elem->pc + (indx % IDX_MOD)) % MEM_SIZE;
+}
+
 //void		apply_ldi(t_data *data, t_list *elem)
 //{
 //
@@ -163,22 +186,25 @@ void		apply_and(t_data *data,t_list *elem, int *param, int *param_types)
 //
 //}
 //
+                  
+
 //void		apply_fork(t_data *data, t_list *elem)
 //{
 //
 //}
 //
-//void		apply_lld(t_data *data, t_list *elem)
+
+//void		apply_lld(t_data *data, t_list *elem) //addresses not relative to IDX
 //{
 //
 //}
 //
-//void		apply_lldi(t_data *data, t_list *elem)
+//void		apply_lldi(t_data *data, t_list *elem) //addresses not relative to IDX
 //{
 //
 //}
 //
-//void		apply_lfork(t_data *data, t_list *elem)
+//void		apply_lfork(t_data *data, t_list *elem) //addresses not relative to IDX!
 //{
 //
 //}
@@ -310,7 +336,7 @@ int         get_ind_value(t_data *data, t_list *elem, int val_pos)
     int add_by; //this plus the pc is the address of the value looked for
 
     add_by = data->map[(elem->pc + val_pos) % MEM_SIZE];
-    ind_value = (elem->pc + add_by) % MEM_SIZE]; //the address of the indirect value
+    ind_value = (elem->pc + (add_by % IDX_MOD)) % MEM_SIZE; //the address of the indirect value
     return (ind_value);
 }// function to get the indirect value's ADDRESSS into the params array
 
@@ -325,12 +351,12 @@ int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp
     while (par_types[i] != 0) //this loop check the param types and fills the param array wtih the corresponding values in order
     {
         if (par_types[i] == REG_CODE)
-            params[i] = elem->reg_number[data->map[(elem->pc + (i + 2)) % MEM_SIZE]]; //getting the register number
+            params[i] = data->map[((elem->pc + ((i + 2) % IDX_MOD))) % MEM_SIZE]]; //getting the register number
         else if (par_types[i] == DIR_CODE)
-            params[i] = (elem->pc + (i + 2)) % MEM_SIZE];
+            params[i] = ((elem->pc + ((i + 2) % IDX_MOD))) % MEM_SIZE];
         else if (par_types[i] == IND_CODE)
-            params[i] = get_ind_value(data, elem, i + 2);
-        i++;
+            params[i] = get_ind_value(data, elem, (i + 2) % IDX_MOD);
+        i++;                                             //I'm not entirely sure about this IDX above
     }
     return (params);
 }// this function is self-explanatory, we're getting the parameters guys..
@@ -356,7 +382,8 @@ void        instruction_exec(t_data *data, t_list *elem)
 
 
 
-
+//essential question: During the extraciton of the paramters do we also put the addresses realtive to IDX?
+//example if there is a direct value to be taken out of the first parameter, do we take pc + 2 or pc + (2 % IDX_MOD) ??
 
 
 
