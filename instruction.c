@@ -25,17 +25,18 @@ void        instr_no_ocp(t_data *data, t_list *elem)
 }
 
 
-void         instr_w_ocp(t_data *data, t_list *elem, int *params);
+void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_types);
 {
     else if (pc == 0x02)
-        //ld
+        apply_ld(data, elem, params);
     else if (pc == 0x03)
-        //st
+        apply_st(data, elem, params, param_types);
     else if (pc == 0x04)
         apply_add(data, elem);
     else if (pc == 0x05)
         apply_sub(data, elem);
     else if (pc == 0x06)
+        
         //and
     else if (pc == 0x07)
         //or
@@ -106,16 +107,20 @@ void		apply_live(t_data *data, t_list *elem)
 void		apply_ld(t_data *data, t_list *elem, int *params)
 {
     //value of first parameter into register
-     = params[0]// param[0] is the first parameter
-
+    elem->reg_number[params[1]] = params[0]// param[0] is the first parameter
+    //params[1] is the vnumber of the register we need
 }
 
-//void		apply_st(t_data *data, t_list *elem)
-//{
-//
-//}
-//
-//
+void		apply_st(t_data *data, t_list *elem, int *params, int *param_types)
+{
+
+    elem->reg_number[params[0]]; //value to copy into the other place
+    if (param_types[1] == IND_CODE)
+        //go to the address (PC plus value) and store first value
+    else if ()
+}
+
+
 //void		apply_and(t_data *data,t_list *elem)
 //{
 //
@@ -334,7 +339,7 @@ void        instruction_exec(t_data *data, t_list *elem)
         //free all the shit first dude
         return ;
     }
-    instr_w_ocp(data, elem, params);        
+    instr_w_ocp(data, elem, params, param_types);        
 }
 
 

@@ -94,7 +94,6 @@ typedef struct				s_list
 	int						carry;
 	int						action_time;
 	int						reg_number[REG_NUMBER];
-	int 					ocp_there; //if this is 1 then there is an ocp
 }							t_list;
 
 typedef struct				s_desc
@@ -156,8 +155,8 @@ t_desc						*create_desc(t_desc **desc, int nb);
  */
 
 void		apply_live(t_data *data, t_list *elem);
-void		apply_ld(t_data *data, t_list *elem);
-void		apply_st(t_data *data, t_list *elem);
+void		apply_ld(t_data *data, t_list *elem, int *params);
+void		apply_st(t_data *data, t_list *elem, int *params);
 void		apply_add(t_data *data, t_list *elem);
 void		apply_sub(t_data *data, t_list *elem);
 void		apply_and(t_data *data, t_list *elem);
