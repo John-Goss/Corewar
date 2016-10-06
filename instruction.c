@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instuction.c                                       :+:      :+:    :+:   */
+/*   instruction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/16 12:01:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/04 17:57:24 by lbaudran         ###   ########.fr       */
+/*   Created: 2016/10/06 19:14:21 by tbui              #+#    #+#             */
+/*   Updated: 2016/10/06 19:14:26 by tbui             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-
 
 void        instr_no_ocp(t_data *data, t_list *elem)
 {
@@ -23,7 +21,6 @@ void        instr_no_ocp(t_data *data, t_list *elem)
     else if (pc == 0x09)
         //zjmp    
 }
-
 
 void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_types);
 {
@@ -36,8 +33,7 @@ void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_typ
     else if (pc == 0x05)
         apply_sub(data, elem);
     else if (pc == 0x06)
-        
-        //and
+        apply_and(data, elem, params, param_types);
     else if (pc == 0x07)
         //or
     else if (pc == 0x08)
@@ -114,18 +110,30 @@ void		apply_ld(t_data *data, t_list *elem, int *params)
 void		apply_st(t_data *data, t_list *elem, int *params, int *param_types)
 {
 
-    elem->reg_number[params[0]]; //value to copy into the other place
-    if (param_types[1] == IND_CODE)
-        //go to the address (PC plus value) and store first value
-    else if ()
-}
+   
+    if (param_types[1] == IND_CODE)//go to the address (PC plus value) and store first value
+        data->map[params[1] % MEM_SIZE] =  elem->reg_number[params[0]]; //value to copy into the other place
+    else if (param_types[1] == REG_CODE)//put the value to be copied into the register
+        elem->reg_number[params[1]] = elem->reg_number[params[0]]; //value to copy into the other place
+}//this takes the value of a register and STORES it at either an address or another register
 
 
-//void		apply_and(t_data *data,t_list *elem)
-//{
-//
-//}
-//
+
+//takes two paramters of which the third will always be register
+void		apply_and(t_data *data,t_list *elem, int *param, int *param_types)
+{
+    unsigned int value_one; //param values
+    unsigned int value_two;
+
+    if (params_type[0] == REG_CODE)
+        value_one = 
+    else if (params_type[0] == DIR_CODE)
+
+    else if (params_type[0] == IND_CODE)
+
+
+}//the bit operation & is executed on the first two and then stored at the third which is a register
+
 //void		apply_or(t_data *data, t_list *elem)
 //{
 //
@@ -298,9 +306,9 @@ int         get_ind_value(t_data *data, t_list *elem, int val_pos)
     int add_by; //this plus the pc is the address of the value looked for
 
     add_by = data->map[(elem->pc + val_pos) % MEM_SIZE];
-    ind_value = data->map[(elem->pc + add_by) % MEM_SIZE];
+    ind_value = (elem->pc + add_by) % MEM_SIZE]; //the address of the indirect value
     return (ind_value);
-}// function to get the indirect value into the params array
+}// function to get the indirect value's ADDRESSS into the params array
 
 int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there
 {
