@@ -94,6 +94,7 @@ typedef struct				s_list
 	int						carry;
 	int						action_time;
 	int						reg_number[REG_NUMBER];
+	int 					ocp_there; //if this is 1 then there is an ocp
 }							t_list;
 
 typedef struct				s_desc

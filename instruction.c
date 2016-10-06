@@ -238,6 +238,66 @@ int     *det_types(unsigned int parameter_types)
 
 //determining the parameter types above 
 
+int         *get_params(int *par_types, t_data *data, t_list *elem)
+{
+    int *params;
+
+    if (!(params = (int *)malloc(sizeof(int) * 4)))
+        return (NULL);
+    
+
+
+
+    return (params);
+}
+
+void        instruction_exec(t_data *data, t_list *elem)
+{
+    int *param_types;
+    int *params;
+    char opc;
+
+    //THE PC IS ON THE OPC AT THIS POINT
+    opc = data->map[(elem->pc) % MEM_SIZE];
+    param_types = det_types(data->map[(elem->pc) % MEM_SIZE]);
+    params = get_params(param_types, data, elem);
+
+    if (pc == 0x01)
+       apply_live(data, elem);
+    else if (pc == 0x02)
+        //ld
+    else if (pc == 0x03)
+        //st
+    else if (pc == 0x04)
+        apply_add(data, elem);
+    else if (pc == 0x05)
+        apply_sub(data, elem);
+    else if (pc == 0x06)
+        //and
+    else if (pc == 0x07)
+        //or
+    else if (pc == 0x08)
+        //xor
+    else if (pc == 0x09)
+        //zjmp    
+    else if (pc == 0x10)
+        //aff
+    else if (pc == 0x0A)
+        //ldi
+    else if (pc == 0x0B)
+        //sti
+    else if (pc == 0x0C)
+        //fork
+    else if (pc == 0x0E)
+        //lldi
+    else if (pc == 0x0F)
+        //lfork
+    else if (pc == 0x0D)
+        //lld
+}
+
+
+
 
 
 
