@@ -13,13 +13,22 @@
 #include "corewar.h"
 
 
-void        choisir_instru()
+
+void        instr_no_ocp(t_data *data, t_list *elem)
 {
-   
-    if (pc == 0x01)
-       apply_live(data, elem);
+    if (pc == 0x0C)  
+       //fork
+    else if (pc == 0x01)
+       apply_live(data, elem);   
+    else if (pc == 0x09)
+        //zjmp    
+}
+
+
+void         instr_w_ocp(t_data *data, t_list *elem, int *params);
+{
     else if (pc == 0x02)
-        //lds
+        //ld
     else if (pc == 0x03)
         //st
     else if (pc == 0x04)
@@ -32,16 +41,12 @@ void        choisir_instru()
         //or
     else if (pc == 0x08)
         //xor
-    else if (pc == 0x09)
-        //zjmp    
     else if (pc == 0x10)
         //aff
     else if (pc == 0x0A)
         //ldi
     else if (pc == 0x0B)
         //sti
-    else if (pc == 0x0C)
-        //fork
     else if (pc == 0x0E)
         //lldi
     else if (pc == 0x0F)
@@ -98,11 +103,13 @@ void		apply_live(t_data *data, t_list *elem)
 	}
 }
 
-//void		apply_ld(t_data *data, t_list *elem)
-//{
-//
-//}
-//
+void		apply_ld(t_data *data, t_list *elem, int *params)
+{
+    //value of first parameter into register
+     = params[0]// param[0] is the first parameter
+
+}
+
 //void		apply_st(t_data *data, t_list *elem)
 //{
 //
@@ -288,7 +295,7 @@ int         get_ind_value(t_data *data, t_list *elem, int val_pos)
     add_by = data->map[(elem->pc + val_pos) % MEM_SIZE];
     ind_value = data->map[(elem->pc + add_by) % MEM_SIZE];
     return (ind_value);
-}
+}// function to get the indirect value into the params array
 
 int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there
 {
@@ -309,7 +316,7 @@ int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp
         i++;
     }
     return (params);
-}
+}// this function is self-explanatory, we're getting the parameters guys..
 
 void        instruction_exec(t_data *data, t_list *elem)
 {
@@ -320,15 +327,14 @@ void        instruction_exec(t_data *data, t_list *elem)
     //THE PC IS ON THE OPC AT THIS POINT
     opc = data->map[(elem->pc) % MEM_SIZE];
     param_types = det_types(data->map[(elem->pc) % MEM_SIZE]);
-
-
-    if (opc == 0x0C || opc == 0x09 || opc == 0x01)
-        elem->ocp_there = 1;
-
-
     params = get_params(param_types, data, elem);
-
-
+    if (opc == 0x0C || opc == 0x09 || opc == 0x01)
+    {
+        instr_no_ocp(data, elem);
+        //free all the shit first dude
+        return ;
+    }
+    instr_w_ocp(data, elem, params);        
 }
 
 
