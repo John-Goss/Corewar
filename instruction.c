@@ -12,6 +12,47 @@
 
 #include "corewar.h"
 
+
+void        choisir_instru()
+{
+   
+    if (pc == 0x01)
+       apply_live(data, elem);
+    else if (pc == 0x02)
+        //lds
+    else if (pc == 0x03)
+        //st
+    else if (pc == 0x04)
+        apply_add(data, elem);
+    else if (pc == 0x05)
+        apply_sub(data, elem);
+    else if (pc == 0x06)
+        //and
+    else if (pc == 0x07)
+        //or
+    else if (pc == 0x08)
+        //xor
+    else if (pc == 0x09)
+        //zjmp    
+    else if (pc == 0x10)
+        //aff
+    else if (pc == 0x0A)
+        //ldi
+    else if (pc == 0x0B)
+        //sti
+    else if (pc == 0x0C)
+        //fork
+    else if (pc == 0x0E)
+        //lldi
+    else if (pc == 0x0F)
+        //lfork
+    else if (pc == 0x0D)
+        //lld
+}
+
+
+
+
 void		apply_add(t_data *data, t_list *elem)
 {
 	int store;
@@ -229,7 +270,7 @@ int     *det_types(unsigned int parameter_types)
 	types = parameter_types & determine;
 	types_bin = conv_dec_to_bin(types);
     types_bin = rev_str(types_bin);
-    if ((!(type_tab = (int *)malloc(sizeof(int) * 4))))
+    if ((!(type_tab = (int *)malloc(sizeof(int) * 5))))
         return (NULL);
     type_tab = type_tab_make(types_bin, type_tab);
 	return (type_tab);
@@ -238,16 +279,35 @@ int     *det_types(unsigned int parameter_types)
 
 //determining the parameter types above 
 
-int         *get_params(int *par_types, t_data *data, t_list *elem)
+
+int         get_ind_value(t_data *data, t_list *elem, int val_pos)
+{
+    int ind_value;
+    int add_by; //this plus the pc is the address of the value looked for
+
+    add_by = data->map[(elem->pc + val_pos) % MEM_SIZE];
+    ind_value = data->map[(elem->pc + add_by) % MEM_SIZE];
+    return (ind_value);
+}
+
+int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there
 {
     int *params;
+    int i; //counter for the par_types tab
 
-    if (!(params = (int *)malloc(sizeof(int) * 4)))
+    i = 0
+    if (!(params = (int *)malloc(sizeof(int) * 5)))
         return (NULL);
-    
-
-
-
+    while (par_types[i] != 0) //this loop check the param types and fills the param array wtih the corresponding values in order
+    {
+        if (par_types[i] == REG_CODE)
+            params[i] = elem->reg_number[data->map[(elem->pc + (i + 2)) % MEM_SIZE]]; //getting the register number
+        else if (par_types[i] == DIR_CODE)
+            params[i] = data->map[(elem->pc + (i + 2)) % MEM_SIZE];
+        else if (par_types[i] == IND_CODE)
+            params[i] = get_ind_value(data, elem, i + 2);
+        i++;
+    }
     return (params);
 }
 
@@ -260,47 +320,11 @@ void        instruction_exec(t_data *data, t_list *elem)
     //THE PC IS ON THE OPC AT THIS POINT
     opc = data->map[(elem->pc) % MEM_SIZE];
     param_types = det_types(data->map[(elem->pc) % MEM_SIZE]);
+
     params = get_params(param_types, data, elem);
 
-    if (pc == 0x01)
-       apply_live(data, elem);
-    else if (pc == 0x02)
-        //ld
-    else if (pc == 0x03)
-        //st
-    else if (pc == 0x04)
-        apply_add(data, elem);
-    else if (pc == 0x05)
-        apply_sub(data, elem);
-    else if (pc == 0x06)
-        //and
-    else if (pc == 0x07)
-        //or
-    else if (pc == 0x08)
-        //xor
-    else if (pc == 0x09)
-        //zjmp    
-    else if (pc == 0x10)
-        //aff
-    else if (pc == 0x0A)
-        //ldi
-    else if (pc == 0x0B)
-        //sti
-    else if (pc == 0x0C)
-        //fork
-    else if (pc == 0x0E)
-        //lldi
-    else if (pc == 0x0F)
-        //lfork
-    else if (pc == 0x0D)
-        //lld
+
 }
-
-
-
-
-
-
 
 
 
