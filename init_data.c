@@ -94,6 +94,7 @@ t_list		*create_elem(t_list **begin, int champ_nb, int pc)
 		(*begin)->carry = 0;
 		(*begin)->process_nb = 0;
 		(*begin)->action_time = 0;
+		(*begin)->ocp_there = 0;
 		return (*begin);
 	}
 	if (!((*begin)->prev = (t_list *)malloc(sizeof(t_list))))
@@ -106,6 +107,7 @@ t_list		*create_elem(t_list **begin, int champ_nb, int pc)
 	(*begin)->prev->carry = 0;
 	(*begin)->prev->process_nb++;
 	(*begin)->prev->action_time = 0;
+	(*begin)->ocp_there = 0;
 	*begin = (*begin)->prev;
 	return (*begin);
 }
