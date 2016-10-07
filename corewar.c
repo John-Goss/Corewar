@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/04 18:00:23 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/05 17:33:13 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int			main(int argc, char **argv)
 	init_struct(&data);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
+	exit(0);
 	while (i <= MEM_SIZE)
 	{
 	printf("%.2hhx ",data.map[i++]);
@@ -38,7 +39,7 @@ int			main(int argc, char **argv)
 	{
 		turn(&data);
 		(data.cycle)++;
-		if ((--(data.cycle_to_die)) == 0)
+		if ((--(data.cycle_to_die)) <= 0)
 			if (verif_end(&data) == 1)
 				break;
 	}
@@ -63,6 +64,16 @@ int			stock_desc(t_data *data, char *buf, int nb)
 	return (elem->size);
 }
 
+int			recup_champ_nb(t_desc *begin)
+{
+	t_desc *elem;
+
+	elem = begin;
+	while (elem->next)
+		elem = elem->next;
+	return(elem->nb_champ);
+}
+
 void		recup_champ(t_data *data, char **argv, int i, int nb)
 {
 	int			fd;
@@ -75,6 +86,8 @@ void		recup_champ(t_data *data, char **argv, int i, int nb)
 	read(fd, buf, BUFF_SIZE);
 	size[0] = stock_desc(data, buf, nb);
 	size[1] = n;
+	printf("%d", data->desc->nb_champ);
+	data->begin = create_elem(data->begin, recup_champ_nb(data->desc), n);
 	while((read(fd, data->map + n, 1)) && n <= MEM_SIZE)
 	{
 		n++;
@@ -87,9 +100,6 @@ void		recup_champ(t_data *data, char **argv, int i, int nb)
 	if (size[0] > CHAMP_MAX_SIZE)
 			exit(write(1, "Taille champion incorrecte\n", 27));
 	n = (n / (MEM_SIZE / data->nb_champ) + 1) * (MEM_SIZE / data->nb_champ);
-//	if (n % CHAMP_MAX_SIZE)
-//		n = ((n / CHAMP_MAX_SIZE)+ 1) * CHAMP_MAX_SIZE;
-//	n++;
 }
 
 
@@ -111,7 +121,6 @@ void		parse_map(int argc, char **argv, t_data *data)
 			}
 		recup_champ(data, argv, i++, nb);
 	}
-//	exit(0);
 }
 
 void		adjust_action_time(t_list *elem, char pc)
@@ -152,7 +161,9 @@ void		process_action(t_data *data, t_list *elem)
 		{
 			elem->action_time--;
 			if (!(elem->action_time))
-				(data->tab)[data->map[elem->pc]](data, elem);
+				NULL;
+//				printf("%hhx", data->map[elem->pc]);
+//				(data->tab)[data->map[elem->pc]](data, elem);
 		}
 	}
 }
@@ -164,11 +175,13 @@ void		turn(t_data *data)
 	elem = data->begin;
 	while (elem)
 	{
+		printf("elem pc = %d elem champ = %d\n",elem->pc , elem->reg_number[0]);
 //		if (data->flag_slowmode == 1)
 //			getch();
 		process_action(data, elem);
 		elem = elem->next;
 	}
+	printf("\n\n");
 	return ;
 }
 

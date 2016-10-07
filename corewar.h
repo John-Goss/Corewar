@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/04 17:47:51 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/05 16:18:17 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void						init_pt_tab(void (**tab)(t_data *data,
 char						*get_str_addr(char *mem);
 WINDOW						*get_win_addr(WINDOW *window);
 
-t_list						*create_elem(t_list **begin, int champ_nb, int pc);
+t_list						*create_elem(t_list *begin, int champ_nb, int pc);
 t_desc						*create_desc(t_desc **desc, int nb);
 
 /*
