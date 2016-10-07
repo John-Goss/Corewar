@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/03 18:57:59 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/05 15:51:57 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,103 +20,111 @@ static void			delete_win(WINDOW *test_window)
 	refresh();
 }
 
-static void			create_win(t_display display)
+static void			create_win(t_display *display)
 {
-	display.screen = initscr();
-	display.win = subwin(display.screen, 66, 130, 0, 0);
-	box(display.win, ACS_VLINE, ACS_HLINE);
-	display.mem = get_str_addr(NULL);
+	display->screen = initscr();
+	display->win = subwin(display->screen, 66, 130, 0, 0);
+	box(display->win, ACS_VLINE, ACS_HLINE);
+	display->mem = get_str_addr(NULL);
 }
 
-static void			print_str(char *mem)
+static void			print_str(t_display *display, t_data *data)
 {
-	int	ptr;
-	int	n;
-	int	j;
+	int	i;
+	int	x;
+	int	y;
+	int	*pc;
 
-	ptr = 0;
-	j = 1;
-	while (ptr < MEM_SIZE * 2)
+	pc = NULL;
+	i = 0;
+	x = 1;
+	y = 1;
+	pc = set_array_pc(data);
+	while (y < 65)
 	{
-		n = 130 - 2;
-		mvprintw(j, 1, "%.2hhx ", 130 - 2, mem + ptr);
-		ptr += n;
-		j++;
+		while (x < 129)
+		{
+			mvwprintw(display->screen, y, x, "%.2hhx", display->mem[i]);
+			x += 3;
+			i++;
+		}
+		y++;
+		x = 1;
 	}
 	refresh();
 }
 
 /*
-static void			signal_catch(int sig_num)
-{
-	WINDOW	*tmp;
-	char	*mem;
+   static void			signal_catch(int sig_num)
+   {
+   WINDOW	*tmp;
+   char	*mem;
 
-	(void)sig_num;
-	tmp = NULL;
-	mem = get_str_addr(NULL);
-	tmp = get_win_addr(NULL);
-	tmp = create_win(tmp);
-	print_str(mem);
-}
-*/
+   (void)sig_num;
+   tmp = NULL;
+   mem = get_str_addr(NULL);
+   tmp = get_win_addr(NULL);
+   tmp = create_win(tmp);
+   print_str(mem);
+   }
+   */
 
-static int			getch_aff(t_display display)
+static int			getch_aff(t_display *display, t_data *data)
 {
 	int			i;
 
-	print_str(display.mem);
+	print_str(display, data);
 	while (42)
 	{
 		i = getch();
-/*		if (i == 28)
-		{
-			refresh();
-			if (window)
+		/*		if (i == 28)
+				{
+				refresh();
+				if (window)
 				delete_win(window);
-			while (COLS <= 50 || LINES <= 50)
-			{
+				while (COLS <= 50 || LINES <= 50)
+				{
 				clear();
 				mvprintw(LINES / 2, COLS / 2, "UP SIZE");
 				refresh();
 				if (LINES > 50 && COLS > 50)
 				{
-					move(1, 1);
-					if (window)
-						delete_win(window);
-					break ;
+				move(1, 1);
+				if (window)
+				delete_win(window);
+				break ;
 				}
-			}
-			window = create_win();
-			window = rest_wsize(window, get_str_addr(mem));
-			continue ;
-		}
-		else */if (i == 27)
+				}
+				window = create_win();
+				window = rest_wsize(window, get_str_addr(mem));
+				continue ;
+				}
+				else */if (i == 27)
 		{
 			clear();
-			delete_win(display.win);
+			delete_win(display->win);
 			endwin();
 			exit(0);
 		}
-		else if ((i == KEY_DOWN) || (i == KEY_UP) || (i == KEY_RIGHT)
-			|| (i == KEY_LEFT))
-		{
-			print_str(display.mem);
-			continue ;
-		}
+				else if ((i == KEY_DOWN) || (i == KEY_UP) || (i == KEY_RIGHT)
+						|| (i == KEY_LEFT))
+				{
+					print_str(display, data);
+					continue ;
+				}
 	}
 }
 
-int					aff_window()
+int					aff_window(t_data *data)
 {
 	t_display	display;
 	int			i;
 
 	display = (t_display){NULL, NULL, NULL};
-	create_win(display);
+	create_win(&display);
 	noecho();
 	raw();
 	refresh();
 	keypad(display.win, TRUE);
-	return (i = getch_aff(display));
+	return (i = getch_aff(&display, data));
 }
