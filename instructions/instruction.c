@@ -24,7 +24,7 @@ void        instr_no_ocp(t_data *data, t_list *elem)
     else if (pc == 0x01)
        apply_live(data, elem);   
     else if (pc == 0x09)
-        //zjmp    
+        //zjmp    0
 }
 
 void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_types);
@@ -419,6 +419,15 @@ int         get_ind_value(t_data *data, t_list *elem, int add_to_pc)
     return (ind_value);
 }
 
+int         get_dir_value(t_data *data, t_list *elem)
+{
+    
+
+
+
+    
+}
+
 int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there
 {
     int *params;
@@ -429,10 +438,12 @@ int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp
         return (NULL);
     while (par_types[i] != 0) //this loop check the param types and fills the param array wtih the corresponding values in order
     {
-        if (par_types[i] == REG_CODE || par_types[i] == IND_CODE) //this gets either the value the we need to jump to relative to the pc for the indirect, or the reg number
-            params[i] = data->map[(elem->pc + (i + 2)) % MEM_SIZE]; //getting the register number
+        if (par_types[i] == REG_CODE)
+            params[i] = data->map[(elem->pc + (i + 2)) % MEM_SIZE]; //getting the register number, the value I still need to get out of the register in the process itself
+        else if (par_types[i] == IND_CODE) //this gets either the value the we need to jump to relative to the pc for the indirect, or the reg number
+            params[i] = get_ind_value(data, elem);
         else if (par_types[i] == DIR_CODE)
-            params[i] = //learn how to get parameters from several bytes
+            params[i] = get_dir_value(data, elem);//learn how to get parameters from several bytes
 
         i++;
     }
@@ -456,6 +467,7 @@ void        instruction_exec(t_data *data, t_list *elem)
     }
     instr_w_ocp(data, elem, params, param_types);        
 }
+
 
 
  //if the last flag in the instructions is at 0 that means we need to get the direct parameter out of 4 bytes.
