@@ -37,26 +37,26 @@ t_desc		*create_desc2(t_desc **desc, int nb, int *used_nb)
 	t_desc	*elem;
 	elem = *desc;
 
-	while (elem)
-		elem = elem->next;
-	if (!(elem = (t_desc *)malloc(sizeof(t_desc))))
+	while (elem->next)
+		elem = (elem)->next;
+	if (!(elem->next = (t_desc *)malloc(sizeof(t_desc))))
 		return (NULL);
-	elem->next = NULL;
-	elem->name = (char *)malloc(129 * sizeof(char));
+	(elem)->next->next = NULL;
+	(elem)->next->name = (char *)malloc(129 * sizeof(char));
 	if (nb)
 	{
 		if (nb <= *used_nb)
 			exit(write(1, "numero de champion deja utilise\n", 31));
-		elem->nb_champ = nb;
+		(elem)->next->nb_champ = nb;
 	}
 	else
 	{
-		elem->nb_champ = (*used_nb) + 1;
+		(elem)->next->nb_champ = (*used_nb) + 1;
 		(*used_nb)++;
 	}
-	elem->size = 0;
-	elem->desc = (char *)malloc(2049 * sizeof(char));
-	return (elem);
+	(elem)->next->size = 0;
+	(elem)->next->desc = (char *)malloc(2049 * sizeof(char));
+	return (elem->next);
 }
 
 t_desc		*create_desc(t_desc **desc, int nb)
@@ -72,7 +72,9 @@ t_desc		*create_desc(t_desc **desc, int nb)
 		(*desc)->size = 0;
 		if (nb)
 			(*desc)->nb_champ = nb;
-		if (nb == 1)
+		else
+			(*desc)->nb_champ = 1;
+		if ((*desc)->nb_champ == 1)
 			used_nb = 1;
 		(*desc)->desc = (char *)malloc(2049 *sizeof(char));
 		return (*desc);
@@ -98,7 +100,7 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 	}
 	if (!((begin)->prev = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
-	ft_bzero((begin)->reg_number, REG_NUMBER);
+	ft_bzero((begin->prev)->reg_number, REG_NUMBER);
 	(begin)->prev->next = (begin);
 	(begin)->prev->prev = NULL;
 	(begin)->prev->pc = pc;
@@ -106,8 +108,7 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 	(begin)->prev->carry = 0;
 	(begin)->prev->process_nb++;
 	(begin)->prev->action_time = 0;
-	begin = (begin)->prev;
-	return (begin);
+	return (begin->prev);
 }
 
 int			check_flag(int argc, char **argv, t_data *data)

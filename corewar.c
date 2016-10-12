@@ -20,7 +20,6 @@ int			main(int argc, char **argv)
 	init_struct(&data);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
-	exit(0);
 	while (i <= MEM_SIZE)
 	{
 	printf("%.2hhx ",data.map[i++]);
@@ -86,7 +85,6 @@ void		recup_champ(t_data *data, char **argv, int i, int nb)
 	read(fd, buf, BUFF_SIZE);
 	size[0] = stock_desc(data, buf, nb);
 	size[1] = n;
-	printf("%d", data->desc->nb_champ);
 	data->begin = create_elem(data->begin, recup_champ_nb(data->desc), n);
 	while((read(fd, data->map + n, 1)) && n <= MEM_SIZE)
 	{
