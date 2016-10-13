@@ -422,7 +422,7 @@ int         get_ind_value(t_data *data, t_list *elem, int add_to_pc)
 int         get_dir_value(t_data *data, t_list *elem)
 {
     
-
+    
 
 
     
