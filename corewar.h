@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/07 14:03:18 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/17 18:34:19 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ typedef struct				s_display
 {
 	WINDOW					*screen;
 	WINDOW					*win;
+	WINDOW					*info;
+	WINDOW					*header;
 	unsigned char			*mem;
 }							t_display;
 
@@ -135,7 +137,7 @@ typedef struct				s_display
  */
 
 int							check_flag(int argc, char **argv, t_data *data);
-void						init_struct(t_data *data);
+void						init_structur(t_data *data);
 int							verif_valid(int argc, char **argv, t_data *data);
 void						turn(t_data *data);
 int							verif_end(t_data *data);

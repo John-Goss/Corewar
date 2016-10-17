@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/17 13:05:21 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/17 18:34:02 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			main(int argc, char **argv)
 	t_data	data;
 //	int i = 0;
 
-	init_struct(&data);
+	init_structur(&data);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
 //	while (i <= MEM_SIZE)

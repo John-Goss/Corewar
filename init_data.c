@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/05 17:32:20 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/17 18:33:49 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int			check_flag(int argc, char **argv, t_data *data)
 	return (0);
 }
 
-void		init_struct(t_data *data)
+void		init_structur(t_data *data)
 {
 	int		i;
 
