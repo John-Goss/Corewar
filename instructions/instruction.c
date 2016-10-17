@@ -382,7 +382,7 @@ int     *type_tab_make(char *types_bin, int *type_tab)
 
 int     *det_types(unsigned int parameter_types)
 {
-	unsigned int determine;
+	int determine;
 	int types;
 	char *types_bin;
     int *type_tab;
@@ -400,41 +400,61 @@ int     *det_types(unsigned int parameter_types)
 
 //determining the parameter types above 
 
-int         get_ind_value_idxd(t_data *data, t_list *elem, int add_to_pc)
+unsigned int                 trans_two_bytes(char *transfer_bytes)
 {
-    int ind_value;
+    unsigned int value;
+    int decal; 
+    int i;
 
-    ind_value = data->map[(elem->pc + (add_to_pc % IDX_MOD)) % MEM_SIZE]; //the value of the indirect value at its address
-    return (ind_value);
-}// function to get the indirect value's ADDRESSS into the params array
+    i = 0;//index counter for the loop
+    decal = 24;
+    while (i < IND_SIZE && transfer_bytes[i] != '\0')
+    {
+        value |= (transfer_bytes[i] << decal);
+        decal = decal - 8;
+        i++;
+    }
+    return (value);
+}//this function does the same as trans_four_bytes but with two bytes instead of four... obviously
 
-
-int         get_ind_value(t_data *data, t_list *elem, int add_to_pc)
+unsigned int                 trans_four_bytes(char *transfer_bytes)
 {
-    int ind_value;
-    int ind_address;
+    unsigned int value;
+    int decal; 
+    int i;
 
-    ind_address = elem->pc + add_to_pc; //adding the value found in the parameter with the pc, giving us the address of the indirect value
-    ind_value = data->map[ind_address % MEM_SIZE]; //getting the value from the memory
+    i = 0;//index counter for the loop
+    decal = 24;
+    while (i < DIR_SIZE && transfer_bytes[i] != '\0')
+    {
+        value |= (transfer_bytes[i] << decal);
+        decal = decal - 8;
+        i++;
+    }
+    return (value);
+}//this function takes four char bytes and puts them into an int using bit operators
+
+unsigned int         get_ind_value_idxd(t_data *data, t_list *elem)
+{
+    unsigned int ind_value;
+    char *transfer_bytes;
+
+    ind_value = 0;
+    transfer_bytes = get_bytes(data, elem); //getting the 2 indirect bytes into a string for transfer, into an int
+    ind_value = trans_four_bytes(transfer_bytes);
+    ind_value = (elem->pc + (ind_value % IDX_MOD)) % MEM_SIZE; //I think this is how you modulo everything, but no idea
+    //ind_value = data->map[(elem->pc + (add_to_pc % IDX_MOD)) % MEM_SIZE];
+
     return (ind_value);
 }
 
-int         get_dir_value(t_data *data, t_list *elem)
+unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there
 {
-    
-    
-
-
-    
-}
-
-int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there
-{
-    int *params;
+    unsigned int *params;
     int i; //counter for the par_types tab
 
     i = 0
-    if (!(params = (int *)malloc(sizeof(int) * 5)))
+    if (!(params = (unsigned int *)malloc(sizeof(int) * 5)))
         return (NULL);
     while (par_types[i] != 0) //this loop check the param types and fills the param array wtih the corresponding values in order
     {
@@ -453,7 +473,7 @@ int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp
 void        instruction_exec(t_data *data, t_list *elem)
 {
     int *param_types;
-    int *params;
+    unsigned int *params;
     char opc; //DO NOT CONFUSE WITH OCP!!!
 
     //THE PC IS ON THE OPC AT THIS POINT
