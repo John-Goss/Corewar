@@ -94,6 +94,7 @@ typedef struct				s_list
 	int						carry;
 	int						action_time;
 	int						reg_number[REG_NUMBER];
+	int 					opc; //the indicator of the instruction
 }							t_list;
 
 typedef struct				s_desc
