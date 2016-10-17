@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/05 15:51:57 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/17 15:06:13 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void			delete_win(WINDOW *test_window)
 static void			create_win(t_display *display)
 {
 	display->screen = initscr();
-	display->win = subwin(display->screen, 66, 130, 0, 0);
+	display->win = subwin(display->screen, 75, 151, 0, 0);
 	box(display->win, ACS_VLINE, ACS_HLINE);
 	display->mem = get_str_addr(NULL);
 }
@@ -40,9 +40,9 @@ static void			print_str(t_display *display, t_data *data)
 	x = 1;
 	y = 1;
 	pc = set_array_pc(data);
-	while (y < 65)
+	while (y < 74)
 	{
-		while (x < 129)
+		while (x < 150)
 		{
 			mvwprintw(display->screen, y, x, "%.2hhx", display->mem[i]);
 			x += 3;

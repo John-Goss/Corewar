@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/05 17:33:13 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/17 13:05:21 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int			main(int argc, char **argv)
 {
 	t_data	data;
-	int i = 0;
+//	int i = 0;
 
 	init_struct(&data);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
-	while (i <= MEM_SIZE)
-	{
-	printf("%.2hhx ",data.map[i++]);
-	}
+//	while (i <= MEM_SIZE)
+//	{
+//	printf("%.2hhx ",data.map[i++]);
+//	}
 //	verif_valid(argc, argv, &data);
 //	if (data.flag_visu)
 //	{
@@ -32,8 +32,8 @@ int			main(int argc, char **argv)
 //		if (getch() == ' ')
 //			data.flag_slowmode = 1;
 //	}
-//	get_str_addr(data.map);
-//	aff_window();
+	get_str_addr(data.map);
+	aff_window(&data);
 	while (42)
 	{
 		turn(&data);
