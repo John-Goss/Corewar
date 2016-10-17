@@ -478,18 +478,25 @@ int                 two_or_four(t_list *elem)
 
 }
 
+
+unsigned int         get_dir_value(t_data *data, t_list *elem, int prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
+{
+    
+
+
+
+}//this function gets the direct value, whether it's on four or two bytes
+
 unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there ONLY!!!
 {
     unsigned int *params;
     int i; //counter for the par_types tab
     int k;
-    int dir; //this is a flag which determines whether an instruction with a direct type parameter, holds the parameter in 4 or 2 bytes
-    //1 will mean 2 bytes, while 0 will mean 4 bytes 
-
+    int dir;
 
     k = 0;
     i = 2;
-    dir = two_or_four();//determining whether the direct is on 2 or 4 bytes
+    elem->dir_by = two_or_four();//determining whether the direct is on 2 or 4 bytes
     if (!(params = (unsigned int *)malloc(sizeof(int) * 5)))
         return (NULL);
     while (par_types[k] != 0) //this loop check the param types and fills the param array wtih the corresponding values in order
@@ -506,7 +513,7 @@ unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //i
         }
         else if (par_types[k] == DIR_CODE && dir == 0) //this only handles the case of the direct parameter being held in 4 bytes
         {
-            params[k] = get_dir_value(data, elem);//learn how to get parameters from several bytes
+            params[k] = get_dir_value(data, elem, i);//learn how to get parameters from several bytes
             i = i + 4;
         }
         k++;
