@@ -12,10 +12,12 @@
 
 #include "corewar.h"
 
-//Finish coding all the single instructions
-//learn how to get a direct parameter out of either 4 or 2 bytes, presumably with bit operators
+//Finish coding all the unfinished functions
 //find out how to direct the process into the given instruction
 //test and refactor EVERYTHING!
+//manage both idxd and un-idxd values in the instructions
+//refactor all instructions
+//find out how to copy a process and then have it run along with the other one
 
 void        instr_no_ocp(t_data *data, t_list *elem)
 {
@@ -434,6 +436,14 @@ unsigned int                 trans_four_bytes(char *transfer_bytes)
     return (value);
 }//this function takes four char bytes and puts them into an int using bit operators
 
+
+char               *get_bytes()
+{
+
+
+
+}//this function puts the parameter bytes into a string for byte transfer later on
+
 unsigned int         get_ind_value_idxd(t_data *data, t_list *elem)
 {
     unsigned int ind_value;
@@ -441,31 +451,72 @@ unsigned int         get_ind_value_idxd(t_data *data, t_list *elem)
 
     ind_value = 0;
     transfer_bytes = get_bytes(data, elem); //getting the 2 indirect bytes into a string for transfer, into an int
-    ind_value = trans_four_bytes(transfer_bytes);
+    ind_value = trans_two_bytes(transfer_bytes);
     ind_value = (elem->pc + (ind_value % IDX_MOD)) % MEM_SIZE; //I think this is how you modulo everything, but no idea
     //ind_value = data->map[(elem->pc + (add_to_pc % IDX_MOD)) % MEM_SIZE];
-
     return (ind_value);
 }
 
-unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there
+unsigned int         get_ind_value(t_data *data, t_list *elem)
+{
+    unsigned int ind_value;
+    char *transfer_bytes;
+
+    ind_value = 0;
+    transfer_bytes = get_bytes(data, elem); //getting the 2 indirect bytes into a string for transfer, into an int
+    ind_value = trans_two_bytes(transfer_bytes);
+    ind_value = (elem->pc + ind_value) % MEM_SIZE; //I think this is how you modulo everything, but no idea
+    //ind_value = data->map[(elem->pc + (add_to_pc % IDX_MOD)) % MEM_SIZE];
+    return (ind_value);
+}
+
+
+int                 two_or_four(t_list *elem)
+{
+
+    //this function compares the opc indicator in the list with all the opcs and then looks if the direct parameter is on two or four bytes
+
+}
+
+
+unsigned int         get_dir_value(t_data *data, t_list *elem, int prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
+{
+    
+
+
+
+}//this function gets the direct value, whether it's on four or two bytes
+
+unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there ONLY!!!
 {
     unsigned int *params;
     int i; //counter for the par_types tab
+    int k;
+    int dir;
 
-    i = 0
+    k = 0;
+    i = 2;
+    elem->dir_by = two_or_four();//determining whether the direct is on 2 or 4 bytes
     if (!(params = (unsigned int *)malloc(sizeof(int) * 5)))
         return (NULL);
-    while (par_types[i] != 0) //this loop check the param types and fills the param array wtih the corresponding values in order
+    while (par_types[k] != 0) //this loop check the param types and fills the param array wtih the corresponding values in order
     {
-        if (par_types[i] == REG_CODE)
-            params[i] = data->map[(elem->pc + (i + 2)) % MEM_SIZE]; //getting the register number, the value I still need to get out of the register in the process itself
-        else if (par_types[i] == IND_CODE) //this gets either the value the we need to jump to relative to the pc for the indirect, or the reg number
-            params[i] = get_ind_value(data, elem);
-        else if (par_types[i] == DIR_CODE)
-            params[i] = get_dir_value(data, elem);//learn how to get parameters from several bytes
-
-        i++;
+        if (par_types[k] == REG_CODE)
+        {
+            params[k] = data->map[(elem->pc + i) % MEM_SIZE]; //getting the register number, the value I still need to get out of the register in the process itself
+            i = i + 1;
+        }
+        else if (par_types[k] == IND_CODE) //this gets either the value the we need to jump to relative to the pc for the indirect, or the reg number
+        {
+            params[k] = get_ind_value(data, elem);
+            i = i + 2;
+        }
+        else if (par_types[k] == DIR_CODE && dir == 0) //this only handles the case of the direct parameter being held in 4 bytes
+        {
+            params[k] = get_dir_value(data, elem, i);//learn how to get parameters from several bytes
+            i = i + 4;
+        }
+        k++;
     }
     return (params);
 }// this function is self-explanatory, we're getting the parameters guys..
