@@ -12,10 +12,12 @@
 
 #include "corewar.h"
 
-//Finish coding all the single instructions
-//learn how to get a direct parameter out of either 4 or 2 bytes, presumably with bit operators
+//Finish coding all the unfinished functions
 //find out how to direct the process into the given instruction
 //test and refactor EVERYTHING!
+//manage both idxd and un-idxd values in the instructions
+//refactor all instructions
+//find out how to copy a process and then have it run along with the other one
 
 void        instr_no_ocp(t_data *data, t_list *elem)
 {
