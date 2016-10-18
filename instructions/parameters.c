@@ -208,7 +208,7 @@ int                 two_or_four(t_data *data, t_list *elem)
 
 unsigned int         get_dir_value(t_data *data, t_list *elem, int prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
 {
-    
+    if ()
 
 
 
