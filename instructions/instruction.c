@@ -288,3 +288,20 @@ void		apply_lldi(t_data *data, t_list *elem) //addresses not relative to IDX
 //
 
 
+void        instruction_exec(t_data *data, t_list *elem)
+{
+    int *param_types;
+    unsigned int *params;
+    char opc; //DO NOT CONFUSE WITH OCP!!!
+
+    //THE PC IS ON THE OPC AT THIS POINT
+    opc = data->map[(elem->pc) % MEM_SIZE];
+    param_types = det_types(data->map[(elem->pc) % MEM_SIZE]);
+    params = get_params(param_types, data, elem);
+    if (opc == 0x0C || opc == 0x09 || opc == 0x01)
+    {
+        instr_no_ocp(data, elem);
+        return ; //free all the shit first dude
+    }
+    instr_w_ocp(data, elem, params, param_types);        
+}

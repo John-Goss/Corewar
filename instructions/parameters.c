@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parameters.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/18 18:08:35 by tbui              #+#    #+#             */
+/*   Updated: 2016/10/18 18:08:37 by tbui             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 //deteermining the paramater types below
 
@@ -122,6 +134,8 @@ int     *det_types(unsigned int parameter_types)
 
 //determining the parameter types above 
 
+
+
 unsigned int                 trans_two_bytes(char *transfer_bytes)
 {
     unsigned int value;
@@ -157,32 +171,6 @@ unsigned int                 trans_four_bytes(char *transfer_bytes)
 }//this function takes four char bytes and puts them into an int using bit operators
 
 
-unsigned int         get_ind_value_idxd(t_data *data, t_list *elem)
-{
-    unsigned int ind_value;
-    char *transfer_bytes;
-
-    ind_value = 0;
-    transfer_bytes = get_bytes(data, elem); //getting the 2 indirect bytes into a string for transfer, into an int
-    ind_value = trans_two_bytes(transfer_bytes);
-    ind_value = (elem->pc + (ind_value % IDX_MOD)) % MEM_SIZE; //I think this is how you modulo everything, but no idea
-    //ind_value = data->map[(elem->pc + (add_to_pc % IDX_MOD)) % MEM_SIZE];
-    return (ind_value);
-}
-
-unsigned int         get_ind_value(t_data *data, t_list *elem)
-{
-    unsigned int ind_value;
-    char *transfer_bytes;
-
-    ind_value = 0;
-    transfer_bytes = get_bytes(data, elem); //getting the 2 indirect bytes into a string for transfer, into an int
-    ind_value = trans_two_bytes(transfer_bytes);
-    ind_value = (elem->pc + ind_value) % MEM_SIZE; //I think this is how you modulo everything, but no idea
-    //ind_value = data->map[(elem->pc + (add_to_pc % IDX_MOD)) % MEM_SIZE];
-    return (ind_value);
-}
-
 
 int                 two_or_four(t_data *data, t_list *elem)
 {
@@ -198,24 +186,7 @@ int                 two_or_four(t_data *data, t_list *elem)
         elem->dir_by = 1;
 }//this function compares the opc indicator in the list with all the opcs and then looks if the direct parameter is on two or four bytes
 
-char               *get_bytes()
-{
 
-
-
-}//this function puts the parameter bytes into a string for byte transfer later on
-
-unsigned int         get_dir_value(t_data *data, t_list *elem, int prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
-{
-    unsigned int dir_val; //the direct value to be returned
-    char *bytes
-
-    if (elem->dir_by == 0) //if the direct is supposed to be on the next four bytes
-        bytes = get_dir_value_quatre(data, elem, prm_pos);
-        //code a function which will add the prm_pos onto the pc and then extract the dir out of the next 4 bytes
-
-
-}//this function gets the direct value, whether it's on four or two bytes
 
 unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there ONLY!!!
 {
@@ -251,20 +222,3 @@ unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //i
     return (params);
 }// this function is self-explanatory, we're getting the parameters guys..
 
-void        instruction_exec(t_data *data, t_list *elem)
-{
-    int *param_types;
-    unsigned int *params;
-    char opc; //DO NOT CONFUSE WITH OCP!!!
-
-    //THE PC IS ON THE OPC AT THIS POINT
-    opc = data->map[(elem->pc) % MEM_SIZE];
-    param_types = det_types(data->map[(elem->pc) % MEM_SIZE]);
-    params = get_params(param_types, data, elem);
-    if (opc == 0x0C || opc == 0x09 || opc == 0x01)
-    {
-        instr_no_ocp(data, elem);
-        return ; //free all the shit first dude
-    }
-    instr_w_ocp(data, elem, params, param_types);        
-}
