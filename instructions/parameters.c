@@ -193,43 +193,17 @@ unsigned int         get_ind_value(t_data *data, t_list *elem)
 
 int                 two_or_four(t_data *data, t_list *elem)
 {
-    if (data->map[elem->pc] == 0x02)
-        //ld
-    else if (pc == 0x03)
-        //apply_st(data, elem, params, param_types);
-    else if (pc == 0x04)
-        //apply_add(data, elem);
-    else if (pc == 0x05)
-        //apply_sub(data, elem);
-    else if (pc == 0x06)
-        //apply_and(data, elem, params, param_types);
-    else if (pc == 0x07)
-        //apply_or(data, elem, params, param_types);
-    else if (pc == 0x08)
-        //apply_xor(data, elem, params, param_types);
-    else if (pc == 0x10)
-        //aff
-    else if (pc == 0x0A)
-        //ldi
-    else if (pc == 0x0B)
-        //sti
-    else if (pc == 0x0E)
-        //lldi
-    else if (pc == 0x0F)
-        //lfork
-    else if (pc == 0x0D)
-        //lld
-    else if (pc == 0x0C)  
-       //fork
-    else if (pc == 0x01)
-       //apply_live(data, elem);   
-    else if (pc == 0x09)
-        //zjmp    0
-
-
-    //this function compares the opc indicator in the list with all the opcs and then looks if the direct parameter is on two or four bytes
-
-}
+    if (data->map[elem->pc] == 0x02 || data->map[elem->pc] == 0x03 || \
+        data->map[elem->pc] == 0x04 || data->map[elem->pc] == 0x05 || \
+        data->map[elem->pc] == 0x06 || data->map[elem->pc] == 0x07 || \
+        data->map[elem->pc] == 0x08 || data->map[elem->pc] == 0x10 || \
+        data->map[elem->pc] == 0x0D || data->map[elem->pc] == 0x01)
+        elem->dir_by = 0;
+    else if (data->map[elem->pc] == 0x09 || data->map[elem->pc] == 0x0A || \
+        data->map[elem->pc] == 0x0B || data->map[elem->pc] == 0x0E || \
+        data->map[elem->pc] == 0x0F || data->map[elem->pc] == 0x0C)
+        elem->dir_by = 1;
+}//this function compares the opc indicator in the list with all the opcs and then looks if the direct parameter is on two or four bytes
 
 
 unsigned int         get_dir_value(t_data *data, t_list *elem, int prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
