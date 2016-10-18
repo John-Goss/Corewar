@@ -179,7 +179,6 @@ int     *det_types(unsigned int parameter_types)
 }//this function makes an int array with the parameter types of the instruction
     //in order!
 
-
 unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there ONLY!!!
 {
     unsigned int *params;
@@ -189,7 +188,7 @@ unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //i
 
     k = 0;
     i = 2;
-    elem->dir_by = two_or_four();//determining whether the direct is on 2 or 4 bytes
+    elem->dir_by = two_or_four(data, elem);//determining whether the direct is on 2 or 4 bytes
     if (!(params = (unsigned int *)malloc(sizeof(int) * 5)))
         return (NULL);
     while (par_types[k] != 0) //this loop check the param types and fills the param array wtih the corresponding values in order

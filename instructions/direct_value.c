@@ -31,7 +31,7 @@ unsigned char					*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos)
 	return (four_bytes);
 }//this function puts four bytes into a string for further conversion into an unsgned int
 
-unsigned char					*get_two_bytes(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
+char					*get_two_bytes(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
 
 {
 	char *two_bytes; //this will be a string, containing the four bytes extracted
