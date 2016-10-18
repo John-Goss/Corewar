@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-char					*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
+unsigned char					*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
 
 {
 	char *four_bytes; //this will be a string, containing the four bytes extracted
@@ -31,7 +31,7 @@ char					*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_po
 	return (four_bytes);
 }//this function puts four bytes into a string for further conversion into an unsgned int
 
-char					*get_dir_value_two(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
+unsigned char					*get_two_bytes(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
 
 {
 	char *two_bytes; //this will be a string, containing the four bytes extracted
@@ -59,10 +59,16 @@ unsigned int 	       	get_dir_value(t_data *data, t_list *elem, int prm_pos)//pr
 
     dir_val = 0;
     if (elem->dir_by == 0) //if the direct is supposed to be on the next four bytes
+    {
         bytes = get_dir_value_quatre(data, elem, prm_pos);
+    	dir_val = trans_four_bytes(bytes);
+    }
         //code a function which will add the prm_pos onto the pc and then extract the dir out of the next 4 bytes
     else if (elem->dir_by == 1)
-    	bytes = get_dir_value_two(data, elem, prm_pos);
+    {
+    	bytes = get_two_bytes(data, elem, prm_pos);
+    	dir_val = trans_two_bytes(bytes);//found in parameters.c
+    }
+    return (dir_val);
 
-    dir_val = trans_four_bytes(bytes); //found in parameters.c
 }//this function gets the direct value, whether it's on four or two bytes

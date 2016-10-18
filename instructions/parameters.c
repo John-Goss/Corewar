@@ -19,8 +19,6 @@
 //essential question: During the extraciton of the paramters do we also put the addresses realtive to IDX?
 //example if there is a direct value to be taken out of the first parameter, do we take pc + 2 or pc + (2 % IDX_MOD) ??
 
-
-
 char *conv_dec_to_bin(int n)
 {
     char *bin_nbr;
@@ -106,7 +104,6 @@ int     *type_tab_make(char *types_bin, int *type_tab)
             k++;
         }
         type_tab[ty] = extr_typ_from_bin(para_bi);
-        printf("\n\n(%d)\n", type_tab[ty]);
         ty++;
     }
     ft_strdel(&para_bi);
@@ -114,28 +111,8 @@ int     *type_tab_make(char *types_bin, int *type_tab)
 }//this function extracts the parameter types out of the given binary
     //and puts it 
 
-int     *det_types(unsigned int parameter_types)
-{
-	int determine;
-	int types;
-	char *types_bin;
-    int *type_tab;
-
-	determine = 255;
-	types = parameter_types & determine;
-	types_bin = conv_dec_to_bin(types);
-    types_bin = rev_str(types_bin);
-    if ((!(type_tab = (int *)malloc(sizeof(int) * 5))))
-        return (NULL);
-    type_tab = type_tab_make(types_bin, type_tab);
-	return (type_tab);
-}//this function makes an int array with the parameter types of the instruction
-    //in order!
 
 //determining the parameter types above 
-
-
-
 unsigned int                 trans_two_bytes(char *transfer_bytes)
 {
     unsigned int value;
@@ -170,8 +147,6 @@ unsigned int                 trans_four_bytes(char *transfer_bytes)
     return (value);
 }//this function takes four char bytes and puts them into an int using bit operators
 
-
-
 int                 two_or_four(t_data *data, t_list *elem)
 {
     if (data->map[elem->pc] == 0x02 || data->map[elem->pc] == 0x03 || \
@@ -186,6 +161,23 @@ int                 two_or_four(t_data *data, t_list *elem)
         elem->dir_by = 1;
 }//this function compares the opc indicator in the list with all the opcs and then looks if the direct parameter is on two or four bytes
 
+int     *det_types(unsigned int parameter_types)
+{
+    int determine;
+    int types;
+    char *types_bin;
+    int *type_tab;
+
+    determine = 255;
+    types = parameter_types & determine;
+    types_bin = conv_dec_to_bin(types);
+    types_bin = rev_str(types_bin);
+    if ((!(type_tab = (int *)malloc(sizeof(int) * 5))))
+        return (NULL);
+    type_tab = type_tab_make(types_bin, type_tab);
+    return (type_tab);
+}//this function makes an int array with the parameter types of the instruction
+    //in order!
 
 
 unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there ONLY!!!
