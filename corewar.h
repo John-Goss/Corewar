@@ -94,7 +94,6 @@ typedef struct				s_list
 	int						carry;
 	int						action_time;
 	int						reg_number[REG_NUMBER];
-	int 					opc; //the indicator of the instruction
 	int 					dir_by; //this is a flag which determines whether an instruction with a direct type parameter, holds the parameter in 4 or 2 bytes
     //1 will mean 2 bytes, while 0 will mean 4 bytes 
 
