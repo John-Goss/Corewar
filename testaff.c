@@ -6,12 +6,13 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/17 18:47:13 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/19 13:10:03 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include <sys/ioctl.h>
+#include <signal.h>
 
 static void			delete_win(WINDOW *test_window)
 {
@@ -33,8 +34,9 @@ static void			create_win(t_display *display)
 	attron(A_UNDERLINE | A_BOLD);
 	mvwprintw(display->screen, 15/2 - 1, 224/2 - 22/2, "COREWAR CHAMPIONSHIP'S");
 	attroff(A_UNDERLINE | A_BOLD);
-//	mvwprintw(display->screen, 15/2 + 1, 224/2 - 16/2, "|| BattleZONE ||");
+	mvwprintw(display->screen, 15/2 + 1, 224/2 - 16/2, "|| BattleZONE ||");
 	display->mem = get_str_addr(NULL);
+	get_win_addr(display->screen);
 }
 
 static void			print_str(t_display *display, t_data *data)
@@ -63,64 +65,35 @@ static void			print_str(t_display *display, t_data *data)
 	refresh();
 }
 
-/*
-   static void			signal_catch(int sig_num)
-   {
-   WINDOW	*tmp;
-   char	*mem;
+static void			sigkill(int code)
+{
+	WINDOW	*tmp;
 
-   (void)sig_num;
-   tmp = NULL;
-   mem = get_str_addr(NULL);
-   tmp = get_win_addr(NULL);
-   tmp = create_win(tmp);
-   print_str(mem);
-   }
-   */
+	code = 0;
+	tmp = NULL;
+	tmp = get_win_addr(NULL);
+	clear();
+	delete_win(tmp);
+	endwin();
+	free(tmp);
+	exit(0);
+}
 
 static int			getch_aff(t_display *display, t_data *data)
 {
 	int			i;
 
-	print_str(display, data);
 	while (42)
 	{
 		i = getch();
-		/*		if (i == 28)
-				{
-				refresh();
-				if (window)
-				delete_win(window);
-				while (COLS <= 50 || LINES <= 50)
-				{
-				clear();
-				mvprintw(LINES / 2, COLS / 2, "UP SIZE");
-				refresh();
-				if (LINES > 50 && COLS > 50)
-				{
-				move(1, 1);
-				if (window)
-				delete_win(window);
-				break ;
-				}
-				}
-				window = create_win();
-				window = rest_wsize(window, get_str_addr(mem));
-				continue ;
-				}
-				else */if (i == 27)
+		signal(SIGINT, sigkill);
+		if (i == 27)
+			sigkill(1);
+		else if (i == KEY_UP)
 		{
-			clear();
-			delete_win(display->win);
-			endwin();
-			exit(0);
+			print_str(display, data);
+			continue ;
 		}
-				else if ((i == KEY_DOWN) || (i == KEY_UP) || (i == KEY_RIGHT)
-						|| (i == KEY_LEFT))
-				{
-					print_str(display, data);
-					continue ;
-				}
 	}
 }
 
@@ -143,6 +116,6 @@ int					aff_window(t_data *data)
 	noecho();
 	raw();
 	refresh();
-	keypad(display.win, TRUE);
+	keypad(display.screen, TRUE);
 	return (i = getch_aff(&display, data));
 }

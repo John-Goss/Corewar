@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/17 18:34:19 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/19 13:08:14 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef char				t_arg_type;
 #include <curses.h>
 #include <stdlib.h>
 #include <string.h>
-#include <signal.h>
 #include <fcntl.h>
 #include "Libft/INCLUDES/libft.h"
 
