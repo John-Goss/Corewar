@@ -6,9 +6,10 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/05 13:52:29 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/19 19:00:52 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "corewar.h"
 
@@ -28,6 +29,62 @@ WINDOW			*get_win_addr(WINDOW *window)
 	if (window)
 		ptr = window;
 	return (ptr);
+}
+
+int				find_pc_pos(t_list *list, int *pc, int value)
+{
+	t_list	*tmp;
+	int		i;
+
+	tmp = list;
+	i = 0;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	while (i >= 0)
+	{
+		if (pc[i] == value)
+			return (1);
+		i--;
+	}
+	return (0);
+}
+
+static int		*sort_array_pc(int *pc, int len)
+{
+	int	*tmp;
+	int	i;
+	int	ref;
+	int	cpt;
+	int	pos;
+
+	tmp = NULL;
+	i = 0;
+	cpt = 0;
+	pos = 0;
+	ref = 0;
+	if (!(tmp = (int *)malloc(sizeof(int) * len)))
+		return (NULL);
+	while (ref < len)
+	{
+		cpt = pc[i];
+		while (i < len)
+		{
+			if (cpt > pc[i] && pc[i] != -1)
+			{
+				pos = i;
+				cpt = pc[i];
+			}
+			i++;
+		}
+		pc[pos] = -1;
+		tmp[ref] = cpt;
+		ref++;
+	}
+	free(pc);
+	return (tmp);
 }
 
 int				*set_array_pc(t_data *data)
@@ -53,5 +110,5 @@ int				*set_array_pc(t_data *data)
 		pc[i++] = tmp->pc;
 		tmp = tmp->next;
 	}
-	return (pc);
+	return (sort_array_pc(pc, i));
 }
