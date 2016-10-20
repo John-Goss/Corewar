@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 12:40:36 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/20 14:57:15 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/20 17:20:02 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,20 @@ int	init_infos_box(t_data *data)
 {
 	t_desc	*tmp;
 	int		pos_y;
+	int		pos_x;
 
 	tmp = data->desc;
-	pos_y = 19;
+	pos_y = 20;
+	pos_x = 195;
+	attron(A_UNDERLINE);
 	mvwprintw(data->display->screen, 16, 196 + 13/2, "Infos Players");
+	attroff(A_UNDERLINE);
 	while (tmp)
 	{
-		mvwprintw(data->display->screen, pos_y, 196, "Player %d - %s", tmp->nb_champ, tmp->name);
+		mvwprintw(data->display->screen, pos_y, 195, "Player %d - (%s)",
+				tmp->nb_champ, tmp->name);
+		pos_y += 4;
 		tmp = tmp->next;
-		pos_y += 3;
 	}
 	refresh();
 	return (0);

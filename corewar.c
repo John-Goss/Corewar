@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/20 16:06:53 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/20 17:37:30 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int			main(int argc, char **argv)
 //		if (getch() == ' ')
 //			data.flag_slowmode = 1;
 //	}
+	get_str_addr(data.map);
+	aff_window(&data);
 //	get_str_addr(data.map);
 //	aff_window(&data);
 //	init_infos_box(&data);
