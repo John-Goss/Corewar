@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/17 18:33:49 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/20 15:49:12 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ void		init_structur(t_data *data)
 	int		i;
 
 	i = 0;
-	ft_bzero(data->map, MEM_SIZE);
+	data->last_live_nb_champ = 0;
+	ft_bzero(data->map, MEM_SIZE - 1);
 	data->flag_slowmode = 0;
 	data->flag_visu = 0;
 	data->cycle = 0;

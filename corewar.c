@@ -6,24 +6,37 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/20 16:05:03 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/20 17:21:55 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/20 15:49:41 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-/*
-void		end(data)
+
+void		end(t_data *data)
 {
-// kill windows
-	if
+	t_desc	*elem;
+
+	elem = data->desc;
+//	delete_win(data->display->screen);
+	if (data->last_live_nb_champ)
+	{
+		while (elem && elem->nb_champ != data->last_live_nb_champ)
+			elem = elem->next;
+		printf("Le joueur %d (%s) a gagne ", elem->nb_champ, elem->name);
+	}
+	else
+		exit(write(1, "Aucun live n'a ete fait\n", 24));
 }
-*/
+
 int			main(int argc, char **argv)
 {
 	t_data	data;
 //	int i = 0;
 
 	init_structur(&data);
+	printf("%d\n", data.last_live_nb_champ);
+	exit(0);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
 //	while (i <= MEM_SIZE)
@@ -40,16 +53,18 @@ int			main(int argc, char **argv)
 //	}
 	get_str_addr(data.map);
 	aff_window(&data);
+//	get_str_addr(data.map);
+//	aff_window(&data);
+//	init_infos_box(&data);
 	while (42)
 	{
-//i		turn(&data);
+		turn(&data);
 		(data.cycle)++;
-//		if ((--(data.cycle_to_die)) <= 0)
-//			if (verif_end(&data) == 1)
-//				break;
+		if ((--(data.cycle_to_die)) <= 0)
+			if (verif_end(&data) == 1)
+				break;
 	}
-	delete_win(data.display->screen);
-//	end(data);
+	end(&data);
 }
 
 int			stock_desc(t_data *data, char *buf, int nb)
