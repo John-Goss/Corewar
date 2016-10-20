@@ -6,18 +6,18 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/20 15:02:50 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:05:03 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
+/*
 void		end(data)
 {
 // kill windows
 	if
 }
-
+*/
 int			main(int argc, char **argv)
 {
 	t_data	data;
@@ -40,7 +40,6 @@ int			main(int argc, char **argv)
 //	}
 	get_str_addr(data.map);
 	aff_window(&data);
-	init_infos_box(&data);
 	while (42)
 	{
 //i		turn(&data);

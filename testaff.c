@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/20 14:31:09 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:55:46 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void			sigkill(int code)
 static void			create_win(t_display *display)
 {
 	display->screen = initscr();
-	start_color();
 	display->header = subwin(display->screen, 15, 224, 0, 0);
 	display->win = subwin(display->screen, 66, 194, 15, 0);
 	display->info = subwin(display->screen, 66, 30, 15, 194);
@@ -128,6 +127,7 @@ int					aff_window(t_data *data)
 	refresh();
 	keypad(display.screen, TRUE);
 	data->display = &display;
+	init_infos_box(data);
 	getch_aff(data);
 	return (1);
 }
