@@ -13,7 +13,7 @@
 #include "corewar.h"
 
 
-unsigned int                 trans_four_bytes(char *transfer_bytes)
+int                 trans_four_bytes(char *transfer_bytes)
 {
     unsigned int value;
     int decal; 
@@ -30,8 +30,7 @@ unsigned int                 trans_four_bytes(char *transfer_bytes)
     return (value);
 }//this function takes four char bytes and puts them into an int using bit operators
 
-
-unsigned char					*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
+char					*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
 
 {
 	char *four_bytes; //this will be a string, containing the four bytes extracted
@@ -53,9 +52,9 @@ unsigned char					*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos)
 
 
 //called from parameters.c
-unsigned int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
+int 	       	get_dir_value(t_data *data, t_list *elem, int prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
 {
-    unsigned int dir_val; //the direct value to be returned
+    int dir_val; //the direct value to be returned
     char *bytes
 
     dir_val = 0;

@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sti.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/20 18:12:34 by tbui              #+#    #+#             */
+/*   Updated: 2016/10/20 18:12:36 by tbui             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
-void        put_in_bytes(t_data *data,t_list *elem, int address, int params)//move this function to the top of the instructions filee
+void        put_in_bytes(t_data *data,t_list *elem, int address, int reg_value)//move this function to the top of the instructions filee
 {
 	char byte_array[4];
 
-	byte_array[0] = (params >> 24) & 0xFF;
-	byte_array[1] = (params >> 16) & 0xFF;
-	byte_array[2] = (params >> 8) & 0xFF;
-	byte_array[3] = params & 0xFF;
+	byte_array[0] = (reg_value >> 24) & 0xFF;
+	byte_array[1] = (reg_value >> 16) & 0xFF;
+	byte_array[2] = (reg_value >> 8) & 0xFF;
+	byte_array[3] = reg_value & 0xFF;
 
 	data->map[elem->pc + address] = byte_array[0];
 	data->map[elem->pc + address + 1] = byte_array[1];
 	data->map[elem->pc + address + 2] = byte_array[2];
 	data->map[elem->pc + address + 3] = byte_array[3];
-}
+} //pas sur si c'est juste mai l'idee est bon
 
 void		apply_sti(t_data *data, t_list *elem, int *param_types, int *params)
 {

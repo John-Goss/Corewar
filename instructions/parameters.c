@@ -138,7 +138,7 @@ int     *det_types(unsigned int parameter_types)
     determine = 255;
     types = parameter_types & determine;
     types_bin = conv_dec_to_bin(types);
-  //  types_bin = rev_str(types_bin);
+  //  types_bin = rev_str(types_bin); //figure out if we have to reverse it or not
     if ((!(type_tab = (int *)malloc(sizeof(int) * 5))))
         return (NULL);
     type_tab = type_tab_make(types_bin, type_tab);
