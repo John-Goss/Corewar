@@ -6,11 +6,17 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/20 14:40:05 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:57:01 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+void		end(data)
+{
+// kill windows
+	if
+}
 
 int			main(int argc, char **argv)
 {
@@ -220,6 +226,8 @@ int			verif_end(t_data *data)
 	j = 0;
 	if (data->check == MAX_CHECKS || data->live_cpt >= NBR_LIVE)
 	{
+		if (data->check == MAX_CHECKS)
+			data->check = 0;
 		data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->cycle_to_die_nbr);
 		data->cycle_to_die_nbr++;
 		check_who_is_alive(data);
