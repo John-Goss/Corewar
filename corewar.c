@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/17 18:34:02 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:57:25 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,16 @@ int			main(int argc, char **argv)
 //	}
 	get_str_addr(data.map);
 	aff_window(&data);
+	init_infos_box(&data);
 	while (42)
 	{
-		turn(&data);
+//i		turn(&data);
 		(data.cycle)++;
-		if ((--(data.cycle_to_die)) <= 0)
-			if (verif_end(&data) == 1)
-				break;
+//		if ((--(data.cycle_to_die)) <= 0)
+//			if (verif_end(&data) == 1)
+//				break;
 	}
+	delete_win(data.display->screen);
 //	end(data);
 }
 
@@ -173,7 +175,7 @@ void		turn(t_data *data)
 	elem = data->begin;
 	while (elem)
 	{
-		printf("elem pc = %d elem champ = %d\n",elem->pc , elem->reg_number[0]);
+//		printf("elem pc = %d elem champ = %d\n",elem->pc , elem->reg_number[0]);
 //		if (data->flag_slowmode == 1)
 //			getch();
 		process_action(data, elem);

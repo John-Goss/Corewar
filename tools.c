@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/19 19:00:52 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:34:50 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ static int		*sort_array_pc(int *pc, int len)
 		return (NULL);
 	while (ref < len)
 	{
+		i = 0;
 		cpt = pc[i];
 		while (i < len)
 		{
-			if (cpt > pc[i] && pc[i] != -1)
+			if (pc[i] < cpt && pc[i] != -1)
 			{
 				pos = i;
 				cpt = pc[i];
@@ -111,4 +112,12 @@ int				*set_array_pc(t_data *data)
 		tmp = tmp->next;
 	}
 	return (sort_array_pc(pc, i));
+}
+
+int				delete_all_win(t_display *display)
+{
+	delete_win(display->info);
+	delete_win(display->win);
+	delete_win(display->screen);
+	return (1);
 }
