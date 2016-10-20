@@ -52,7 +52,7 @@ char					*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_po
 
 
 //called from parameters.c
-int 	       	get_dir_value(t_data *data, t_list *elem, int prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
+int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
 {
     int dir_val; //the direct value to be returned
     char *bytes

@@ -12,12 +12,11 @@
 
 #include "corewar.h"
 
-//Finish coding all the unfinished functions
+//Finish coding apply_aff
 //find out how to direct the process into the given instruction
 //test and refactor EVERYTHING!
-//manage both idxd and un-idxd values in the instructions
 //refactor all instructions
-//find out how to copy a process and then have it run along with the other one
+//figure how the carry modifications work, and what it means to "modify the carry" do we always put it to 1?
 
 void        instr_no_ocp(t_data *data, t_list *elem)
 {
@@ -36,7 +35,7 @@ void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_typ
     else if (data->map[elem->pc] == 0x03)
         apply_st(data, elem, params, param_types);
     else if (data->map[elem->pc] == 0x04)
-        apply_add(data, elem);
+        apply_add(data, elem, params, param_types);
     else if (data->map[elem->pc] == 0x05)
         apply_sub(data, elem);
     else if (data->map[elem->pc] == 0x06)
@@ -79,16 +78,6 @@ void		apply_live(t_data *data, t_list *elem)
 		desc = desc->next;
 	}
 }
-
-void		apply_st(t_data *data, t_list *elem, int *params, int *param_types)
-{
-
-    if (param_types[1] == IND_CODE)//go to the address (PC plus value) and store first value
-        data->map[params[1]] =  elem->reg_number[params[0]]; //value to copy into the other place
-    else if (param_types[1] == REG_CODE)//put the value to be copied into the register
-        elem->reg_number[params[1]] = elem->reg_number[params[0]]; //value to copy into the other place
-}//this takes the value of a register and STORES it at either an address or another register
-
 
 //takes two paramters of which the third will always be register
 void		apply_and(t_data *data,t_list *elem, int *param, int *param_types)

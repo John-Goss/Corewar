@@ -12,30 +12,44 @@
 
 #include "corewar.h"
 
-void		apply_add(t_data *data, t_list *elem)
+void		apply_add(t_data *data, t_list *elem, int *params, int *param_types)
 {
 	int store;
-	int reg_one;
-	int reg_two;
+	int i;
 
-	reg_one = data->map[(elem->pc + 2) % MEM_SIZE];
-	reg_two = data->map[(elem->pc + 3) % MEM_SIZE];
-	store = data->map[(elem->pc + 4) % MEM_SIZE];
-	elem->reg_number[store] = elem->reg_number[reg_one] + elem->reg_number[reg_two];
+	i = 0;
+	store = 0;
+	while (param_types[i] != 0)//this loop verifies if all the param types are truly registers
+	{
+		if (param_types[i] != REG_CODE)
+		{
+			ft_putstr("ERROR in add instruction, param types are invalid\n");//this is just for testing
+			return ; //not sure if I need this kind of error handing
+		}
+		i++;
+	}
+	store = elem->reg_number[params[0]] + elem->reg_number[params[1]];
+	elem->reg_number[params[2]] = store;
 	elem->carry = 1;
-	//elem->pc = ((elem->pc + (4 % IDX_MOD)) % MEM_SIZE);
 }
 
-void		apply_sub(t_data *data, t_list *elem)
+void		apply_sub(t_data *data, t_list *elem, int *params, int *param_types)
 {
 	int store;
-	int reg_one;
-	int reg_two;
-    reg_one = data->map[(elem->pc + 2) % MEM_SIZE];
-    reg_two = data->map[(elem->pc + 3) % MEM_SIZE];
-    store = data->map[(elem->pc + 4) % MEM_SIZE];
-	elem->reg_number[store] = elem->reg_number[reg_one] - elem->reg_number[reg_two];
+	int i;
+
+	i = 0;
+	store = 0;
+	while (param_types[i] != 0)//this loop verifies if all the param types are truly registers
+	{
+		if (param_types[i] != REG_CODE)
+		{
+			ft_putstr("ERROR in add instruction, param types are invalid\n");//this is just for testing
+			return ; //not sure if I need this kind of error handing
+		}
+		i++;
+	}
+	store = elem->reg_number[params[0]] - elem->reg_number[params[1]];
+	elem->reg_number[params[2]] = store;
 	elem->carry = 1;
-	//elem->pc = (elem->pc + 4) % MEM_SIZE;
-}//same as add but subtraction
-//add & sub functions above
+}
