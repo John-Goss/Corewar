@@ -12,6 +12,24 @@
 
 #include "corewar.h"
 
+unsigned int                 trans_two_bytes(char *transfer_bytes)
+{
+    unsigned int value;
+    int decal; 
+    int i;
+
+    i = 0;//index counter for the loop
+    decal = 24;
+    while (i < IND_SIZE && transfer_bytes[i] != '\0')
+    {
+        value |= (transfer_bytes[i] << decal);
+        decal = decal - 8;
+        i++;
+    }
+    return (value);
+}//this function does the same as trans_four_bytes but with two bytes instead of four... obviously
+
+
 unsigned char                   *get_two_bytes(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
 
 {
@@ -31,7 +49,6 @@ unsigned char                   *get_two_bytes(t_data *data, t_list *elem, int p
     return (two_bytes);
 }//this function puts four bytes into a string for further conversion into an unsgned int
 
-
 unsigned int         get_ind_value_idxd(t_data *data, t_list *elem)
 {
     unsigned int ind_value;
@@ -45,12 +62,18 @@ unsigned int         get_ind_value_idxd(t_data *data, t_list *elem)
     return (ind_value);
 }
 
-unsigned int         get_ind_value(t_data *data, t_list *elem)
+unsigned int         get_ind_value(t_data *data, t_list *elem, int *prm_pos)
 {
     unsigned int ind_value;
     char *transfer_bytes;
 
+    (*prm_pos) = (*prm_pos) + 2;
     ind_value = 0;
+  //  if (need_idx(data, elem) == 1)
+  //  {
+  //      ind_value = get_ind_value_idxd(data, elem);
+  //      return (ind_value);
+  //  }
     transfer_bytes = get_two_bytes(data, elem); //getting the 2 indirect bytes into a string for transfer, into an int
     ind_value = trans_two_bytes(transfer_bytes); //found in parameters.c
     ind_value = (elem->pc + ind_value) % MEM_SIZE; //I think this is how you modulo everything, but no idea

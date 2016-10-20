@@ -113,39 +113,6 @@ int     *type_tab_make(char *types_bin, int *type_tab)
 
 
 //determining the parameter types above 
-unsigned int                 trans_two_bytes(char *transfer_bytes)
-{
-    unsigned int value;
-    int decal; 
-    int i;
-
-    i = 0;//index counter for the loop
-    decal = 24;
-    while (i < IND_SIZE && transfer_bytes[i] != '\0')
-    {
-        value |= (transfer_bytes[i] << decal);
-        decal = decal - 8;
-        i++;
-    }
-    return (value);
-}//this function does the same as trans_four_bytes but with two bytes instead of four... obviously
-
-unsigned int                 trans_four_bytes(char *transfer_bytes)
-{
-    unsigned int value;
-    int decal; 
-    int i;
-
-    i = 0;//index counter for the loop
-    decal = 24;
-    while (i < DIR_SIZE && transfer_bytes[i] != '\0')
-    {
-        value |= (transfer_bytes[i] << decal);
-        decal = decal - 8;
-        i++;
-    }
-    return (value);
-}//this function takes four char bytes and puts them into an int using bit operators
 
 int                 two_or_four(t_data *data, t_list *elem)
 {
@@ -171,7 +138,7 @@ int     *det_types(unsigned int parameter_types)
     determine = 255;
     types = parameter_types & determine;
     types_bin = conv_dec_to_bin(types);
-    types_bin = rev_str(types_bin);
+  //  types_bin = rev_str(types_bin);
     if ((!(type_tab = (int *)malloc(sizeof(int) * 5))))
         return (NULL);
     type_tab = type_tab_make(types_bin, type_tab);
@@ -183,15 +150,14 @@ unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //i
 {
     unsigned int *params;
     int i; //counter for the par_types tab
-    int k;
-    int dir;
+    int k; //counter for the params tab
 
     k = 0;
     i = 2;
     elem->dir_by = two_or_four(data, elem);//determining whether the direct is on 2 or 4 bytes
     if (!(params = (unsigned int *)malloc(sizeof(int) * 5)))
         return (NULL);
-    while (par_types[k] != 0) //this loop check the param types and fills the param array wtih the corresponding values in order
+    while (par_types[k] != 0) //this loop checks the param types and fills the param array wtih the corresponding values in order
     {
         if (par_types[k] == REG_CODE)
         {
@@ -199,17 +165,11 @@ unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //i
             i = i + 1;
         }
         else if (par_types[k] == IND_CODE) //this gets either the value the we need to jump to relative to the pc for the indirect, or the reg number
-        {
-            params[k] = get_ind_value(data, elem);
-            i = i + 2;
-        }
-        else if (par_types[k] == DIR_CODE && dir == 0) //this only handles the case of the direct parameter being held in 4 bytes
-        {
-            params[k] = get_dir_value(data, elem, i);//learn how to get parameters from several bytes
-            i = i + 4;
-        }
+            params[k] = get_ind_value(data, elem &i);
+        else if (par_types[k] == DIR_CODE) //this only handles the case of the direct parameter being held in 4 bytes
+            params[k] = get_dir_value(data, elem, &i);//learn how to get parameters from several bytes
         k++;
     }
-    return (params);
+    return (params);//returns to instructions.c
 }// this function is self-explanatory, we're getting the parameters guys..
 

@@ -216,27 +216,7 @@ void		apply_ldi(t_data *data, t_list *elem, int *param_types, int *params)
 }//{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
 //        "load index", 1, 1},
 
-void		apply_sti(t_data *data, t_list *elem, int *param_types, int *params)
-{
-    int value_one;
-    int value_two;
 
-    if (param_types[1] == DIR_CODE)
-        value_one = params[1];
-    else if (param_types[1] == IND_CODE)
-        value_one = get_ind_value_idxd(params[1]);
-    else if (param_types[0] == REG_CODE)
-        value_one = elem->reg_number[params[1]]; //determining the first value which we will use as the an index
-    if (param_types[2] == DIR_CODE)
-        value_two = params[2];
-    else if (param_types[2] == REG_CODE)
-        value_two = elem->reg_number[params[2]];
-    elem->reg_number[params[0]] = get_ind_value_idxd(value_one + value_two); //getting the value at the address which we've determined by combining the values of the last two parameters
-        //then putting the value we found at that address into the register, given to us in the first parameter
-}//{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
-//     "store index", 1, 1},
-
-                
 
 void		apply_lld(t_data *data, t_list *elem) //addresses not relative to IDX
 {
@@ -300,7 +280,7 @@ void        instruction_exec(t_data *data, t_list *elem)
     params = get_params(param_types, data, elem);
     if (opc == 0x0C || opc == 0x09 || opc == 0x01)
     {
-        instr_no_ocp(data, elem);
+        instr_no_ocp(data, elem, params);
         return ; //free all the shit first dude
     }
     instr_w_ocp(data, elem, params, param_types);        
