@@ -6,6 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
+/*   Updated: 2016/10/20 15:00:56 by jle-quer         ###   ########.fr       */
 /*   Updated: 2016/10/20 14:38:04 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -107,6 +108,15 @@ typedef struct				s_desc
 	struct s_desc			*next;
 }							t_desc;
 
+typedef struct				s_display
+{
+	WINDOW					*screen;
+	WINDOW					*win;
+	WINDOW					*info;
+	WINDOW					*header;
+	unsigned char			*mem;
+}							t_display;
+
 typedef struct				s_data
 {
 	void					(*tab[17])(struct s_data *data, t_list *elem);
@@ -118,21 +128,13 @@ typedef struct				s_data
 	int 					cycle_to_die_nbr;
 	t_list					*begin;
 	t_desc					*desc;
+	t_display				*display;
 	int						check;
 	unsigned char			map[MEM_SIZE];
 	int						last_live_nb_champ;
 	int						champ[MAX_PLAYERS + 1];
 	int						nb_champ;
 }							t_data;
-
-typedef struct				s_display
-{
-	WINDOW					*screen;
-	WINDOW					*win;
-	WINDOW					*info;
-	WINDOW					*header;
-	unsigned char			*mem;
-}							t_display;
 
 /*
  * PROTOTYPE
@@ -182,3 +184,6 @@ void		apply_aff(t_data *data, t_list *elem);
 int							find_pc_pos(t_list *list, int *pc, int i);
 int							*set_array_pc(t_data *data);
 int							aff_window(t_data *data);
+int							init_infos_box(t_data *data);
+void						delete_win(WINDOW *screen);
+int							delete_all_win(t_display *display);

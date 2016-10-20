@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/19 19:00:57 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/20 14:31:09 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 #include <sys/ioctl.h>
 #include <signal.h>
 
-static void			delete_win(WINDOW *test_window)
+void				delete_win(WINDOW *test_window)
 {
 	box(test_window, 0, 0);
 	move(0, 0);
 	delwin(test_window);
 	refresh();
+	endwin();
 }
 
 static void			sigkill(int code)
@@ -31,7 +32,6 @@ static void			sigkill(int code)
 	tmp = get_win_addr(NULL);
 	clear();
 	delete_win(tmp);
-	endwin();
 	free(tmp);
 	exit(0);
 }
@@ -84,15 +84,14 @@ static void			print_str(t_display *display, t_data *data)
 		y++;
 		x = 1;
 	}
-	mvwprintw(display->screen, 16, 196, "Valeur de sort PC[0] %d, 1 : %d, 2 : %d", pc[0], pc[1], pc[2]);
 	refresh();
 }
 
-static int			getch_aff(t_display *display, t_data *data)
+static int			getch_aff(t_data *data)
 {
 	int			keycode;
 
-	mvwprintw(display->screen, 44, 194/2 - 33/2,
+	mvwprintw(data->display->screen, 44, 194/2 - 33/2,
 			"Press Space_Key for run the game.");
 	signal(SIGINT, &sigkill); // Catch ctrl-c signal
 	while (42)
@@ -102,17 +101,17 @@ static int			getch_aff(t_display *display, t_data *data)
 			sigkill(1);
 		else if (keycode == 32) // Space Key
 		{
-			werase(display->win);
-			print_str(display, data);
-			continue ;
+			werase(data->display->win);
+			print_str(data->display, data);
+			break ;
 		}
 	}
+	return (0);
 }
 
 int					aff_window(t_data *data)
 {
 	t_display		display;
-	int				i;
 	struct winsize	t;
 
 	display = (t_display){NULL, NULL, NULL, NULL, NULL};
@@ -122,11 +121,13 @@ int					aff_window(t_data *data)
 	{
 		ft_printf("\nTOO SHORT SIZE FOR DISPLAY\nLINES MIN: 81 / Value TTY: ");
 		ft_printf("%d\nCOLS MIN: 224 / Value TTY: %d\n",t.ws_row, t.ws_col);
-		exit(0);
+		exit(1);
 	}
 	create_win(&display);
 	noecho();
 	refresh();
 	keypad(display.screen, TRUE);
-	return (i = getch_aff(&display, data));
+	data->display = &display;
+	getch_aff(data);
+	return (1);
 }
