@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 12:01:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/07 14:03:46 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/20 17:36:35 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,41 +21,41 @@
 
 void        instr_no_ocp(t_data *data, t_list *elem)
 {
-    if (pc == 0x0C)  
+    if (data->map[elem->pc] == 0x0C)  
        //fork
-    else if (pc == 0x01)
+    else if (data->map[elem->pc] == 0x01)
        apply_live(data, elem);   
-    else if (pc == 0x09)
+    else if (data->map[elem->pc] == 0x09)
         //zjmp    0
 }
 
 void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_types);
 {
-    else if (map[i] == 0x02)
+    else if (data->map[elem->pc] == 0x02)
         apply_ld(data, elem, params);
-    else if (pc == 0x03)
+    else if (data->map[elem->pc] == 0x03)
         apply_st(data, elem, params, param_types);
-    else if (pc == 0x04)
+    else if (data->map[elem->pc] == 0x04)
         apply_add(data, elem);
-    else if (pc == 0x05)
+    else if (data->map[elem->pc] == 0x05)
         apply_sub(data, elem);
-    else if (pc == 0x06)
+    else if (data->map[elem->pc] == 0x06)
         apply_and(data, elem, params, param_types);
-    else if (pc == 0x07)
+    else if (data->map[elem->pc] == 0x07)
         apply_or(data, elem, params, param_types);
-    else if (pc == 0x08)
+    else if (data->map[elem->pc] == 0x08)
         apply_xor(data, elem, params, param_types);
-    else if (pc == 0x10)
+    else if (data->map[elem->pc] == 0x10)
         //aff
-    else if (pc == 0x0A)
+    else if (data->map[elem->pc] == 0x0A)
         //ldi
-    else if (pc == 0x0B)
+    else if (data->map[elem->pc] == 0x0B)
         //sti
-    else if (pc == 0x0E)
+    else if (data->map[elem->pc] == 0x0E)
         //lldi
-    else if (pc == 0x0F)
+    else if (data->map[elem->pc] == 0x0F)
         //lfork
-    else if (pc == 0x0D)
+    else if (data->map[elem->pc] == 0x0D)
         //lld
 }
 
@@ -91,9 +91,14 @@ void		apply_live(t_data *data, t_list *elem)
 {
 	t_desc	*desc;
 	int		nb_champ;
+	int		i;
 
-	nb_champ = data->map[(elem->pc + (1 % IDX_MOD)) % MEM_SIZE];
-	elem->pc = (elem->pc + 2) % MEM_SIZE;
+	nb_champ = (data->map[(elem->pc + 1) % MEM_SIZE] << 24 & 0xff000000) |
+	(data->map[(elem->pc + 2) % MEM_SIZE] << 16 & 0xff0000) |
+	(data->map[(elem->pc + 3) % MEM_SIZE] << 8 & 0xff00) |
+	(data->map[(elem->pc + 4) % MEM_SIZE] & 0xff);
+
+	elem->pc = (elem->pc + 5) % MEM_SIZE;
 	data->live_cpt++;
 	while (desc)
 	{
@@ -250,22 +255,26 @@ void		apply_lldi(t_data *data, t_list *elem) //addresses not relative to IDX
     //figure out carry modification
 }
 
-//void		apply_lfork(t_data *data, t_list *elem) //addresses not relative to IDX!
-//{
-//  //Again... figure out how to split a process
-//}
-//
-//void		apply_aff(t_data *data, t_list *elem)
-//{
-// //IDK what the fuck this means
-//}
-//
+void		apply_lfork(t_data *data, t_list *elem)
+{
+	data->begin = create_elem(data->begin, elem->reg_number[0], pc +
+			(data->map[(elem->pc + 1) % MEM_SIZE]));
+	elem->pc = (elem->pc + 2) % MEM_SIZE;
+}
 
-//void      apply_fork(t_data *data, t_list *elem)
-//{
-// //figure out how to split a process
-//}
-//
+void		apply_aff(t_data *data, t_list *elem)
+{
+//IDK what the fuck this means
+}
+
+
+void      apply_fork(t_data *data, t_list *elem)
+{
+	data->begin = create_elem(data->begin, elem->reg_number[0], pc +
+			(data->map[(elem->pc + 1) % MEM_SIZE]) % IDX_MOD);
+	elem->pc = (elem->pc + 2) % MEM_SIZE;
+}
+
 
 
 void        instruction_exec(t_data *data, t_list *elem)

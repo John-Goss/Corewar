@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/20 15:49:41 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:06:53 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ void		process_action(t_data *data, t_list *elem)
 		{
 			elem->action_time--;
 			if (!(elem->action_time))
-				NULL;
+				instruction_exec(data, elem);
 //				printf("%hhx", data->map[elem->pc]);
 //				(data->tab)[data->map[elem->pc]](data, elem);
 		}

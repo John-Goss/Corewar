@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/20 15:00:56 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:05:57 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/10/20 14:38:04 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -159,6 +159,9 @@ t_desc						*create_desc(t_desc **desc, int nb);
 /*
  *	PROTOTYPE INSTRUCTIONS
  */
+
+void		instruction_exec(t_data *data, t_list *elem);
+
 
 void		apply_live(t_data *data, t_list *elem);
 void		apply_ld(t_data *data, t_list *elem, int *params);
