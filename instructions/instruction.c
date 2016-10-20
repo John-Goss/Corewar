@@ -59,34 +59,6 @@ void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_typ
         //lld
 }
 
-void		apply_add(t_data *data, t_list *elem)
-{
-	int store;
-	int reg_one;
-	int reg_two;
-
-	reg_one = data->map[(elem->pc + 2) % MEM_SIZE];
-	reg_two = data->map[(elem->pc + 3) % MEM_SIZE];
-	store = data->map[(elem->pc + 4) % MEM_SIZE];
-	elem->reg_number[store] = elem->reg_number[reg_one] + elem->reg_number[reg_two];
-	elem->carry = 1;
-	//elem->pc = ((elem->pc + (4 % IDX_MOD)) % MEM_SIZE);
-}
-
-void		apply_sub(t_data *data, t_list *elem)
-{
-	int store;
-	int reg_one;
-	int reg_two;
-    reg_one = data->map[(elem->pc + 2) % MEM_SIZE];
-    reg_two = data->map[(elem->pc + 3) % MEM_SIZE];
-    store = data->map[(elem->pc + 4) % MEM_SIZE];
-	elem->reg_number[store] = elem->reg_number[reg_one] - elem->reg_number[reg_two];
-	elem->carry = 1;
-	//elem->pc = (elem->pc + 4) % MEM_SIZE;
-}//same as add but subtraction
-//add & sub functions above
-
 void		apply_live(t_data *data, t_list *elem)
 {
 	t_desc	*desc;
@@ -101,18 +73,6 @@ void		apply_live(t_data *data, t_list *elem)
 			data->last_live_nb_champ = nb_champ;
 		desc = desc->next;
 	}
-}
-
-void		apply_ld(t_data *data, t_list *elem, int *params, int *param_types)
-{
-    //value of first parameter into register
-    if (param_type[0] == DIR_CODE)
-        elem->reg_number[params[1]] = params[0];// param[0] is the first parameter
-    else if (param_type[0] == DIR_CODE)
-        elem->reg_number[params[1]] = get_ind_value_idxd(params[0]);
-    else if (param_types[0] == REG_CODE)
-        elem->reg_number[params[1]] = elem->reg_number[params[0]];
-    //params[1] is the vnumber of the register we need
 }
 
 void		apply_st(t_data *data, t_list *elem, int *params, int *param_types)
