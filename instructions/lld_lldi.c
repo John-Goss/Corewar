@@ -13,17 +13,17 @@
 #include "corewar.h"
 
 
-void		apply_lld(t_data *data, t_list *elem) //addresses not relative to IDX
+void		apply_lld(t_data *data, t_list *elem, int *param_types, int *params) //addresses not relative to IDX
 {
-      if (param_type[0] == DIR_CODE)
+      if (param_types[0] == DIR_CODE)
         elem->reg_number[params[1]] = params[0];// param[0] is the first parameter
-    else if (param_type[0] == IND_CODE)
+    else if (param_types[0] == IND_CODE)
         elem->reg_number[params[1]] = get_ind_value(params[0]);
-    else if (param_types[0] == REG_CODE)
+    else if (param_typess[0] == REG_CODE)
         elem->reg_number[params[1]] = elem->reg_number[params[0]];
 }
 
-void		apply_lldi(t_data *data, t_list *elem) //addresses not relative to IDX
+void		apply_lldi(t_data *data, t_list *elem, int *param_types, int *params) //addresses not relative to IDX
 {
 
     int value_one;

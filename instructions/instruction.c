@@ -18,14 +18,18 @@
 //refactor all instructions
 //figure how the carry modifications work, and what it means to "modify the carry" do we always put it to 1?
 
-void        instr_no_ocp(t_data *data, t_list *elem)
+void        instr_no_ocp(t_data *data, t_list *elem, int *params)
 {
     if (data->map[elem->pc] == 0x0C)  
-       //fork
+        apply_fork(data, elem);
     else if (data->map[elem->pc] == 0x01)
        apply_live(data, elem);   
     else if (data->map[elem->pc] == 0x09)
-        //zjmp    0
+        aff_zjmp(data, elem, params);
+    else if (data->map[elem->pc] == 0x0F)
+        apply_lfork(data, elem);
+    else if (data->map[elem->pc] == 0x10)
+        apply_aff(data, elem, params);
 }
 
 void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_types);
@@ -44,73 +48,15 @@ void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_typ
         apply_or(data, elem, params, param_types);
     else if (data->map[elem->pc] == 0x08)
         apply_xor(data, elem, params, param_types);
-    else if (data->map[elem->pc] == 0x10)
-        //aff
     else if (data->map[elem->pc] == 0x0A)
-        //ldi
+        apply_ldi(data, elem, param_types, params);
     else if (data->map[elem->pc] == 0x0B)
-        //sti
+        apply_sti(data, elem, param_types, params);
     else if (data->map[elem->pc] == 0x0E)
-        //lldi
-    else if (data->map[elem->pc] == 0x0F)
-        //lfork
+        apply_lldi(param_types, params);
     else if (data->map[elem->pc] == 0x0D)
-        //lld
+        apply_lld(data, elem, param_types, params);
 }
-
-void		apply_live(t_data *data, t_list *elem)
-{
-	t_desc	*desc;
-	int		nb_champ;
-	int		i;
-
-	nb_champ = (data->map[(elem->pc + 1) % MEM_SIZE] << 24 & 0xff000000) |
-	(data->map[(elem->pc + 2) % MEM_SIZE] << 16 & 0xff0000) |
-	(data->map[(elem->pc + 3) % MEM_SIZE] << 8 & 0xff00) |
-	(data->map[(elem->pc + 4) % MEM_SIZE] & 0xff);
-
-	elem->pc = (elem->pc + 5) % MEM_SIZE;
-	data->live_cpt++;
-	while (desc)
-	{
-		if (nb_champ == desc->nb_champ)
-			data->last_live_nb_champ = nb_champ;
-		desc = desc->next;
-	}
-}
-
-//takes two paramters of which the third will always be register
-
-
-void		apply_zjmp(t_data *data, t_list *elem, int *params)
-{
-    if (elem->carry == 1)
-            elem->pc = (elem->pc + (params[0] % IDX_MOD)) % MEM_SIZE;
-}
-
-
-
-void		apply_lfork(t_data *data, t_list *elem)
-{
-	data->begin = create_elem(data->begin, elem->reg_number[0], pc +
-			(data->map[(elem->pc + 1) % MEM_SIZE]));
-	elem->pc = (elem->pc + 2) % MEM_SIZE;
-}
-
-void		apply_aff(t_data *data, t_list *elem)
-{
-//IDK what the fuck this means
-}
-
-
-void      apply_fork(t_data *data, t_list *elem)
-{
-	data->begin = create_elem(data->begin, elem->reg_number[0], pc +
-			(data->map[(elem->pc + 1) % MEM_SIZE]) % IDX_MOD);
-	elem->pc = (elem->pc + 2) % MEM_SIZE;
-}
-
-
 
 void        instruction_exec(t_data *data, t_list *elem)
 {
@@ -121,7 +67,7 @@ void        instruction_exec(t_data *data, t_list *elem)
     //THE PC IS ON THE OPC AT THIS POINT
     opc = data->map[(elem->pc) % MEM_SIZE];
     param_types = det_types(data->map[(elem->pc) % MEM_SIZE]);
-    params = get_params(param_types, data, elem);
+    params = get_params(param_types, data, elem);å
     if (opc == 0x0C || opc == 0x09 || opc == 0x01)
     {
         instr_no_ocp(data, elem, params);
