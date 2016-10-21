@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/20 17:37:30 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/21 16:00:35 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int			main(int argc, char **argv)
 //	int i = 0;
 
 	init_structur(&data);
-	printf("%d\n", data.last_live_nb_champ);
-	exit(0);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
 //	while (i <= MEM_SIZE)
@@ -50,8 +48,8 @@ int			main(int argc, char **argv)
 //		if (getch() == ' ')
 //			data.flag_slowmode = 1;
 //	}
-	get_str_addr(data.map);
-	aff_window(&data);
+//	get_str_addr(data.map);
+//	aff_window(&data);
 //	get_str_addr(data.map);
 //	aff_window(&data);
 //	init_infos_box(&data);
@@ -179,8 +177,8 @@ void		process_action(t_data *data, t_list *elem)
 		else if (elem->action_time)
 		{
 			elem->action_time--;
-			if (!(elem->action_time))
-				instruction_exec(data, elem);
+//			if (!(elem->action_time))
+//				instruction_exec(data, elem);
 //				printf("%hhx", data->map[elem->pc]);
 //				(data->tab)[data->map[elem->pc]](data, elem);
 		}
@@ -200,7 +198,6 @@ void		turn(t_data *data)
 		process_action(data, elem);
 		elem = elem->next;
 	}
-	printf("\n\n");
 	return ;
 }
 

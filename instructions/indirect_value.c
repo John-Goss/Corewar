@@ -6,11 +6,11 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:01 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/18 18:08:05 by tbui             ###   ########.fr       */
+/*   Updated: 2016/10/21 16:04:36 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../corewar.h"
 
 int                 trans_two_bytes(char *transfer_bytes)
 {
@@ -19,11 +19,11 @@ int                 trans_two_bytes(char *transfer_bytes)
     int i;
 
     i = 0;//index counter for the loop
-    decal = 24;
+    decal = 8;
     value = 0;
     while (i < IND_SIZE && transfer_bytes[i] != '\0')
     {
-        value |= (transfer_bytes[i] << decal);
+        value |= (transfer_bytes[i] << decal & 0xff);
         decal = decal - 8;
         i++;
     }

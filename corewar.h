@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/20 16:05:57 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/21 16:21:33 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/10/20 14:38:04 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -164,21 +164,26 @@ void		instruction_exec(t_data *data, t_list *elem);
 
 
 void		apply_live(t_data *data, t_list *elem);
-void		apply_ld(t_data *data, t_list *elem, int *params);
-void		apply_st(t_data *data, t_list *elem, int *params);
-void		apply_add(t_data *data, t_list *elem);
-void		apply_sub(t_data *data, t_list *elem);
-void		apply_and(t_data *data, t_list *elem);
-void		apply_or(t_data *data, t_list *elem);
-void		apply_xor(t_data *data, t_list *elem);
-void		apply_zjmp(t_data *data, t_list *elem);
-void		apply_ldi(t_data *data, t_list *elem);
-void		apply_sti(t_data *data, t_list *elem);
+void		apply_ld(t_data *data, t_list *elem, int *params, int *param_type);
+void		apply_st(t_data *data, t_list *elem, int *params, int *param_type);
+void		apply_add(t_data *data, t_list *elem, int *params, int *param_type);
+void		apply_sub(t_data *data, t_list *elem, int *params, int *param_type);
+void		apply_and(t_data *data, t_list *elem, int *params, int *param_type);
+void		apply_or(t_data *data, t_list *elem, int *params, int *param_type);
+void		apply_xor(t_data *data, t_list *elem, int *params, int *param_type);
+void		apply_zjmp(t_data *data, t_list *elem, int *params);
+void		apply_ldi(t_data *data, t_list *elem, int *param_type, int *params);
+void		apply_sti(t_data *data, t_list *elem, int *param_type, int *params);
 void		apply_fork(t_data *data, t_list *elem);
-void		apply_lld(t_data *data, t_list *elem);
-void		apply_lldi(t_data *data, t_list *elem);
+void		apply_lld(t_data *data, t_list *elem, int *param_type, int *params);
+void		apply_lldi(t_data *data, t_list *elem, int *param_type, int *params);
 void		apply_lfork(t_data *data, t_list *elem);
-void		apply_aff(t_data *data, t_list *elem);
+void		apply_aff(t_data *data, t_list *elem, int *params);
+
+
+int		trans_two_bytes(char *transfer_bytes);
+char	*get_two_bytes(t_data *data, t_list *elem, int prm_pos);
+unsigned int         *get_params(int *par_types, t_data *data, t_list *elem);
 
 /*
  * PROTOTYPE DISPLAY

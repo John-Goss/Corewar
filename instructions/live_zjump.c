@@ -6,11 +6,11 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:21:15 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/21 13:21:17 by tbui             ###   ########.fr       */
+/*   Updated: 2016/10/21 16:04:57 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../corewar.h"
 
 void		apply_live(t_data *data, t_list *elem)
 {
@@ -23,7 +23,7 @@ void		apply_live(t_data *data, t_list *elem)
 	(data->map[(elem->pc + 3) % MEM_SIZE] << 8 & 0xff00) |
 	(data->map[(elem->pc + 4) % MEM_SIZE] & 0xff);
 
-	elem->pc = (elem->pc + 5) % MEM_SIZE;
+	elem->pc = ((elem->pc + 5) % MEM_SIZE) % IDX_MOD;
 	data->live_cpt++;
 	while (desc)
 	{
@@ -37,5 +37,5 @@ void		apply_live(t_data *data, t_list *elem)
 void		apply_zjmp(t_data *data, t_list *elem, int *params)
 {
     if (elem->carry == 1)
-            elem->pc = (elem->pc + (params[0] % IDX_MOD)) % MEM_SIZE;
+            elem->pc = (elem->pc + (params[0] % MEM_SIZE) % IDX_MOD);
 }

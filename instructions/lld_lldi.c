@@ -6,11 +6,11 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:12:49 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/20 18:12:51 by tbui             ###   ########.fr       */
+/*   Updated: 2016/10/21 16:22:59 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../corewar.h"
 
 
 void		apply_lld(t_data *data, t_list *elem, int *param_types, int *params) //addresses not relative to IDX
@@ -19,7 +19,7 @@ void		apply_lld(t_data *data, t_list *elem, int *param_types, int *params) //add
         elem->reg_number[params[1]] = params[0];// param[0] is the first parameter
     else if (param_types[0] == IND_CODE)
         elem->reg_number[params[1]] = get_ind_value(params[0]);
-    else if (param_typess[0] == REG_CODE)
+    else if (param_types[0] == REG_CODE)
         elem->reg_number[params[1]] = elem->reg_number[params[0]];
 }
 
@@ -37,7 +37,7 @@ void		apply_lldi(t_data *data, t_list *elem, int *param_types, int *params) //ad
     else if (param_types[0] == REG_CODE)
         value_one = elem->reg_number[params[0]];
     if (param_types[1] == DIR_CODE)
-        value_two = params[1]
+        value_two = params[1];
     else if (param_types[1] == REG_CODE)
         value_two = elem->reg_number[params[1]];
     store = get_ind_value_idxd(value_one + value_two);

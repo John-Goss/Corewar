@@ -6,11 +6,11 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:35 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/18 18:08:37 by tbui             ###   ########.fr       */
+/*   Updated: 2016/10/21 16:25:24 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../corewar.h"
 //deteermining the paramater types below
 
 //if the last flag in the instructions is at 0 that means we need to get the direct parameter out of 4 bytes.
@@ -165,7 +165,7 @@ unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //i
             i = i + 1;
         }
         else if (par_types[k] == IND_CODE) //this gets either the value the we need to jump to relative to the pc for the indirect, or the reg number
-            params[k] = get_ind_value(data, elem &i);
+            params[k] = get_ind_value(data, elem, &i);
         else if (par_types[k] == DIR_CODE) //this only handles the case of the direct parameter being held in 4 bytes
             params[k] = get_dir_value(data, elem, &i);//learn how to get parameters from several bytes
         k++;

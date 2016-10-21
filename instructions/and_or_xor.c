@@ -6,58 +6,58 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 12:07:06 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/21 12:07:08 by tbui             ###   ########.fr       */
+/*   Updated: 2016/10/21 16:11:10 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../corewar.h"
 
-void        apply_and(t_data *data,t_list *elem, int *param, int *param_types)
+void        apply_and(t_data *data,t_list *elem, int *params, int *param_type)
 {
     int value_one; //param values
     int value_two;
 
-    if (params_type[0] == REG_CODE)
+    if (param_type[0] == REG_CODE)
         value_one = elem->reg_number[params[0]];
-    else if (params_type[0] == DIR_CODE || params_type[0] == IND_CODE)
+    else if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
         value_one = params[0];
-    if (params_type[1] == REG_CODE)
+    if (param_type[1] == REG_CODE)
         value_two = elem->reg_number[params[1]];
-    else if (params_type[1] == DIR_CODE || params_type[1] == IND_CODE)
+    else if (param_type[1] == DIR_CODE || param_type[1] == IND_CODE)
         value_two = params[1];
     elem->reg_number[params[2]] = value_one & value_two;//so now we got the two values which we need to stock
 }//the bit operation & is executed on the first two and then stored at the third which is a register
 
 
-void        apply_or(t_data *data,t_list *elem, int *param, int *param_types)
+void        apply_or(t_data *data,t_list *elem, int *params, int *param_type)
 {
     int value_one; //param values
     int value_two;
 
-    if (params_type[0] == REG_CODE)
+    if (param_type[0] == REG_CODE)
         value_one = elem->reg_number[params[0]];
-    else if (params_type[0] == DIR_CODE || params_type[0] == IND_CODE)
+    else if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
         value_one = params[0];
-    if (params_type[1] == REG_CODE)
+    if (param_type[1] == REG_CODE)
         value_two = elem->reg_number[params[1]];
-    else if (params_type[1] == DIR_CODE || params_type[1] == IND_CODE)
+    else if (param_type[1] == DIR_CODE || param_type[1] == IND_CODE)
         value_two = params[1];
     elem->reg_number[params[2]] = value_one | value_two;//so now we got the two values which we need to stock
 }//the bit operation | is executed on the first two and then stored at the third which is a register
 
 
-void        apply_xor(t_data *data,t_list *elem, int *param, int *param_types)
+void        apply_xor(t_data *data,t_list *elem, int *params, int *param_type)
 {
     int value_one; //param values
     int value_two;
 
-    if (params_type[0] == REG_CODE)
+    if (param_type[0] == REG_CODE)
         value_one = elem->reg_number[params[0]];
-    else if (params_type[0] == DIR_CODE || params_type[0] == IND_CODE)
+    else if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
         value_one = params[0];
-    if (params_type[1] == REG_CODE)
+    if (param_type[1] == REG_CODE)
         value_two = elem->reg_number[params[1]];
-    else if (params_type[1] == DIR_CODE || params_type[1] == IND_CODE)
+    else if (param_type[1] == DIR_CODE || param_type[1] == IND_CODE)
         value_two = params[1];
     elem->reg_number[params[2]] = value_one ^ value_two;//so now we got the two values which we need to stock
 }//the bit operation ^ is executed on the first two and then stored at the third which is a register

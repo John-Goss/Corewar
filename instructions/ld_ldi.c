@@ -6,12 +6,12 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:27:31 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/20 18:27:32 by tbui             ###   ########.fr       */
+/*   Updated: 2016/10/21 16:22:36 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-
+#include "../corewar.h"
+/*
 void		apply_ld(t_data *data, t_list *elem, int *params, int *param_types)
 {
     //value of first parameter into register
@@ -24,7 +24,7 @@ void		apply_ld(t_data *data, t_list *elem, int *params, int *param_types)
     //params[1] is the number of the register we need
 }
 //{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
-
+*/
 int         get_ind_size_at_add(t_data *data, t_list *elem, int prm_pos)
 {
     int ind_value;
@@ -39,8 +39,8 @@ int         get_ind_size_at_add(t_data *data, t_list *elem, int prm_pos)
 
 int 	       	get_reg_size_at_add(t_data *data, t_list *elem, int prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
 {
-    int dir_val; //the direct value to be returned
-    char *bytes
+    int val; //the direct value to be returned
+    char *bytes;
 
    	val = 0;
 	bytes = get_dir_value_quatre(data, elem, prm_pos);
@@ -61,11 +61,11 @@ void		apply_ldi(t_data *data, t_list *elem, int *param_types, int *params)
     else if (param_types[0] == REG_CODE)
         value_one =  get_ind_size_at_add(data, elem, elem->reg_number[params[0]] % IDX_MOD); 
     if (param_types[1] == DIR_CODE)
-        value_two = params[1]
+        value_two = params[1];
     else if (param_types[1] == REG_CODE)
         value_two = elem->reg_number[params[1]];
  	S = value_one + value_two;
-    elem->reg_number[params[2]] = get_reg_size_at_add(data, elem, S % IDX_MOD)//prm_pos is the position of the first address byte of the parameter to be searched
+    elem->reg_number[params[2]] = get_reg_size_at_add(data, elem, S % IDX_MOD);//prm_pos is the position of the first address byte of the parameter to be searched
 }//{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
 //        "load index", 1, 1},
 

@@ -6,11 +6,11 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 19:43:20 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/20 19:43:21 by tbui             ###   ########.fr       */
+/*   Updated: 2016/10/21 16:04:10 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../corewar.h"
 
 void		apply_add(t_data *data, t_list *elem, int *params, int *param_types)
 {

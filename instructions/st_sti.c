@@ -6,11 +6,11 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:12:34 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/20 18:12:36 by tbui             ###   ########.fr       */
+/*   Updated: 2016/10/21 16:05:14 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "../corewar.h"
 
 void        put_in_bytes(t_data *data,t_list *elem, int address, int reg_value)//move this function to the top of the instructions filee
 {
@@ -54,7 +54,7 @@ void        apply_st(t_data *data, t_list *elem, int *params, int *param_types)
 {
 
     if (param_types[1] == IND_CODE)//go to the address (PC plus value) and store first value
-        data->map[params[1]] =  elem->reg_number[params[0]]; //value to copy into the other place
+        data->map[(params[1] % IDX_MOD) % MEM_SIZE] =  elem->reg_number[params[0]]; //value to copy into the other place
     else if (param_types[1] == REG_CODE)//put the value to be copied into the register
         elem->reg_number[params[1]] = elem->reg_number[params[0]]; //value to copy into the other place
 }//this takes the value of a register and STORES it at either an address or another register
