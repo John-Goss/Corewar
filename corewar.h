@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/21 16:21:33 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:40:04 by jle-quer         ###   ########.fr       */
 /*   Updated: 2016/10/20 14:38:04 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -193,5 +193,4 @@ int							find_pc_pos(t_list *list, int *pc, int i);
 int							*set_array_pc(t_data *data);
 int							aff_window(t_data *data);
 int							init_infos_box(t_data *data);
-void						delete_win(WINDOW *screen);
-int							delete_all_win(t_display *display);
+void						delete_win(t_display *display);

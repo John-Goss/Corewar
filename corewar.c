@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/24 12:15:25 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:43:59 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ void		end(t_data *data)
 	t_desc	*elem;
 
 	elem = data->desc;
-//	delete_win(data->display->screen);
+	delete_win(data->display);
 	if (data->last_live_nb_champ)
 	{
 		while (elem && elem->nb_champ != data->last_live_nb_champ)
 			elem = elem->next;
-		printf("Le joueur %d (%s) a gagne ", elem->nb_champ, elem->name);
+		delete_win(data->display);
+		printf("\nLe joueur %d (%s) a gagne\n", elem->nb_champ, elem->name);
 	}
 	else
-		exit(write(1, "Aucun live n'a ete fait\n", 24));
+		exit(write(1, "\nAucun live n'a ete fait\n", 24));
 }
 
 int			main(int argc, char **argv)
@@ -48,9 +49,8 @@ int			main(int argc, char **argv)
 //		if (getch() == ' ')
 //			data.flag_slowmode = 1;
 //	}
-//	get_str_addr(data.map);
-//	aff_window(&data);
-//	init_infos_box(&data);
+	get_str_addr(data.map);
+	aff_window(&data);
 	while (42)
 	{
 		turn(&data);

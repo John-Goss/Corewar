@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/21 14:06:57 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/24 12:39:37 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 #include <sys/ioctl.h>
 #include <signal.h>
 
-void				delete_win(WINDOW *test_window)
+void				delete_win(t_display *display)
 {
-	box(test_window, 0, 0);
-	move(0, 0);
-	delwin(test_window);
+	if (display->info)
+		delwin(display->info);
+	if (display->win)
+		delwin(display->win);
+	if (display->header)
+		delwin(display->header);
+	if (display->screen)
+		delwin(display->screen);
+	clear();
 	refresh();
 	endwin();
 }
@@ -31,7 +37,6 @@ static void			sigkill(int code)
 	tmp = NULL;
 	tmp = get_win_addr(NULL);
 	clear();
-	delete_win(tmp);
 	free(tmp);
 	exit(0);
 }
@@ -127,7 +132,7 @@ int					aff_window(t_data *data)
 	refresh();
 	keypad(display.screen, TRUE);
 	data->display = &display;
-//	init_infos_box(data);
+	init_infos_box(data);
 	getch_aff(data);
 	return (1);
 }
