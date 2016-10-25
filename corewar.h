@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/25 13:17:51 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/25 17:57:43 by jle-quer         ###   ########.fr       */
 /*   Updated: 2016/10/20 14:38:04 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -149,7 +149,7 @@ void						check_who_is_alive(t_data *data);
 void						parse_map(int argc, char **argv, t_data *data);
 void						init_pt_tab(void (**tab)(t_data *data,
 							t_list *elem));
-
+int							turn_by_slowmode(t_data *data);
 unsigned char				*get_str_addr(unsigned char *mem);
 WINDOW						*get_win_addr(WINDOW *window);
 
@@ -193,5 +193,6 @@ int							find_pc_pos(t_list *list, int *pc, int i);
 int							*set_array_pc(t_data *data);
 int							aff_window(t_data *data);
 int							init_infos_box(t_data *data);
+int							set_live_infos(t_data *data);
 t_display					*get_dsp_struct_addr(t_display *dsp);
 void						delete_win(t_display *display);

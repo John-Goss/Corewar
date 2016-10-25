@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/25 15:41:33 by lbaudran         ###   ########.fr       */
+/*   Created: 2016/10/25 16:06:46 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/10/25 18:02:46 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,19 @@ int			main(int argc, char **argv)
 	parse_map(argc, argv, &data);
 	get_str_addr(data.map);
 	aff_window(&data);
-	while (42)
+	if (data.flag_slowmode == 1)
+		turn_by_slowmode(&data);
+	else
 	{
-		turn(&data);
-		(data.cycle)++;
-		if ((--(data.cycle_to_die)) <= 0)
-			if (verif_end(&data) == 1)
-				break ;
+		while (42)
+		{
+			set_live_infos(&data);
+			turn(&data);
+			(data.cycle)++;
+			if ((--(data.cycle_to_die)) <= 0)
+				if (verif_end(&data) == 1)
+					break ;
+		}
 	}
 	end(&data);
 }
@@ -169,10 +175,10 @@ void		process_action(t_data *data, t_list *elem)
 		else if (elem->action_time)
 		{
 			elem->action_time--;
-//			if (!(elem->action_time))
-//				instruction_exec(data, elem);
-//				printf("%hhx", data->map[elem->pc]);
-//				(data->tab)[data->map[elem->pc]](data, elem);
+			//			if (!(elem->action_time))
+			//				instruction_exec(data, elem);
+			//				printf("%hhx", data->map[elem->pc]);
+			//				(data->tab)[data->map[elem->pc]](data, elem);
 		}
 	}
 }
@@ -184,10 +190,7 @@ void		turn(t_data *data)
 	elem = data->begin;
 	while (elem)
 	{
-//		printf("elem pc = %d elem champ = %d\n",elem->pc , elem->reg_number[0]);
-		if (data->flag_slowmode == 1)
-			getch();
-		mvwprintw(data->display->screen, 1, 1, "D");
+		//		printf("elem pc = %d elem champ = %d\n",elem->pc , elem->reg_number[0]);
 		process_action(data, elem);
 		elem = elem->next;
 	}

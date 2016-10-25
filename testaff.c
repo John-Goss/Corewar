@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/25 14:45:28 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/25 17:12:46 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void			print_str(t_display *display, t_data *data)
 		y++;
 		x = 1;
 	}
-	refresh();
+	init_infos_box(data);
 }
 
 static int			getch_aff(t_data *data)
@@ -138,7 +138,6 @@ int					aff_window(t_data *data)
 	refresh();
 	keypad(display.screen, TRUE);
 	data->display = &display;
-	init_infos_box(data);
 	get_dsp_struct_addr(data->display);
 	getch_aff(data);
 	return (1);

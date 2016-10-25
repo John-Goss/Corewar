@@ -5,6 +5,7 @@ SRC += init_data.c
 SRC += testaff.c
 SRC += tools.c
 SRC += display_infos_box.c
+SRC += turn_by_slowmode.c
 //SRC += instructions/add_and_sub.c
 //SRC += instructions/and_or_xor.c
 //SRC += instructions/direct_value.c
