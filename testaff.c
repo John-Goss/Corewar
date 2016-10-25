@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/25 13:28:44 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/25 14:45:28 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,13 @@ void				delete_win(t_display *display)
 
 static void			sigkill(int code)
 {
-	WINDOW		*tmp;
 	t_display	*ptr;
 
 	code = 0;
-	tmp = NULL;
 	ptr = NULL;
 	ptr = get_dsp_struct_addr(NULL);
-	tmp = get_win_addr(NULL);
-	if (ptr)
-		exit(0);
-	//delete_win(ptr);
-	//clear();
-	//free(tmp);
-	//exit(0);
+	delete_win(ptr);
+	exit(0);
 }
 
 static void			create_win(t_display *display)
@@ -76,13 +69,6 @@ static void			print_str(t_display *display, t_data *data)
 	x = 1;
 	y = 16;
 	pc = set_array_pc(data);
-	
-	t_display	*tmp;
-	tmp = NULL;
-	tmp = get_dsp_struct_addr(NULL);
-
-	mvwprintw(display->screen, 1, 1, "%p", &tmp);
-	mvwprintw(display->screen, 2, 1, "%p", &data->display);
 	while (y < 80)
 	{
 		while (x < 192)
