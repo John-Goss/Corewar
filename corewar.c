@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/25 12:35:13 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/25 13:32:40 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ int			main(int argc, char **argv)
 	init_structur(&data);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
-//		if (getch() == ' ')
-//			data.flag_slowmode = 1;
-//	}
 	get_str_addr(data.map);
 	aff_window(&data);
 	while (42)
@@ -116,6 +113,11 @@ void		parse_map(int argc, char **argv, t_data *data)
 	nb = 0;
 	i = 1 + data->flag_visu;
 	data->nb_champ = argc - 1 - data->flag_visu;
+	if (i == argc)
+	{
+		ft_printf("NO CHAMPIONS\n");
+		exit(0);
+	}
 	while (i < argc)
 	{
 		if (!(ft_strcmp(argv[i], "-n")))
@@ -181,8 +183,9 @@ void		turn(t_data *data)
 	while (elem)
 	{
 //		printf("elem pc = %d elem champ = %d\n",elem->pc , elem->reg_number[0]);
-//		if (data->flag_slowmode == 1)
-//			getch();
+		if (data->flag_slowmode == 1)
+			getch();
+		mvwprintw(data->display->screen, 1, 1, "D");
 		process_action(data, elem);
 		elem = elem->next;
 	}

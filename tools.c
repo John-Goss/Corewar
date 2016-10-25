@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/24 12:39:54 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/25 13:17:32 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ WINDOW			*get_win_addr(WINDOW *window)
 	if (window)
 		ptr = window;
 	return (ptr);
+}
+
+t_display		*get_dsp_struct_addr(t_display *dsp)
+{
+	static t_display	*tmp = NULL;
+
+	if (dsp)
+		tmp = dsp;
+	return (tmp);
 }
 
 int				find_pc_pos(t_list *list, int *pc, int value)

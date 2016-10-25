@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/24 12:39:37 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/25 13:28:44 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,20 @@ void				delete_win(t_display *display)
 
 static void			sigkill(int code)
 {
-	WINDOW	*tmp;
+	WINDOW		*tmp;
+	t_display	*ptr;
 
 	code = 0;
 	tmp = NULL;
+	ptr = NULL;
+	ptr = get_dsp_struct_addr(NULL);
 	tmp = get_win_addr(NULL);
-	clear();
-	free(tmp);
-	exit(0);
+	if (ptr)
+		exit(0);
+	//delete_win(ptr);
+	//clear();
+	//free(tmp);
+	//exit(0);
 }
 
 static void			create_win(t_display *display)
@@ -70,6 +76,13 @@ static void			print_str(t_display *display, t_data *data)
 	x = 1;
 	y = 16;
 	pc = set_array_pc(data);
+	
+	t_display	*tmp;
+	tmp = NULL;
+	tmp = get_dsp_struct_addr(NULL);
+
+	mvwprintw(display->screen, 1, 1, "%p", &tmp);
+	mvwprintw(display->screen, 2, 1, "%p", &data->display);
 	while (y < 80)
 	{
 		while (x < 192)
@@ -95,14 +108,21 @@ static int			getch_aff(t_data *data)
 {
 	int			keycode;
 
-	mvwprintw(data->display->screen, 44, 194/2 - 33/2,
-			"Press Space_Key for run the game.");
+	mvwprintw(data->display->screen, 44, 194/2 - 58/2,
+			"Press Space_Key for run the game or S for run the slowmode.");
 	signal(SIGINT, &sigkill); // Catch ctrl-c signal
 	while (42)
 	{
 		keycode = getch();
 		if (keycode == 27) // ESC Key
 			sigkill(1);
+		else if (keycode == 's')
+		{
+			data->flag_slowmode = 1;
+			werase(data->display->win);
+			print_str(data->display, data);
+			break ;
+		}
 		else if (keycode == 32) // Space Key
 		{
 			werase(data->display->win);
@@ -133,6 +153,7 @@ int					aff_window(t_data *data)
 	keypad(display.screen, TRUE);
 	data->display = &display;
 	init_infos_box(data);
+	get_dsp_struct_addr(data->display);
 	getch_aff(data);
 	return (1);
 }
