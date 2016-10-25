@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/25 13:32:40 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/25 15:41:33 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void		recup_champ(t_data *data, char **argv, int i, int nb)
 
 	buf[BUFF_SIZE] = '\0';
 	fd = open(argv[i], O_RDONLY);
+	if (fd == -1)
+		exit(ft_printf("Invalid path\n"));
 	read(fd, buf, BUFF_SIZE);
 	size[0] = stock_desc(data, buf, nb);
 	size[1] = n;
