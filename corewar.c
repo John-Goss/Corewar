@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/24 12:43:59 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:35:13 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,10 @@ void		end(t_data *data)
 int			main(int argc, char **argv)
 {
 	t_data	data;
-//	int i = 0;
 
 	init_structur(&data);
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
-//	while (i <= MEM_SIZE)
-//	{
-//	printf("%.2hhx ",data.map[i++]);
-//	}
-//	verif_valid(argc, argv, &data);
-//	if (data.flag_visu)
-//	{
-//		aff_window();
-//		initscr();
 //		if (getch() == ' ')
 //			data.flag_slowmode = 1;
 //	}
@@ -57,7 +47,7 @@ int			main(int argc, char **argv)
 		(data.cycle)++;
 		if ((--(data.cycle_to_die)) <= 0)
 			if (verif_end(&data) == 1)
-				break;
+				break ;
 	}
 	end(&data);
 }
@@ -72,7 +62,7 @@ int			stock_desc(t_data *data, char *buf, int nb)
 	i = (buf[0] << 24 & 0xff000000) | (buf[1] << 16 & 0xff0000) |
 		(buf[2] << 8 & 0xff00) | (buf[3] & 0xff);
 	if (i != COREWAR_EXEC_MAGIC)
-		exit(write(1 ,"magic invalid\n", 14));
+		exit(write(1, "magic invalid\n", 14));
 	ft_strncpy(elem->name, buf + 4, 128);
 	elem->size = (buf[136] << 24 & 0xff000000) | (buf[137] << 16 & 0xff0000) |
 		(buf[138] << 8 & 0xff00) | (buf[139] & 0xff);
@@ -87,7 +77,7 @@ int			recup_champ_nb(t_desc *begin)
 	elem = begin;
 	while (elem->next)
 		elem = elem->next;
-	return(elem->nb_champ);
+	return (elem->nb_champ);
 }
 
 void		recup_champ(t_data *data, char **argv, int i, int nb)
@@ -103,7 +93,7 @@ void		recup_champ(t_data *data, char **argv, int i, int nb)
 	size[0] = stock_desc(data, buf, nb);
 	size[1] = n;
 	data->begin = create_elem(data->begin, recup_champ_nb(data->desc), n);
-	while((read(fd, data->map + n, 1)) && n <= MEM_SIZE)
+	while ((read(fd, data->map + n, 1)) && n <= MEM_SIZE)
 	{
 		n++;
 	}
@@ -113,7 +103,7 @@ void		recup_champ(t_data *data, char **argv, int i, int nb)
 	if (size[0] != size[1])
 		exit(write(1, "Taille indiquee incorrecte\n", 27));
 	if (size[0] > CHAMP_MAX_SIZE)
-			exit(write(1, "Taille champion incorrecte\n", 27));
+		exit(write(1, "Taille champion incorrecte\n", 27));
 	n = (n / (MEM_SIZE / data->nb_champ) + 1) * (MEM_SIZE / data->nb_champ);
 }
 
@@ -125,15 +115,15 @@ void		parse_map(int argc, char **argv, t_data *data)
 
 	nb = 0;
 	i = 1 + data->flag_visu;
-	data->nb_champ = argc - 1 - data->flag_visu ;
+	data->nb_champ = argc - 1 - data->flag_visu;
 	while (i < argc)
 	{
 		if (!(ft_strcmp(argv[i], "-n")))
-			{
-				i++;
-				nb = ft_atoi(argv[i]);
-				i++;
-			}
+		{
+			i++;
+			nb = ft_atoi(argv[i]);
+			i++;
+		}
 		recup_champ(data, argv, i++, nb);
 	}
 }
@@ -238,8 +228,8 @@ int			verif_end(t_data *data)
 	{
 		if (data->check == MAX_CHECKS)
 			data->check = 0;
-		data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->cycle_to_die_nbr);
-		data->cycle_to_die_nbr++;
+		data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->ctd_nbr);
+		data->ctd_nbr++;
 		check_who_is_alive(data);
 	}
 	else
@@ -248,30 +238,5 @@ int			verif_end(t_data *data)
 	if (!data->begin)
 		return (0);
 	return(1);
-//	while (i < data->nb_champ)
-//	{
-//		if (data->statut_champ[i++] == 0)
-//			j++;
-//		if (j >= 2)
-//			return (0);
-//	}
-//	return (1);
 }
-/*
-int			verif_valid(int argc, char **argv, t_data *data)
-{
-	t_desc *elem;
 
-	(void)argc;
-	(void)argv;
-	elem = data->desc;;
-	if (data->nb_champ > MAX_PLAYERS + 1)
-		exit(write(1, "Nombre de champions incorrect\n", 30));
-	while (elem)
-	{
-		if (elem->size > CHAMP_MAX_SIZE)
-			exit(write(1, "Taille champion incorrecte\n", 27));
-		elem = elem->next;
-	}
-	return (0);
-}*/

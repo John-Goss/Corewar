@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/24 12:40:04 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:35:02 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/10/20 14:38:04 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -125,7 +125,7 @@ typedef struct				s_data
 	int						cycle;
 	int						cycle_to_die;
 	int						live_cpt;
-	int 					cycle_to_die_nbr;
+	int 					ctd_nbr;
 	t_list					*begin;
 	t_desc					*desc;
 	t_display				*display;

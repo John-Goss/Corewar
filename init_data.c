@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/20 15:49:12 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:35:18 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void		init_structur(t_data *data)
 	data->flag_visu = 0;
 	data->cycle = 0;
 	data->cycle_to_die = CYCLE_TO_DIE;
-	data->cycle_to_die_nbr = 1;
+	data->ctd_nbr = 1;
 	data->begin = NULL;
 	data->desc = NULL;
 	data->nb_champ = 0;
