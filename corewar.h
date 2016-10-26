@@ -162,29 +162,35 @@ t_desc						*create_desc(t_desc **desc, int nb);
  */
 
 void		instruction_exec(t_data *data, t_list *elem);
+int 	    get_dir_value(t_data *data, t_list *elem, int *prm_pos);
+unsigned int         get_ind_value(t_data *data, t_list *elem, int *prm_pos);
+int                 trans_four_bytes(char *transfer_bytes);
+char    *get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos); //prm_pos being the position fo the first octet to be extract
 
 
 void		apply_live(t_data *data, t_list *elem);
-void		apply_ld(t_data *data, t_list *elem, int *params, int *param_type);
-void		apply_st(t_data *data, t_list *elem, int *params, int *param_type);
-void		apply_add(t_data *data, t_list *elem, int *params, int *param_type);
-void		apply_sub(t_data *data, t_list *elem, int *params, int *param_type);
-void		apply_and(t_data *data, t_list *elem, int *params, int *param_type);
-void		apply_or(t_data *data, t_list *elem, int *params, int *param_type);
-void		apply_xor(t_data *data, t_list *elem, int *params, int *param_type);
-void		apply_zjmp(t_data *data, t_list *elem, int *params);
-void		apply_ldi(t_data *data, t_list *elem, int *param_type, int *params);
-void		apply_sti(t_data *data, t_list *elem, int *param_type, int *params);
+void		apply_ld(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void		apply_st(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void		apply_add(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void		apply_sub(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void		apply_and(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void		apply_or(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void		apply_xor(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void		apply_zjmp(t_data *data, t_list *elem, unsigned int* params );
+void		apply_ldi(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
+void		apply_sti(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
 void		apply_fork(t_data *data, t_list *elem);
-void		apply_lld(t_data *data, t_list *elem, int *param_type, int *params);
-void		apply_lldi(t_data *data, t_list *elem, int *param_type, int *params);
+void		apply_lld(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
+void		apply_lldi(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
 void		apply_lfork(t_data *data, t_list *elem);
-void		apply_aff(t_data *data, t_list *elem, int *params);
+void		apply_aff(t_data *data, t_list *elem, unsigned int* params );
 
 
 int		trans_two_bytes(char *transfer_bytes);
 char	*get_two_bytes(t_data *data, t_list *elem, int prm_pos);
-unsigned int         *get_params(int *par_types, t_data *data, t_list *elem);
+unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *elem);
+unsigned int     *det_types(unsigned int parameter_types);
+
 
 /*
  * PROTOTYPE DISPLAY
