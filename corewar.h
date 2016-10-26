@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/26 15:09:22 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:26:47 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,12 +148,9 @@ void						check_who_is_alive(t_data *data);
 void						parse_map(int argc, char **argv, t_data *data);
 void						init_pt_tab(void (**tab)(t_data *data,
 							t_list *elem));
-<<<<<<< HEAD
 int							test_int(char *s);
 
-=======
 int							turn_by_slowmode(t_data *data);
->>>>>>> c21b537409e42a528882b9677b7361363281a717
 unsigned char				*get_str_addr(unsigned char *mem);
 WINDOW						*get_win_addr(WINDOW *window);
 
