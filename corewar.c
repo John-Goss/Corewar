@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/26 15:03:52 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:09:30 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,28 @@ int			main(int argc, char **argv)
 	t_data	data;
 
 	init_structur(&data);
+/*
+	ft_strcmp(argv[1], "-v") == 0 ? data->flag_visu = 1 : data->flag_viso = 0;
+ca serais la meme chose que check_flag mais on economise une fonction
+au passage la fonction check_flag est vachement chelou :).
+*/
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
 	get_str_addr(data.map);
 	aff_window(&data);
-	while (42)
+	if (data.flag_slowmode == 1)
+		turn_by_slowmode(&data);
+	else
 	{
-		turn(&data);
-		(data.cycle)++;
-		if ((--(data.cycle_to_die)) <= 0)
-			if (verif_end(&data) == 1)
-				break ;
+		while (42)
+		{
+			set_live_infos(&data);
+			turn(&data);
+			(data.cycle)++;
+			if ((--(data.cycle_to_die)) <= 0)
+				if (verif_end(&data) == 1)
+					break ;
+		}
 	}
 	end(&data);
 }
@@ -172,10 +183,10 @@ void		process_action(t_data *data, t_list *elem)
 		else if (elem->action_time)
 		{
 			elem->action_time--;
-//			if (!(elem->action_time))
-//				instruction_exec(data, elem);
-//				printf("%hhx", data->map[elem->pc]);
-//				(data->tab)[data->map[elem->pc]](data, elem);
+			//			if (!(elem->action_time))
+			//				instruction_exec(data, elem);
+			//				printf("%hhx", data->map[elem->pc]);
+			//				(data->tab)[data->map[elem->pc]](data, elem);
 		}
 	}
 }
@@ -187,10 +198,7 @@ void		turn(t_data *data)
 	elem = data->begin;
 	while (elem)
 	{
-//		printf("elem pc = %d elem champ = %d\n",elem->pc , elem->reg_number[0]);
-		if (data->flag_slowmode == 1)
-			getch();
-		mvwprintw(data->display->screen, 1, 1, "D");
+		//		printf("elem pc = %d elem champ = %d\n",elem->pc , elem->reg_number[0]);
 		process_action(data, elem);
 		elem = elem->next;
 	}
