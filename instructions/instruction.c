@@ -18,7 +18,7 @@
 //refactor all instructions
 //figure how the carry modifications work, and what it means to "modify the carry" do we always put it to 1?
 
-void        instr_no_ocp(t_data *data, t_list *elem, int *params)
+void        instr_no_ocp(t_data *data, t_list *elem, unsigned int *params)
 {
     if (data->map[elem->pc] == 0x0C)  
         apply_fork(data, elem);
@@ -32,7 +32,7 @@ void        instr_no_ocp(t_data *data, t_list *elem, int *params)
         apply_aff(data, elem, params);
 }
 
-void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_types)
+void         instr_w_ocp(t_data *data, t_list *elem, unsigned int *params, unsigned int *param_types)
 {
     if (data->map[elem->pc] == 0x02)
         apply_ld(data, elem, params, param_types);
@@ -60,8 +60,8 @@ void         instr_w_ocp(t_data *data, t_list *elem, int *params, int *param_typ
 
 void        instruction_exec(t_data *data, t_list *elem)
 {
-    int *param_types;
-     int *params;
+    unsigned int *param_types;
+    unsigned int *params;
     char opc; //DO NOT CONFUSE WITH OCP!!!
 
     //THE PC IS ON THE OPC AT THIS POINT

@@ -27,7 +27,7 @@ void      apply_fork(t_data *data, t_list *elem)
 }
 
 
-void		apply_aff(t_data *data, t_list *elem, int *params)
+void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
 {
 
 

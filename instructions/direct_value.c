@@ -30,15 +30,14 @@ int                 trans_four_bytes(char *transfer_bytes)
     return (value);
 }//this function takes four char bytes and puts them into an int using bit operators
 
-char	*get_dir_value_quatre(t_data *data, t_list *elem, int *prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
-
+char    *get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
 {
 	char *four_bytes; //this will be a string, containing the four bytes extracted
 	int i; //counter for the the extarction of bytes
 	int k; //counter for the loop, as well as the copy destination
 
 	k = 0;
-	i = (elem->pc + *prm_pos) % MEM_SIZE;
+	i = (elem->pc + prm_pos) % MEM_SIZE;
 	four_bytes = ft_strnew(5);
 	while (k < REG_SIZE)
 	{

@@ -84,7 +84,7 @@ int             extr_typ_from_bin(char *para_bi)
 }// this function returns a value which will determine the
 //parameter type
 
-int     *type_tab_make(char *types_bin, int *type_tab)
+unsigned int     *type_tab_make(char *types_bin, unsigned  int *type_tab)
 {
     int i; //counter for binary
     int k;  //counter for pairs of bits
@@ -121,32 +121,33 @@ int                 two_or_four(t_data *data, t_list *elem)
         data->map[elem->pc] == 0x06 || data->map[elem->pc] == 0x07 || \
         data->map[elem->pc] == 0x08 || data->map[elem->pc] == 0x10 || \
         data->map[elem->pc] == 0x0D || data->map[elem->pc] == 0x01)
-        elem->dir_by = 0;
+        return (0);
     else if (data->map[elem->pc] == 0x09 || data->map[elem->pc] == 0x0A || \
         data->map[elem->pc] == 0x0B || data->map[elem->pc] == 0x0E || \
         data->map[elem->pc] == 0x0F || data->map[elem->pc] == 0x0C)
-        elem->dir_by = 1;
+        return (1);
+    return (0); //provisionary
 }//this function compares the opc indicator in the list with all the opcs and then looks if the direct parameter is on two or four bytes
 
-int     *det_types(unsigned int parameter_types)
+unsigned int     *det_types(unsigned int parameter_types)
 {
     int determine;
     int types;
     char *types_bin;
-    int *type_tab;
+    unsigned int *type_tab;
 
     determine = 255;
     types = parameter_types & determine;
     types_bin = conv_dec_to_bin(types);
   //  types_bin = rev_str(types_bin); //figure out if we have to reverse it or not
-    if ((!(type_tab = (int *)malloc(sizeof(int) * 5))))
+    if ((!(type_tab = (unsigned int *)malloc(sizeof(unsigned int) * 5))))
         return (NULL);
     type_tab = type_tab_make(types_bin, type_tab);
     return (type_tab);
 }//this function makes an int array with the parameter types of the instruction
     //in order!
 
-unsigned int         *get_params(int *par_types, t_data *data, t_list *elem) //if the ocp is there ONLY!!!
+unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *elem) //if the ocp is there ONLY!!!
 {
     unsigned int *params;
     int i; //counter for the par_types tab

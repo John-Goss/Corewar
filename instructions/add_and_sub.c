@@ -12,7 +12,7 @@
 
 #include "../corewar.h"
 
-void		apply_add(t_data *data, t_list *elem, int *params, int *param_types)
+void		apply_add(t_data *data, t_list *elem, unsigned int *params, unsigned int *param_types)
 {
 	int store;
 	int i;
@@ -33,7 +33,7 @@ void		apply_add(t_data *data, t_list *elem, int *params, int *param_types)
 	elem->carry = 1;
 }
 
-void		apply_sub(t_data *data, t_list *elem, int *params, int *param_types)
+void		apply_sub(t_data *data, t_list *elem, unsigned int *params, unsigned int *param_types)
 {
 	int store;
 	int i;

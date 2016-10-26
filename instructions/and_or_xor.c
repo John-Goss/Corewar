@@ -12,7 +12,7 @@
 
 #include "../corewar.h"
 
-void        apply_and(t_data *data,t_list *elem, int *params, int *param_type)
+void        apply_and(t_data *data,t_list *elem, unsigned int *params, unsigned int *param_type)
 {
     int value_one; //param values
     int value_two;
@@ -29,7 +29,7 @@ void        apply_and(t_data *data,t_list *elem, int *params, int *param_type)
 }//the bit operation & is executed on the first two and then stored at the third which is a register
 
 
-void        apply_or(t_data *data,t_list *elem, int *params, int *param_type)
+void        apply_or(t_data *data,t_list *elem, unsigned int *params, unsigned int *param_type)
 {
     int value_one; //param values
     int value_two;
@@ -46,7 +46,7 @@ void        apply_or(t_data *data,t_list *elem, int *params, int *param_type)
 }//the bit operation | is executed on the first two and then stored at the third which is a register
 
 
-void        apply_xor(t_data *data,t_list *elem, int *params, int *param_type)
+void        apply_xor(t_data *data,t_list *elem, unsigned int *params, unsigned int *param_type)
 {
     int value_one; //param values
     int value_two;
