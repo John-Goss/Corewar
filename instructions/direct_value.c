@@ -73,3 +73,6 @@ int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//prm_pos is
     return (dir_val);
 
 }//this function gets the direct value, whether it's on four or two bytes
+
+
+
