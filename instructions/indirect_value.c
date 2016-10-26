@@ -12,9 +12,9 @@
 
 #include "../corewar.h"
 
-int                 trans_two_bytes(char *transfer_bytes)
+unsigned int                 trans_two_bytes(char *transfer_bytes)
 {
-    int value;
+    unsigned int value;
     int decal; 
     int i;
 
@@ -51,19 +51,19 @@ char                   *get_two_bytes(t_data *data, t_list *elem, int prm_pos) /
     return (two_bytes);
 }//this function puts four bytes into a string for further conversion into an unsgned int
 
-unsigned int         get_ind_value(t_data *data, t_list *elem, int *prm_pos)
+unsigned int         get_ind_value(t_data *data, t_list *elem, int prm_pos)
 {
     unsigned int ind_value;
     char *transfer_bytes;
 
-    (*prm_pos) = (*prm_pos) + 2;
+
     ind_value = 0;
   //  if (need_idx(data, elem) == 1)
   //  {
   //      ind_value = get_ind_value_idxd(data, elem);
   //      return (ind_value);
   //  }
-    transfer_bytes = get_two_bytes(data, elem, (*prm_pos)); //getting the 2 indirect bytes into a string for transfer, into an int
+    transfer_bytes = get_two_bytes(data, elem, prm_pos); //getting the 2 indirect bytes into a string for transfer, into an int
     ind_value = trans_two_bytes(transfer_bytes); //found in parameters.c
     ind_value = (elem->pc + ind_value) % MEM_SIZE; //I think this is how you modulo everything, but no idea
     //ind_value = data->map[(elem->pc + (add_to_pc % IDX_MOD)) % MEM_SIZE];

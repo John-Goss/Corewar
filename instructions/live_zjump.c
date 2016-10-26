@@ -38,7 +38,7 @@ void		apply_live(t_data *data, t_list *elem)
 }
 
 //takes two paramters of which the third will always be register
-void		apply_zjmp(t_data *data, t_list *elem, int *params)
+void		apply_zjmp(t_data *data, t_list *elem, unsigned int *params)
 {
     if (elem->carry == 1)
             elem->pc = (elem->pc + (params[0] % MEM_SIZE) % IDX_MOD);

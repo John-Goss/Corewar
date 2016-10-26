@@ -166,7 +166,10 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
             i = i + 1;
         }
         else if (par_types[k] == IND_CODE) //this gets either the value the we need to jump to relative to the pc for the indirect, or the reg number
-            params[k] = get_ind_value(data, elem, &i);
+        {
+            params[k] = get_ind_value(data, elem, i);
+            i = i + 2;
+        }
         else if (par_types[k] == DIR_CODE) //this only handles the case of the direct parameter being held in 4 bytes
             params[k] = get_dir_value(data, elem, &i);//learn how to get parameters from several bytes
         k++;
