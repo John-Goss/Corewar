@@ -33,14 +33,14 @@ void		apply_lldi(t_data *data, t_list *elem, unsigned int *param_types, unsigned
     if (param_types[0] == DIR_CODE)
         value_one = params[0];
     else if (param_types[0] == IND_CODE)
-        value_one = get_ind_value(data, elem, params[0] % IDX_MOD);
+        value_one = get_ind_value(data, elem, params[0]);
     else if (param_types[0] == REG_CODE)
         value_one = elem->reg_number[params[0]];
     if (param_types[1] == DIR_CODE)
         value_two = params[1];
     else if (param_types[1] == REG_CODE)
         value_two = elem->reg_number[params[1]];
-    store = get_ind_value(data, elem, (value_one + value_two) % IDX_MOD);
+    store = get_ind_value(data, elem, (value_one + value_two));
     elem->reg_number[params[2]] = store;
     //figure out carry modification
 }

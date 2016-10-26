@@ -58,11 +58,6 @@ unsigned int         get_ind_value(t_data *data, t_list *elem, int prm_pos)
 
 
     ind_value = 0;
-  //  if (need_idx(data, elem) == 1)
-  //  {
-  //      ind_value = get_ind_value_idxd(data, elem);
-  //      return (ind_value);
-  //  }
     transfer_bytes = get_two_bytes(data, elem, prm_pos); //getting the 2 indirect bytes into a string for transfer, into an int
     ind_value = trans_two_bytes(transfer_bytes); //found in parameters.c
     ind_value = (elem->pc + ind_value) % MEM_SIZE; //I think this is how you modulo everything, but no idea
