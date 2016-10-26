@@ -6,10 +6,9 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/26 15:08:49 by vijacque         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:26:26 by vijacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "corewar.h"
 
@@ -61,15 +60,17 @@ int				find_pc_pos(t_list *list, int *pc, int value)
 	return (0);
 }
 
-static int		*sort_array_pc(int *pc, int len, int ref, int cpt, int pos)
+static int		*sort_array_pc(int *pc, int len, int ref, int cpt)
 {
 	int	*tmp;
+	int	pos;
 	int	i;
 
 	tmp = NULL;
+	pos = 0;
 	if (!(tmp = (int *)malloc(sizeof(int) * len)))
 		return (NULL);
-	while (ref < len)
+	while (ref++ < len)
 	{
 		i = 0;
 		cpt = pc[i];
@@ -81,7 +82,6 @@ static int		*sort_array_pc(int *pc, int len, int ref, int cpt, int pos)
 			}
 		pc[pos] = -1;
 		tmp[ref] = cpt;
-		ref++;
 	}
 	free(pc);
 	return (tmp);
@@ -110,5 +110,5 @@ int				*set_array_pc(t_data *data)
 		pc[i++] = tmp->pc;
 		tmp = tmp->next;
 	}
-	return (sort_array_pc(pc, i, 0, 0, 0));
+	return (sort_array_pc(pc, i, 0, 0));
 }
