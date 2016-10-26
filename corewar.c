@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/25 15:41:33 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:03:52 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		end(t_data *data)
 		while (elem && elem->nb_champ != data->last_live_nb_champ)
 			elem = elem->next;
 		delete_win(data->display);
-		printf("\nLe joueur %d (%s) a gagne\n", elem->nb_champ, elem->name);
+		ft_printf("\nLe joueur %d (%s) a gagne\n", elem->nb_champ, elem->name);
 	}
 	else
 		exit(write(1, "\nAucun live n'a ete fait\n", 24));
@@ -125,10 +125,13 @@ void		parse_map(int argc, char **argv, t_data *data)
 		if (!(ft_strcmp(argv[i], "-n")))
 		{
 			i++;
+			 if (test_int(argv[i]))
+				exit(ft_printf("Numero de champion incorrect"));
 			nb = ft_atoi(argv[i]);
 			i++;
 		}
 		recup_champ(data, argv, i++, nb);
+		nb = 0;
 	}
 }
 

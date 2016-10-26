@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/25 13:17:51 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:02:39 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/10/20 14:38:04 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -124,7 +124,7 @@ typedef struct				s_data
 	int						flag_visu;
 	int						cycle;
 	int						cycle_to_die;
-	int						live_cpt;
+	long					live_cpt;
 	int 					ctd_nbr;
 	t_list					*begin;
 	t_desc					*desc;
@@ -149,6 +149,7 @@ void						check_who_is_alive(t_data *data);
 void						parse_map(int argc, char **argv, t_data *data);
 void						init_pt_tab(void (**tab)(t_data *data,
 							t_list *elem));
+int							test_int(char *s);
 
 unsigned char				*get_str_addr(unsigned char *mem);
 WINDOW						*get_win_addr(WINDOW *window);

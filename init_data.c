@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/25 12:39:34 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:01:40 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,95 @@ void		init_pt_tab(void (**tab)(t_data *data, t_list *elem))
 	tab[16] = &apply_aff;
 }
 */
-t_desc		*create_desc2(t_desc **desc, int nb, int *used_nb)
-{
-	t_desc	*elem;
-	elem = *desc;
 
+int		test_int(char *s)
+{
+	long long	i;
+	int			n;
+	int			signe;
+
+	signe = 1;
+	n = 0;
+	i = 0;
+	if (!s)
+		return (0);
+	if (s[n] == '-')
+	{
+		n++;
+		signe = -1;
+	}
+	while (s[n])
+	{
+		if (s[n] > '9' || s[n] < '0')
+			return (1);
+		i *= 10;
+		i += s[n++] - '0';
+	}
+	i *= signe;
+	if (i < 2147483647 && i > -2147483648)
+		return (0);
+	return (1);
+}
+
+void	init_tab(int *tab)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		tab[i++] = 0;
+	}
+}
+
+int			find_first_nb(int *tab)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 1;
+	while (tab[i] != 0 && i < 4)
+	{
+		if (tab[i] == j)
+		{
+			j++;
+			i = 0;
+		}
+		else
+			i++;
+	}
+	tab[i] = j;
+	return(j);
+}
+
+int			is_used(int nb, int *tab)
+{
+	int i;
+
+	i = 0;
+	while (tab[i] != 0 && i < 4)
+	{
+		if (tab[i] == nb)
+			exit(write(1, "numero de champion deja utilise\n", 31));
+		i++;
+	}
+	tab[i] = nb;
+	return(1);
+}
+t_desc		*create_desc2(t_desc **desc, int nb)
+{
+	t_desc		*elem;
+	static int	start = 0;
+	static int	*tab;
+
+	if (start++ == 0)
+	{
+		tab = malloc(4 * sizeof(int));
+		init_tab(tab);
+	}
+	elem = *desc;
+	tab[0] = elem->nb_champ;
 	while (elem->next)
 		elem = (elem)->next;
 	if (!(elem->next = (t_desc *)malloc(sizeof(t_desc))))
@@ -45,15 +129,11 @@ t_desc		*create_desc2(t_desc **desc, int nb, int *used_nb)
 	(elem)->next->name = (char *)malloc(129 * sizeof(char));
 	if (nb)
 	{
-		if (nb <= *used_nb)
-			exit(write(1, "numero de champion deja utilise\n", 31));
+		is_used(nb, tab);
 		(elem)->next->nb_champ = nb;
 	}
 	else
-	{
-		(elem)->next->nb_champ = (*used_nb) + 1;
-		(*used_nb)++;
-	}
+		elem->next->nb_champ = find_first_nb(tab);
 	(elem)->next->size = 0;
 	(elem)->next->desc = (char *)malloc(2049 * sizeof(char));
 	return (elem->next);
@@ -61,8 +141,6 @@ t_desc		*create_desc2(t_desc **desc, int nb, int *used_nb)
 
 t_desc		*create_desc(t_desc **desc, int nb)
 {
-	static int used_nb;
-
 	if (!*desc)
 	{
 		if (!(*desc = (t_desc *)malloc(sizeof(t_desc))))
@@ -74,12 +152,10 @@ t_desc		*create_desc(t_desc **desc, int nb)
 			(*desc)->nb_champ = nb;
 		else
 			(*desc)->nb_champ = 1;
-		if ((*desc)->nb_champ == 1)
-			used_nb = 1;
 		(*desc)->desc = (char *)malloc(2049 *sizeof(char));
 		return (*desc);
 	}
-	return(create_desc2(desc, nb, &used_nb));
+	return(create_desc2(desc, nb));
 }
 
 t_list		*create_elem(t_list *begin, int champ_nb, int pc)
@@ -106,7 +182,7 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 	(begin)->prev->pc = pc;
 	(begin)->prev->reg_number[0] = champ_nb;
 	(begin)->prev->carry = 0;
-	(begin)->prev->process_nb++;
+	((begin)->prev->process_nb) = (begin->process_nb)++;
 	(begin)->prev->action_time = 0;
 	return (begin->prev);
 }
