@@ -27,7 +27,7 @@ void        put_in_bytes(t_data *data,t_list *elem, int address, int reg_value)/
 	data->map[elem->pc + address + 3] = byte_array[3];
 } //pas sur si c'est juste mai l'idee est bon
 
-void		apply_sti(t_data *data, t_list *elem, int *param_types, int *params)
+void		apply_sti(t_data *data, t_list *elem, unsigned int *param_types, unsigned int *params)
 {
     int value_one;
     int value_two;
@@ -50,7 +50,7 @@ void		apply_sti(t_data *data, t_list *elem, int *param_types, int *params)
 }//{"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,
 //     "store index", 1, 1},
           
-void        apply_st(t_data *data, t_list *elem, int *params, int *param_types)
+void        apply_st(t_data *data, t_list *elem, unsigned int *params, unsigned int *param_types)
 {
 
     if (param_types[1] == IND_CODE)//go to the address (PC plus value) and store first value
