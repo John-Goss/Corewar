@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/25 12:39:34 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:13:20 by vijacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,10 @@ int			check_flag(int argc, char **argv, t_data *data)
 {
 	int	i;
 
+/*
+ * j'ai l'impression que tu t'est gourer dans ta fonction et que tu voulais mettre
+ * av[i] plutot que av[1] ? dans le doute je touche a rien ^^
+ */
 	i = 1;
 	while (i < argc)
 	{

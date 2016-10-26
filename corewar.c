@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 16:06:46 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/25 18:02:46 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:06:07 by vijacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ int			main(int argc, char **argv)
 	t_data	data;
 
 	init_structur(&data);
+/*
+	ft_strcmp(argv[1], "-v") == 0 ? data->flag_visu = 1 : data->flag_viso = 0;
+ca serais la meme chose que check_flag mais on economise une fonction
+au passage la fonction check_flag est vachement chelou :).
+*/
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
 	get_str_addr(data.map);
