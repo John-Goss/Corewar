@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/25 14:47:22 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:08:49 by vijacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,24 @@ int				find_pc_pos(t_list *list, int *pc, int value)
 	return (0);
 }
 
-static int		*sort_array_pc(int *pc, int len)
+static int		*sort_array_pc(int *pc, int len, int ref, int cpt, int pos)
 {
 	int	*tmp;
 	int	i;
-	int	ref;
-	int	cpt;
-	int	pos;
 
 	tmp = NULL;
-	i = 0;
-	cpt = 0;
-	pos = 0;
-	ref = 0;
 	if (!(tmp = (int *)malloc(sizeof(int) * len)))
 		return (NULL);
 	while (ref < len)
 	{
 		i = 0;
 		cpt = pc[i];
-		while (i < len)
-		{
+		while (i++ < len)
 			if (pc[i] < cpt && pc[i] != -1)
 			{
 				pos = i;
 				cpt = pc[i];
 			}
-			i++;
-		}
 		pc[pos] = -1;
 		tmp[ref] = cpt;
 		ref++;
@@ -120,5 +110,5 @@ int				*set_array_pc(t_data *data)
 		pc[i++] = tmp->pc;
 		tmp = tmp->next;
 	}
-	return (sort_array_pc(pc, i));
+	return (sort_array_pc(pc, i, 0, 0, 0));
 }
