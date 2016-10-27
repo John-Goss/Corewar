@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/26 15:32:27 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/27 12:11:03 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,8 @@ void		init_structur(t_data *data)
 	data->desc = NULL;
 	data->nb_champ = 0;
 	data->live_cpt = 0;
-//	init_pt_tab(data->tab);
+	data->display = NULL;
+	//	init_pt_tab(data->tab);
 	while (i <= MAX_PLAYERS + 1)
 	{
 //		data->statut_champ[i] = 0;

@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/25 17:12:46 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/27 12:16:37 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ static int			getch_aff(t_data *data)
 		{
 			data->flag_slowmode = 1;
 			werase(data->display->win);
+			refresh();
 			print_str(data->display, data);
 			break ;
 		}
@@ -121,10 +122,12 @@ static int			getch_aff(t_data *data)
 
 int					aff_window(t_data *data)
 {
-	t_display		display;
+	t_display		*display;
 	struct winsize	t;
 
-	display = (t_display){NULL, NULL, NULL, NULL, NULL};
+	if (!(display = (t_display*)malloc(sizeof(t_display))))
+		return (0);
+	*display = (t_display){NULL, NULL, NULL, NULL, NULL};
 	if ((ioctl(0, TIOCGWINSZ, &t) < 0))
 		return (-1);
 	if (t.ws_col < 224 || t.ws_row < 81)
@@ -133,11 +136,11 @@ int					aff_window(t_data *data)
 		ft_printf("%d\nCOLS MIN: 224 / Value TTY: %d\n",t.ws_row, t.ws_col);
 		exit(1);
 	}
-	create_win(&display);
+	create_win(display);
 	noecho();
 	refresh();
-	keypad(display.screen, TRUE);
-	data->display = &display;
+	keypad(display->screen, TRUE);
+	data->display = display;
 	get_dsp_struct_addr(data->display);
 	getch_aff(data);
 	return (1);

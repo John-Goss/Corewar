@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/26 15:26:47 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/27 12:25:00 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ unsigned int     *det_types(unsigned int parameter_types);
 int							find_pc_pos(t_list *list, int *pc, int i);
 int							*set_array_pc(t_data *data);
 int							aff_window(t_data *data);
-int							init_infos_box(t_data *data);
+void						init_infos_box(t_data *data);
 int							set_live_infos(t_data *data);
 t_display					*get_dsp_struct_addr(t_display *dsp);
 void						delete_win(t_display *display);

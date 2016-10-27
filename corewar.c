@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/26 16:00:40 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/27 11:18:38 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ au passage la fonction check_flag est vachement chelou :).
 	{
 		while (42)
 		{
-	if (data.flag_slowmode == 1)
-		getch();
-			set_live_infos(&data);
+			init_infos_box(&data);
 			turn(&data);
 			(data.cycle)++;
 			if ((--(data.cycle_to_die)) <= 0)
