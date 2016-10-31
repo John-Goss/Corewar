@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:12:34 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/31 15:41:55 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/31 18:12:04 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void		apply_sti(t_data *data, t_list *elem, unsigned int *param_types, unsigned 
     else if (param_types[2] == REG_CODE)
         value_two = elem->reg_number[params[2]];
     address = value_one + value_two;
-	ft_printf("\n%d - %d\n", value_one, value_two);
-    ft_printf("Params - %zd\n", param_types[0]);
 	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);//this function puts the desired value onto the required number of bytes in the memory
 
     //getting the value at the address which we've determined by combining the values of the last two parameters
