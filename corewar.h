@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/27 12:25:00 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/31 15:28:36 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
  * ** Toutes les tailles sont en octets.
  * ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
  * */
+
+#define DEBUGG printf("\nDEBUG - File: %s - Line : %d\n", __FILE__, __LINE__)
 
 #define IND_SIZE			2
 #define REG_SIZE			4
@@ -150,6 +152,7 @@ void						init_pt_tab(void (**tab)(t_data *data,
 							t_list *elem));
 int							test_int(char *s);
 
+int							turn_by_none(t_data *data);
 int							turn_by_slowmode(t_data *data);
 unsigned char				*get_str_addr(unsigned char *mem);
 WINDOW						*get_win_addr(WINDOW *window);
@@ -161,11 +164,11 @@ t_desc						*create_desc(t_desc **desc, int nb);
  *	PROTOTYPE INSTRUCTIONS
  */
 
-void		instruction_exec(t_data *data, t_list *elem);
-int 	    get_dir_value(t_data *data, t_list *elem, int *prm_pos);
-unsigned int         get_ind_value(t_data *data, t_list *elem, int *prm_pos);
-int                 trans_four_bytes(char *transfer_bytes);
-char    *get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos); //prm_pos being the position fo the first octet to be extract
+void			instruction_exec(t_data *data, t_list *elem);
+int				get_dir_value(t_data *data, t_list *elem, int *prm_pos);
+unsigned int	get_ind_value(t_data *data, t_list *elem, int prm_pos);
+int				trans_four_bytes(char *transfer_bytes);
+char			*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos); //prm_pos being the position fo the first octet to be extract
 
 
 void		apply_live(t_data *data, t_list *elem);
@@ -186,10 +189,10 @@ void		apply_lfork(t_data *data, t_list *elem);
 void		apply_aff(t_data *data, t_list *elem, unsigned int* params );
 
 
-int		trans_two_bytes(char *transfer_bytes);
-char	*get_two_bytes(t_data *data, t_list *elem, int prm_pos);
-unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *elem);
-unsigned int     *det_types(unsigned int parameter_types);
+unsigned int	trans_two_bytes(char *transfer_bytes);
+char			*get_two_bytes(t_data *data, t_list *elem, int prm_pos);
+unsigned int	*get_params(unsigned int *par_types, t_data *data, t_list *elem);
+unsigned int	*det_types(unsigned int parameter_types);
 
 
 /*
@@ -202,4 +205,5 @@ int							aff_window(t_data *data);
 void						init_infos_box(t_data *data);
 int							set_live_infos(t_data *data);
 t_display					*get_dsp_struct_addr(t_display *dsp);
+void						print_str(t_display *display, t_data *data);
 void						delete_win(t_display *display);

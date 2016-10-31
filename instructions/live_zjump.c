@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:21:15 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/26 17:22:07 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/31 15:05:17 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ void		apply_live(t_data *data, t_list *elem)
 	data->live_cpt++;
 	while (desc)
 	{
-		if (nb_champ == desc->nb_champ)
+		if (desc->nb_champ && nb_champ && nb_champ == desc->nb_champ)
 		{
 			data->last_live_nb_champ = nb_champ;
-			ft_printf("Un processus dit que le joueur %d(%s) est en vie",
+			if (data->flag_visu == 0)
+				ft_printf("Un processus dit que le joueur %d(%s) est en vie",
 					nb_champ, desc->name);
 		}
 		desc = desc->next;

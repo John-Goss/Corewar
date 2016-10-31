@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:14 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/21 16:24:28 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/31 15:45:47 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,3 @@ int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//prm_pos is
     return (dir_val);
 
 }//this function gets the direct value, whether it's on four or two bytes
-
-
-

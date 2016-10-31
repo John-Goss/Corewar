@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 12:01:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/21 16:20:05 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/31 15:51:54 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ void        instruction_exec(t_data *data, t_list *elem)
         instr_no_ocp(data, elem, params);
         return ; //free all the shit first dude
     }
-    instr_w_ocp(data, elem, params, param_types);        
+    instr_w_ocp(data, elem, params, param_types);
 }

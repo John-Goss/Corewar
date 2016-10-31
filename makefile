@@ -23,7 +23,7 @@ $(OBJ):
 
 OBJ = $(SRC:.c=.o)
 
-FLAG = -g -fsanitize=address
+FLAG = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 all: $(NAME)
 

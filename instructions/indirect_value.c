@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:01 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/21 16:04:36 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/31 13:05:26 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 unsigned int                 trans_two_bytes(char *transfer_bytes)
 {
     unsigned int value;
-    int decal; 
+    int decal;
     int i;
 
     i = 0;//index counter for the loop

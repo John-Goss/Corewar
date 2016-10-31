@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:35 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/21 16:25:24 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/10/31 15:46:29 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,10 @@ int                 two_or_four(t_data *data, t_list *elem)
 
 unsigned int     *det_types(unsigned int parameter_types)
 {
-    int determine;
-    int types;
-    char *types_bin;
-    unsigned int *type_tab;
+    int				determine;
+    int				types;
+    char			*types_bin;
+    unsigned int	*type_tab;
 
     determine = 255;
     types = parameter_types & determine;

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/27 11:18:38 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/10/31 15:29:38 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void		end(t_data *data)
 	t_desc	*elem;
 
 	elem = data->desc;
-	delete_win(data->display);
+	if (data->flag_visu == 1)
+		delete_win(data->display);
 	if (data->last_live_nb_champ)
 	{
 		while (elem && elem->nb_champ != data->last_live_nb_champ)
 			elem = elem->next;
-		delete_win(data->display);
 		ft_printf("\nLe joueur %d (%s) a gagne\n", elem->nb_champ, elem->name);
 	}
 	else
@@ -34,29 +34,14 @@ int			main(int argc, char **argv)
 	t_data	data;
 
 	init_structur(&data);
-/*
-	ft_strcmp(argv[1], "-v") == 0 ? data->flag_visu = 1 : data->flag_viso = 0;
-ca serais la meme chose que check_flag mais on economise une fonction
-au passage la fonction check_flag est vachement chelou :).
-*/
 	check_flag(argc, argv, &data);
 	parse_map(argc, argv, &data);
-	get_str_addr(data.map);
-	aff_window(&data);
-	if (data.flag_slowmode == 1)
-		turn_by_slowmode(&data);
-	else
+	if (data.flag_visu == 1)
 	{
-		while (42)
-		{
-			init_infos_box(&data);
-			turn(&data);
-			(data.cycle)++;
-			if ((--(data.cycle_to_die)) <= 0)
-				if (verif_end(&data) == 1)
-					break ;
-		}
+		get_str_addr(data.map);
+		aff_window(&data);
 	}
+	data.flag_slowmode == 1 ? turn_by_slowmode(&data) : turn_by_none(&data);
 	end(&data);
 }
 
@@ -128,7 +113,7 @@ void		parse_map(int argc, char **argv, t_data *data)
 	data->nb_champ = argc - 1 - data->flag_visu;
 	if (i == argc)
 	{
-		ft_printf("NO CHAMPIONS\n");
+		ft_printf("\nNO CHAMPIONS\n");
 		exit(0);
 	}
 	while (i < argc)
@@ -136,8 +121,8 @@ void		parse_map(int argc, char **argv, t_data *data)
 		if (!(ft_strcmp(argv[i], "-n")))
 		{
 			i++;
-			 if (test_int(argv[i]))
-				exit(ft_printf("Numero de champion incorrect"));
+			if (test_int(argv[i]))
+				exit(ft_printf("\nNumero de champion incorrect.\n"));
 			nb = ft_atoi(argv[i]);
 			i++;
 		}
@@ -183,10 +168,8 @@ void		process_action(t_data *data, t_list *elem)
 		else if (elem->action_time)
 		{
 			elem->action_time--;
-			//			if (!(elem->action_time))
-			//				instruction_exec(data, elem);
-			//				printf("%hhx", data->map[elem->pc]);
-			//				(data->tab)[data->map[elem->pc]](data, elem);
+			if (!(elem->action_time))
+				instruction_exec(data, elem);
 		}
 	}
 }
@@ -195,10 +178,11 @@ void		turn(t_data *data)
 {
 	t_list *elem;
 
+	if (data == NULL || data->begin == NULL)
+		return ;
 	elem = data->begin;
 	while (elem)
 	{
-		//		printf("elem pc = %d elem champ = %d\n",elem->pc , elem->reg_number[0]);
 		process_action(data, elem);
 		elem = elem->next;
 	}
@@ -255,4 +239,3 @@ int			verif_end(t_data *data)
 		return (0);
 	return(1);
 }
-
