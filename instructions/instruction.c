@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 12:01:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/31 15:51:54 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/01 16:41:48 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void        instruction_exec(t_data *data, t_list *elem)
 
     //THE PC IS ON THE OPC AT THIS POINT
     opc = data->map[(elem->pc) % MEM_SIZE];
-    param_types = det_types(data->map[(elem->pc) % MEM_SIZE]);
+    param_types = det_types(data->map[(elem->pc + 1) % MEM_SIZE]);
     params = get_params(param_types, data, elem);
     if (opc == 0x0C || opc == 0x09 || opc == 0x01)
     {

@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:14 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/31 15:45:47 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/01 17:21:09 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//prm_pos is
     dir_val = 0;
     if (elem->dir_by == 0) //if the direct is supposed to be on the next four bytes
     {
+
+
         bytes = get_dir_value_quatre(data, elem, (*prm_pos));
     	dir_val = trans_four_bytes(bytes);
     	(*prm_pos) = (*prm_pos) + 4;
@@ -66,9 +68,13 @@ int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//prm_pos is
         //code a function which will add the prm_pos onto the pc and then extract the dir out of the next 4 bytes
     else if (elem->dir_by == 1)
     {
-    	bytes = get_two_bytes(data, elem, (*prm_pos));
-    	dir_val = trans_two_bytes(bytes);//found in parameters.c
-    	(*prm_pos) = (*prm_pos) + 2;
+    	
+		bytes = get_two_bytes(data, elem, (*prm_pos));
+    	
+		printf("bytes= %d\n", bytes[1]);
+		dir_val = trans_two_bytes(bytes);//found in parameters.c
+    	
+		(*prm_pos) = (*prm_pos) + 2;
     }
     return (dir_val);
 

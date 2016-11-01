@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:35 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/31 15:46:29 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/01 17:06:53 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,14 @@ char *conv_dec_to_bin(int n)
     int i;
     int k;
 
+    bin_nbr = ft_strnew(9);
     i = 1;
     k = 0;
-    bin_nbr = ft_strnew(9);
     while (n != 0)
     {
         remainder = n % 2;
         n /= 2;
-
-        if (remainder == 0)
+		if (remainder == 0)
         	bin_nbr[k] = '0';
         else if (remainder == 1)
         	bin_nbr[k] = '1';
@@ -132,14 +131,11 @@ int                 two_or_four(t_data *data, t_list *elem)
 unsigned int     *det_types(unsigned int parameter_types)
 {
     int				determine;
-    int				types;
     char			*types_bin;
     unsigned int	*type_tab;
 
-    determine = 255;
-    types = parameter_types & determine;
-    types_bin = conv_dec_to_bin(types);
-  //  types_bin = rev_str(types_bin); //figure out if we have to reverse it or not
+    types_bin = conv_dec_to_bin(parameter_types);
+	types_bin = rev_str(types_bin); //figure out if we have to reverse it or not
     if ((!(type_tab = (unsigned int *)malloc(sizeof(unsigned int) * 5))))
         return (NULL);
     type_tab = type_tab_make(types_bin, type_tab);
@@ -160,7 +156,7 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
         return (NULL);
     while (par_types[k] != 0) //this loop checks the param types and fills the param array wtih the corresponding values in order
     {
-        if (par_types[k] == REG_CODE)
+		if (par_types[k] == REG_CODE)
         {
             params[k] = data->map[(elem->pc + i) % MEM_SIZE]; //getting the register number, the value I still need to get out of the register in the process itself
             i = i + 1;

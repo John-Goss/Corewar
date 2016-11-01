@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:01 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/31 13:05:26 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/01 17:23:39 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ unsigned int                 trans_two_bytes(char *transfer_bytes)
         decal = decal - 8;
         i++;
     }
+		printf("dir_val = %d\n", transfer_bytes[1]);
     return (value);
 }//this function does the same as trans_four_bytes but with two bytes instead of four... obviously
 
@@ -45,10 +46,11 @@ char                   *get_two_bytes(t_data *data, t_list *elem, int prm_pos) /
     while (k < IND_SIZE)
     {
         two_bytes[k] = data->map[i % MEM_SIZE];
+	printf("2bytes =  %d\n", two_bytes[k]);
         i++;
         k++;
     }
-    return (two_bytes);
+	return (two_bytes);
 }//this function puts four bytes into a string for further conversion into an unsgned int
 
 unsigned int         get_ind_value(t_data *data, t_list *elem, int prm_pos)
