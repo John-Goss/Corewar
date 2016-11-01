@@ -21,13 +21,14 @@ unsigned int                 trans_two_bytes(char *transfer_bytes)
     i = 0;//index counter for the loop
     decal = 8;
     value = 0;
-    while (i < IND_SIZE && transfer_bytes[i] != '\0')
+  //    printf("(--TEST-->%d)\n", value);
+    while (i < IND_SIZE)// && transfer_bytes[i] != '\0')
     {
         value |= (transfer_bytes[i] << decal & 0xff);
         decal = decal - 8;
         i++;
+    //    printf("(--TEST-->%d)\n", value);
     }
-		printf("dir_val = %d\n", transfer_bytes[1]);
     return (value);
 }//this function does the same as trans_four_bytes but with two bytes instead of four... obviously
 
@@ -46,7 +47,6 @@ char                   *get_two_bytes(t_data *data, t_list *elem, int prm_pos) /
     while (k < IND_SIZE)
     {
         two_bytes[k] = data->map[i % MEM_SIZE];
-	printf("2bytes =  %d\n", two_bytes[k]);
         i++;
         k++;
     }

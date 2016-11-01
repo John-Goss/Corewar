@@ -156,6 +156,7 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
         return (NULL);
     while (par_types[k] != 0) //this loop checks the param types and fills the param array wtih the corresponding values in order
     {
+
 		if (par_types[k] == REG_CODE)
         {
             params[k] = data->map[(elem->pc + i) % MEM_SIZE]; //getting the register number, the value I still need to get out of the register in the process itself
@@ -166,10 +167,12 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
             params[k] = get_ind_value(data, elem, i);
             i = i + 2;
         }
-        else if (par_types[k] == DIR_CODE) //this only handles the case of the direct parameter being held in 4 bytes
-            params[k] = get_dir_value(data, elem, &i);//learn how to get parameters from several bytes
+        else if (par_types[k] == DIR_CODE) 
+            params[k] = get_dir_value(data, elem, &i);
+        printf("--->TESTparams:\t%d\n", params[k]);
         k++;
     }
+
     return (params);//returns to instructions.c
 }// this function is self-explanatory, we're getting the parameters guys..
 
