@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:35 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/02 15:50:45 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/02 15:51:52 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ int                 two_or_four(t_data *data, t_list *elem)
 
 unsigned int     *det_types(unsigned int parameter_types)
 {
-    int				determine;
     char			*types_bin;
     unsigned int	*type_tab;
 
@@ -143,6 +142,23 @@ unsigned int     *det_types(unsigned int parameter_types)
 }//this function makes an int array with the parameter types of the instruction
     //in order!
 
+int                 octet_cod(t_data *data, t_list *elem)
+{
+
+    if (data->map[elem->pc] == 0x02 || data->map[elem->pc] == 0x03 ||\
+        data->map[elem->pc] == 0x04 || data->map[elem->pc] == 0x05 || \
+        data->map[elem->pc] == 0x06 || data->map[elem->pc] == 0x07 || \
+        data->map[elem->pc] == 0x08 || data->map[elem->pc] == 0x0A || \
+        data->map[elem->pc] == 0x0B || data->map[elem->pc] == 0x0E || \
+        data->map[elem->pc] == 0x0D)
+        return (2);
+    else if (data->map[elem->pc] == 0x0C || data->map[elem->pc] == 0x01 ||\
+     data->map[elem->pc] == 0x09 || data->map[elem->pc] == 0x0F || \
+     data->map[elem->pc] == 0x10)
+        return (1);
+    return (0); //this is an error case
+}
+
 unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *elem) //if the ocp is there ONLY!!!
 {
     unsigned int *params;
@@ -150,7 +166,8 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
     int k; //counter for the params tab
 
     k = 0;
-    i = 2;
+    i = octet_cod(data, elem);
+    elem->dir_by = 0;
     elem->dir_by = two_or_four(data, elem);//determining whether the direct is on 2 or 4 bytes
     if (!(params = (unsigned int *)malloc(sizeof(int) * 5)))
         return (NULL);
@@ -171,7 +188,7 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
             params[k] = get_dir_value(data, elem, &i);
         k++;
     }
-
+    data->dep = i; //
     return (params);//returns to instructions.c
 }// this function is self-explanatory, we're getting the parameters guys..
 

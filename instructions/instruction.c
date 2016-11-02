@@ -34,6 +34,7 @@ void        instr_no_ocp(t_data *data, t_list *elem, unsigned int *params)
 
 void         instr_w_ocp(t_data *data, t_list *elem, unsigned int *params, unsigned int *param_types)
 {
+
     if (data->map[elem->pc] == 0x02)
         apply_ld(data, elem, params, param_types);
     else if (data->map[elem->pc] == 0x03)
@@ -68,10 +69,19 @@ void        instruction_exec(t_data *data, t_list *elem)
     opc = data->map[(elem->pc) % MEM_SIZE];
     param_types = det_types(data->map[(elem->pc + 1) % MEM_SIZE]);
     params = get_params(param_types, data, elem);
+
+
+   //ft_printf("Para type 0 -> %zu\n", param_types[0]);
+   //ft_printf("Param type 1 -> %zu\n", param_types[1]);
+
+
     if (opc == 0x0C || opc == 0x09 || opc == 0x01)
     {
         instr_no_ocp(data, elem, params);
         return ; //free all the shit first dude
     }
     instr_w_ocp(data, elem, params, param_types);
+    elem->pc = elem->pc + data->dep;
+    free(params);
+    free(param_types);
 }
