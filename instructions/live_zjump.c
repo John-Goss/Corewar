@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:21:15 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/31 15:05:17 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/02 14:31:11 by tbui             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void		apply_live(t_data *data, t_list *elem)
 {
 	t_desc	*desc;
 	int		nb_champ;
-	int		i;
 
+	desc = data->desc;
 	nb_champ = (data->map[(elem->pc + 1) % MEM_SIZE] << 24 & 0xff000000) |
 	(data->map[(elem->pc + 2) % MEM_SIZE] << 16 & 0xff0000) |
 	(data->map[(elem->pc + 3) % MEM_SIZE] << 8 & 0xff00) |
