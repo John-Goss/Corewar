@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:12:34 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/02 15:36:58 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/02 16:13:17 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void		apply_sti(t_data *data, t_list *elem, unsigned int *param_types, unsigned 
         value_two = elem->reg_number[params[2]];
     address = value_one + value_two;
 	put_in_bytes(data, elem, address, elem->reg_number[params[0] - 1]);//this function puts the desired value onto the required number of bytes in the memory
-	elem->pc += 7;
 
     //getting the value at the address which we've determined by combining the values of the last two parameters
         //then putting the value we found at that address into the register, given to us in the first parameter
@@ -54,8 +53,9 @@ void		apply_sti(t_data *data, t_list *elem, unsigned int *param_types, unsigned 
           
 void        apply_st(t_data *data, t_list *elem, unsigned int *params, unsigned int *param_types)
 {
+	params[0]--;
     if (param_types[1] == IND_CODE)//go to the address (PC plus value) and store first value
         data->map[(params[1] % IDX_MOD) % MEM_SIZE] =  elem->reg_number[params[0]]; //value to copy into the other place
     else if (param_types[1] == REG_CODE)//put the value to be copied into the register
-        elem->reg_number[params[1]] = elem->reg_number[params[0]]; //value to copy into the other place
+        elem->reg_number[params[1] - 1] = elem->reg_number[params[0]]; //value to copy into the other place
 }//this takes the value of a register and STORES it at either an address or another register
