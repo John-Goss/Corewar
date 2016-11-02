@@ -81,6 +81,7 @@ void        instruction_exec(t_data *data, t_list *elem)
         return ; //free all the shit first dude
     }
     instr_w_ocp(data, elem, params, param_types);
+    elem->pc = elem->pc + data->dep;
     free(params);
     free(param_types);
 }
