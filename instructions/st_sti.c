@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:12:34 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/01 16:47:21 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/02 15:36:58 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@ void        put_in_bytes(t_data *data,t_list *elem, int address, int reg_value)/
 	data->map[(elem->pc + address + 1) % MEM_SIZE] = byte_array[1];
 	data->map[(elem->pc + address + 2) % MEM_SIZE] = byte_array[2];
 	data->map[(elem->pc + address + 3) % MEM_SIZE] = byte_array[3];
-	elem->pc = (elem->pc + 5) % MEM_SIZE; // il faut faire elem-> pc + taille de tous les arguments en octet
 } //pas sur si c'est juste mai l'idee est bon
 
 void		apply_sti(t_data *data, t_list *elem, unsigned int *param_types, unsigned int *params)
 {
-    int value_one;
-    int value_two;
-    int address;
+    int	value_one;
+    int	value_two;
+    int	address;
+	int	pc_add;
 
+	pc_add = 0;
     address = 0;
     if (param_types[1] == DIR_CODE || param_types[1] == IND_CODE)
         value_one = params[1];
@@ -42,9 +43,9 @@ void		apply_sti(t_data *data, t_list *elem, unsigned int *param_types, unsigned 
         value_two = params[2];
     else if (param_types[2] == REG_CODE)
         value_two = elem->reg_number[params[2]];
-	printf("1 = %d 2 = %d\n", params[1], params[2]);
     address = value_one + value_two;
-	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);//this function puts the desired value onto the required number of bytes in the memory
+	put_in_bytes(data, elem, address, elem->reg_number[params[0] - 1]);//this function puts the desired value onto the required number of bytes in the memory
+	elem->pc += 7;
 
     //getting the value at the address which we've determined by combining the values of the last two parameters
         //then putting the value we found at that address into the register, given to us in the first parameter

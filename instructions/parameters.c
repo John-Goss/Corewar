@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:35 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/01 17:06:53 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/02 15:50:45 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,6 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
         }
         else if (par_types[k] == DIR_CODE) 
             params[k] = get_dir_value(data, elem, &i);
-        printf("--->TESTparams:\t%d\n", params[k]);
         k++;
     }
 
