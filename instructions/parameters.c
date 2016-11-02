@@ -186,8 +186,6 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
         }
         else if (par_types[k] == DIR_CODE) 
             params[k] = get_dir_value(data, elem, &i);
-     //   printf("--->TESTparams:\t%d\n", params[k]);
-        printf("--->TESTparams_type:\t%d\n", par_types[k]);
         k++;
     }
     data->dep = i; //

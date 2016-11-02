@@ -24,7 +24,7 @@ void        put_in_bytes(t_data *data,t_list *elem, int address, int reg_value)/
 	data->map[(elem->pc + address + 1) % MEM_SIZE] = byte_array[1];
 	data->map[(elem->pc + address + 2) % MEM_SIZE] = byte_array[2];
 	data->map[(elem->pc + address + 3) % MEM_SIZE] = byte_array[3];
-	elem->pc = (elem->pc + 5) % MEM_SIZE; // il faut faire elem-> pc + taille de tous les arguments en octet
+	//elem->pc = (elem->pc + 5) % MEM_SIZE; // il faut faire elem-> pc + taille de tous les arguments en octet
 } //pas sur si c'est juste mai l'idee est bon
 
 void		apply_sti(t_data *data, t_list *elem, unsigned int *param_types, unsigned int *params)
@@ -42,7 +42,7 @@ void		apply_sti(t_data *data, t_list *elem, unsigned int *param_types, unsigned 
         value_two = params[2];
     else if (param_types[2] == REG_CODE)
         value_two = elem->reg_number[params[2]];
-	printf("1 = %d 2 = %d\n", params[1], params[2]);
+//	printf("1 = %d 2 = %d\n", params[1], params[2]);
     address = value_one + value_two;
 	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);//this function puts the desired value onto the required number of bytes in the memory
 

@@ -65,17 +65,11 @@ void        instruction_exec(t_data *data, t_list *elem)
     unsigned int *params;
     char opc; //DO NOT CONFUSE WITH OCP!!!
 
-    //THE PC IS ON THE OPC AT THIS POINT
+    data->dep = 0;
     opc = data->map[(elem->pc) % MEM_SIZE];
     param_types = det_types(data->map[(elem->pc + 1) % MEM_SIZE]);
     params = get_params(param_types, data, elem);
-
-
-   //ft_printf("Para type 0 -> %zu\n", param_types[0]);
-   //ft_printf("Param type 1 -> %zu\n", param_types[1]);
-
-
-    if (opc == 0x0C || opc == 0x09 || opc == 0x01)
+    if (opc == 0x0C || opc == 0x09 || opc == 0x01 || data->map[elem->pc] == 0x10)
     {
         instr_no_ocp(data, elem, params);
         return ; //free all the shit first dude
