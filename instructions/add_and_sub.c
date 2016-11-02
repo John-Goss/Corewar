@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 19:43:20 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/21 16:04:10 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/02 17:06:13 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void		apply_add(t_data *data, t_list *elem, unsigned int *params, unsigned int *
 		}
 		i++;
 	}
-	store = elem->reg_number[params[0]] + elem->reg_number[params[1]];
-	elem->reg_number[params[2]] = store;
+	store = elem->reg_number[params[0] - 1] + elem->reg_number[params[1] - 1];
+	elem->reg_number[params[2] - 1] = store;
 	elem->carry = 1;
 }
 
@@ -49,7 +49,7 @@ void		apply_sub(t_data *data, t_list *elem, unsigned int *params, unsigned int *
 		}
 		i++;
 	}
-	store = elem->reg_number[params[0]] - elem->reg_number[params[1]];
-	elem->reg_number[params[2]] = store;
+	store = elem->reg_number[params[0] - 1] - elem->reg_number[params[1] - 1];
+	elem->reg_number[params[2] - 1] = store;
 	elem->carry = 1;
 }
