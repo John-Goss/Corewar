@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 12:07:06 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/21 16:11:10 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/02 14:33:20 by tbui             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void        apply_and(t_data *data,t_list *elem, unsigned int *params, unsigned 
 {
     int value_one; //param values
     int value_two;
+
 
     if (param_type[0] == REG_CODE)
         value_one = elem->reg_number[params[0]];

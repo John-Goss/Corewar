@@ -13,7 +13,7 @@
 #include "../corewar.h"
 
 
-int                 trans_four_bytes(char *transfer_bytes)
+unsigned int                 trans_four_bytes(char *transfer_bytes)
 {
     unsigned int value;
     int decal; 
@@ -51,15 +51,14 @@ char    *get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_pos
 
 
 //called from parameters.c
-int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
+unsigned int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
 {
-    int dir_val; //the direct value to be returned
+    unsigned  int dir_val; //the direct value to be returned
     char *bytes;
 
     dir_val = 0;
     if (elem->dir_by == 0) //if the direct is supposed to be on the next four bytes
     {
-
 
         bytes = get_dir_value_quatre(data, elem, (*prm_pos));
     	dir_val = trans_four_bytes(bytes);
