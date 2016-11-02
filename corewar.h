@@ -135,7 +135,9 @@ typedef struct				s_data
 	int						last_live_nb_champ;
 	int						champ[MAX_PLAYERS + 1];
 	int						nb_champ;
+	int 					dep; //pour le deplacement du pc
 }							t_data;
+
 
 /*
  * PROTOTYPE
@@ -165,9 +167,9 @@ t_desc						*create_desc(t_desc **desc, int nb);
  */
 
 void			instruction_exec(t_data *data, t_list *elem);
-int				get_dir_value(t_data *data, t_list *elem, int *prm_pos);
+unsigned int				get_dir_value(t_data *data, t_list *elem, int *prm_pos);
 unsigned int	get_ind_value(t_data *data, t_list *elem, int prm_pos);
-int				trans_four_bytes(char *transfer_bytes);
+unsigned int				trans_four_bytes(char *transfer_bytes);
 char			*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos); //prm_pos being the position fo the first octet to be extract
 
 
