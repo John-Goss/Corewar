@@ -21,6 +21,7 @@ unsigned int                 trans_four_bytes(char *transfer_bytes)
 
     i = 0;//index counter for the loop
     decal = 24;
+    value = 0;
     while (i < DIR_SIZE)
     {
         value |= (transfer_bytes[i] << decal & 0xff);
@@ -63,6 +64,7 @@ unsigned int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//p
         bytes = get_dir_value_quatre(data, elem, (*prm_pos));
     	dir_val = trans_four_bytes(bytes);
     	(*prm_pos) = (*prm_pos) + 4;
+
     }
         //code a function which will add the prm_pos onto the pc and then extract the dir out of the next 4 bytes
     else if (elem->dir_by == 1)
@@ -70,7 +72,9 @@ unsigned int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//p
 		bytes = get_two_bytes(data, elem, (*prm_pos));
 		dir_val = trans_two_bytes(bytes);	
 		(*prm_pos) = (*prm_pos) + 2;
+
     }
+
     return (dir_val);
 
 }//this function gets the direct value, whether it's on four or two bytes

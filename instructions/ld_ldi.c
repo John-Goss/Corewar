@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:27:31 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/02 17:04:57 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/03 18:30:18 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void		apply_ldi(t_data *data, t_list *elem, unsigned int *param_types, unsigned 
     if (param_types[0] == DIR_CODE || param_types[0] == IND_CODE)
         value_one =  get_ind_size_at_add(data, elem, params[0] % IDX_MOD); //get value at address
     else if (param_types[0] == REG_CODE)
-        value_one =  get_ind_size_at_add(data, elem, elem->reg_number[params[0] - 1] % IDX_MOD); 
+        value_one =  get_ind_size_at_add(data, elem, elem->reg_number[params[0]] % IDX_MOD); 
     if (param_types[1] == DIR_CODE)
         value_two = params[1];
     else if (param_types[1] == REG_CODE)
-        value_two = elem->reg_number[params[1] - 1];
+        value_two = elem->reg_number[params[1]];
  	S = value_one + value_two;
     elem->reg_number[params[2]] = get_reg_size_at_add(data, elem, S % IDX_MOD);//prm_pos is the position of the first address byte of the parameter to be searched
 }//{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
@@ -74,7 +74,7 @@ void        apply_ld(t_data *data, t_list *elem, unsigned int *params, unsigned 
     //value of first parameter into register
     if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
     {
-        elem->reg_number[params[1] - 1] = params[0];// param[0] is the first parameter
+        elem->reg_number[params[1]] = params[0];// param[0] is the first parameter
         elem->carry = 1;
     }
     else

@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:20:57 by tbui              #+#    #+#             */
-/*   Updated: 2016/10/26 17:18:35 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/03 16:42:48 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
 {
 	char c;
 
-	c = elem->reg_number[data->map[elem->pc + 2]];
-	c %= 256;
+	c = (elem->reg_number[data->map[elem->pc + 2]])  % 256;
 	ft_printf("%c", c);
 	elem->pc += 3;
 }//{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
