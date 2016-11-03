@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:49:58 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/31 15:27:22 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/03 13:15:32 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	turn_by_slowmode(t_data *data)
 		if (keycode == 32)
 		{
 			werase(data->display->win);
-			print_str(data->display, data);
+			print_str(data);
 			turn(data);
 			(data->cycle)++;
 			if ((--(data->cycle_to_die)) <= 0)
@@ -42,7 +42,7 @@ int	turn_by_none(t_data *data)
 		if (data->flag_visu == 1)
 		{
 			werase(data->display->win);
-			print_str(data->display, data);
+			print_str(data);
 		}
 		turn(data);
 		(data->cycle)++;

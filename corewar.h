@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/31 15:28:36 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/03 17:24:12 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,11 +201,15 @@ unsigned int	*det_types(unsigned int parameter_types);
  * PROTOTYPE DISPLAY
  */
 
-int							find_pc_pos(t_list *list, int *pc, int i);
-int							*set_array_pc(t_data *data);
+int							champ_id(t_data *data, int index);
+int							nb_champ_pc(t_list *list, int value);
+int							find_pc_pos(t_list *list, int *pc, int nb_champ, int value);
+int							*set_array_pc(t_list *list_pc);
 int							aff_window(t_data *data);
+void						display_pc(t_data *data, int i, int y, int x, int champ_id);
+void						display_classique(t_data *data, int i, int y, int x, int champ_id);
 void						init_infos_box(t_data *data);
 int							set_live_infos(t_data *data);
 t_display					*get_dsp_struct_addr(t_display *dsp);
-void						print_str(t_display *display, t_data *data);
+void						print_str(t_data *data);
 void						delete_win(t_display *display);

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/26 15:26:26 by vijacque         ###   ########.fr       */
+/*   Updated: 2016/11/03 18:39:28 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,55 +39,83 @@ t_display		*get_dsp_struct_addr(t_display *dsp)
 	return (tmp);
 }
 
-int				find_pc_pos(t_list *list, int *pc, int value)
+int				champ_id(t_data *data, int index)
+{
+	t_desc	*tmp;
+	int		cpt;
+	int		w_1;
+
+	tmp = data->desc;
+	cpt = 0;
+	w_1 = 0;
+	return (-1);
+}
+
+int				nb_champ_pc(t_list *list, int value)
+{
+	t_list	*tmp;
+
+	tmp = list;
+	while (tmp)
+	{
+		if (tmp->pc == value)
+			return (tmp->reg_number[0]); // NE PAS LAISSER SUR REG_NUMBER A PASSER SUR begin->pid !!!
+		tmp = tmp->next;
+	}
+	return (-1);
+}
+
+int				find_pc_pos(t_list *list, int *pc, int nb_champ, int value)
 {
 	t_list	*tmp;
 	int		i;
+	int		cpt;
 
-	tmp = list;
 	i = 0;
+	cpt = 0;
+	tmp = list;
 	while (tmp)
 	{
-		i++;
+		cpt++;
 		tmp = tmp->next;
 	}
-	while (i >= 0)
+	while (i < cpt)
 	{
 		if (pc[i] == value)
-			return (1);
-		i--;
+			return (nb_champ_pc(list, value));
+		i++;
 	}
-	return (0);
+	return (-1);
 }
-
+/*
 static int		*sort_array_pc(int *pc, int len, int ref, int cpt)
 {
-	int	*tmp;
+	int	tmp;
 	int	pos;
 	int	i;
 
-	tmp = NULL;
 	pos = 0;
-	if (!(tmp = (int *)malloc(sizeof(int) * len)))
-		return (NULL);
-	while (ref++ < len)
+	i = 0;
+	tmp = 0;
+	while (i < len)
 	{
-		i = 0;
-		cpt = pc[i];
-		while (i++ < len)
-			if (pc[i] < cpt && pc[i] != -1)
+		pos = i + 1;
+		while (pos < len)
+		{
+			if (pc[i] > pc[pos])
 			{
-				pos = i;
-				cpt = pc[i];
+				tmp = pc[i];
+				pc[i] = pc[pos];
+				pc[pos] = tmp;
 			}
-		pc[pos] = -1;
-		tmp[ref] = cpt;
+			pos++;
+		}
+		i++;
 	}
-	free(pc);
-	return (tmp);
+	return (pc);
 }
-
-int				*set_array_pc(t_data *data)
+*/
+int				*set_array_pc(t_list *list_pc)
 {
 	t_list	*tmp;
 	int		*pc;
@@ -95,7 +123,7 @@ int				*set_array_pc(t_data *data)
 
 	pc = NULL;
 	i = 0;
-	tmp = data->begin;
+	tmp = list_pc;
 	while (tmp)
 	{
 		i++;
@@ -103,12 +131,12 @@ int				*set_array_pc(t_data *data)
 	}
 	if (!(pc = (int *)malloc(sizeof(int) * i)))
 		return (NULL);
+	tmp = list_pc;
 	i = 0;
-	tmp = data->begin;
 	while (tmp)
 	{
 		pc[i++] = tmp->pc;
 		tmp = tmp->next;
 	}
-	return (sort_array_pc(pc, i, 0, 0));
+	return (pc);
 }

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 12:40:36 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/27 12:24:44 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/03 18:39:14 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,35 @@ void	init_infos_box(t_data *data)
 		tmp = tmp->next;
 	}
 	set_live_infos(data);
+}
+
+void	display_pc(t_data *data, int i, int y, int x, int champ_id)
+{
+	attron(A_STANDOUT | COLOR_PAIR(champ_id));
+	mvwprintw(data->display->screen, y, x, "%.2hhx", data->display->mem[i]);
+	attroff(A_STANDOUT | COLOR_PAIR(champ_id));
+}
+
+void	display_classique(t_data *data, int i, int y, int x, int champ_id)
+{
+	if (champ_id != -1)
+		attron(COLOR_PAIR(champ_id));
+	mvwprintw(data->display->screen, y, x, "%.2hhx", data->display->mem[i]);
+	if (champ_id != -1)
+		attroff(COLOR_PAIR(champ_id));
+}
+
+void	delete_win(t_display *display)
+{
+	if (display->info)
+		delwin(display->info);
+	if (display->win)
+		delwin(display->win);
+	if (display->header)
+		delwin(display->header);
+	if (display->screen)
+		delwin(display->screen);
+	clear();
+	refresh();
+	endwin();
 }
