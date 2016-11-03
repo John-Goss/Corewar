@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/31 15:28:36 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/03 18:11:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct				s_list
 	int						live;
 	int						carry;
 	int						action_time;
-	int						reg_number[REG_NUMBER];
+	int						*reg_number;
 	int 					dir_by; //this is a flag which determines whether an instruction with a direct type parameter, holds the parameter in 4 or 2 bytes
     //1 will mean 2 bytes, while 0 will mean 4 bytes 
 

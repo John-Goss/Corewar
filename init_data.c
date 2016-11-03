@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/10/31 15:02:07 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/03 18:11:36 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 	{
 		if (!(begin = (t_list *)malloc(sizeof(t_list))))
 			return (NULL);
+		begin->reg_number = malloc(REG_NUMBER * sizeof(int));
 		ft_bzero((begin)->reg_number, REG_NUMBER);
 		(begin)->prev = NULL;
 		(begin)->next = NULL;
@@ -172,10 +173,12 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 		(begin)->carry = 0;
 		(begin)->process_nb = 0;
 		(begin)->action_time = 0;
+		(begin)->live = 0;
 		return (begin);
 	}
 	if (!((begin)->prev = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
+	(begin->prev)->reg_number = malloc(REG_NUMBER * sizeof(int));
 	ft_bzero((begin->prev)->reg_number, REG_NUMBER);
 	(begin)->prev->next = (begin);
 	(begin)->prev->prev = NULL;
@@ -184,6 +187,7 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 	(begin)->prev->carry = 0;
 	((begin)->prev->process_nb) = (begin->process_nb)++;
 	(begin)->prev->action_time = 0;
+	(begin)->prev->live = 0;
 	return (begin->prev);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:21:15 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/03 16:49:48 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/03 17:20:48 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/11/02 16:16:24 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -26,6 +26,7 @@ void		apply_live(t_data *data, t_list *elem)
 
 	elem->pc = ((elem->pc + 5) % MEM_SIZE) % IDX_MOD;
 	data->live_cpt++;
+	elem->live++;
 	while (desc)
 	{
 		if (desc->nb_champ && nb_champ && nb_champ == desc->nb_champ)
