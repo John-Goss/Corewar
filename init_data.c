@@ -164,8 +164,7 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 	{
 		if (!(begin = (t_list *)malloc(sizeof(t_list))))
 			return (NULL);
-		begin->reg_number = malloc(REG_NUMBER * sizeof(int));
-		ft_bzero((begin)->reg_number, REG_NUMBER);
+		begin->reg_number = ft_memalloc(REG_NUMBER * 4);
 		(begin)->prev = NULL;
 		(begin)->next = NULL;
 		(begin)->pc = 0;
