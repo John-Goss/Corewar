@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/10/31 15:29:38 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/03 16:23:44 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void		parse_map(int argc, char **argv, t_data *data)
 	data->nb_champ = argc - 1 - data->flag_visu;
 	if (i == argc)
 	{
-		ft_printf("\nNO CHAMPIONS\n");
+		ft_printf("NO CHAMPIONS\n");
 		exit(0);
 	}
 	while (i < argc)
@@ -122,7 +122,7 @@ void		parse_map(int argc, char **argv, t_data *data)
 		{
 			i++;
 			if (test_int(argv[i]))
-				exit(ft_printf("\nNumero de champion incorrect.\n"));
+				exit(ft_printf("Numero de champion incorrect.\n"));
 			nb = ft_atoi(argv[i]);
 			i++;
 		}
@@ -165,7 +165,7 @@ void		process_action(t_data *data, t_list *elem)
 	{
 		if (!(elem->action_time))
 			adjust_action_time(elem, data->map[elem->pc]);
-		else if (elem->action_time)
+		if (elem->action_time)
 		{
 			elem->action_time--;
 			if (!(elem->action_time))

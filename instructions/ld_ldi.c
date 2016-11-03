@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:27:31 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/02 17:04:57 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/03 16:43:18 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		apply_ldi(t_data *data, t_list *elem, unsigned int *param_types, unsigned 
     else if (param_types[1] == REG_CODE)
         value_two = elem->reg_number[params[1] - 1];
  	S = value_one + value_two;
-    elem->reg_number[params[2]] = get_reg_size_at_add(data, elem, S % IDX_MOD);//prm_pos is the position of the first address byte of the parameter to be searched
+    elem->reg_number[params[2] - 1] = get_reg_size_at_add(data, elem, S % IDX_MOD);//prm_pos is the position of the first address byte of the parameter to be searched
 }//{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
 //        "load index", 1, 1},
 
