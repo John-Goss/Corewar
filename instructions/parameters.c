@@ -169,11 +169,9 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
     i = octet_cod(data, elem);
     elem->dir_by = 0;
     elem->dir_by = two_or_four(data, elem);//determining whether the direct is on 2 or 4 bytes
-    if (!(params = (unsigned int *)malloc(sizeof(int) * 5)))
-        return (NULL);
+    params = ft_memalloc(20);
     while (par_types[k] != 0) //this loop checks the param types and fills the param array wtih the corresponding values in order
     {
-
 		if (par_types[k] == REG_CODE)
         {
             params[k] = data->map[(elem->pc + i) % MEM_SIZE]; //getting the register number, the value I still need to get out of the register in the process itself
