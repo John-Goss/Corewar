@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:21:15 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/03 17:20:48 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/03 18:29:31 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/11/02 16:16:24 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -24,7 +24,7 @@ void		apply_live(t_data *data, t_list *elem)
 	(data->map[(elem->pc + 3) % MEM_SIZE] << 8 & 0xff00) |
 	(data->map[(elem->pc + 4) % MEM_SIZE] & 0xff);
 
-	elem->pc = ((elem->pc + 5) % MEM_SIZE) % IDX_MOD;
+	elem->pc = ((elem->pc + 5) % MEM_SIZE);
 	data->live_cpt++;
 	elem->live++;
 	while (desc)
