@@ -72,7 +72,8 @@ void        instruction_exec(t_data *data, t_list *elem)
     if (opc == 0x0C || opc == 0x09 || opc == 0x01 || data->map[elem->pc] == 0x10)
     {
         instr_no_ocp(data, elem, params);
-        return ; //free all the shit first dude
+        elem->pc = (elem->pc + data->dep) % MEM_SIZE;
+        return ;
     }
     instr_w_ocp(data, elem, params, param_types);
     elem->pc = (elem->pc + data->dep) % MEM_SIZE;
