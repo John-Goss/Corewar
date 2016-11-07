@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/07 15:32:20 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/07 16:53:37 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/11/03 18:08:29 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -195,6 +195,14 @@ t_list		*destroy_elem(t_data *data,t_list *elem)
 	t_list *tmp;
 
 	tmp = elem->next;
+	if (elem->next == NULL)
+	{
+		if (elem->prev)
+			elem->prev->next = NULL;
+		free(elem);
+		data->begin = NULL;
+		return(NULL);
+	}
 	if (elem->prev)
 	{
 		tmp->prev = elem->prev;
@@ -206,6 +214,7 @@ t_list		*destroy_elem(t_data *data,t_list *elem)
 		if (data->begin)
 		{
 			data->begin->prev = NULL;
+			free(elem);
 			return(data->begin);
 		}
 		else
