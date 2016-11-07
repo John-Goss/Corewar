@@ -64,18 +64,24 @@ void        instruction_exec(t_data *data, t_list *elem)
     unsigned int *param_types;
     unsigned int *params;
     char opc; //DO NOT CONFUSE WITH OCP!!!
+    int elem_tmp;
 
+    elem_tmp = elem->pc;
     data->dep = 0;
     opc = data->map[(elem->pc) % MEM_SIZE];
-    param_types = det_types(data->map[(elem->pc + 1) % MEM_SIZE]);
+    param_types = det_types(data, elem, data->map[(elem->pc + 1) % MEM_SIZE]);
     params = get_params(param_types, data, elem);
     if (opc == 0x0C || opc == 0x09 || opc == 0x01 || data->map[elem->pc] == 0x10)
     {
         instr_no_ocp(data, elem, params);
-        elem->pc = (elem->pc + data->dep) % MEM_SIZE;
+        if (elem_tmp == elem->pc)
+            elem->pc = (elem->pc + data->dep) % MEM_SIZE;
         return ;
     }
     instr_w_ocp(data, elem, params, param_types);
+
+    //printf("testes---> %d\n", data->dep);
+
     elem->pc = (elem->pc + data->dep) % MEM_SIZE;
     free(params);
     free(param_types);

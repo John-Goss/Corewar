@@ -128,15 +128,57 @@ int                 two_or_four(t_data *data, t_list *elem)
     return (0); //provisionary
 }//this function compares the opc indicator in the list with all the opcs and then looks if the direct parameter is on two or four bytes
 
-unsigned int     *det_types(unsigned int parameter_types)
+
+
+
+
+int                 octet_cod_there(t_data *data, t_list *elem)
+{
+
+    if (data->map[elem->pc] == 0x02 || data->map[elem->pc] == 0x03 ||\
+        data->map[elem->pc] == 0x04 || data->map[elem->pc] == 0x05 || \
+        data->map[elem->pc] == 0x06 || data->map[elem->pc] == 0x07 || \
+        data->map[elem->pc] == 0x08 || data->map[elem->pc] == 0x0A || \
+        data->map[elem->pc] == 0x0B || data->map[elem->pc] == 0x0E || \
+        data->map[elem->pc] == 0x0D)
+        return (1);
+    else if (data->map[elem->pc] == 0x0C || data->map[elem->pc] == 0x01 ||\
+     data->map[elem->pc] == 0x09 || data->map[elem->pc] == 0x0F || \
+     data->map[elem->pc] == 0x10)
+        return (0);
+    return (0); //this is an error case
+}
+
+char            *get_par_types_no_ocp(t_data *data, t_list *elem)
+{
+    if (data->map[elem->pc] == 0x0C)
+        return(ft_strdup("10"));
+    else if (data->map[elem->pc] == 0x01)
+        return(ft_strdup("10"));
+    else if (data->map[elem->pc] == 0x09)
+        return(ft_strdup("10"));
+    else if (data->map[elem->pc] == 0x0F)
+        return(ft_strdup("10"));
+    else if (data->map[elem->pc] == 0x10)
+        return(ft_strdup("01"));
+    else
+        return (NULL);
+}
+
+unsigned int     *det_types(t_data *data, t_list *elem, unsigned int parameter_types)
 {
     char			*types_bin;
     unsigned int	*type_tab;
-
-    types_bin = conv_dec_to_bin(parameter_types);
-	types_bin = rev_str(types_bin); //figure out if we have to reverse it or not
     if ((!(type_tab = (unsigned int *)malloc(sizeof(unsigned int) * 5))))
         return (NULL);
+    if (octet_cod_there(data, elem) == 0)
+    {
+        types_bin = get_par_types_no_ocp(data, elem);
+        type_tab = type_tab_make(types_bin, type_tab);
+        return (type_tab);
+    }
+    types_bin = conv_dec_to_bin(parameter_types);
+	types_bin = rev_str(types_bin); //figure out if we have to reverse it or not
     type_tab = type_tab_make(types_bin, type_tab);
     return (type_tab);
 }//this function makes an int array with the parameter types of the instruction
@@ -167,6 +209,7 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
 
     k = 0;
     i = octet_cod(data, elem);
+
     elem->dir_by = 0;
     elem->dir_by = two_or_four(data, elem);//determining whether the direct is on 2 or 4 bytes
     params = ft_memalloc(20);
@@ -190,6 +233,7 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
         k++;
     }
     data->dep = i; //
+   // printf("\n%.2hhx\n%d\n\n", data->map[elem->pc] , i);
     return (params);//returns to instructions.c
 }// this function is self-explanatory, we're getting the parameters guys..
 

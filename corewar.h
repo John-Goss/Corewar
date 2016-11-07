@@ -196,7 +196,7 @@ void		apply_aff(t_data *data, t_list *elem, unsigned int* params );
 unsigned int	trans_two_bytes(char *transfer_bytes);
 char			*get_two_bytes(t_data *data, t_list *elem, int prm_pos);
 unsigned int	*get_params(unsigned int *par_types, t_data *data, t_list *elem);
-unsigned int	*det_types(unsigned int parameter_types);
+unsigned int	*det_types(t_data *data, t_list *elem, unsigned int parameter_types);
 
 
 /*
