@@ -16,18 +16,12 @@
 unsigned int                 trans_four_bytes(char *transfer_bytes)
 {
     unsigned int value;
-    int decal; 
-    int i;
 
-    i = 0;//index counter for the loop
-    decal = 24;
     value = 0;
-    while (i < DIR_SIZE)
-    {
-        value |= (transfer_bytes[i] << decal & 0xff);
-        decal = decal - 8;
-        i++;
-    }
+    value |= (transfer_bytes[0] << 24 & 0xff000000);
+    value |= (transfer_bytes[1] << 16 & 0xff0000);
+    value |= (transfer_bytes[2] << 8 & 0xff00);
+    value |= (transfer_bytes[3] << 0 & 0xff);
     return (value);
 }//this function takes four char bytes and puts them into an int using bit operators
 
@@ -48,8 +42,6 @@ char    *get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_pos
 	}
 	return (four_bytes);
 }//this function puts four bytes into a string for further conversion into an unsgned int
-
-
 
 //called from parameters.c
 unsigned int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched

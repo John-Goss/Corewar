@@ -15,20 +15,10 @@
 unsigned int                 trans_two_bytes(char *transfer_bytes)
 {
     unsigned int value;
-    int decal;
-    int i;
 
-    i = 0;//index counter for the loop
-    decal = 8;
     value = 0;
-  //    printf("(--TEST-->%d)\n", value);
-    while (i < IND_SIZE)// && transfer_bytes[i] != '\0')
-    {
-        value |= (transfer_bytes[i] << decal & 0xff);
-        decal = decal - 8;
-        i++;
-    //    printf("(--TEST-->%d)\n", value);
-    }
+    value |= (transfer_bytes[0] << 8 & 0xff00);
+    value |= (transfer_bytes[1] << 0 & 0xff);
     return (value);
 }//this function does the same as trans_four_bytes but with two bytes instead of four... obviously
 
@@ -47,10 +37,11 @@ char                   *get_two_bytes(t_data *data, t_list *elem, int prm_pos) /
     while (k < IND_SIZE)
     {
         two_bytes[k] = data->map[i % MEM_SIZE];
-	printf("%hhx   ",two_bytes[k]);
+	    printf("%hhx   ",two_bytes[k]);
         i++;
         k++;
     }
+    printf("\n\n");
 	return (two_bytes);
 }//this function puts four bytes into a string for further conversion into an unsgned int
 
@@ -58,7 +49,6 @@ unsigned int         get_ind_value(t_data *data, t_list *elem, int prm_pos)
 {
     unsigned int ind_value;
     char *transfer_bytes;
-
 
     ind_value = 0;
     transfer_bytes = get_two_bytes(data, elem, prm_pos); //getting the 2 indirect bytes into a string for transfer, into an int
