@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/03 18:39:28 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/07 13:30:48 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,6 @@ t_display		*get_dsp_struct_addr(t_display *dsp)
 	if (dsp)
 		tmp = dsp;
 	return (tmp);
-}
-
-int				champ_id(t_data *data, int index)
-{
-	t_desc	*tmp;
-	int		cpt;
-	int		w_1;
-
-	tmp = data->desc;
-	cpt = 0;
-	w_1 = 0;
-	return (-1);
 }
 
 int				nb_champ_pc(t_list *list, int value)

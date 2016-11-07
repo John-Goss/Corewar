@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/03 18:41:12 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/07 13:26:04 by jle-quer         ###   ########.fr       */
 /*   Updated: 2016/11/03 18:11:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -106,6 +106,7 @@ typedef struct				s_desc
 	char					*name;
 	char					*desc;
 	int						nb_champ;
+	int						pc;
 	unsigned int			size;
 	struct s_desc			*next;
 }							t_desc;
@@ -204,6 +205,7 @@ unsigned int	*det_types(unsigned int parameter_types);
 
 int							champ_id(t_data *data, int index);
 int							nb_champ_pc(t_list *list, int value);
+int							set_desc_pc(t_data *data);
 int							find_pc_pos(t_list *list, int *pc, int nb_champ, int value);
 int							*set_array_pc(t_list *list_pc);
 int							aff_window(t_data *data);

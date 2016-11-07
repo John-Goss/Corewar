@@ -4,6 +4,7 @@ SRC = corewar.c
 SRC += init_data.c
 SRC += testaff.c
 SRC += tools.c
+SRC += tools_2.c
 SRC += display_infos_box.c
 SRC += turn_by_slowmode.c
 SRC += instructions/add_and_sub.c
