@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 12:07:06 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/03 18:18:31 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/03 18:35:01 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void        apply_and(t_data *data,t_list *elem, unsigned int *params, unsigned 
         value_two = elem->reg_number[params[1]];
     else if (param_type[1] == DIR_CODE || param_type[1] == IND_CODE)
         value_two = params[1];
+		printf("TEST 0 %d\n", params[0]);
+		printf("TEST 1 %d\n", params[1]);
+		printf("TEST 2 %d\n", params[2]);
     elem->reg_number[params[2]] = value_one & value_two;//so now we got the two values which we need to stock
 }//the bit operation & is executed on the first two and then stored at the third which is a register
 
