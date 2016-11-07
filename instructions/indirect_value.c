@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:01 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/01 17:23:39 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/07 18:41:54 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char                   *get_two_bytes(t_data *data, t_list *elem, int prm_pos) /
     while (k < IND_SIZE)
     {
         two_bytes[k] = data->map[i % MEM_SIZE];
+	printf("%hhx   ",two_bytes[k]);
         i++;
         k++;
     }

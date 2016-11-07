@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:12:49 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/03 18:29:55 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/07 18:14:52 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void		apply_lld(t_data *data, t_list *elem, unsigned int *param_types, unsigned 
         elem->reg_number[params[1]] = get_ind_value(data, elem, params[0]);
     else if (param_types[0] == REG_CODE)
         elem->reg_number[params[1]] = elem->reg_number[params[0]];
+	if (!elem->carry)
+		elem->carry = 1;
+	else if (elem->carry)
+		elem->carry = 0;
 }
 
 void		apply_lldi(t_data *data, t_list *elem, unsigned int *param_types, unsigned int *params) //addresses not relative to IDX
@@ -42,5 +46,9 @@ void		apply_lldi(t_data *data, t_list *elem, unsigned int *param_types, unsigned
         value_two = elem->reg_number[params[1]];
     store = get_ind_value(data, elem, (value_one + value_two));
     elem->reg_number[params[2]] = store;
+	if (!elem->carry)
+		elem->carry = 1;
+	else if (elem->carry)
+		elem->carry = 0;
     //figure out carry modification
 }

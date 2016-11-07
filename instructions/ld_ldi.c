@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:27:31 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/03 18:30:18 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/07 18:12:27 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ void        apply_ld(t_data *data, t_list *elem, unsigned int *params, unsigned 
     if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
     {
         elem->reg_number[params[1]] = params[0];// param[0] is the first parameter
-        elem->carry = 1;
-    }
+		if (elem->carry)
+			elem->carry = 0;
+		else if (!elem->carry)
+			elem->carry = 1;
+	}
     else
         return ; //I don't think the carry needs to be modified here because in this case the instruction wouldn't have been executed
     //modify carry
