@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/07 13:26:04 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/08 14:38:05 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/11/03 18:11:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -122,7 +122,7 @@ typedef struct				s_display
 
 typedef struct				s_data
 {
-	void					(*tab[17])(struct s_data *data, t_list *elem);
+	int						flag_dump;
 	int						flag_slowmode;
 	int						flag_visu;
 	int						cycle;

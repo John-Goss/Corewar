@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/03 18:11:36 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/08 15:02:56 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,19 +194,28 @@ int			check_flag(int argc, char **argv, t_data *data)
 {
 	int	i;
 
-/*
- * j'ai l'impression que tu t'est gourer dans ta fonction et que tu voulais mettre
- * av[i] plutot que av[1] ? dans le doute je touche a rien ^^
- *
- * C'etait une erreur effectivement, la fonction a ete faite dans le cas ou on aurait
- * rajouter des autres flags, pour le moment je la laisse;;
- */
 	i = 1;
 	while (i < argc)
 	{
-		if (!strcmp(argv[i], "-v"))
+		if (!ft_strcmp(argv[i], "-v"))
 			data->flag_visu = 1;
+		if (!ft_strcmp(argv[i], "-dump"))
+		{
+			i++;
+			if (!test_int(argv[i]))
+				data->flag_dump = ft_atoi(argv[i]);
+			else
+			{
+				ft_printf("Incorrect value for dump\n");
+				exit(0);
+			}
+		}
 		i++;
+	}
+	if (data->flag_visu && data->flag_dump > -1)
+	{
+		ft_printf("Too many flags\n");
+		exit(0);
 	}
 	return (0);
 }
@@ -216,6 +225,7 @@ void		init_structur(t_data *data)
 	int		i;
 
 	i = 0;
+	data->flag_dump = -1;
 	data->last_live_nb_champ = 0;
 	ft_bzero(data->map, MEM_SIZE - 1);
 	data->flag_slowmode = 0;

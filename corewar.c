@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/08 12:40:52 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/08 15:08:27 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/11/03 18:08:29 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -24,10 +24,10 @@ void		end(t_data *data)
 	{
 		while (elem && elem->nb_champ != data->last_live_nb_champ)
 			elem = elem->next;
-		ft_printf("\nLe joueur %d (%s) a gagne\n", elem->nb_champ, elem->name);
+		ft_printf("Le joueur %d (%s) a gagne\n", elem->nb_champ, elem->name);
 	}
 	else
-		exit(write(1, "\nAucun live n'a ete fait\n", 24));
+		exit(write(1, "Aucun live n'a ete fait\n", 24));
 }
 
 int			main(int argc, char **argv)
@@ -112,6 +112,11 @@ void		parse_map(int argc, char **argv, t_data *data)
 	nb = 0;
 	i = 1 + data->flag_visu;
 	data->nb_champ = argc - 1 - data->flag_visu;
+	if (data->flag_dump >= 0)
+	{
+		data->nb_champ -= 2;
+		i += 2;
+	}
 	if (i == argc)
 	{
 		ft_printf("NO CHAMPIONS\n");
