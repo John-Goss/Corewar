@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:21:15 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/07 18:33:21 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/08 12:02:53 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/11/02 16:16:24 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -44,8 +44,5 @@ void		apply_live(t_data *data, t_list *elem)
 void		apply_zjmp(t_data *data, t_list *elem, unsigned int *params)
 {
 	if (elem->carry == 1)
-	{
-		printf("jump = %d\n", params[0]);
-		elem->pc = (elem->pc + (params[0] % MEM_SIZE) % IDX_MOD);
-	}
+		elem->pc = ((elem->pc + params[0]) % IDX_MOD);
 }

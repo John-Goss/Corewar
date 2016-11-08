@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/07 16:53:37 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/08 12:40:52 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/11/03 18:08:29 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -125,6 +125,7 @@ void		parse_map(int argc, char **argv, t_data *data)
 			if (test_int(argv[i]))
 				exit(ft_printf("Numero de champion incorrect.\n"));
 			nb = ft_atoi(argv[i]);
+			data->nb_champ -= 2;
 			i++;
 		}
 		recup_champ(data, argv, i++, nb);

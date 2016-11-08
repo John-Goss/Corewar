@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 14:54:39 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/07 13:42:46 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/08 13:14:20 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,24 @@ static void			sigkill(int code)
 static void			init_pair_by_id(t_data *data)
 {
 	int		cpt;
+	int		i;
 	t_desc	*tmp;
 
 	cpt = 0;
 	tmp = data->desc;
 	while (cpt < data->nb_champ)
 	{
+		i = tmp->nb_champ;
+		if (i < 0)
+			i = -i;
 		if (cpt == 0)
-			init_pair(tmp->nb_champ, COLOR_RED, COLOR_BLACK);
+			init_pair(i % 255, COLOR_RED, COLOR_BLACK);
 		else if (cpt == 1)
-			init_pair(tmp->nb_champ, COLOR_BLUE, COLOR_BLACK);
+			init_pair(i % 255, COLOR_BLUE, COLOR_BLACK);
 		else if (cpt == 2)
-			init_pair(tmp->nb_champ, COLOR_GREEN, COLOR_BLACK);
+			init_pair(i % 255, COLOR_GREEN, COLOR_BLACK);
 		else if (cpt == 3)
-			init_pair(tmp->nb_champ, COLOR_YELLOW, COLOR_BLACK);
+			init_pair(i % 255, COLOR_YELLOW, COLOR_BLACK);
 		tmp = tmp->next;
 		cpt++;
 	}
