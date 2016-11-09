@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/19 16:27:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/08 15:02:56 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/09 17:09:03 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 		(begin)->process_nb = 0;
 		(begin)->action_time = 0;
 		(begin)->live = 0;
+		begin->nb_champ = champ_nb;
 		return (begin);
 	}
 	if (!((begin)->prev = (t_list *)malloc(sizeof(t_list))))
@@ -184,9 +185,10 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 	(begin)->prev->pc = pc;
 	(begin)->prev->reg_number[0] = champ_nb;
 	(begin)->prev->carry = 0;
-	((begin)->prev->process_nb) = (begin->process_nb)++;
+	((begin)->prev->process_nb) = (begin->process_nb) + 1;
 	(begin)->prev->action_time = 0;
 	(begin)->prev->live = 0;
+	begin->prev->nb_champ = champ_nb;
 	return (begin->prev);
 }
 
