@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:20:57 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/10 17:31:43 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/10 19:19:44 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void      apply_fork(t_data *data, t_list *elem, unsigned int *params)// I need 
 {
 //	printf("%d", (elem->pc + params[0]));
 //	exit(0);
-	data->begin = copy_elem(data->begin, elem, (elem->pc + params[0])
-			% IDX_MOD);
+	data->begin = copy_elem(data->begin, elem, ((elem->pc - (elem->pc % IDX_MOD))
+			+ (elem->pc + params[0]) % IDX_MOD) % MEM_SIZE);
 //	data->begin = create_elem(data->begin, elem->reg_number[0], elem->pc +
 //			(data->map[(elem->pc + 1) % IDX_MOD]));
 	elem->pc = (elem->pc + 3) % MEM_SIZE;
@@ -57,7 +57,7 @@ void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
 {
 	char	c;
 
-	c = (elem->reg_number[data->map[elem->pc + 2]])  % 256;
+	c = (elem->reg_number[data->map[elem->pc + 2]]) % 256;
 	ft_printf("%c", c);
 	elem->pc += 3;
 }

@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:12:34 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/09 14:32:19 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:58:41 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		apply_sti(t_data *data, t_list *elem, unsigned int *param_types, unsigned 
 void        apply_st(t_data *data, t_list *elem, unsigned int *params, unsigned int *param_types)
 {
     if (param_types[1] == IND_CODE)//go to the address (PC plus value) and store first value
-		put_in_bytes(data, elem, (params[1] - elem->pc) % IDX_MOD, elem->reg_number[params[0] - 1]);
+		put_in_bytes(data, elem, (params[1] - elem->pc) % IDX_MOD, elem->reg_number[params[0]]);
 //        data->map[(params[1] % IDX_MOD) % MEM_SIZE] =  elem->reg_number[params[0]]; //value to copy into the other place
     else if (param_types[1] == REG_CODE)//put the value to be copied into the register
         elem->reg_number[params[1]] = elem->reg_number[params[0]]; //value to copy into the other place
