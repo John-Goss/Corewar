@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:20:57 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/09 17:21:44 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/10 17:31:43 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,24 @@ t_list *copy_elem(t_list *begin, t_list *elem, int pc)
 	return (begin->prev);
 }
 
-void		apply_lfork(t_data *data, t_list *elem)// I need param
+void		apply_lfork(t_data *data, t_list *elem, unsigned int *params)// I need param
 {
-//	data->begin = copy_elem(data->begin, elem, elem->pc +
-//			(params[0] % MEM_SIZE));
-	data->begin = create_elem(data->begin, elem->reg_number[0], elem->pc +
-			(data->map[(elem->pc + 1) % MEM_SIZE]));
+	data->begin = copy_elem(data->begin, elem, elem->pc + params[0] % MEM_SIZE);
+//	data->begin = create_elem(data->begin, elem->reg_number[0], elem->pc +
+//			(data->map[(elem->pc + 1) % MEM_SIZE]));
 	elem->pc = (elem->pc + 3) % MEM_SIZE;
 }
 
-void      apply_fork(t_data *data, t_list *elem)// I need param too
+void      apply_fork(t_data *data, t_list *elem, unsigned int *params)// I need param too
 {
-//	data->begin = copy_elem(data->begin, elem, elem->pc +
-//			(params[0] % IDX_MOD));
-	data->begin = create_elem(data->begin, elem->reg_number[0], elem->pc +
-			(data->map[(elem->pc + 1) % IDX_MOD]));
+//	printf("%d", (elem->pc + params[0]));
+//	exit(0);
+	data->begin = copy_elem(data->begin, elem, (elem->pc + params[0])
+			% IDX_MOD);
+//	data->begin = create_elem(data->begin, elem->reg_number[0], elem->pc +
+//			(data->map[(elem->pc + 1) % IDX_MOD]));
 	elem->pc = (elem->pc + 3) % MEM_SIZE;
 }
-
 
 void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
 {

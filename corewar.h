@@ -187,10 +187,10 @@ void		apply_xor(t_data *data, t_list *elem, unsigned int* params , unsigned int 
 void		apply_zjmp(t_data *data, t_list *elem, unsigned int* params );
 void		apply_ldi(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
 void		apply_sti(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
-void		apply_fork(t_data *data, t_list *elem);
+void		apply_fork(t_data *data, t_list *elem, unsigned int *params);
 void		apply_lld(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
 void		apply_lldi(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
-void		apply_lfork(t_data *data, t_list *elem);
+void		apply_lfork(t_data *data, t_list *elem, unsigned int *params);
 void		apply_aff(t_data *data, t_list *elem, unsigned int* params );
 
 
