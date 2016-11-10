@@ -21,13 +21,13 @@
 void        instr_no_ocp(t_data *data, t_list *elem, unsigned int *params)
 {
     if (data->map[elem->pc] == 0x0C)  
-        apply_fork(data, elem);
+        apply_fork(data, elem, params);
     else if (data->map[elem->pc] == 0x01)
        apply_live(data, elem);   
     else if (data->map[elem->pc] == 0x09)
         apply_zjmp(data, elem, params);
     else if (data->map[elem->pc] == 0x0F)
-        apply_lfork(data, elem);
+        apply_lfork(data, elem, params);
     else if (data->map[elem->pc] == 0x10)
         apply_aff(data, elem, params);
 }

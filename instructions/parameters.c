@@ -128,10 +128,6 @@ int                 two_or_four(t_data *data, t_list *elem)
     return (0); //provisionary
 }//this function compares the opc indicator in the list with all the opcs and then looks if the direct parameter is on two or four bytes
 
-
-
-
-
 int                 octet_cod_there(t_data *data, t_list *elem)
 {
 
