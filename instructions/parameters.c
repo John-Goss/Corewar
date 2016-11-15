@@ -213,7 +213,7 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
     {
 		if (par_types[k] == REG_CODE)
         {
-            params[k] = (data->map[(elem->pc + i) % MEM_SIZE]) - 1; //getting the register number, the value I still need to get out of the register in the process itself
+            params[k] = (data->map[(elem->pc + i) % MEM_SIZE]); //getting the register number, the value I still need to get out of the register in the process itself
             if ((data->map[(elem->pc + i) % MEM_SIZE]) > 16)
                 params[k] = 42; //42 means that it's an error and weo don't excute the instruction
             i = i + 1;
