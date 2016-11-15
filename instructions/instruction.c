@@ -67,6 +67,9 @@ int protect_registers(unsigned int *params, unsigned int *param_types)
     k = 0;
     while (param_types[k])
     {
+
+    if (param_types[k] == REG_CODE)
+        params[k] = params[k] -1;
        // if (param_types[k] == REG_CODE && params[k] > 0 && params[k] != 42)
        //     params[k] = params[k] - 1;
         if (param_types[k] == REG_CODE && params[k] > 16)
