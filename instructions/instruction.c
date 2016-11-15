@@ -69,7 +69,7 @@ int protect_registers(unsigned int *params, unsigned int *param_types)
     {
        // if (param_types[k] == REG_CODE && params[k] > 0 && params[k] != 42)
        //     params[k] = params[k] - 1;
-        if (param_types[k] == REG_CODE && params[k] == 42)
+        if (param_types[k] == REG_CODE && params[k] > 16)
             return (0); //0 implies error case. move the PC but don't execute the instruction
         k++;
     }
@@ -92,8 +92,6 @@ void        instruction_exec(t_data *data, t_list *elem)
     if (protect_registers(params, param_types) == 0)
     {
         elem->pc = (elem->pc + data->dep) % MEM_SIZE;
-        free(params);
-        free(param_types);
         return ;
     }
     if (opc == 0x0C || opc == 0x09 || opc == 0x01 || data->map[elem->pc] == 0x10)
@@ -105,6 +103,4 @@ void        instruction_exec(t_data *data, t_list *elem)
     }
     instr_w_ocp(data, elem, params, param_types);
     elem->pc = (elem->pc + data->dep) % MEM_SIZE;
-    free(params);
-    free(param_types);
 }
