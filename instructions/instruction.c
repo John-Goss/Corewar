@@ -59,6 +59,22 @@ void         instr_w_ocp(t_data *data, t_list *elem, unsigned int *params, unsig
         apply_lld(data, elem, param_types, params);
 }
 
+
+int protect_registers(unsigned int *params, unsigned int *param_types)
+{
+    int k;
+
+    k = 0;
+    while (param_types[k])
+    {
+        if (param_types[k] == REG_CODE && params[k] == 42)
+            return (0); //0 implies error case. move the PC but don't execute the instruction
+        k++;
+    }
+    return (1); //means either no registers have been found, or no registers have been marked as an error. C'est bon
+}//goes through the params array and sees if it's a register. if yes then it will chck if its value is 42    
+
+
 void        instruction_exec(t_data *data, t_list *elem)
 {
     unsigned int *param_types;
@@ -71,6 +87,13 @@ void        instruction_exec(t_data *data, t_list *elem)
     opc = data->map[(elem->pc) % MEM_SIZE];
     param_types = det_types(data, elem, data->map[(elem->pc + 1) % MEM_SIZE]);
     params = get_params(param_types, data, elem);
+    if (protect_registers(params, param_types) == 0)
+    {
+        elem->pc = (elem->pc + data->dep) % MEM_SIZE;
+        free(params);
+        free(param_types);
+        return ;
+    }
     if (opc == 0x0C || opc == 0x09 || opc == 0x01 || data->map[elem->pc] == 0x10)
     {
         instr_no_ocp(data, elem, params);
@@ -79,9 +102,6 @@ void        instruction_exec(t_data *data, t_list *elem)
         return ;
     }
     instr_w_ocp(data, elem, params, param_types);
-
-    //printf("testes---> %d\n", data->dep);
-
     elem->pc = (elem->pc + data->dep) % MEM_SIZE;
     free(params);
     free(param_types);
