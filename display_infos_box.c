@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 12:40:36 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/08 13:14:12 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/16 15:50:02 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		set_live_infos(t_data *data)
 	mvprintw(35, 195, "----------------------------");
 	mvprintw(40, 196, "Cycle To Die : %d", data->cycle_to_die);
 	mvprintw(43, 196, "Cycle : %d", data->cycle);
-	mvprintw(46, 196, "Exe Process : %d", data->begin->process_nb);
+	mvprintw(46, 196, "Exe Process : %d", data->begin->process_nb + 1);
 	mvprintw(52, 196, "Total Live : %d", data->live_cpt);
 	mvprintw(55, 196, "Last Champ ID Live : %d", data->last_live_nb_champ);
 	if (data->flag_slowmode == 1)
@@ -43,7 +43,7 @@ void	init_infos_box(t_data *data)
 	wrefresh(data->display->info);
 	refresh();
 	attron(A_UNDERLINE);
-	mvprintw(16, 196 + 13/2, "Infos Players");
+	mvprintw(16, 196 + 13 / 2, "Infos Players");
 	attroff(A_UNDERLINE);
 	refresh();
 	while (tmp)
@@ -57,24 +57,26 @@ void	init_infos_box(t_data *data)
 	set_live_infos(data);
 }
 
-void	display_pc(t_data *data, int i, int y, int x, int champ_id)
+void	display_pc(t_data *data, int i, int *x_y, int champ_id)
 {
 	if (champ_id < 0)
 		champ_id = -champ_id;
 	champ_id %= 255;
 	attron(A_STANDOUT | COLOR_PAIR(champ_id));
-	mvwprintw(data->display->screen, y, x, "%.2hhx", data->display->mem[i]);
+	mvwprintw(data->display->screen, x_y[1], x_y[0], "%.2hhx",
+			data->display->mem[i]);
 	attroff(A_STANDOUT | COLOR_PAIR(champ_id));
 }
 
-void	display_classique(t_data *data, int i, int y, int x, int champ_id)
+void	display_classique(t_data *data, int i, int *x_y, int champ_id)
 {
 	if (champ_id < 0 && champ_id != -1)
 		champ_id = -champ_id;
 	champ_id %= 255;
 	if (champ_id != -1)
 		attron(COLOR_PAIR(champ_id));
-	mvwprintw(data->display->screen, y, x, "%.2hhx", data->display->mem[i]);
+	mvwprintw(data->display->screen, x_y[1], x_y[0], "%.2hhx",
+			data->display->mem[i]);
 	if (champ_id != -1)
 		attroff(COLOR_PAIR(champ_id));
 }

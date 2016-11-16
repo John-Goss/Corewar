@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/09 16:51:34 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/16 15:48:27 by jle-quer         ###   ########.fr       */
 /*   Updated: 2016/11/03 18:11:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -210,8 +210,8 @@ int							set_desc_pc(t_data *data);
 int							find_pc_pos(t_list *list, int *pc, int nb_champ, int value);
 int							*set_array_pc(t_list *list_pc);
 int							aff_window(t_data *data);
-void						display_pc(t_data *data, int i, int y, int x, int champ_id);
-void						display_classique(t_data *data, int i, int y, int x, int champ_id);
+void						display_pc(t_data *data, int i, int *x_y, int champ_id);
+void						display_classique(t_data *data, int i, int *x_y, int champ_id);
 void						init_infos_box(t_data *data);
 int							set_live_infos(t_data *data);
 t_display					*get_dsp_struct_addr(t_display *dsp);
