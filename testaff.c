@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 14:54:39 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/08 13:14:20 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/16 15:47:58 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,29 +73,28 @@ static void			create_win(t_data *data, t_display *display)
 void			print_str(t_data *data)
 {
 	int	i;
-	int	x;
-	int	y;
+	int	x_y[2];
 	int	*pc;
 	int	nb_champ;
 
 	pc = NULL;
 	i = 0;
-	x = 1;
-	y = 16;
+	x_y[0] = 1;
+	x_y[1] = 16;
 	pc = set_array_pc(data->begin);
-	while (y < 80)
+	while (x_y[1] < 80)
 	{
-		while (x < 192)
+		while (x_y[0] < 192)
 		{
 			if ((nb_champ = find_pc_pos(data->begin, pc, data->nb_champ, i)) != -1)
-				display_pc(data, i, y, x, nb_champ);
+				display_pc(data, i, x_y, nb_champ);
 			else
-				display_classique(data, i, y, x, champ_id(data, i));
-			x += 3;
+				display_classique(data, i, x_y, champ_id(data, i));
+			x_y[0] += 3;
 			i++;
 		}
-		y++;
-		x = 1;
+		x_y[1]++;
+		x_y[0] = 1;
 	}
 	init_infos_box(data);
 }
