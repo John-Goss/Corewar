@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/07 13:30:48 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/16 17:21:33 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				nb_champ_pc(t_list *list, int value)
 	while (tmp)
 	{
 		if (tmp->pc == value)
-			return (tmp->reg_number[0]); // NE PAS LAISSER SUR REG_NUMBER A PASSER SUR begin->pid !!!
+			return (tmp->nb_champ); // NE PAS LAISSER SUR REG_NUMBER A PASSER SUR begin->pid !!!
 		tmp = tmp->next;
 	}
 	return (-1);
@@ -75,34 +75,7 @@ int				find_pc_pos(t_list *list, int *pc, int nb_champ, int value)
 	}
 	return (-1);
 }
-/*
-static int		*sort_array_pc(int *pc, int len, int ref, int cpt)
-{
-	int	tmp;
-	int	pos;
-	int	i;
 
-	pos = 0;
-	i = 0;
-	tmp = 0;
-	while (i < len)
-	{
-		pos = i + 1;
-		while (pos < len)
-		{
-			if (pc[i] > pc[pos])
-			{
-				tmp = pc[i];
-				pc[i] = pc[pos];
-				pc[pos] = tmp;
-			}
-			pos++;
-		}
-		i++;
-	}
-	return (pc);
-}
-*/
 int				*set_array_pc(t_list *list_pc)
 {
 	t_list	*tmp;

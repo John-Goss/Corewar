@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 12:45:29 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/07 13:56:00 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/16 17:13:37 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	set_desc_pc(t_data *data)
 		tmp->pc = -1;
 		while (tmp->pc == -1)
 		{
-			if (tmp->nb_champ == ptr->reg_number[0])
+			if (tmp->nb_champ == ptr->nb_champ)
 				tmp->pc = ptr->pc;
 			ptr = ptr->next;
 		}
