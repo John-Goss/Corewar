@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/16 16:49:49 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/16 17:13:24 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/11/03 18:08:29 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -94,7 +94,7 @@ void		recup_champ(t_data *data, char **argv, int i, int nb)
 		n++;
 	}
 	if (n > MEM_SIZE)
-		exit(write(1, "Taille champion incorrecte\n", 27));
+		exit(write(1, "Taille champion trop grande\n", 27));
 	size[1] = n - size[1];
 	if (size[0] != size[1])
 		exit(write(1, "Taille indiquee incorrecte\n", 27));
@@ -103,6 +103,20 @@ void		recup_champ(t_data *data, char **argv, int i, int nb)
 	n = (n / (MEM_SIZE / data->nb_champ) + 1) * (MEM_SIZE / data->nb_champ);
 }
 
+void			is_number_set(int argc, char **argv, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < argc)
+	{
+		if (!(ft_strcmp(argv[i], "-n")))
+			data->nb_champ -= 1;
+			if (!(test_int(argv[i])))
+			data->nb_champ -= 1;
+		i++;
+	}
+}
 
 void		parse_map(int argc, char **argv, t_data *data)
 {
@@ -112,6 +126,7 @@ void		parse_map(int argc, char **argv, t_data *data)
 	nb = 0;
 	i = 1 + data->flag_visu;
 	data->nb_champ = argc - 1 - data->flag_visu;
+	is_number_set(argc, argv, data);
 	if (data->flag_dump >= 0)
 	{
 		data->nb_champ -= 2;
@@ -130,7 +145,6 @@ void		parse_map(int argc, char **argv, t_data *data)
 			if (test_int(argv[i]))
 				exit(ft_printf("Numero de champion incorrect.\n"));
 			nb = ft_atoi(argv[i]);
-			data->nb_champ -= 2;
 			i++;
 		}
 		recup_champ(data, argv, i++, nb);
