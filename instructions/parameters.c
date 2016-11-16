@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:35 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/02 15:51:52 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/16 14:41:03 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,19 +93,19 @@ unsigned int     *type_tab_make(char *types_bin, unsigned  int *type_tab)
     i = 0;
     ty = 0;
     para_bi = ft_strnew(2);
-    while (types_bin[i] != '\0')
+	while (types_bin && types_bin[i])
     {
         k = 0;
         while (k <= 1)
         {
             para_bi[k] = types_bin[i];
-            i++;
+			i++;
             k++;
         }
         type_tab[ty] = extr_typ_from_bin(para_bi);
         ty++;
     }
-    ft_strdel(&para_bi);
+    free(para_bi);
     return (type_tab);
 }//this function extracts the parameter types out of the given binary
     //and puts it 
@@ -232,4 +232,3 @@ unsigned int         *get_params(unsigned int *par_types, t_data *data, t_list *
    // printf("\n%.2hhx\n%d\n\n", data->map[elem->pc] , i);
     return (params);//returns to instructions.c
 }// this function is self-explanatory, we're getting the parameters guys..
-

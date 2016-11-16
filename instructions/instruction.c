@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 12:01:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/01 16:41:48 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/16 14:31:28 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,9 @@ void        instruction_exec(t_data *data, t_list *elem)
     opc = data->map[(elem->pc) % MEM_SIZE];
     param_types = det_types(data, elem, data->map[(elem->pc + 1) % MEM_SIZE]);
     params = get_params(param_types, data, elem);
-    if (protect_registers(params, param_types) == 0)
+	if (param_types[0] == -1)
+		return ;
+	if (protect_registers(params, param_types) == 0)
     {
         elem->pc = (elem->pc + data->dep) % MEM_SIZE;
         return ;
