@@ -1,7 +1,10 @@
 NAME = corewar
 
 SRC = corewar.c
+SRC += parsing.c
+SRC += end.c
 SRC += init_data.c
+SRC += create_list.c
 SRC += testaff.c
 SRC += tools.c
 SRC += tools_2.c
