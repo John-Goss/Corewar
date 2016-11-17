@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:49:58 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/16 16:50:38 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/17 14:56:06 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ void	dump_map(t_data *data)
 	while (j < MEM_SIZE)
 	{
 		while (i++ < 32)
-			ft_printf("%.2hhx ", data->map[j++]);
+		{
+			if (j == (MEM_SIZE - 1))
+				ft_printf("%.2hhx", data->map[j++]);
+			else
+				ft_printf("%.2hhx ", data->map[j++]);
+		}
 		i = 0;
 		ft_printf("\n");
 	}
@@ -42,17 +47,17 @@ int		turn_by_slowmode(t_data *data)
 			werase(data->display->win);
 			print_str(data);
 			turn(data);
-			(data->cycle)++;
 			if ((--(data->cycle_to_die)) <= 0)
 				if (verif_end(data) == 1)
 					break ;
 			init_infos_box(data);
+			(data->cycle)++;
 		}
 	}
 	return (0);
 }
 
-int	turn_by_none(t_data *data)
+int		turn_by_none(t_data *data)
 {
 	while (42)
 	{
@@ -64,12 +69,12 @@ int	turn_by_none(t_data *data)
 		turn(data);
 		if (!(data->flag_dump--))
 			dump_map(data);
-		(data->cycle)++;
 		if ((--(data->cycle_to_die)) <= 0)
 			if (verif_end(data) == 1)
 				break ;
 		if (data->flag_visu == 1)
 			init_infos_box(data);
+		(data->cycle)++;
 	}
 	return (0);
 }

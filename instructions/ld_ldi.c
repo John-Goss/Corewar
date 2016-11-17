@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:27:31 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/17 13:30:25 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/17 14:38:40 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,13 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 		value_two = elem->reg_number[params[1]];
 	S = value_one + value_two;
 	elem->reg_number[params[2]] = get_reg_size_at_add(data, elem, S % IDX_MOD);//prm_pos is the position of the first address byte of the parameter to be searched
-}//{"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,
-//        "load index", 1, 1},
+}
 
 void	apply_ld(t_data *data, t_list *elem, unsigned int *params, unsigned int *param_type)
 {
 	//value of first parameter into register
-	DEBUGG;
-	dprintf(open("/dev/ttys003", 1), "Param_type [%d] - DIR_CODE == [%d] - IND_CODE == [%d]\n\n", param_type[0], DIR_CODE, IND_CODE);
 	if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
 	{
-		DEBUGG;
-		dprintf(open("/dev/ttys003", 1), "Charged Value [%d] - reg number index [%d]\n\n", params[0], params[1]);
 		elem->reg_number[params[1]] = params[0];// param[0] is the first parameter
 		if (elem->carry)
 			elem->carry = 0;
