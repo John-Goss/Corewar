@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 12:40:36 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/16 17:19:20 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/17 18:39:41 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,21 @@ void	init_infos_box(t_data *data)
 	set_live_infos(data);
 }
 
+void	display_clear_pc(t_data *data, int i, int *x_y, int champ_id)
+{
+	if (champ_id < 0)
+		champ_id = -(champ_id);
+	champ_id %= 255;
+	attron(COLOR_PAIR(champ_id));
+	mvwprintw(data->display->screen, x_y[1], x_y[0], "%.2hhx",
+			data->display->mem[i]);
+	attroff(COLOR_PAIR(champ_id));
+}
+
 void	display_pc(t_data *data, int i, int *x_y, int champ_id)
 {
 	if (champ_id < 0)
-		champ_id = -champ_id;
+		champ_id = -(champ_id);
 	champ_id %= 255;
 	attron(A_STANDOUT | COLOR_PAIR(champ_id));
 	mvwprintw(data->display->screen, x_y[1], x_y[0], "%.2hhx",
