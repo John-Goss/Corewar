@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/15 12:56:03 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/17 14:39:26 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/17 15:21:57 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/11/03 18:08:29 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -111,9 +111,11 @@ void			is_number_set(int argc, char **argv, t_data *data)
 	while (i < argc)
 	{
 		if (!(ft_strcmp(argv[i], "-n")))
+		{
 			data->nb_champ -= 1;
 			if (!(test_int(argv[i])))
 			data->nb_champ -= 1;
+		}
 		i++;
 	}
 }
