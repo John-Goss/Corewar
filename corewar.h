@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/16 15:48:27 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/17 12:31:00 by jle-quer         ###   ########.fr       */
 /*   Updated: 2016/11/03 18:11:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
  * ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
  * */
 
-#define DEBUGG printf("\nDEBUG - File: %s - Line : %d\n", __FILE__, __LINE__)
+#define DEBUGG dprintf(open("/dev/ttys003", 1), "\nDEBUG - File: %s - Line : %d\n", __FILE__, __LINE__)
 
 #define IND_SIZE			2
 #define REG_SIZE			4

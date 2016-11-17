@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 12:01:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/16 15:26:44 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/17 12:51:30 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void         instr_w_ocp(t_data *data, t_list *elem, unsigned int *params, unsig
 {
 
     if (data->map[elem->pc] == 0x02)
-        apply_ld(data, elem, params, param_types);
+		apply_ld(data, elem, params, param_types);
     else if (data->map[elem->pc] == 0x03)
         apply_st(data, elem, params, param_types);
     else if (data->map[elem->pc] == 0x04)
