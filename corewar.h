@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/17 12:31:00 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/17 16:54:20 by lbaudran         ###   ########.fr       */
 /*   Updated: 2016/11/03 18:11:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -164,6 +164,7 @@ WINDOW						*get_win_addr(WINDOW *window);
 
 t_list						*create_elem(t_list *begin, int champ_nb, int pc);
 t_desc						*create_desc(t_desc **desc, int nb);
+void						end(t_data *data);
 
 /*
  *	PROTOTYPE INSTRUCTIONS
@@ -199,6 +200,10 @@ char			*get_two_bytes(t_data *data, t_list *elem, int prm_pos);
 unsigned int	*get_params(unsigned int *par_types, t_data *data, t_list *elem);
 unsigned int	*det_types(t_data *data, t_list *elem, unsigned int parameter_types);
 
+
+void			init_tab(int *tab);
+int				is_used(int nb, int *tab);
+int				find_first_nb(int *tab);
 
 /*
  * PROTOTYPE DISPLAY
