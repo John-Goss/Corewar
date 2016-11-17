@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:49:58 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/17 14:56:06 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/17 17:07:35 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	dump_map(t_data *data)
 
 int		turn_by_slowmode(t_data *data)
 {
-	int	keycode;
+	int			keycode;
 
 	keycode = 0;
 	while (42)

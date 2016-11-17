@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:12:34 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/17 13:45:26 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/17 17:06:24 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 void	put_in_bytes(t_data *data,t_list *elem, int address, int reg_value)
 {
 	char	byte_array[4];
+	int		i;
+	int		c;
 
+	i = 1;
+	c = 0;
 	byte_array[0] = (reg_value >> 24) & 0xFF;
 	byte_array[1] = (reg_value >> 16) & 0xFF;
 	byte_array[2] = (reg_value >> 8) & 0xFF;
@@ -24,6 +28,8 @@ void	put_in_bytes(t_data *data,t_list *elem, int address, int reg_value)
 	data->map[(elem->pc + ((address + 1) % IDX_MOD))] = byte_array[1];
 	data->map[(elem->pc + ((address + 2) % IDX_MOD))] = byte_array[2];
 	data->map[(elem->pc + ((address + 3) % IDX_MOD))] = byte_array[3];
+//	value + 1 % largeur (64) == x (colonne)
+//	value + 1 / longueur (64) == y (line)
 }
 
 void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types, unsigned int *params)
