@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:49:58 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/17 17:07:35 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/17 17:18:59 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	dump_map(t_data *data)
 
 int		turn_by_slowmode(t_data *data)
 {
+	static int	status = 0;
 	int			keycode;
 
 	keycode = 0;
@@ -44,8 +45,12 @@ int		turn_by_slowmode(t_data *data)
 		keycode = getch();
 		if (keycode == 32)
 		{
-			werase(data->display->win);
-			print_str(data);
+			if (status == 0)
+			{
+				werase(data->display->win);
+				print_str(data);
+				status = 1;
+			}
 			turn(data);
 			if ((--(data->cycle_to_die)) <= 0)
 				if (verif_end(data) == 1)
@@ -59,12 +64,15 @@ int		turn_by_slowmode(t_data *data)
 
 int		turn_by_none(t_data *data)
 {
+	static int	status = 0;
+
 	while (42)
 	{
-		if (data->flag_visu == 1)
+		if (data->flag_visu == 1 && status == 0)
 		{
 			werase(data->display->win);
 			print_str(data);
+			status = 1;
 		}
 		turn(data);
 		if (!(data->flag_dump--))
