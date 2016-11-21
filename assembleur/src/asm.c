@@ -6,7 +6,7 @@
 /*   By: vijacque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:59:12 by vijacque          #+#    #+#             */
-/*   Updated: 2016/10/19 14:58:49 by vijacque         ###   ########.fr       */
+/*   Updated: 2016/11/21 15:59:34 by vijacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int				main(int ac, char **av)
 {
 	t_env		*e;
 
-	e = (t_env*)ft_malloc(sizeof(t_env));
+	if ((e = (t_env*)ft_malloc(sizeof(t_env))) == NULL)
+		ft_exit("MALLOC failed.", 0);
 	if (ac == 4)
 	{
 		if ((ft_strcmp(av[1], "-n") == 0) && (check_ext(av[3], 2) == 1) \
