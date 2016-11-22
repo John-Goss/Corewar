@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:20:57 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/17 13:57:30 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/22 15:25:44 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
 	c = (elem->reg_number[data->map[elem->pc + 2]]) % 256;
 	if (data->flag_visu == 0)
 		ft_printf("%c", c);
-	elem->pc += 3;
+	elem->pc = ((elem->pc + 3 )% MEM_SIZE);
 }

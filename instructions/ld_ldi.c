@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:27:31 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/17 14:38:40 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/22 13:20:48 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params, unsigned int *pa
 	else
 	{
 		elem->pc++; // VRAIMENT ?
+		elem-> pc = elem->pc % MEM_SIZE;
 		return ;
 	}
 	//params[1] is the vnumber of the register we need

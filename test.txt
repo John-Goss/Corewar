@@ -1,0 +1,10 @@
+add semble fonctionner;
+aff on ne rentre pas dans apply_aff;
+and semble fonctionner;
+fork fonctionne;
+ld semble fonctionner;
+ldi semble fonctionner;
+live fonctionne;
+lld semble fonctionner;
+lldi semble fonctionner;
+or semble fonctionner;
