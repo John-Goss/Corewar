@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/17 18:15:24 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:18:56 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,5 +223,6 @@ int							set_live_infos(t_data *data);
 t_display					*get_dsp_struct_addr(t_display *dsp);
 void						print_str(t_data *data);
 void						print_index(t_data *data, t_list *elem, int index);
+void						clear_died_pc(t_data *data, t_list *elem);
 void						print_pc(t_data *data);
 void						delete_win(t_display *display);

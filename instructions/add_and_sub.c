@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 19:43:20 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/22 15:16:10 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/23 15:39:42 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void		apply_add(t_data *data, t_list *elem, unsigned int *params, unsigned int *
 		i++;
 	}
 	store = elem->reg_number[params[0]] + elem->reg_number[params[1]];
-	printf("%d\n", store);
 	elem->reg_number[params[2]] = store;
 	if (elem->carry)
 		elem->carry = 0;

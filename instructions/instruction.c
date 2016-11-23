@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/16 12:01:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/17 12:51:30 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/23 16:11:56 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 
 void        instr_no_ocp(t_data *data, t_list *elem, unsigned int *params)
 {
-    if (data->map[elem->pc] == 0x0C)  
+    if (data->map[elem->pc] == 0x0C)
         apply_fork(data, elem, params);
     else if (data->map[elem->pc] == 0x01)
-       apply_live(data, elem);   
+       apply_live(data, elem);
     else if (data->map[elem->pc] == 0x09)
         apply_zjmp(data, elem, params);
     else if (data->map[elem->pc] == 0x0F)
@@ -34,7 +34,6 @@ void        instr_no_ocp(t_data *data, t_list *elem, unsigned int *params)
 
 void         instr_w_ocp(t_data *data, t_list *elem, unsigned int *params, unsigned int *param_types)
 {
-
     if (data->map[elem->pc] == 0x02)
 		apply_ld(data, elem, params, param_types);
     else if (data->map[elem->pc] == 0x03)
@@ -65,14 +64,14 @@ int protect_registers(unsigned int *params, unsigned int *param_types)
     int k;
 
     k = 0;
-    while (param_types[k])
+	while (param_types[k])
     {
 
     if (param_types[k] == REG_CODE)
         params[k] = params[k] -1;
        // if (param_types[k] == REG_CODE && params[k] > 0 && params[k] != 42)
        //     params[k] = params[k] - 1;
-        if (param_types[k] == REG_CODE && params[k] > 16)
+        if (param_types[k] == REG_CODE && params[k] > 15)
             return (0); //0 implies error case. move the PC but don't execute the instruction
         k++;
     }
@@ -99,7 +98,7 @@ void        instruction_exec(t_data *data, t_list *elem)
         elem->pc = (elem->pc + data->dep) % MEM_SIZE;
         return ;
     }
-    if (opc == 0x0C || opc == 0x09 || opc == 0x01 || data->map[elem->pc] == 0x10)
+    if (opc == 0x0C || opc == 0x09 || opc == 0x01 || opc == 0x10 || opc == 0x0F)
     {
         instr_no_ocp(data, elem, params);
         if (elem_tmp == elem->pc)

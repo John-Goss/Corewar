@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:27:31 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/22 13:20:48 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:09:55 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,18 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 
 void	apply_ld(t_data *data, t_list *elem, unsigned int *params, unsigned int *param_type)
 {
-	//value of first parameter into register
+	if (elem->carry)
+		elem->carry = 0;
+	else if (!elem->carry)
+		elem->carry = 1;
 	if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
 	{
-		elem->reg_number[params[1]] = params[0];// param[0] is the first parameter
-		if (elem->carry)
-			elem->carry = 0;
-		else if (!elem->carry)
-			elem->carry = 1;
+		if (params[1] < 16)
+			elem->reg_number[params[1]] = params[0];
 	}
 	else
 	{
-		elem->pc++; // VRAIMENT ?
-		elem-> pc = elem->pc % MEM_SIZE;
+		elem->pc = (elem->pc + 1) % MEM_SIZE; // VRAIMENT ?
 		return ;
 	}
-	//params[1] is the vnumber of the register we need
 }

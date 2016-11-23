@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:52:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/22 13:19:59 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:28:30 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,11 @@ void		check_who_is_alive(t_data *data)
 	while (elem)
 	{
 		if (elem->live == 0)
+		{
+			if (data->flag_visu == 1)
+				clear_died_pc(data, elem);
 			elem = destroy_elem(data, elem);
+		}
 		else
 		{
 			elem->live = 0;

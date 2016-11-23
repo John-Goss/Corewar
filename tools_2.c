@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 12:45:29 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/17 18:15:27 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:26:13 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,29 @@ void	clear_pc(t_data *data)
 		x_y[1]++;
 		x_y[0] = 1;
 	}
+}
+
+void	clear_died_pc(t_data *data, t_list *elem)
+{
+	int	x_y[2];
+	int	i;
+
+	i = 0;
+	x_y[0] = 1;
+	x_y[1] = 16;
+	while (x_y[1] < 80)
+	{
+		while (x_y[0] < 192)
+		{
+			if (i == elem->pc)
+				display_classique(data, i, x_y, elem->nb_champ);
+			x_y[0] += 3;
+			i++;
+		}
+		x_y[1]++;
+		x_y[0] = 1;
+	}
+	refresh();
 }
 
 void	print_pc(t_data *data)
