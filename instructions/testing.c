@@ -52,7 +52,7 @@ int                main(int argc, char **argv)
 
 	transfer_bytes = argv[1];
     four_bytes = trans_four_bytes(transfer_bytes);
-    printf("\n->\t%d\n", four_bytes);
+//    printf("\n->\t%d\n", four_bytes);
 
 	return (0);
 }

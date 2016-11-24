@@ -45,7 +45,7 @@ void	init_infos_box(t_data *data)
 	attron(A_UNDERLINE);
 	mvprintw(16, 196 + 13 / 2, "Infos Players");
 	attroff(A_UNDERLINE);
-	refresh();
+//	refresh();
 	while (tmp)
 	{
 		mvprintw(pos_y, 195, "Player %d - (%s)",

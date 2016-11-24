@@ -26,6 +26,7 @@ int			main(int argc, char **argv)
 	}
 	data.flag_slowmode == 1 ? turn_by_slowmode(&data) : turn_by_none(&data);
 	end(&data);
+	return (0);
 }
 
 void		adjust_action_time(t_list *elem, char pc)

@@ -33,7 +33,7 @@ void		apply_live(t_data *data, t_list *elem)
 		{
 			data->last_live_nb_champ = nb_champ;
 			if (data->flag_visu == 0)
-				ft_printf("Un processus dit que le joueur %d(%s) est en vie\n",
+				ft_printf("Un processus dit que le joueur %d (%s) est en vie\n",
 						nb_champ, desc->name);
 		}
 		desc = desc->next;

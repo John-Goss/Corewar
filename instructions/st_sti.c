@@ -27,7 +27,7 @@ void	put_in_bytes(t_data *data, t_list *elem, int address, int reg_value)
 	data->map[(elem->pc + ((address + 1) % IDX_MOD))] = byte_array[1];
 	data->map[(elem->pc + ((address + 2) % IDX_MOD))] = byte_array[2];
 	data->map[(elem->pc + ((address + 3) % IDX_MOD))] = byte_array[3];
-	if (data->flag_visu)
+	if (data->flag_visu == 1)
 	{
 		while (i < 4)
 		{
