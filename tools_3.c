@@ -6,13 +6,13 @@
 /*   By: vijacque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 15:18:43 by vijacque          #+#    #+#             */
-/*   Updated: 2016/11/25 15:18:45 by vijacque         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:21:18 by vijacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		champ_id(t_data *data, int index)
+int						champ_id(t_data *data, int index)
 {
 	t_desc		*tmp;
 
@@ -25,4 +25,13 @@ int		champ_id(t_data *data, int index)
 		tmp = tmp->next;
 	}
 	return (-1);
+}
+
+unsigned char			*get_str_addr(unsigned char *mem)
+{
+	static unsigned char		*ptr = NULL;
+
+	if (mem)
+		ptr = mem;
+	return (ptr);
 }

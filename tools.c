@@ -6,20 +6,11 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/16 17:21:33 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:21:29 by vijacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-unsigned char	*get_str_addr(unsigned char *mem)
-{
-	static unsigned char	*ptr = NULL;
-
-	if (mem)
-		ptr = mem;
-	return (ptr);
-}
 
 WINDOW			*get_win_addr(WINDOW *window)
 {
