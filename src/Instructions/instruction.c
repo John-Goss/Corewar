@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 19:21:44 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 20:04:12 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	instruction_exec(t_data *data, t_list *elem)
 	opc = data->map[(elem->pc) % MEM_SIZE];
 	param_types = det_types(data, elem, data->map[(elem->pc + 1) % MEM_SIZE]);
 	params = get_params(param_types, data, elem);
-	if (param_types[0] == 0)
+	if ((int)param_types[0] == -1)
 		return ;
 	if (protect_registers(params, param_types) == 0)
 	{
