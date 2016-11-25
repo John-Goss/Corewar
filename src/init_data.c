@@ -6,11 +6,11 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/17 16:30:37 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/25 19:17:44 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <corewar.h>
 
 int			test_int(char *s)
 {

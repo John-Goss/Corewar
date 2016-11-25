@@ -6,11 +6,11 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 15:15:32 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 16:20:46 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 19:18:34 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <corewar.h>
 
 void			sigkill(int code)
 {
@@ -55,7 +55,7 @@ int				champ_id(t_data *data, int index)
 	tmp = data->desc;
 	while (tmp)
 	{
-		if (index >= tmp->pc && index < tmp->pc + tmp->size)
+		if (index >= tmp->pc && index < tmp->pc + (int)tmp->size)
 			return (tmp->nb_champ);
 		tmp = tmp->next;
 	}

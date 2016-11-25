@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fork_lfork_aff.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/21 13:20:57 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/25 12:26:43 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/25 19:20:51 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/25 19:29:55 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include <corewar.h>
 
 t_list *	copy_elem(t_list *begin, t_list *elem, int pc)
 {
@@ -55,6 +55,7 @@ void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
 {
 	char	c;
 
+	(void)params;
 	c = (elem->reg_number[data->map[elem->pc + 2]]) % 256; // Why 256 ?
 	if (data->flag_visu == 0)
 		ft_printf("%c\n", c);

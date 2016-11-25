@@ -6,11 +6,11 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:59:18 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/22 11:36:50 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/25 19:17:19 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <corewar.h>
 
 t_desc		*create_desc2(t_desc **desc, int nb)
 {

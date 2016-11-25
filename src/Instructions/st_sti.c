@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 14:32:35 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 14:32:39 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/25 19:23:21 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include <corewar.h>
 
 void	put_in_bytes(t_data *data, t_list *elem, int address, int reg_value)
 {

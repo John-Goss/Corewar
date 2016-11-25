@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   instruction.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/16 12:01:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/25 16:50:17 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/25 19:21:25 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/25 19:21:44 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include <corewar.h>
 
 void	instr_no_ocp(t_data *data, t_list *elem, unsigned int *params)
 {
@@ -85,7 +85,7 @@ void	instruction_exec(t_data *data, t_list *elem)
 	opc = data->map[(elem->pc) % MEM_SIZE];
 	param_types = det_types(data, elem, data->map[(elem->pc + 1) % MEM_SIZE]);
 	params = get_params(param_types, data, elem);
-	if (param_types[0] == -1)
+	if (param_types[0] == 0)
 		return ;
 	if (protect_registers(params, param_types) == 0)
 	{

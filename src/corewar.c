@@ -6,11 +6,11 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:55:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/22 12:09:20 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/25 19:17:11 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <corewar.h>
 
 int			main(int argc, char **argv)
 {

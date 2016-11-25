@@ -6,11 +6,11 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 12:45:29 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 16:16:55 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 19:18:28 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <corewar.h>
 
 int		set_desc_pc(t_data *data)
 {

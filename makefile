@@ -1,47 +1,79 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/11/25 18:08:17 by jle-quer          #+#    #+#              #
+#    Updated: 2016/11/25 19:28:27 by jle-quer         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = corewar
 
-SRC = corewar.c
-SRC += parsing.c
-SRC += end.c
-SRC += init_data.c
-SRC += create_list.c
-SRC += testaff.c
-SRC += tools.c
-SRC += tools_2.c
-SRC += tools_3.c
-SRC += display_infos_box.c
-SRC += turn_by_slowmode.c
-SRC += instructions/add_and_sub.c
-SRC += instructions/and_or_xor.c
-SRC += instructions/direct_value.c
-SRC += instructions/fork_lfork_aff.c
-SRC += instructions/indirect_value.c
-SRC += instructions/instruction.c
-SRC += instructions/ld_ldi.c
-SRC += instructions/live_zjump.c
-SRC += instructions/lld_lldi.c
-SRC += instructions/parameters.c
-SRC += instructions/parameters_2.c
-SRC += instructions/st_sti.c
+FLAGS = -Wall -Werror -Wextra
 
-$(OBJ):
-	gcc -c $(SRC)
+vpath %.c ./src ./src/Instructions/
 
-OBJ = $(SRC:.c=.o)
+SRC = corewar.c \
+	parsing.c \
+	end.c \
+	init_data.c \
+	create_list.c \
+	testaff.c \
+	tools.c \
+	tools_2.c \
+	tools_3.c \
+	display_infos_box.c \
+	turn_by_slowmode.c \
+	add_and_sub.c \
+	and_or_xor.c \
+	direct_value.c \
+	fork_lfork_aff.c \
+	indirect_value.c \
+	instruction.c \
+	ld_ldi.c \
+	live_zjump.c \
+	lld_lldi.c \
+	parameters.c \
+	parameters_2.c \
+	st_sti.c
 
-FLAG = -Wall -Wextra -Werror -g3 -fsanitize=address
+# FILES
+OBJS	= $(SRC:.c=.o)
+O2		= $(addprefix $(OPATH), $(OBJS))
 
+# DIRECTORIES
+LIBFT	= ./Libft/
+OPATH	= ./obj/
+INC		= ./src/Header/
+LIBINC	= $(LIBFT)/INCLUDES/
+LIB		= $(LIBFT)libft.a
+
+# PROCESS
 all: $(NAME)
 
-$(NAME) : $(OBJ)
-	gcc $(FLAG) -o corewar $(OBJ) Libft/libft.a -lncurses
+$(NAME): $(OBJS) $(LIB)
+	@gcc $(FLAGS) $(O2) -L$(LIBFT) -lft -lncurses -I$(INC) -o $(NAME)
+	@echo "\033[0;32mCorewar compilation done !\033[0;m"
+
+$(LIB):
+	@echo "\033[0;32mWaiting, libft is in compilation...\033[0;m"
+	@make -C $(LIBFT)
+
+%.o: %.c
+	@gcc $(FLAGS) -c $< -I $(INC) -I $(LIBINC) -o $@
+	@mv $@ $(OPATH)
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(O2)
+	@echo "\033[0;32mObject files deleted !\033[0;m"
 
-fclean : clean
-	rm -f corewar
+fclean: clean
+	@rm -f $(NAME)
+	@echo "\033[0;32mExecutable deleted !\033[0;m"
+	-@make fclean -C $(LIBFT)
+	@echo "\033[0;32mLibft cleaned.\033[0;m"
 
-re : fclean all
-
-.PHONY : all, clean, fclean , re
+re: fclean all

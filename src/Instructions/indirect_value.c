@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   indirect_value.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/18 18:08:01 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/25 12:33:33 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/25 19:21:12 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/25 19:21:14 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include <corewar.h>
 
 /*
 ** this function does the same as trans_four_bytes but with

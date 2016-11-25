@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   or_xor.c                                           :+:      :+:    :+:   */
+/*   and_or_xor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/21 12:07:06 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/25 12:21:19 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/25 19:19:25 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/25 19:25:17 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include <corewar.h>
 
 void	apply_and(t_data *data, t_list *elem, unsigned int *params,
 			unsigned int *param_type)
@@ -18,6 +18,9 @@ void	apply_and(t_data *data, t_list *elem, unsigned int *params,
 	int	value_one;
 	int	value_two;
 
+	value_one = 0;
+	value_two = 0;
+	(void)data;
 	if (param_type[0] == REG_CODE)
 		value_one = elem->reg_number[params[0]];
 	else if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
@@ -39,6 +42,9 @@ void	apply_or(t_data *data, t_list *elem, unsigned int *params,
 	int value_one;
 	int value_two;
 
+	value_one = 0;
+	value_two = 0;
+	(void)data;
 	if (param_type[0] == REG_CODE)
 		value_one = elem->reg_number[params[0]];
 	else if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
@@ -60,6 +66,9 @@ void	apply_xor(t_data *data, t_list *elem, unsigned int *params,
 	int	value_one;
 	int	value_two;
 
+	value_one = 0;
+	value_two = 0;
+	(void)data;
 	if (param_type[0] == REG_CODE)
 		value_one = elem->reg_number[params[0]];
 	else if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)

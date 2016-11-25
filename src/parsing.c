@@ -6,11 +6,11 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:49:30 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/17 18:24:43 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 19:17:52 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <corewar.h>
 
 int			stock_desc(t_data *data, char *buf, int nb)
 {

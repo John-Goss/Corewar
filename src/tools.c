@@ -6,11 +6,11 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 16:14:37 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 19:18:20 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <corewar.h>
 
 WINDOW			*get_win_addr(WINDOW *window)
 {
@@ -44,6 +44,7 @@ int				find_pc_pos(t_list *list, int *pc, int nb_champ, int value)
 	i = 0;
 	cpt = 0;
 	tmp = list;
+	(void)nb_champ;
 	while (tmp)
 	{
 		cpt++;

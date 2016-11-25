@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/25 15:17:54 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 19:12:28 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
-# include "Libft/INCLUDES/libft.h"
+# include <libft.h>
 
 # define IND_SIZE			2
 # define REG_SIZE			4

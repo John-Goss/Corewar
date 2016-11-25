@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 13:06:41 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 14:28:28 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/25 19:23:03 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/25 19:23:05 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include <corewar.h>
 
 /*
 ** this gives me a string with a converted reversed binary.

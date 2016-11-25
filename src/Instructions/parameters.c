@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parameters.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/18 18:08:35 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/25 17:23:36 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/25 19:22:48 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/25 19:22:50 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include <corewar.h>
 
 int				octet_cod_there(t_data *data, t_list *elem)
 {

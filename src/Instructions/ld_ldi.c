@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ld_ldi.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/20 18:27:31 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/25 12:57:37 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/25 19:21:53 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/25 19:26:08 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include <corewar.h>
 
 int		get_ind_size_at_add(t_data *data, t_list *elem, int prm_pos)
 {
@@ -64,6 +64,7 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 		unsigned int *param_type)
 {
+	(void)data;
 	if (elem->carry)
 		elem->carry = 0;
 	else if (!elem->carry)

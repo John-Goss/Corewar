@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   direct_value.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/18 18:08:14 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/25 12:21:13 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/25 19:20:22 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/25 19:20:34 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include <corewar.h>
 
 /*
 ** this function takes four char bytes and puts them into

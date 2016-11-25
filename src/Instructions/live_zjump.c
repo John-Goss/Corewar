@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   live_zjump.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/21 13:21:15 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/25 16:55:37 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/25 19:22:16 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/25 19:28:10 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../corewar.h"
+#include <corewar.h>
 
 void		apply_live(t_data *data, t_list *elem)
 {
@@ -44,6 +44,7 @@ void		apply_live(t_data *data, t_list *elem)
 
 void		apply_zjmp(t_data *data, t_list *elem, unsigned int *params)
 {
+	(void)data;
 	if (elem->carry == 1)
 		elem->pc = (((elem->pc - (elem->pc % IDX_MOD)) +
 					(elem->pc + params[0])) % IDX_MOD) % MEM_SIZE;
