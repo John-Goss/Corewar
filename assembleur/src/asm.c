@@ -6,7 +6,7 @@
 /*   By: vijacque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:59:12 by vijacque          #+#    #+#             */
-/*   Updated: 2016/11/21 15:59:34 by vijacque         ###   ########.fr       */
+/*   Updated: 2016/11/25 14:38:08 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		make_header(t_env *e)
 {
-	int			i;
+	int	i;
 
 	e->head.magic = COREWAR_EXEC_MAGIC;
 	e->head.prog_size = e->prog_size;
@@ -63,7 +63,7 @@ static int		launch_without_path(t_env *e, char *arg)
 	return (0);
 }
 
-static int				check_ext(char *s, int check)
+static int		check_ext(char *s, int check)
 {
 	int i;
 

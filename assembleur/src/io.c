@@ -6,7 +6,7 @@
 /*   By: vijacque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 14:55:18 by vijacque          #+#    #+#             */
-/*   Updated: 2016/10/12 14:13:13 by vijacque         ###   ########.fr       */
+/*   Updated: 2016/11/25 14:39:02 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ char		*correct_param_spacing(char *buf)
 
 void		add_label(t_ins *ptr, char *label)
 {
-	t_label *ptr2;
+	t_label	*ptr2;
+
 	ptr2 = ptr->labels;
 	if (ptr2 == NULL)
 	{

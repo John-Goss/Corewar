@@ -6,7 +6,7 @@
 /*   By: vijacque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/12 13:59:52 by vijacque          #+#    #+#             */
-/*   Updated: 2016/10/25 15:24:21 by vijacque         ###   ########.fr       */
+/*   Updated: 2016/11/25 14:41:09 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			write_file(t_env *e, char *filename, char *path)
 {
 	int		fd;
 	char	*output;
-	int len;
+	int		len;
 
 	fd = ft_strlen(filename);
 	if (filename == NULL || fd < 3 \
@@ -100,10 +100,10 @@ void			write_file(t_env *e, char *filename, char *path)
 	ft_putendl(output);
 	len = ft_strlen(output);
 	if (is_slash(output) == 1)
-		 output = ft_strsub(output, find_last_slash(output, len), len);
+		output = ft_strsub(output, find_last_slash(output, len), len);
 	output = ft_strjoin(path, output);
 	if ((fd = open(output, O_CREAT | O_WRONLY | O_EXCL, 0666)) == -1)
-		ft_exit("Open failed.\n\t-> Output file already exist?", OPENFAIL);
+		ft_exit("Open failed.\n\t-> Output file already exist ?", OPENFAIL);
 	write_header(e, fd);
 	write_bytecodes(e, fd);
 	close(fd);

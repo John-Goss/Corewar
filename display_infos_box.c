@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 12:40:36 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/17 18:39:41 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:22:24 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,15 @@ void	init_infos_box(t_data *data)
 	attron(A_UNDERLINE);
 	mvprintw(16, 196 + 13 / 2, "Infos Players");
 	attroff(A_UNDERLINE);
-//	refresh();
 	while (tmp)
 	{
 		mvprintw(pos_y, 195, "Player %d - (%s)",
 				tmp->nb_champ, tmp->name);
 		pos_y += 3;
-		refresh();
 		tmp = tmp->next;
 	}
 	set_live_infos(data);
+	refresh();
 }
 
 void	display_clear_pc(t_data *data, int i, int *x_y, int champ_id)
@@ -90,19 +89,4 @@ void	display_classique(t_data *data, int i, int *x_y, int champ_id)
 			data->display->mem[i]);
 	if (champ_id != -1)
 		attroff(COLOR_PAIR(champ_id));
-}
-
-void	delete_win(t_display *display)
-{
-	if (display->info)
-		delwin(display->info);
-	if (display->win)
-		delwin(display->win);
-	if (display->header)
-		delwin(display->header);
-	if (display->screen)
-		delwin(display->screen);
-	clear();
-	refresh();
-	endwin();
 }

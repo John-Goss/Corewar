@@ -8,6 +8,7 @@ SRC += create_list.c
 SRC += testaff.c
 SRC += tools.c
 SRC += tools_2.c
+SRC += tools_3.c
 SRC += display_infos_box.c
 SRC += turn_by_slowmode.c
 SRC += instructions/add_and_sub.c

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:49:58 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/17 18:11:59 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:25:20 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int		turn_by_slowmode(t_data *data)
 	keycode = 0;
 	while (42)
 	{
-		keycode = getch();
-		if (keycode == 32)
+		if ((keycode = getch()) == 32)
 		{
 			if (status == 0)
 			{

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 12:56:09 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/16 17:21:33 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:28:07 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,6 @@ WINDOW			*get_win_addr(WINDOW *window)
 	return (ptr);
 }
 
-t_display		*get_dsp_struct_addr(t_display *dsp)
-{
-	static t_display	*tmp = NULL;
-
-	if (dsp)
-		tmp = dsp;
-	return (tmp);
-}
-
 int				nb_champ_pc(t_list *list, int value)
 {
 	t_list	*tmp;
@@ -47,7 +38,7 @@ int				nb_champ_pc(t_list *list, int value)
 	while (tmp)
 	{
 		if (tmp->pc == value)
-			return (tmp->nb_champ); // NE PAS LAISSER SUR REG_NUMBER A PASSER SUR begin->pid !!!
+			return (tmp->nb_champ);
 		tmp = tmp->next;
 	}
 	return (-1);

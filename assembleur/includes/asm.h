@@ -6,14 +6,14 @@
 /*   By: vijacque <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 16:25:05 by vijacque          #+#    #+#             */
-/*   Updated: 2016/10/12 14:58:39 by vijacque         ###   ########.fr       */
+/*   Updated: 2016/11/25 14:36:41 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
 
-#include "../libcorewar/includes/libcorewar.h"
+# include "../libcorewar/includes/libcorewar.h"
 # include "op.h"
 
 # define BADARG			10

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 11:37:11 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/09/22 14:20:53 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:00:39 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
-# define DEBUG ft_printf("%s in %s at %d\n", __func__, __FILE__, __LINE__)
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
