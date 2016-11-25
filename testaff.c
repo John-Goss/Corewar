@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 14:54:39 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/17 18:39:44 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 15:30:06 by vijacque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,16 @@ static void			create_win(t_data *data, t_display *display)
 	start_color();
 	init_pair_by_id(data);
 	attron(A_UNDERLINE | A_BOLD);
-	mvwprintw(display->screen, 15/2 -1, 224/2 - 22/2, "COREWAR CHAMPIONSHIP'S");
+	mvwprintw(display->screen, 15 / 2 - 1, 224 / 2 - 22 / 2,\
+			"COREWAR CHAMPIONSHIP'S");
 	attroff(A_UNDERLINE | A_BOLD);
-	mvwprintw(display->screen, 15/2 + 1, 224/2 - 16/2, "|| BattleZONE ||");
+	mvwprintw(display->screen, 15 / 2 + 1, 224 / 2 - 16 / 2, \
+			"|| BattleZONE ||");
 	display->mem = get_str_addr(NULL);
 	get_win_addr(display->screen);
 }
 
-void			print_str(t_data *data)
+void				print_str(t_data *data)
 {
 	int	i;
 	int	x_y[2];
@@ -86,10 +88,9 @@ void			print_str(t_data *data)
 	{
 		while (x_y[0] < 192)
 		{
-			if ((nb_champ = find_pc_pos(data->begin, pc, data->nb_champ, i)) != -1)
-				display_pc(data, i, x_y, nb_champ);
-			else
-				display_classique(data, i, x_y, champ_id(data, i));
+			nb_champ = find_pc_pos(data->begin, pc, data->nb_champ, i);
+			nb_champ != -1 ? display_pc(data, i, x_y, nb_champ) \
+			: display_classique(data, i, x_y, champ_id(data, i));
 			x_y[0] += 3;
 			i++;
 		}
@@ -103,15 +104,14 @@ static int			getch_aff(t_data *data)
 {
 	int			keycode;
 
-	mvwprintw(data->display->screen, 44, 194/2 - 58/2,
+	mvwprintw(data->display->screen, 44, 194 / 2 - 58 / 2,
 			"Press Space_Key for run the game or S for run the slowmode.");
 	signal(SIGINT, &sigkill); // Catch ctrl-c signal
 	while (42)
 	{
 		keycode = getch();
-		if (keycode == 27) // ESC Key
-			sigkill(1);
-		else if (keycode == 's')
+		keycode == 27 ? sigkill(1) : 0;
+		if (keycode == 's')
 		{
 			data->flag_slowmode = 1;
 			werase(data->display->win);
@@ -143,7 +143,7 @@ int					aff_window(t_data *data)
 	if (t.ws_col < 224 || t.ws_row < 81)
 	{
 		ft_printf("\nTOO SHORT SIZE FOR DISPLAY\nLINES MIN: 81 / Value TTY: ");
-		ft_printf("%d\nCOLS MIN: 224 / Value TTY: %d\n",t.ws_row, t.ws_col);
+		ft_printf("%d\nCOLS MIN: 224 / Value TTY: %d\n", t.ws_row, t.ws_col);
 		exit(1);
 	}
 	create_win(data, display);
