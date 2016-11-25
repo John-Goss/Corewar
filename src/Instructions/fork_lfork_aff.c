@@ -6,13 +6,13 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:20:51 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 19:29:55 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 19:53:27 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-t_list *	copy_elem(t_list *begin, t_list *elem, int pc)
+t_list		*copy_elem(t_list *begin, t_list *elem, int pc)
 {
 	int	j;
 
@@ -37,15 +37,15 @@ t_list *	copy_elem(t_list *begin, t_list *elem, int pc)
 void		apply_lfork(t_data *data, t_list *elem, unsigned int *params)
 {
 	data->begin = copy_elem(data->begin, elem,
-			(elem->pc + params[0]) % MEM_SIZE);
+		(elem->pc + params[0]) % MEM_SIZE);
 	elem->pc = (elem->pc + 3) % MEM_SIZE;
 }
 
 void		apply_fork(t_data *data, t_list *elem, unsigned int *params)
 {
 	data->begin = copy_elem(data->begin, elem,
-			((elem->pc - (elem->pc % IDX_MOD))
-			+ (elem->pc + params[0]) % IDX_MOD) % MEM_SIZE);
+		((elem->pc - (elem->pc % IDX_MOD)) +
+		(elem->pc + params[0]) % IDX_MOD) % MEM_SIZE);
 	elem->pc = (elem->pc + 3) % MEM_SIZE;
 }
 

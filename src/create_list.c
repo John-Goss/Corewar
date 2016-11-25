@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 15:59:18 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/25 19:17:19 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 19:50:04 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_desc		*create_desc2(t_desc **desc, int nb)
 
 	if (tab == NULL)
 	{
-		tab = malloc(4 * sizeof(int));
+		tab = malloc(sizeof(int) * 4);
 		init_tab(tab);
 	}
 	elem = *desc;
@@ -29,13 +29,13 @@ t_desc		*create_desc2(t_desc **desc, int nb)
 	if (!(elem->next = (t_desc *)malloc(sizeof(t_desc))))
 		return (NULL);
 	elem->next->next = NULL;
-	elem->next->name = (char *)malloc(129 * sizeof(char));
+	elem->next->name = (char *)malloc(sizeof(char) * 129);
 	if (nb)
 		elem->next->nb_champ = is_used(nb, tab);
 	else
 		elem->next->nb_champ = find_first_nb(tab);
 	elem->next->size = 0;
-	elem->next->desc = (char *)malloc(2049 * sizeof(char));
+	elem->next->desc = (char *)malloc(sizeof(char) * 2049);
 	return (elem->next);
 }
 
@@ -46,13 +46,13 @@ t_desc		*create_desc(t_desc **desc, int nb)
 		if (!(*desc = (t_desc *)malloc(sizeof(t_desc))))
 			return (NULL);
 		(*desc)->next = NULL;
-		(*desc)->name = (char *)malloc(129 * sizeof(char));
+		(*desc)->name = (char *)malloc(sizeof(char) * 129);
 		(*desc)->size = 0;
 		if (nb)
 			(*desc)->nb_champ = nb;
 		else
 			(*desc)->nb_champ = 1;
-		(*desc)->desc = (char *)malloc(2049 * sizeof(char));
+		(*desc)->desc = (char *)malloc(sizeof(char) * 2049);
 		return (*desc);
 	}
 	return (create_desc2(desc, nb));
