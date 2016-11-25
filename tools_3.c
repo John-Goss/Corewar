@@ -6,13 +6,13 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 15:15:32 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 16:17:42 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:20:46 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		sigkill(int code)
+void			sigkill(int code)
 {
 	t_display *ptr;
 
@@ -23,7 +23,7 @@ void		sigkill(int code)
 	exit(0);
 }
 
-void		delete_win(t_display *display)
+void			delete_win(t_display *display)
 {
 	if (display->info)
 		delwin(display->info);
@@ -38,7 +38,7 @@ void		delete_win(t_display *display)
 	endwin();
 }
 
-t_display	*get_dsp_struct_addr(t_display *dsp)
+t_display		*get_dsp_struct_addr(t_display *dsp)
 {
 	static	t_display	*tmp = NULL;
 
@@ -47,7 +47,7 @@ t_display	*get_dsp_struct_addr(t_display *dsp)
 	return (tmp);
 }
 
-int						champ_id(t_data *data, int index)
+int				champ_id(t_data *data, int index)
 {
 	t_desc		*tmp;
 
@@ -62,7 +62,7 @@ int						champ_id(t_data *data, int index)
 	return (-1);
 }
 
-unsigned char			*get_str_addr(unsigned char *mem)
+unsigned char	*get_str_addr(unsigned char *mem)
 {
 	static unsigned char		*ptr = NULL;
 

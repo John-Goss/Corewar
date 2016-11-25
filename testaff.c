@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 14:54:39 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 16:14:04 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:20:21 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void		create_win(t_data *data, t_display *display)
 	get_win_addr(display->screen);
 }
 
-void				print_str(t_data *data)
+void			print_str(t_data *data)
 {
 	int	i;
 	int	x_y[2];
