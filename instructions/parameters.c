@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:35 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/25 14:26:51 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 17:23:36 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,12 @@ unsigned int	*get_params(unsigned int *par_types, t_data *data, t_list *elem)
 	unsigned int	*params;
 	int				cpt[2];
 
-	cpt[0] = 0;
+	cpt[0] = -1;
 	cpt[1] = octet_cod(data, elem);
 	params = NULL;
 	elem->dir_by = two_or_four(data, elem);
 	params = ft_memalloc(20);
-	while (par_types[cpt[0]++] != 0)
+	while (par_types[++cpt[0]] != 0)
 	{
 		if (par_types[cpt[0]] == REG_CODE)
 		{
