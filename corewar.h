@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/23 17:18:56 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 14:25:35 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,8 @@ typedef struct				s_data
 
 
 /*
- * PROTOTYPE
- */
+** PROTOTYPE
+*/
 
 int							check_flag(int argc, char **argv, t_data *data);
 void						init_structur(t_data *data);
@@ -166,47 +166,48 @@ t_desc						*create_desc(t_desc **desc, int nb);
 void						end(t_data *data);
 
 /*
- *	PROTOTYPE INSTRUCTIONS
- */
+** PROTOTYPE INSTRUCTIONS
+*/
 
 void			instruction_exec(t_data *data, t_list *elem);
-unsigned int				get_dir_value(t_data *data, t_list *elem, int *prm_pos);
+unsigned int	get_dir_value(t_data *data, t_list *elem, int *prm_pos);
 unsigned int	get_ind_value(t_data *data, t_list *elem, int prm_pos);
-unsigned int				trans_four_bytes(char *transfer_bytes);
-char			*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos); //prm_pos being the position fo the first octet to be extract
+unsigned int	trans_four_bytes(char *transfer_bytes);
+char			*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos);
 
+void			apply_live(t_data *data, t_list *elem);
+void			apply_ld(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void			apply_st(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void			apply_add(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void			apply_sub(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void			apply_and(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void			apply_or(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void			apply_xor(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
+void			apply_zjmp(t_data *data, t_list *elem, unsigned int* params );
+void			apply_ldi(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
+void			apply_sti(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
+void			apply_fork(t_data *data, t_list *elem, unsigned int *params);
+void			apply_lld(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
+void			apply_lldi(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
+void			apply_lfork(t_data *data, t_list *elem, unsigned int *params);
+void			apply_aff(t_data *data, t_list *elem, unsigned int* params );
 
-void		apply_live(t_data *data, t_list *elem);
-void		apply_ld(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
-void		apply_st(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
-void		apply_add(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
-void		apply_sub(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
-void		apply_and(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
-void		apply_or(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
-void		apply_xor(t_data *data, t_list *elem, unsigned int* params , unsigned int *param_type);
-void		apply_zjmp(t_data *data, t_list *elem, unsigned int* params );
-void		apply_ldi(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
-void		apply_sti(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
-void		apply_fork(t_data *data, t_list *elem, unsigned int *params);
-void		apply_lld(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
-void		apply_lldi(t_data *data, t_list *elem, unsigned int *param_type, unsigned int* params );
-void		apply_lfork(t_data *data, t_list *elem, unsigned int *params);
-void		apply_aff(t_data *data, t_list *elem, unsigned int* params );
-
-
+unsigned int	*type_tab_make(char *types_bin, unsigned int *type_tab);
+char			*conv_dec_to_bin(int n);
+char			*rev_str(char *string);
+int				two_or_four(t_data *data, t_list *elem);
 unsigned int	trans_two_bytes(char *transfer_bytes);
 char			*get_two_bytes(t_data *data, t_list *elem, int prm_pos);
 unsigned int	*get_params(unsigned int *par_types, t_data *data, t_list *elem);
 unsigned int	*det_types(t_data *data, t_list *elem, unsigned int parameter_types);
-
 
 void			init_tab(int *tab);
 int				is_used(int nb, int *tab);
 int				find_first_nb(int *tab);
 
 /*
- * PROTOTYPE DISPLAY
- */
+** PROTOTYPE DISPLAY
+*/
 
 int							champ_id(t_data *data, int index);
 int							nb_champ_pc(t_list *list, int value);

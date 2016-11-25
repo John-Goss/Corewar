@@ -6,17 +6,21 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 18:12:49 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/17 13:49:05 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 13:05:02 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../corewar.h"
 
+/*
+** param[0] is the first parameter.
+*/
 
-void		apply_lld(t_data *data, t_list *elem, unsigned int *param_types, unsigned int *params) //addresses not relative to IDX
+void	apply_lld(t_data *data, t_list *elem, unsigned int *param_types,
+		unsigned int *params)
 {
 	if (param_types[0] == DIR_CODE)
-		elem->reg_number[params[1]] = params[0];// param[0] is the first parameter
+		elem->reg_number[params[1]] = params[0];
 	else if (param_types[0] == IND_CODE)
 		elem->reg_number[params[1]] = get_ind_value(data, elem, params[0]);
 	else if (param_types[0] == REG_CODE)
@@ -27,12 +31,12 @@ void		apply_lld(t_data *data, t_list *elem, unsigned int *param_types, unsigned 
 		elem->carry = 0;
 }
 
-void		apply_lldi(t_data *data, t_list *elem, unsigned int *param_types, unsigned int *params) //addresses not relative to IDX
+void	apply_lldi(t_data *data, t_list *elem, unsigned int *param_types,
+		unsigned int *params)
 {
-
 	unsigned int	value_one;
 	unsigned int	value_two;
-	unsigned int	store; //value to store into the given register
+	unsigned int	store;
 
 	store = 0;
 	value_one = 0;

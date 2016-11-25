@@ -6,30 +6,39 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 18:08:14 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/01 17:21:09 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/25 12:21:13 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../corewar.h"
 
+/*
+** this function takes four char bytes and puts them into
+** an int using bit operators.
+*/
 
-unsigned int                 trans_four_bytes(char *transfer_bytes)
+unsigned int	trans_four_bytes(char *transfer_bytes)
 {
-    unsigned int value;
+	unsigned int	value;
 
-    value = 0;
-    value |= (transfer_bytes[0] << 24 & 0xff000000);
-    value |= (transfer_bytes[1] << 16 & 0xff0000);
-    value |= (transfer_bytes[2] << 8 & 0xff00);
-    value |= (transfer_bytes[3] << 0 & 0xff);
-    return (value);
-}//this function takes four char bytes and puts them into an int using bit operators
+	value = 0;
+	value |= (transfer_bytes[0] << 24 & 0xff000000);
+	value |= (transfer_bytes[1] << 16 & 0xff0000);
+	value |= (transfer_bytes[2] << 8 & 0xff00);
+	value |= (transfer_bytes[3] << 0 & 0xff);
+	return (value);
+}
 
-char    *get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_pos being the position fo the first octet to be extracted out of the parameter
+/*
+** this function puts four bytes into a string for
+** further conversion into an unsgned int.
+*/
+
+char			*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos)
 {
-	char *four_bytes; //this will be a string, containing the four bytes extracted
-	int i; //counter for the the extarction of bytes
-	int k; //counter for the loop, as well as the copy destination
+	char	*four_bytes;
+	int		i;
+	int		k;
 
 	k = 0;
 	i = (elem->pc + prm_pos) % MEM_SIZE;
@@ -41,32 +50,32 @@ char    *get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos) //prm_pos
 		k++;
 	}
 	return (four_bytes);
-}//this function puts four bytes into a string for further conversion into an unsgned int
+}
 
-//called from parameters.c
-unsigned int 	       	get_dir_value(t_data *data, t_list *elem, int *prm_pos)//prm_pos is the position of the first address byte of the parameter to be searched
+/*
+** called from parameters.
+** this function gets the direct value,
+** whether it's on four or two bytes.
+*/
+
+unsigned int	get_dir_value(t_data *data, t_list *elem, int *prm_pos)
 {
-    unsigned  int dir_val; //the direct value to be returned
-    char *bytes;
+	unsigned int	dir_val;
+	char			*bytes;
 
-    dir_val = 0;
-    if (elem->dir_by == 0) //if the direct is supposed to be on the next four bytes
-    {
-
-        bytes = get_dir_value_quatre(data, elem, (*prm_pos));
-    	dir_val = trans_four_bytes(bytes);
-    	(*prm_pos) = (*prm_pos) + 4;
-
-    }
-        //code a function which will add the prm_pos onto the pc and then extract the dir out of the next 4 bytes
-    else if (elem->dir_by == 1)
-    {
+	dir_val = 0;
+	bytes = NULL;
+	if (elem->dir_by == 0)
+	{
+		bytes = get_dir_value_quatre(data, elem, (*prm_pos));
+		dir_val = trans_four_bytes(bytes);
+		(*prm_pos) = (*prm_pos) + 4;
+	}
+	else if (elem->dir_by == 1)
+	{
 		bytes = get_two_bytes(data, elem, (*prm_pos));
-		dir_val = trans_two_bytes(bytes);	
+		dir_val = trans_two_bytes(bytes);
 		(*prm_pos) = (*prm_pos) + 2;
-
-    }
-
-    return (dir_val);
-
-}//this function gets the direct value, whether it's on four or two bytes
+	}
+	return (dir_val);
+}

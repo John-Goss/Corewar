@@ -20,6 +20,7 @@ SRC += instructions/ld_ldi.c
 SRC += instructions/live_zjump.c
 SRC += instructions/lld_lldi.c
 SRC += instructions/parameters.c
+SRC += instructions/parameters_2.c
 SRC += instructions/st_sti.c
 
 $(OBJ):

@@ -6,8 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:21:15 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/22 13:20:08 by lbaudran         ###   ########.fr       */
-/*   Updated: 2016/11/02 16:16:24 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/11/25 13:00:05 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +22,6 @@ void		apply_live(t_data *data, t_list *elem)
 		(data->map[(elem->pc + 2) % MEM_SIZE] << 16 & 0xff0000) |
 		(data->map[(elem->pc + 3) % MEM_SIZE] << 8 & 0xff00) |
 		(data->map[(elem->pc + 4) % MEM_SIZE] & 0xff);
-
 	elem->pc = ((elem->pc + 5) % MEM_SIZE);
 	data->live_cpt++;
 	elem->live++;
@@ -40,9 +38,13 @@ void		apply_live(t_data *data, t_list *elem)
 	}
 }
 
-//takes two paramters of which the third will always be register
+/*
+** takes two paramters of which the third will always be register.
+*/
+
 void		apply_zjmp(t_data *data, t_list *elem, unsigned int *params)
 {
 	if (elem->carry == 1)
-		elem->pc = ((elem->pc - (elem->pc % IDX_MOD)) + (elem->pc + params[0]) % IDX_MOD) % MEM_SIZE;
+		elem->pc = (((elem->pc - (elem->pc % IDX_MOD)) +
+					(elem->pc + params[0])) % IDX_MOD) % MEM_SIZE;
 }

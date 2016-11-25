@@ -6,7 +6,7 @@
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/21 13:20:57 by tbui              #+#    #+#             */
-/*   Updated: 2016/11/23 15:51:27 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 12:26:43 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,29 @@ t_list *	copy_elem(t_list *begin, t_list *elem, int pc)
 	return (begin->prev);
 }
 
-void		apply_lfork(t_data *data, t_list *elem, unsigned int *params)// I need param
+void		apply_lfork(t_data *data, t_list *elem, unsigned int *params)
 {
-	data->begin = copy_elem(data->begin, elem, (elem->pc + params[0]) % MEM_SIZE);
+	data->begin = copy_elem(data->begin, elem,
+			(elem->pc + params[0]) % MEM_SIZE);
 	elem->pc = (elem->pc + 3) % MEM_SIZE;
 }
 
-void		apply_fork(t_data *data, t_list *elem, unsigned int *params)// I need param too
+void		apply_fork(t_data *data, t_list *elem, unsigned int *params)
 {
-	data->begin = copy_elem(data->begin, elem, ((elem->pc - (elem->pc % IDX_MOD))
+	data->begin = copy_elem(data->begin, elem,
+			((elem->pc - (elem->pc % IDX_MOD))
 			+ (elem->pc + params[0]) % IDX_MOD) % MEM_SIZE);
 	elem->pc = (elem->pc + 3) % MEM_SIZE;
 }
+
+// This is the shit display !
 
 void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
 {
 	char	c;
 
-	c = (elem->reg_number[data->map[elem->pc + 2]]) % 256;
+	c = (elem->reg_number[data->map[elem->pc + 2]]) % 256; // Why 256 ?
 	if (data->flag_visu == 0)
-		ft_printf("%c", c);
-	elem->pc = ((elem->pc + 3 )% MEM_SIZE);
+		ft_printf("%c\n", c);
+	elem->pc = ((elem->pc + 3) % MEM_SIZE);
 }
