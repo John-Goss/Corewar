@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 12:45:29 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 15:33:50 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:16:55 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	clear_pc(t_data *data)
 	{
 		while (x_y[0] < 192)
 		{
-			if ((nb_champ = find_pc_pos(data->begin, pc, data->nb_champ, i))
+			if ((nb_champ = find_pc_pos(data->begin, pc, data->nb_champ, i)) \
 					!= -1)
 				display_clear_pc(data, i, x_y, nb_champ);
 			x_y[0] += 3;
@@ -97,7 +97,7 @@ void	print_pc(t_data *data)
 	{
 		while (x_y[0] < 192)
 		{
-			if ((nb_champ = find_pc_pos(data->begin, pc, data->nb_champ, i))
+			if ((nb_champ = find_pc_pos(data->begin, pc, data->nb_champ, i)) \
 					!= -1)
 				display_pc(data, i, x_y, nb_champ);
 			x_y[0] += 3;
@@ -113,11 +113,11 @@ void	print_index(t_data *data, t_list *elem, int index)
 {
 	int	x_y[2];
 	int	*pc;
-	int	i;
 	int	nb_champ;
+	int	i;
 
-	pc = set_array_pc(data->begin);
 	i = 0;
+	pc = set_array_pc(data->begin);
 	x_y[0] = 1;
 	x_y[1] = 16;
 	while (x_y[1] < 80)

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 14:54:39 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 15:18:29 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/25 16:14:04 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,16 @@ static void		create_win(t_data *data, t_display *display)
 	mvwprintw(display->screen, 15 / 2 - 1, 224 / 2 - 22 / 2,
 			"COREWAR CHAMPIONSHIP'S");
 	attroff(A_UNDERLINE | A_BOLD);
-	mvwprintw(display->screen, 15 / 2 + 1, 224 / 2 - 16 / 2,
+	mvwprintw(display->screen, 15 / 2 - 1, 224 / 2 - 22 / 2,\
+			"COREWAR CHAMPIONSHIP'S");
+	attroff(A_UNDERLINE | A_BOLD);
+	mvwprintw(display->screen, 15 / 2 + 1, 224 / 2 - 16 / 2, \
 			"|| BattleZONE ||");
 	display->mem = get_str_addr(NULL);
 	get_win_addr(display->screen);
 }
 
-void			print_str(t_data *data)
+void				print_str(t_data *data)
 {
 	int	i;
 	int	x_y[2];
@@ -77,9 +80,9 @@ void			print_str(t_data *data)
 	{
 		while (x_y[0] < 192)
 		{
-			(nb_champ = find_pc_pos(data->begin, pc, data->nb_champ, i)) != -1 ?
-				display_pc(data, i, x_y, nb_champ) : display_classique(data, i,
-						x_y, champ_id(data, i));
+			nb_champ = find_pc_pos(data->begin, pc, data->nb_champ, i);
+			nb_champ != -1 ? display_pc(data, i, x_y, nb_champ) \
+			: display_classique(data, i, x_y, champ_id(data, i));
 			x_y[0] += 3;
 			i++;
 		}
@@ -98,10 +101,8 @@ static int		getch_aff(t_data *data)
 	signal(SIGINT, &sigkill);
 	while (42)
 	{
-		keycode = getch();
-		if (keycode == 27)
-			sigkill(1);
-		else if (keycode == 's')
+		(keycode = getch()) == 27 ? sigkill(1) : 0;
+		if (keycode == 's')
 		{
 			data->flag_slowmode = 1;
 			werase(data->display->win);
