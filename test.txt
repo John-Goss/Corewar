@@ -16,3 +16,16 @@ tester casimir vs the_professor, prend enormement de temps (fait un time dessus,
 essayer avec youforkmytralala vs the_professor, sur le notre youforkmytralala gagne normalement (-1s), normalement the professor gagne
 
 avec THUNDER.cor vs the_professor, sur le notre le champion jouant en premier gagne, sur le corewar normal the_professor gagne quelque soit l'ordre
+
+darksasuke: si le the_professor est mis en premier, the_professor gagne (alors que normalement c'est darksasuke qui gagne), si darksasuke est mis en premier : segfault
+
+dubo : the_professor vs dubo : dubo gagne (ca devrais etre the_professor)
+		dubo vs the_professor : the_professor gagne (bon)
+
+Machine-gun : Machine-gun vs the_professor : Machine-gun won (devrais etre the_professor)
+				the_professor vs Machine-gun : the_professor gagne (bon)
+
+Varimathras : Vari vs prof : vari gagne (devrais etre prof)
+			prof vs Vari : prof gagne (ok)
+
+
