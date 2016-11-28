@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:20:51 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/28 14:03:53 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/28 15:22:16 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,13 @@ void		apply_fork(t_data *data, t_list *elem, unsigned int *params)
 	elem->pc = (elem->pc + 3) % MEM_SIZE;
 }
 
-// This is the shit display !
-
 void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
 {
 	unsigned char	c;
 
 	(void)params;
-	c = (elem->reg_number[data->map[elem->pc + 2]]) % 256; // Why 256 ?
+	c = (elem->reg_number[data->map[elem->pc + 2]]) % 256;
 	if (data->flag_visu == 0)
-		ft_printf("%.2hhx\n", c);
+		ft_printf("%c\n", c);
 	elem->pc = ((elem->pc + 3) % MEM_SIZE);
 }
