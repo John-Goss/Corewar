@@ -8,3 +8,11 @@ live fonctionne;
 lld semble fonctionner;
 lldi semble fonctionner;
 or semble fonctionner;
+
+tester notre corewar avec Rainbow_dash vs the_professor, sur le notre rainbow_dash gagne, sur le corewar normal the_professor gagne
+
+tester casimir vs the_professor, prend enormement de temps (fait un time dessus, 1m34s, pas avec le visu, juste le corewar normal, normalement the_professor gagne)
+
+essayer avec youforkmytralala vs the_professor, sur le notre youforkmytralala gagne normalement (-1s), normalement the professor gagne
+
+avec THUNDER.cor vs the_professor, sur le notre le champion jouant en premier gagne, sur le corewar normal the_professor gagne quelque soit l'ordre
