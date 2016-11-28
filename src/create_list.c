@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/17 15:59:18 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/25 19:50:04 by jle-quer         ###   ########.fr       */
+/*   Created: 2016/11/28 13:55:08 by jle-quer          #+#    #+#             */
+/*   Updated: 2016/11/28 14:02:37 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ t_list		*create_elem2(t_list *begin, int champ_nb, int pc)
 {
 	if (!(begin->prev = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
-	begin->prev->reg_number = ft_memalloc((size_t)(REG_NUMBER * 4));
-	begin->prev->next = (begin);
+	begin->prev->reg_number = ft_memalloc((size_t)(4 * REG_NUMBER));
+	begin->prev->next = begin;
 	begin->prev->prev = NULL;
 	begin->prev->pc = pc;
 	begin->prev->reg_number[0] = champ_nb;
 	begin->prev->carry = 0;
-	begin->prev->process_nb = (begin->process_nb) + 1;
+	begin->prev->process_nb = begin->process_nb + 1;
 	begin->prev->action_time = 0;
 	begin->prev->live = 0;
 	begin->prev->nb_champ = champ_nb;
@@ -81,7 +81,7 @@ t_list		*create_elem(t_list *begin, int champ_nb, int pc)
 	{
 		if (!(begin = (t_list *)malloc(sizeof(t_list))))
 			return (NULL);
-		begin->reg_number = ft_memalloc((size_t)(REG_NUMBER * 4));
+		begin->reg_number = ft_memalloc((size_t)(4 * REG_NUMBER));
 		begin->prev = NULL;
 		begin->next = NULL;
 		begin->pc = 0;

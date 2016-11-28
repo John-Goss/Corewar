@@ -6,7 +6,7 @@
 #    By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/25 18:08:17 by jle-quer          #+#    #+#              #
-#    Updated: 2016/11/25 20:03:46 by jle-quer         ###   ########.fr        #
+#    Updated: 2016/11/28 12:58:36 by jle-quer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,3 +77,5 @@ fclean: clean
 	@echo "\033[0;32mLibft cleaned.\033[0;m"
 
 re: fclean all
+
+.PHONY : all, clean, fclean, re

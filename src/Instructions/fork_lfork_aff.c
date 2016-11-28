@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:20:51 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 19:53:27 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/28 14:03:53 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list		*copy_elem(t_list *begin, t_list *elem, int pc)
 	j = -1;
 	if (!(begin->prev = (t_list *)malloc(sizeof(t_list))))
 		return (NULL);
-	begin->prev->reg_number = ft_memalloc(REG_NUMBER * sizeof(int));
+	begin->prev->reg_number = ft_memalloc(sizeof(int) * REG_NUMBER);
 	while (j++ != REG_NUMBER)
 		begin->prev->reg_number[j] = elem->reg_number[j];
 	begin->prev->prev = NULL;
@@ -53,11 +53,11 @@ void		apply_fork(t_data *data, t_list *elem, unsigned int *params)
 
 void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
 {
-	char	c;
+	unsigned char	c;
 
 	(void)params;
 	c = (elem->reg_number[data->map[elem->pc + 2]]) % 256; // Why 256 ?
 	if (data->flag_visu == 0)
-		ft_printf("%c\n", c);
+		ft_printf("%.2hhx\n", c);
 	elem->pc = ((elem->pc + 3) % MEM_SIZE);
 }

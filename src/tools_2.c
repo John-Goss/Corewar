@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/07 12:45:29 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 19:18:28 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/28 13:28:05 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	clear_pc(t_data *data)
 		{
 			if ((nb_champ = find_pc_pos(data->begin, pc, data->nb_champ, i)) \
 					!= -1)
-				display_clear_pc(data, i, x_y, nb_champ);
+				display_classique(data, i, x_y, nb_champ);
 			x_y[0] += 3;
 			i++;
 		}
