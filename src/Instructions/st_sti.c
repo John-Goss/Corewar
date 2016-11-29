@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/28 13:33:50 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/11/29 15:42:26 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	put_in_bytes(t_data *data, t_list *elem, int address, int reg_value)
 	int		index;
 
 	i = 0;
+	if (address < 0 && elem->pc < -address)
+		address = MEM_SIZE + (elem->pc + address);
 	byte_array[0] = (reg_value >> 24) & 0xFF;
 	byte_array[1] = (reg_value >> 16) & 0xFF;
 	byte_array[2] = (reg_value >> 8) & 0xFF;
