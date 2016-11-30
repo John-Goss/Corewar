@@ -6,7 +6,7 @@
 #    By: vijacque <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/12 13:42:35 by vijacque          #+#    #+#              #
-#    Updated: 2016/10/25 14:42:18 by vijacque         ###   ########.fr        #
+#    Updated: 2016/11/30 12:50:26 by jle-quer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,3 +75,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY : all, clean, fclean, re
