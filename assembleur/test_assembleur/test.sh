@@ -71,6 +71,10 @@ echo "\033[34m"
 ./Corewar_Zaz/asm Corewar_Zaz/champions/zork.s
 ./Corewar_Zaz/asm Corewar_Zaz/champions/the_professor.s
 
+mkdir Corewar_Zaz/hexdump
+mkdir Corewar_Zaz/result
+mkdir Our_Corewar/result
+mkdir Our_Corewar/hexdump
 mv Corewar_Zaz/champions/*.cor Corewar_Zaz/result/
 mv Our_Corewar/*.cor Our_Corewar/result/
 echo "\033[0m\n\n\n"
