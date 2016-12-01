@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 14:54:39 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 19:18:11 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:18:43 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void			print_str(t_data *data)
 		x_y[0] = 1;
 	}
 	init_infos_box(data);
+	refresh();
 }
 
 static int		getch_aff(t_data *data)
@@ -137,11 +138,9 @@ int				aff_window(t_data *data)
 	}
 	create_win(data, display);
 	noecho();
-	refresh();
 	keypad(display->screen, TRUE);
 	data->display = display;
 	get_dsp_struct_addr(data->display);
 	getch_aff(data);
-	refresh();
 	return (1);
 }

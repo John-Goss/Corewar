@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:49:58 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 19:18:40 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:17:20 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		turn_by_slowmode(t_data *data)
 			{
 				werase(data->display->win);
 				print_str(data);
+				refresh();
 				status = 1;
 			}
 			status == 1 ? clear_pc(data) : NULL;
@@ -58,6 +59,7 @@ int		turn_by_slowmode(t_data *data)
 				if (verif_end(data) == 1)
 					break ;
 			init_infos_box(data);
+			refresh();
 		}
 	}
 	return (0);
@@ -73,6 +75,7 @@ int		turn_by_none(t_data *data)
 		{
 			werase(data->display->win);
 			print_str(data);
+			refresh();
 			status = 1;
 		}
 		data->flag_visu == 1 && status == 1 ? clear_pc(data) : NULL;
@@ -85,7 +88,10 @@ int		turn_by_none(t_data *data)
 			if (verif_end(data) == 1)
 				break ;
 		if (data->flag_visu == 1)
+		{
 			init_infos_box(data);
+			refresh();
+		}
 	}
 	return (0);
 }

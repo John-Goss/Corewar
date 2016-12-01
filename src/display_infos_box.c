@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/20 12:40:36 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/28 13:19:09 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:17:41 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		set_live_infos(t_data *data)
 		mvprintw(77, 197, "|| Slowmode Activated ||");
 		mvprintw(78, 196, "Press Space for next cycle");
 	}
-	refresh();
 	return (0);
 }
 
@@ -40,8 +39,6 @@ void	init_infos_box(t_data *data)
 	tmp = data->desc;
 	werase(data->display->info);
 	box(data->display->info, ACS_VLINE, ACS_HLINE);
-	wrefresh(data->display->info);
-	refresh();
 	attron(A_UNDERLINE);
 	mvprintw(16, 196 + 13 / 2, "Infos Players");
 	attroff(A_UNDERLINE);
@@ -53,7 +50,6 @@ void	init_infos_box(t_data *data)
 		tmp = tmp->next;
 	}
 	set_live_infos(data);
-	refresh();
 }
 
 void	display_clear_pc(t_data *data, int i, int *x_y, int champ_id)

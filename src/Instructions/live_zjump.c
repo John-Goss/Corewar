@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:16 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/29 15:47:15 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/01 18:50:09 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void		apply_live(t_data *data, t_list *elem)
 		if (desc->nb_champ && nb_champ && nb_champ == desc->nb_champ)
 		{
 			data->last_live_nb_champ = nb_champ;
-			if (data->flag_visu == 0)
-				ft_printf("Un processus dit que le joueur %d (%s) est en vie\n",
-						nb_champ, desc->name);
+//			if (data->flag_visu == 0)
+//				ft_printf("Un processus dit que le joueur %d (%s) est en vie\n",
+//						nb_champ, desc->name);
 		}
 		desc = desc->next;
 	}
@@ -83,6 +83,5 @@ void		apply_zjmp(t_data *data, t_list *elem, unsigned int *params)
 {
 	(void)data;
 	if (elem->carry == 1)
-		elem->pc = (((elem->pc - (elem->pc % IDX_MOD)) +
-					(elem->pc + params[0])) % IDX_MOD) % MEM_SIZE;
+		elem->pc =  (elem->pc + params[0]) % MEM_SIZE;
 }

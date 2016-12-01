@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/29 15:42:26 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/01 19:03:29 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,29 @@ void	put_in_bytes(t_data *data, t_list *elem, int address, int reg_value)
 	char	byte_array[4];
 	int		i;
 	int		index;
+	int		tmp;
 
 	i = 0;
 	if (address < 0 && elem->pc < -address)
 		address = MEM_SIZE + (elem->pc + address);
+//	printf("%d\n", address);
 	byte_array[0] = (reg_value >> 24) & 0xFF;
 	byte_array[1] = (reg_value >> 16) & 0xFF;
 	byte_array[2] = (reg_value >> 8) & 0xFF;
 	byte_array[3] = reg_value & 0xFF;
-	data->map[(elem->pc + (address % IDX_MOD))] = byte_array[0];
-	data->map[(elem->pc + ((address + 1) % IDX_MOD))] = byte_array[1];
-	data->map[(elem->pc + ((address + 2) % IDX_MOD))] = byte_array[2];
-	data->map[(elem->pc + ((address + 3) % IDX_MOD))] = byte_array[3];
+//	printf("elem->pc = %.2hhx -- IDX_MOD = %d\n",data->map[elem->pc], IDX_MOD);
+//	tmp = (elem->pc - (IDX_MOD  + elem->pc % IDX_MOD)/*(elem->pc % IDX_MOD)) + (elem->pc */+ (address) % IDX_MOD) % MEM_SIZE;
+	tmp = ((elem->pc + address)) % MEM_SIZE;
+	data->map[tmp] = byte_array[0];
+	data->map[(tmp + 1) % MEM_SIZE] = byte_array[1];
+	data->map[(tmp + 2) % MEM_SIZE] = byte_array[2];
+	data->map[(tmp + 3) % MEM_SIZE] = byte_array[3];
+//	exit(0);
 	if (data->flag_visu == 1)
 	{
 		while (i < 4)
 		{
-			index = (elem->pc + ((address + i) % IDX_MOD));
+			index = (tmp + i) % MEM_SIZE;
 			print_index(data, elem, index);
 			i++;
 		}

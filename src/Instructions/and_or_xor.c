@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:19:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 20:01:27 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/01 15:23:25 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	apply_and(t_data *data, t_list *elem, unsigned int *params,
 	else if (param_type[1] == DIR_CODE || param_type[1] == IND_CODE)
 		value_two = params[1];
 	elem->reg_number[params[2]] = value_one & value_two;
-	if (!elem->carry)
+	if (elem->reg_number[params[2]] == 0)
 		elem->carry = 1;
-	else if (elem->carry)
+	else
 		elem->carry = 0;
 }
 
@@ -54,9 +54,9 @@ void	apply_or(t_data *data, t_list *elem, unsigned int *params,
 	else if (param_type[1] == DIR_CODE || param_type[1] == IND_CODE)
 		value_two = params[1];
 	elem->reg_number[params[2]] = value_one | value_two;
-	if (!elem->carry)
+	if (elem->reg_number[params[2]] == 0)
 		elem->carry = 1;
-	else if (elem->carry)
+	else
 		elem->carry = 0;
 }
 
@@ -78,8 +78,8 @@ void	apply_xor(t_data *data, t_list *elem, unsigned int *params,
 	else if (param_type[1] == DIR_CODE || param_type[1] == IND_CODE)
 		value_two = params[1];
 	elem->reg_number[params[2]] = value_one ^ value_two;
-	if (!elem->carry)
+	if (elem->reg_number[params[2]] == 0)
 		elem->carry = 1;
-	else if (elem->carry)
+	else
 		elem->carry = 0;
 }

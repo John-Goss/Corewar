@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:53 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 19:26:08 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/01 17:10:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,24 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 		unsigned int *param_type)
 {
+	static int i = 0;
+
+	i++;
+	if (i == 2)
+	{
+//	printf("reg = %d", params[0]);
+	}
 	(void)data;
-	if (elem->carry)
-		elem->carry = 0;
-	else if (!elem->carry)
-		elem->carry = 1;
 	if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
 	{
+		if (params[0] == 0)
+			elem->carry = 1;
+		else
+			elem->carry = 0;
 		if (params[1] < 16)
 			elem->reg_number[params[1]] = params[0];
 	}
 	else
 		elem->pc = (elem->pc + 1) % MEM_SIZE;
+
 }

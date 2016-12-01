@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:48 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 19:22:50 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/01 17:01:26 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,9 @@ unsigned int	*get_params(unsigned int *par_types, t_data *data, t_list *elem)
 			cpt[1] = cpt[1] + 2;
 		}
 		else if (par_types[cpt[0]] == DIR_CODE)
+		{
 			params[cpt[0]] = get_dir_value(data, elem, &cpt[1]);
+		}
 	}
 	data->dep = cpt[1];
 	return (params);

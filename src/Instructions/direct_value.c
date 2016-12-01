@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:20:22 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 19:20:34 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/01 17:14:51 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ char			*get_dir_value_quatre(t_data *data, t_list *elem, int prm_pos)
 	four_bytes = ft_strnew(5);
 	while (k < REG_SIZE)
 	{
-		four_bytes[k] = data->map[i % MEM_SIZE];
+		four_bytes[k++] = data->map[i % MEM_SIZE];
 		i++;
-		k++;
 	}
 	return (four_bytes);
 }
