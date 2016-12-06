@@ -6,13 +6,13 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:49:58 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/01 16:17:20 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/06 14:53:40 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void	dump_map(t_data *data)
+void		dump_map(t_data *data)
 {
 	int	i;
 	int	j;
@@ -34,7 +34,14 @@ void	dump_map(t_data *data)
 	exit(0);
 }
 
-int		turn_by_slowmode(t_data *data)
+static void	first_call_display_map(t_data *data)
+{
+	werase(data->display->win);
+	print_str(data);
+	refresh();
+}
+
+int			turn_by_slowmode(t_data *data)
 {
 	static int	status = 0;
 	int			keycode;
@@ -46,9 +53,7 @@ int		turn_by_slowmode(t_data *data)
 		{
 			if (status == 0)
 			{
-				werase(data->display->win);
-				print_str(data);
-				refresh();
+				first_call_display_map(data);
 				status = 1;
 			}
 			status == 1 ? clear_pc(data) : NULL;
@@ -58,14 +63,14 @@ int		turn_by_slowmode(t_data *data)
 			if ((--(data->cycle_to_die)) <= 0)
 				if (verif_end(data) == 1)
 					break ;
-			init_infos_box(data);
-			refresh();
+			data->flag_visu == 1 ? init_infos_box(data) : NULL;
+			data->flag_visu == 1 ? refresh() : NULL;
 		}
 	}
 	return (0);
 }
 
-int		turn_by_none(t_data *data)
+int			turn_by_none(t_data *data)
 {
 	static int	status = 0;
 
@@ -73,9 +78,7 @@ int		turn_by_none(t_data *data)
 	{
 		if (data->flag_visu == 1 && status == 0)
 		{
-			werase(data->display->win);
-			print_str(data);
-			refresh();
+			first_call_display_map(data);
 			status = 1;
 		}
 		data->flag_visu == 1 && status == 1 ? clear_pc(data) : NULL;
@@ -87,11 +90,8 @@ int		turn_by_none(t_data *data)
 		if ((--(data->cycle_to_die)) <= 0)
 			if (verif_end(data) == 1)
 				break ;
-		if (data->flag_visu == 1)
-		{
-			init_infos_box(data);
-			refresh();
-		}
+		data->flag_visu == 1 ? init_infos_box(data) : NULL;
+		data->flag_visu == 1 ? refresh() : NULL;
 	}
 	return (0);
 }

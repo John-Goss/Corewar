@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/06 13:34:14 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/06 14:46:42 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,24 @@ void	put_in_bytes(t_data *data, t_list *elem, int address, int reg_value)
 	int		index;
 	int		tmp;
 
-	i = 0;
+	i = -1;
 	if (address < 0 && elem->pc < -address)
 		address = MEM_SIZE + (elem->pc + address);
-//	printf("%d\n", address);
 	byte_array[0] = (reg_value >> 24) & 0xFF;
 	byte_array[1] = (reg_value >> 16) & 0xFF;
 	byte_array[2] = (reg_value >> 8) & 0xFF;
 	byte_array[3] = reg_value & 0xFF;
-//	printf("elem->pc = %.2hhx -- IDX_MOD = %d\n",data->map[elem->pc], IDX_MOD);
-//	tmp = (elem->pc - (IDX_MOD  + elem->pc % IDX_MOD)/*(elem->pc % IDX_MOD)) + (elem->pc */+ (address) % IDX_MOD) % MEM_SIZE;
 	tmp = ((elem->pc + address)) % MEM_SIZE;
 	data->map[tmp] = byte_array[0];
 	data->map[(tmp + 1) % MEM_SIZE] = byte_array[1];
 	data->map[(tmp + 2) % MEM_SIZE] = byte_array[2];
 	data->map[(tmp + 3) % MEM_SIZE] = byte_array[3];
-//	exit(0);
 	if (data->flag_visu == 1)
 	{
-		while (i < 4)
+		while (++i < 4)
 		{
 			index = (tmp + i) % MEM_SIZE;
 			print_index(data, elem, index);
-			i++;
 		}
 	}
 }

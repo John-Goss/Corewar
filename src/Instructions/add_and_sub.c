@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:18:48 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/01 15:19:15 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/06 14:42:34 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void		apply_add(t_data *data, t_list *elem, unsigned int *params,
 	}
 	store = elem->reg_number[params[0]] + elem->reg_number[params[1]];
 	if (store == 0)
-			elem->carry = 1;
+		elem->carry = 1;
 	else
-			elem->carry = 0;
+		elem->carry = 0;
 	elem->reg_number[params[2]] = store;
 }
 
