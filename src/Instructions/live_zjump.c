@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:16 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/06 14:43:56 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/06 17:44:20 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void		apply_live(t_data *data, t_list *elem)
 
 void		apply_zjmp(t_data *data, t_list *elem, unsigned int *params)
 {
+	short	i;
+
+	i = (short)params[0];
 	(void)data;
 	if (elem->carry == 1)
-		elem->pc = (elem->pc + params[0]) % MEM_SIZE;
+		elem->pc = (elem->pc + (i % IDX_MOD)) % MEM_SIZE;
 }

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/06 14:46:42 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/06 17:07:55 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 		value_two = params[2];
 	else if (param_types[2] == REG_CODE)
 		value_two = elem->reg_number[params[2]];
-	address = value_one + value_two;
+	address = (value_one + value_two);
 	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);
 }
 
@@ -80,9 +80,12 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 		unsigned int *param_types)
 {
+	int i;
+
+	i = ((int)params[1]) % IDX_MOD;
 	if (param_types[1] == IND_CODE)
-		put_in_bytes(data, elem, (params[1] - elem->pc),
+		put_in_bytes(data, elem, (i - elem->pc),
 				elem->reg_number[params[0]]);
 	else if (param_types[1] == REG_CODE)
-		elem->reg_number[params[1]] = elem->reg_number[params[0]];
+		elem->reg_number[i] = elem->reg_number[params[0]];
 }
