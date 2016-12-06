@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:49:58 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/06 14:53:40 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/06 15:42:53 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void		dump_map(t_data *data)
 static void	first_call_display_map(t_data *data)
 {
 	werase(data->display->win);
+	box(data->display->win, ACS_VLINE, ACS_HLINE);
 	print_str(data);
 	refresh();
 }
@@ -63,8 +64,7 @@ int			turn_by_slowmode(t_data *data)
 			if ((--(data->cycle_to_die)) <= 0)
 				if (verif_end(data) == 1)
 					break ;
-			data->flag_visu == 1 ? init_infos_box(data) : NULL;
-			data->flag_visu == 1 ? refresh() : NULL;
+			init_infos_box(data);
 		}
 	}
 	return (0);
@@ -90,8 +90,7 @@ int			turn_by_none(t_data *data)
 		if ((--(data->cycle_to_die)) <= 0)
 			if (verif_end(data) == 1)
 				break ;
-		data->flag_visu == 1 ? init_infos_box(data) : NULL;
-		data->flag_visu == 1 ? refresh() : NULL;
+		data->flag_visu == 1 ? init_infos_box(data) : 0;
 	}
 	return (0);
 }
