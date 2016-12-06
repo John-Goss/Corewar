@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 13:55:08 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/28 14:02:37 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/06 12:40:55 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_desc		*create_desc2(t_desc **desc, int nb)
 		elem->next->nb_champ = find_first_nb(tab);
 	elem->next->size = 0;
 	elem->next->desc = (char *)malloc(sizeof(char) * 2049);
+	elem->next->dead = 0;
+	elem->next->live = 0;
 	return (elem->next);
 }
 
@@ -53,6 +55,8 @@ t_desc		*create_desc(t_desc **desc, int nb)
 		else
 			(*desc)->nb_champ = 1;
 		(*desc)->desc = (char *)malloc(sizeof(char) * 2049);
+		(*desc)->dead = 0;
+		(*desc)->live = 0;
 		return (*desc);
 	}
 	return (create_desc2(desc, nb));

@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/28 14:04:43 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/06 12:51:55 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ typedef struct				s_desc
 	int						pc;
 	unsigned int			size;
 	struct s_desc			*next;
+	int						dead;
+	int						live;
 }							t_desc;
 
 typedef struct				s_display
@@ -141,6 +143,7 @@ int							verif_valid(int argc, char **argv, t_data *data);
 void						turn(t_data *data);
 int							verif_end(t_data *data);
 void						check_who_is_alive(t_data *data);
+void						check_who_is_alive_champ(t_data *data);
 void						parse_map(int argc, char **argv, t_data *data);
 void						init_pt_tab(void (**tab)(t_data *data,
 							t_list *elem));

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/01 19:03:29 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/06 13:34:14 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 		unsigned int *param_types)
 {
 	if (param_types[1] == IND_CODE)
-		put_in_bytes(data, elem, (params[1] - elem->pc) % IDX_MOD,
+		put_in_bytes(data, elem, (params[1] - elem->pc),
 				elem->reg_number[params[0]]);
 	else if (param_types[1] == REG_CODE)
 		elem->reg_number[params[1]] = elem->reg_number[params[0]];

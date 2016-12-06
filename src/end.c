@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:52:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/12/01 16:06:12 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/06 13:04:49 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ int			verif_end(t_data *data)
 			data->check = 0;
 		data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->ctd_nbr);
 		data->ctd_nbr++;
-		check_who_is_alive(data);
 	}
 	else
 	{
-		(data->check)++;
 		data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->ctd_nbr);
-		check_who_is_alive(data);
+		(data->check)++;
 	}
+	check_who_is_alive(data);
+	check_who_is_alive_champ(data);
 	data->live_cpt = 0;
 	if (data->begin)
 		return (0);
@@ -84,13 +84,26 @@ t_list		*destroy_elem(t_data *data, t_list *elem)
 	return (data->begin);
 }
 
+void		check_who_is_alive_champ(t_data *data)
+{
+	t_desc	*elem;
+
+	elem = data->desc;
+	while (elem)
+	{
+		if (elem->dead == 0 && elem->live > 0)
+			elem->live = 0;
+		else
+			elem->dead = 1;
+		elem = elem->next;
+	}
+}
+
 void		check_who_is_alive(t_data *data)
 {
-	int		i;
 	t_list	*elem;
 
 	elem = data->begin;
-	i = 1;
 	while (elem)
 	{
 		if (elem->live == 0)
