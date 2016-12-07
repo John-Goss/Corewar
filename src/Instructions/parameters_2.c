@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:03 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/11/25 19:23:05 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/07 18:46:42 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ unsigned int	*type_tab_make(char *types_bin, unsigned int *type_tab)
 	i = 0;
 	ty = 0;
 	para_bi = ft_strnew(2);
-	while (types_bin && types_bin[i])
+	while (types_bin && types_bin[i] && i < 6)
 	{
 		k = 0;
 		while (k <= 1)

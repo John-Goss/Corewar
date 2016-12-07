@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/06 17:07:55 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/07 21:37:13 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	put_in_bytes(t_data *data, t_list *elem, int address, int reg_value)
 	int		i;
 	int		index;
 	int		tmp;
-
+	static int t = 0;
 	i = -1;
 	if (address < 0 && elem->pc < -address)
 		address = MEM_SIZE + (elem->pc + address);
@@ -26,7 +26,7 @@ void	put_in_bytes(t_data *data, t_list *elem, int address, int reg_value)
 	byte_array[1] = (reg_value >> 16) & 0xFF;
 	byte_array[2] = (reg_value >> 8) & 0xFF;
 	byte_array[3] = reg_value & 0xFF;
-	tmp = ((elem->pc + address)) % MEM_SIZE;
+	tmp = (elem->pc + (address % IDX_MOD)) % MEM_SIZE;
 	data->map[tmp] = byte_array[0];
 	data->map[(tmp + 1) % MEM_SIZE] = byte_array[1];
 	data->map[(tmp + 2) % MEM_SIZE] = byte_array[2];
@@ -39,6 +39,9 @@ void	put_in_bytes(t_data *data, t_list *elem, int address, int reg_value)
 			print_index(data, elem, index);
 		}
 	}
+	t++;
+	if (t == 10)
+		exit(0);
 }
 
 /*
@@ -60,9 +63,16 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 	address = 0;
 	value_one = 0;
 	value_two = 0;
-	if (param_types[1] == DIR_CODE || param_types[1] == IND_CODE)
+	if (param_types[1] == IND_CODE)
+	{
+		value_one = (data->map[params[1] % MEM_SIZE] << 24 & 0xff000000) |
+		(data->map[(params[1] + 1) % MEM_SIZE] << 16 & 0xff0000) |
+		(data->map[(params[1] + 2) % MEM_SIZE] << 8 & 0xff00) |
+		(data->map[(params[1] + 3) % MEM_SIZE] & 0xff);
+	}
+	else if (param_types[1] == DIR_CODE)
 		value_one = params[1];
-	else if (param_types[0] == REG_CODE)
+	else if (param_types[1] == REG_CODE)
 		value_one = elem->reg_number[params[1]];
 	if (param_types[2] == DIR_CODE)
 		value_two = params[2];
@@ -82,10 +92,25 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 {
 	int i;
 
-	i = ((int)params[1]) % IDX_MOD;
 	if (param_types[1] == IND_CODE)
-		put_in_bytes(data, elem, (i - elem->pc),
+	{
+//		printf("params = %d\n",params[1]);
+		params[1] = params[1] - elem->pc;
+/*		printf("%d\n",params[1]);
+		printf("pc = %d\n", elem->pc);
+		printf("address = %d\n", params[1]);
+		printf("map = %hhx\n", data->map[(params[1]) % MEM_SIZE]);
+		printf("map = %hhx\n", data->map[(params[1] +1) % MEM_SIZE]);
+		printf("map = %hhx\n", data->map[(params[1]+2) % MEM_SIZE]);
+		printf("map = %hhx\n", data->map[(params[1]+3) % MEM_SIZE]);*/
+		i = (data->map[params[1] % MEM_SIZE] << 24 & 0xff000000) |
+		(data->map[(params[1] + 1) % MEM_SIZE] << 16 & 0xff0000) |
+		(data->map[(params[1] + 2) % MEM_SIZE] << 8 & 0xff00) |
+		(data->map[(params[1] + 3) % MEM_SIZE] & 0xff);
+//		printf("i = %d\n", i);
+		put_in_bytes(data, elem, params[1],
 				elem->reg_number[params[0]]);
+	}
 	else if (param_types[1] == REG_CODE)
-		elem->reg_number[i] = elem->reg_number[params[0]];
+		elem->reg_number[params[0]] = elem->reg_number[params[0]];
 }

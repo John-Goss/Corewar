@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:12 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/01 17:08:59 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/07 17:02:17 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char			*get_two_bytes(t_data *data, t_list *elem, int prm_pos)
 
 unsigned int	get_ind_value(t_data *data, t_list *elem, int prm_pos)
 {
-	unsigned int	ind_value;
+	int	ind_value;
 	char			*transfer_bytes;
 
 	ind_value = 0;
