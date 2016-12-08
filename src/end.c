@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:52:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/12/06 13:04:49 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/08 18:27:24 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,15 @@ int			verif_end(t_data *data)
 
 	i = 1;
 	j = 0;
-	if (data->check == MAX_CHECKS || data->live_cpt >= NBR_LIVE)
+	if (data->check == (MAX_CHECKS - 1) || (int)data->live_cpt >= NBR_LIVE)
 	{
-		if (data->check == MAX_CHECKS)
-			data->check = 0;
 		data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->ctd_nbr);
+			data->check = 0;
 		data->ctd_nbr++;
 	}
 	else
 	{
-		data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->ctd_nbr);
+		data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * (data->ctd_nbr - 1));
 		(data->check)++;
 	}
 	check_who_is_alive(data);

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:12 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/07 17:02:17 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/08 14:56:22 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,5 @@ unsigned int	get_ind_value(t_data *data, t_list *elem, int prm_pos)
 	transfer_bytes = NULL;
 	transfer_bytes = get_two_bytes(data, elem, prm_pos);
 	ind_value = trans_two_bytes(transfer_bytes);
-	ind_value = (elem->pc + ind_value) % MEM_SIZE;
 	return (ind_value);
 }

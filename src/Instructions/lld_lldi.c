@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:33 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/01 15:23:04 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/08 18:23:46 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	apply_lld(t_data *data, t_list *elem, unsigned int *param_types,
 	if (param_types[0] == DIR_CODE)
 		elem->reg_number[params[1]] = params[0];
 	else if (param_types[0] == IND_CODE)
-		elem->reg_number[params[1]] = get_ind_value(data, elem, params[0]);
+		elem->reg_number[params[1]] = recup_ind(data, (short)params[0], elem->pc);
 	else if (param_types[0] == REG_CODE)
 		elem->reg_number[params[1]] = elem->reg_number[params[0]];
 	if (elem->reg_number[params[1]] == 0)
@@ -44,7 +44,7 @@ void	apply_lldi(t_data *data, t_list *elem, unsigned int *param_types,
 	if (param_types[0] == DIR_CODE)
 		value_one = params[0];
 	else if (param_types[0] == IND_CODE)
-		value_one = get_ind_value(data, elem, params[0]);
+		value_one = recup_ind(data, (short)params[0], elem->pc);
 	else if (param_types[0] == REG_CODE)
 		value_one = elem->reg_number[params[0]];
 	if (param_types[1] == DIR_CODE)

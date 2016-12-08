@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:53 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/07 20:08:50 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/08 18:24:13 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 			(param_types[1] == DIR_CODE ||
 			param_types[1] == REG_CODE))
 	{
-	if (param_types[0] == DIR_CODE || param_types[0] == IND_CODE)
+	if (param_types[0] == DIR_CODE)
 		value_one = get_ind_size_at_add(data, elem, params[0]);
+	else if (param_types[0] == IND_CODE)
+		value_one = recup_ind(data, (short)params[0], elem->pc);
 	else if (param_types[0] == REG_CODE)
 		value_one = get_ind_size_at_add(data, elem, elem->reg_number[params[0]]
 				);
@@ -83,14 +85,9 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 			elem->carry = 0;
 		i = params[0];
 		if (param_type[0] == IND_CODE)
-		{
-			i = (data->map[params[1] % MEM_SIZE] << 24 & 0xff000000) |
-			(data->map[(params[1] + 1) % MEM_SIZE] << 16 & 0xff0000) |
-			(data->map[(params[1] + 2) % MEM_SIZE] << 8 & 0xff00) |
-			(data->map[(params[1] + 3) % MEM_SIZE] & 0xff);
-		}
+			i = recup_ind(data ,((short)params[1]) % IDX_MOD, elem->pc);
 		if (params[1] < 16)
-			elem->reg_number[params[1]] = (i % IDX_MOD);
+			elem->reg_number[params[1]] = i;
 	}
 	else
 		elem->pc = (elem->pc + 1) % MEM_SIZE;

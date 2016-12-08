@@ -25,12 +25,17 @@ Rainbow_dash.cor big_feet.cor corelol.cor live.cor
 
 live.cor different = normal;
 bee_gees.cor est ok;
+turtle.cor = ok;
+
 ldi ne marche pas avec les indirect mais il n'y a pas de champions qui s'en servent;
 
 On n'aura jamais le meme resultat pour le champion live.cor de lsrigna, il n'effectue pas de live avant la fin du premier cycle to die, donc le premier processus meurt chez nous mais zaz ne tue pas un processus faisant un fork. A ne pas reproduire selon moi.
 J'ai remarque que la vm de zaz prenait un live comme correct meme si le numero n'est pas attribue.
 Et pour finir meme si aucun live n'est fait il designe un champion quand meme.
 
-il faut finir st en se basant sur turtle.cor et faire des tests.
-modifier toutes les actions prenant un ind en se basant sur sti.
-attention la valeur indirect que l'on recoit correspond a la valeur indirect + elem->pc;
+modifier toutes les actions prenant un ind en se basant sur st.
+
+remplacer x par le cycle voulu + remplacer y par un champion et regler la taille du dump de notre champion a 64.
+a lancer a la racine de notre corewar;
+
+./corewar -dump x test_corewar/y.cor > mine.txt;./Corewar_ZAZ_Test/corewar -d x test_corewar/y > mine2.txt; diff mine.txt mine2.txt;

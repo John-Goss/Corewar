@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/12/06 12:51:55 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/08 18:24:39 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ void						parse_map(int argc, char **argv, t_data *data);
 void						init_pt_tab(void (**tab)(t_data *data,
 							t_list *elem));
 int							test_int(char *s);
+int							recup_ind(t_data *data, short tmp, int pc);
 
 int							turn_by_none(t_data *data);
 int							turn_by_slowmode(t_data *data);
