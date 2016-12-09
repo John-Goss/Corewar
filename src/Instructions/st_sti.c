@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/09 14:52:19 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/09 22:34:17 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	put_in_bytes(t_data *data, t_list *elem, int address, int reg_value)
 	int		i;
 	int		index;
 	int		tmp;
-	i = -1;
 
+	i = -1;
 	byte_array[0] = (reg_value >> 24) & 0xFF;
 	byte_array[1] = (reg_value >> 16) & 0xFF;
 	byte_array[2] = (reg_value >> 8) & 0xFF;
@@ -72,6 +72,7 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 	if (address < 0 && elem->pc < -(address))
 		address = MEM_SIZE + address;
 	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);
+//	printf("add = %d -- reg = %d <<< = %d\n",address, params[0], elem->reg_number[params[0]]);
 }
 
 /*
@@ -93,8 +94,14 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 				elem->reg_number[params[0]]);
 	}
 	else if (param_types[1] == REG_CODE)
-		elem->reg_number[params[0]] = elem->reg_number[params[0]];
-}
+	{
+		elem->reg_number[params[1]] = elem->reg_number[params[0]];
+	}
+/*	if (data->cycle >= 4400 && data->cycle <= 4800)
+	{
+		printf("address = %d regnb = %d, value reg = %d cycle = %d\n", i, params[0],elem->reg_number[params[0]],data->cycle);
+	}
+*/}
 
 int		recup_ind(t_data *data, short tmp, int pc)
 {

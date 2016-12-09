@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/07 18:30:52 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/09 22:32:31 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	instruction_exec(t_data *data, t_list *elem)
 	if (opc == 0x0C || opc == 0x09 || opc == 0x01 || opc == 0x10 || opc == 0x0F)
 	{
 		instr_no_ocp(data, elem, params);
+		if (opc == 0x09 && data->dep == 5)
+			data->dep = 3;
 		tmp == elem->pc ? (elem->pc = (elem->pc + data->dep) % MEM_SIZE) : 0;
 		return ;
 	}

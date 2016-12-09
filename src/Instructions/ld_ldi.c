@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:53 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/09 14:51:23 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/09 21:19:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 	value_one = 0;
 	value_two = 0;
 	s = 0;
-	exit(0);
 	if ((param_types[0] == DIR_CODE || param_types[0] == IND_CODE ||
 				param_types[0] == REG_CODE) &&
 			(param_types[1] == DIR_CODE ||
@@ -77,6 +76,7 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 {
 	int	i;
 
+	i = 0;
 	if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
 	{
 		if (params[0] == 0)
@@ -84,11 +84,14 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 		else
 			elem->carry = 0;
 		i = params[0];
+//		printf("data = %d\n", elem->carry);
+//		printf("i = %d, params[0] = %d\n",i,params[0]);
 		if (param_type[0] == IND_CODE)
-			i = recup_ind(data ,((short)params[1]) % IDX_MOD, elem->pc);
+			i = recup_ind(data ,((short)(params[0])) % IDX_MOD, elem->pc);
 		if (params[1] < 16)
 			elem->reg_number[params[1]] = i;
 	}
 	else
 		elem->pc = (elem->pc + 1) % MEM_SIZE;
+//	printf("reg = %d -- store = %d -- cycle = %d\n",params[0], params[1], data->cycle);
 }

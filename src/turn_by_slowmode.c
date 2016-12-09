@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:49:58 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/08 16:51:19 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/09 22:05:35 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ void		dump_map(t_data *data)
 
 	i = 0;
 	j = 0;
+	printf("carry = %d\n",data->begin->carry);
+	printf("pc = %d\n",data->begin->pc);
+	printf("%hhx\n",data->map[data->begin->pc]);
+	exit(0);
 	while (j < MEM_SIZE)
 	{
 		while (i++ < 32)
@@ -87,7 +91,6 @@ int			turn_by_none(t_data *data)
 		if (!(data->flag_dump--))
 			dump_map(data);
 		(data->cycle)++;
-//		printf("DANS TURN ctd = %d, cycle = %d\n", data->cycle_to_die, data->cycle);
 		if ((--(data->cycle_to_die)) <= 0)
 			if (verif_end(data) == 1)
 				break ;

@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:55:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/25 19:17:11 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/09 20:24:45 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		process_action(t_data *data, t_list *elem)
 	if ((!(data->map[elem->pc] >= 0x01 && data->map[elem->pc] <= 0x10)) &&
 			!elem->action_time)
 	{
-		(elem->pc)++;
+		elem->pc++;
 		elem->pc = elem->pc % MEM_SIZE;
 		return ;
 	}
@@ -82,8 +82,10 @@ void		turn(t_data *data)
 	elem = data->begin;
 	while (elem)
 	{
+//		printf("pc = %d nb = %d\n",elem->pc, elem->process_nb );
 		process_action(data, elem);
 		elem = elem->next;
 	}
+//	printf("cycle = %d\n\n", data->cycle);
 	return ;
 }

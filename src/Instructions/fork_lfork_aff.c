@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:20:51 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/07 18:30:50 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/09 19:13:33 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
 	if (data->flag_visu == 0)
 		ft_printf("%.2hhx\n", c);
 	elem->pc = ((elem->pc + 2) % MEM_SIZE);
+	getch();
 }
