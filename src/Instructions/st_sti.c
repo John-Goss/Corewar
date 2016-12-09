@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/08 18:35:47 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/09 14:52:19 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 	if (param_types[1] == IND_CODE)
 		value_one = recup_ind(data, (short)params[1], elem->pc);
 	else if (param_types[1] == DIR_CODE)
-		value_one = params[1];
+		value_one = (short)params[1];
 	else if (param_types[1] == REG_CODE)
 		value_one = elem->reg_number[params[1]];
 	if (param_types[2] == DIR_CODE)
