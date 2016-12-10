@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:20:51 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/09 19:13:33 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/10 18:06:54 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,21 @@ void		apply_fork(t_data *data, t_list *elem, unsigned int *params)
 	short	i;
 
 	i = (short)(params[0]);
+	printf("FORK : pc = %d -- address = %d -- new pc = %d -- cycle = %d\n", elem->pc, i, (elem->pc + (i % IDX_MOD) % MEM_SIZE), data->cycle);
 	data->begin = copy_elem(data->begin, elem,
 		(elem->pc + (i % IDX_MOD)) % MEM_SIZE);
 	elem->pc = (elem->pc + 3) % MEM_SIZE;
 }
 
-void		apply_aff(t_data *data, t_list *elem, unsigned int *params)
+void		apply_aff(t_data *data, t_list *elem, unsigned int *param_type,
+		unsigned int *params)
 {
 	char	c;
 
+	(void)param_type;
 	(void)params;
 	c = (elem->reg_number[data->map[elem->pc + 2]]) % 256;
-	if (data->flag_visu == 0)
-		ft_printf("%.2hhx\n", c);
+//	if (data->flag_visu == 0)
+//		ft_printf("%.2hhx\n", c);
 	elem->pc = ((elem->pc + 2) % MEM_SIZE);
-	getch();
 }

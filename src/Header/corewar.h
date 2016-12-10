@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/12/08 18:24:39 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/10 16:48:09 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ void						apply_lldi(t_data *data, t_list *elem,
 void						apply_lfork(t_data *data, t_list *elem,
 		unsigned int *params);
 void						apply_aff(t_data *data, t_list *elem,
-		unsigned int *params);
+		unsigned int *param_type, unsigned int *params);
 
 unsigned int				*type_tab_make(char *types_bin,
 		unsigned int *type_tab);

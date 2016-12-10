@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:53 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/09 21:19:07 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/10 18:13:28 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 			param_types[1] == REG_CODE))
 	{
 	if (param_types[0] == DIR_CODE)
-		value_one = (short)get_ind_size_at_add(data, elem, params[0]);
+		value_one = get_ind_size_at_add(data, elem, (short)params[0]);
 	else if (param_types[0] == IND_CODE)
 		value_one = recup_ind(data, (short)params[0], elem->pc);
 	else if (param_types[0] == REG_CODE)
@@ -88,6 +88,7 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 //		printf("i = %d, params[0] = %d\n",i,params[0]);
 		if (param_type[0] == IND_CODE)
 			i = recup_ind(data ,((short)(params[0])) % IDX_MOD, elem->pc);
+		printf("LD : i = %d --- params[1] = %d \n", i, params[1] + 1);
 		if (params[1] < 16)
 			elem->reg_number[params[1]] = i;
 	}

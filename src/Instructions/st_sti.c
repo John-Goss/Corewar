@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/09 22:34:17 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/10 18:44:52 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 	else if (param_types[2] == REG_CODE)
 		value_two = elem->reg_number[params[2]];
 	address = (value_one + value_two) % IDX_MOD;
-	if (address < 0 && elem->pc < -(address))
-		address = MEM_SIZE + address;
 	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);
-//	printf("add = %d -- reg = %d <<< = %d\n",address, params[0], elem->reg_number[params[0]]);
+	printf("STI : add = %d -- regnb = %d contenue de reg_nb = %d, cycle = %d\n",address, params[0], elem->reg_number[params[0]], data->cycle);
 }
 
 /*
@@ -84,31 +82,33 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 		unsigned int *param_types)
 {
 	int		i;
-
 	if (param_types[1] == IND_CODE)
 	{
 		i = (short)params[1];
 		if (i < 0)
+		{
+			i %= MEM_SIZE;
 			i = MEM_SIZE + i;
+		}
 		put_in_bytes(data, elem, i,
 				elem->reg_number[params[0]]);
+	printf("ST : address = %d regnb = %d, contenue de reg = %d cycle = %d\n", i, params[0],elem->reg_number[params[0]],data->cycle);
 	}
 	else if (param_types[1] == REG_CODE)
 	{
 		elem->reg_number[params[1]] = elem->reg_number[params[0]];
 	}
-/*	if (data->cycle >= 4400 && data->cycle <= 4800)
-	{
-		printf("address = %d regnb = %d, value reg = %d cycle = %d\n", i, params[0],elem->reg_number[params[0]],data->cycle);
-	}
-*/}
+}
 
 int		recup_ind(t_data *data, short tmp, int pc)
 {
 	int	i;
 
 	if (tmp < 0 && pc < -(tmp))
+	{
+		tmp %= MEM_SIZE;
 		tmp = MEM_SIZE + (tmp);
+	}
 
 	tmp += pc;
 	i = (data->map[tmp % MEM_SIZE] << 24 & 0xff000000) |

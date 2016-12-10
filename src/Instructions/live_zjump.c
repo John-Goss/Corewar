@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:16 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/09 22:33:08 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/10 18:10:44 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		apply_live(t_data *data, t_list *elem)
 	elem->pc = ((elem->pc + 5) % MEM_SIZE);
 	(elem->live)++;
 	(data->live_cpt)++;
+	printf("live -- cycle : %d\n", data->cycle);
 	while (desc)
 	{
 	(desc->live)++;
@@ -50,6 +51,7 @@ void		apply_zjmp(t_data *data, t_list *elem, unsigned int *params)
 
 	i = (short)params[0];
 	(void)data;
+	printf("ZJUMP : pc = %d -- carry = %d -- dist = %d, cycle : %d\n",elem->pc, elem->carry, i  % IDX_MOD, data->cycle);
 	if (elem->carry == 1)
 		elem->pc = (elem->pc + (i % IDX_MOD)) % MEM_SIZE;
 }

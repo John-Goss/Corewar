@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/09 22:32:31 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/10 18:41:09 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	instr_no_ocp(t_data *data, t_list *elem, unsigned int *params)
 		apply_zjmp(data, elem, params);
 	else if (data->map[elem->pc] == 0x0F)
 		apply_lfork(data, elem, params);
-	else if (data->map[elem->pc] == 0x10)
-		apply_aff(data, elem, params);
 }
 
 void	instr_w_ocp(t_data *data, t_list *elem, unsigned int *params,
@@ -51,6 +49,8 @@ void	instr_w_ocp(t_data *data, t_list *elem, unsigned int *params,
 		apply_lldi(data, elem, param_types, params);
 	else if (data->map[elem->pc] == 0x0D)
 		apply_lld(data, elem, param_types, params);
+	else if (data->map[elem->pc] == 0x10)
+		apply_aff(data, elem, param_types, params);
 }
 
 int		protect_registers(unsigned int *params, unsigned int *param_types)
@@ -102,4 +102,6 @@ void	instruction_exec(t_data *data, t_list *elem)
 	}
 	instr_w_ocp(data, elem, params, param_types);
 	elem->pc = (elem->pc + data->dep) % MEM_SIZE;
+//	if (opc == 0x03)
+//		printf("IL Y A UN ST%hhx\n", data->map[elem->pc]);
 }

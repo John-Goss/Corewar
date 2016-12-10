@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:48 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/07 18:20:05 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/10 16:39:38 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ int				octet_cod_there(t_data *data, t_list *elem)
 			data->map[elem->pc] == 0x06 || data->map[elem->pc] == 0x07 || \
 			data->map[elem->pc] == 0x08 || data->map[elem->pc] == 0x0A || \
 			data->map[elem->pc] == 0x0B || data->map[elem->pc] == 0x0E || \
-			data->map[elem->pc] == 0x0D)
+			data->map[elem->pc] == 0x0D || data->map[elem->pc] == 0x10)
 		return (1);
 	else if (data->map[elem->pc] == 0x0C || data->map[elem->pc] == 0x01 || \
-			data->map[elem->pc] == 0x09 || data->map[elem->pc] == 0x0F || \
-			data->map[elem->pc] == 0x10)
+			data->map[elem->pc] == 0x09 || data->map[elem->pc] == 0x0F)
 		return (0);
 	return (0);
 }
@@ -38,8 +37,6 @@ char			*get_par_types_no_ocp(t_data *data, t_list *elem)
 		return (ft_strdup("10"));
 	else if (data->map[elem->pc] == 0x0F)
 		return (ft_strdup("10"));
-	else if (data->map[elem->pc] == 0x10)
-		return (ft_strdup("01"));
 	else
 		return (NULL);
 }
@@ -78,11 +75,10 @@ int				octet_cod(t_data *data, t_list *elem)
 			data->map[elem->pc] == 0x06 || data->map[elem->pc] == 0x07 || \
 			data->map[elem->pc] == 0x08 || data->map[elem->pc] == 0x0A || \
 			data->map[elem->pc] == 0x0B || data->map[elem->pc] == 0x0E || \
-			data->map[elem->pc] == 0x0D)
+			data->map[elem->pc] == 0x0D || data->map[elem->pc] == 0x10)
 		return (2);
 	else if (data->map[elem->pc] == 0x0C || data->map[elem->pc] == 0x01 || \
-			data->map[elem->pc] == 0x09 || data->map[elem->pc] == 0x0F || \
-			data->map[elem->pc] == 0x10)
+			data->map[elem->pc] == 0x09 || data->map[elem->pc] == 0x0F)
 		return (1);
 	return (0);
 }
