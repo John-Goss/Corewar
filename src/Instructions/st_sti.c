@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/10 18:44:52 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/11 18:59:43 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,20 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 	else if (param_types[1] == REG_CODE)
 		value_one = elem->reg_number[params[1]];
 	if (param_types[2] == DIR_CODE)
-		value_two = params[2];
+		value_two = (short)params[2];
 	else if (param_types[2] == REG_CODE)
 		value_two = elem->reg_number[params[2]];
 	address = (value_one + value_two) % IDX_MOD;
+	if (address < 0)
+	{
+		address %= MEM_SIZE;
+		address = MEM_SIZE + address;
+	}
 	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);
-	printf("STI : add = %d -- regnb = %d contenue de reg_nb = %d, cycle = %d\n",address, params[0], elem->reg_number[params[0]], data->cycle);
+	printf("STI : params[0] = %d-- val 1= %d-- val 2 =  %d\n", params[0], value_one,value_two);
+//	printf("STI : add = %d -- regnb = %d contenue de reg_nb = %d, cycle = %d\n",address, params[0], elem->reg_number[params[0]], data->cycle);
+	printf("\n");
+
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:20:51 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/10 18:06:54 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/11 16:12:48 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ t_list		*copy_elem(t_list *begin, t_list *elem, int pc)
 
 void		apply_lfork(t_data *data, t_list *elem, unsigned int *params)
 {
+	int		i;
+
+	i = (int)params[0];
 	data->begin = copy_elem(data->begin, elem,
 		(elem->pc + params[0]) % MEM_SIZE);
 	elem->pc = (elem->pc + 3) % MEM_SIZE;

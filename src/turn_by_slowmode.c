@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 17:49:58 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/09 22:05:35 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/11 17:58:57 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ void		dump_map(t_data *data)
 	printf("carry = %d\n",data->begin->carry);
 	printf("pc = %d\n",data->begin->pc);
 	printf("%hhx\n",data->map[data->begin->pc]);
-	exit(0);
 	while (j < MEM_SIZE)
 	{
-		while (i++ < 32)
+		while (i++ < 64) // a modifer pour 32
 		{
 			if (j == (MEM_SIZE - 1))
-				ft_printf("%.2hhx", data->map[j++]);
+			//	ft_printf("%.2hhx", data->map[j++]);
+				printf("%.2hhx", data->map[j++]);
 			else
-				ft_printf("%.2hhx ", data->map[j++]);
+				printf("%.2hhx ", data->map[j++]);
+			//	ft_printf("%.2hhx ", data->map[j++]);
 		}
 		i = 0;
-		ft_printf("\n");
+		printf("\n");
 	}
 	exit(0);
 }

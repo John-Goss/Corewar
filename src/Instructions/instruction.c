@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/10 18:41:09 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/11 18:23:51 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	instruction_exec(t_data *data, t_list *elem)
 	if (protect_registers(params, param_types) == 0)
 	{
 		elem->pc = (elem->pc + data->dep) % MEM_SIZE;
+		free(params);
+		free(param_types);
 		return ;
 	}
 	if (opc == 0x0C || opc == 0x09 || opc == 0x01 || opc == 0x10 || opc == 0x0F)
@@ -98,10 +100,14 @@ void	instruction_exec(t_data *data, t_list *elem)
 		if (opc == 0x09 && data->dep == 5)
 			data->dep = 3;
 		tmp == elem->pc ? (elem->pc = (elem->pc + data->dep) % MEM_SIZE) : 0;
+		free(params);
+		free(param_types);
 		return ;
 	}
 	instr_w_ocp(data, elem, params, param_types);
 	elem->pc = (elem->pc + data->dep) % MEM_SIZE;
+		free(params);
+		free(param_types);
 //	if (opc == 0x03)
 //		printf("IL Y A UN ST%hhx\n", data->map[elem->pc]);
 }

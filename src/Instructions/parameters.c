@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:48 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/10 16:39:38 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/11 18:22:26 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ unsigned int	*det_types(t_data *data, t_list *elem,
 	types_bin = NULL;
 	if ((!(type_tab = (unsigned int *)malloc(sizeof(unsigned int) * 5))))
 		return (NULL);
+	ft_bzero(type_tab, (sizeof(unsigned int)) * 5);
 	if (octet_cod_there(data, elem) == 0)
 	{
 		types_bin = get_par_types_no_ocp(data, elem);
