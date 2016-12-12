@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:53 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 17:20:06 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:50:27 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 		value_two = elem->reg_number[params[1]];
 	s = (value_one + value_two) % IDX_MOD;
 	elem->reg_number[params[2]] = recup_ind(data, (short)s, elem->pc);
-//	printf("LDI : par[0] = %d, par[1] = %d, par[2] = %d\n",params[0],params[1],params[2]);
-//	printf("LDI : store = %d, val 1 = %d, val 2 = %d\n", s, value_one, value_two);
+	printf("LDI : par[0] = %d, par[1] = %d, par[2] = %d\n",params[0],params[1],params[2]);
+	printf("LDI : store = %d, val 1 = %d, val 2 = %d\n", s, value_one, value_two);
 	}
 	else
 		elem->pc = (elem->pc - 1) % MEM_SIZE;
@@ -97,5 +97,5 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 	}
 	else
 		elem->pc = (elem->pc + 1) % MEM_SIZE;
-//	printf("reg = %d -- store = %d -- cycle = %d\n",params[0], params[1], data->cycle);
+	printf("reg = %d -- store = %d -- cycle = %d\n",params[0], params[1], data->cycle);
 }
