@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:20:51 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 19:21:59 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/12 19:56:40 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,4 @@ void		apply_aff(t_data *data, t_list *elem, unsigned int *param_type,
 	c = (elem->reg_number[data->map[elem->pc + 2]]) % 256;
 //	if (data->flag_visu == 0)
 //		ft_printf("%.2hhx\n", c);
-	elem->pc = ((elem->pc + 2) % MEM_SIZE);
 }

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 19:48:10 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/12 19:56:11 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 	int		i;
 	if (param_types[1] == IND_CODE)
 	{
-		i = ((short)params[1]) % IDX_MOD;
+		i = ((short)params[1]);
 		if (i < 0)
 		{
 			i %= MEM_SIZE;
@@ -112,12 +112,12 @@ int		recup_ind(t_data *data, short tmp, int pc)
 {
 	int	i;
 
+	tmp = tmp % IDX_MOD;
 	if (tmp < 0 && pc < -(tmp))
 	{
 		tmp %= MEM_SIZE;
 		tmp = MEM_SIZE + (tmp);
 	}
-
 	tmp += pc;
 	i = (data->map[tmp % MEM_SIZE] << 24 & 0xff000000) |
 	(data->map[(tmp + 1) % MEM_SIZE] << 16 & 0xff0000) |
