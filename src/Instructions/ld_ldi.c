@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:53 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 17:51:13 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/12 18:35:02 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,10 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 	value_one = 0;
 	value_two = 0;
 	s = 0;
-	if (params[2] > 15)
-	{
-		elem->pc = (elem->pc - 1) % MEM_SIZE;
-		return;
-	}
-	if ((param_types[0] == DIR_CODE || param_types[0] == IND_CODE ||
+	if (((param_types[0] == DIR_CODE || param_types[0] == IND_CODE ||
 				param_types[0] == REG_CODE) &&
 			(param_types[1] == DIR_CODE ||
-			param_types[1] == REG_CODE))
+			param_types[1] == REG_CODE)) && params[2] < 16)
 	{
 	if (param_types[0] == DIR_CODE)
 		value_one = (short)params[0];
@@ -100,5 +95,5 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 	}
 	else
 		elem->pc = (elem->pc + 1) % MEM_SIZE;
-	printf("reg = %d -- store = %d -- cycle = %d\n",params[0], params[1], data->cycle);
+	printf("LD : reg = %d -- store = %d -- cycle = %d\n",params[0], params[1], data->cycle);
 }
