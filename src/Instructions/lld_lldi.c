@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:33 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/11 18:41:41 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:48:03 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,23 @@ void	apply_lld(t_data *data, t_list *elem, unsigned int *param_types,
 void	apply_lldi(t_data *data, t_list *elem, unsigned int *param_types,
 		unsigned int *params)
 {
-	unsigned int	value_one;
-	unsigned int	value_two;
-	unsigned int	store;
+	int	value_one;
+	int	value_two;
+	int	s;
 
-	store = 0;
 	value_one = 0;
 	value_two = 0;
+	s = 0;
+	if (params[2] > 15)
+	{
+		elem->pc = (elem->pc - 1) % MEM_SIZE;
+		return;
+	}
+	if ((param_types[0] == DIR_CODE || param_types[0] == IND_CODE ||
+				param_types[0] == REG_CODE) &&
+			(param_types[1] == DIR_CODE ||
+			param_types[1] == REG_CODE))
+	{
 	if (param_types[0] == DIR_CODE)
 		value_one = (short)params[0];
 	else if (param_types[0] == IND_CODE)
@@ -55,10 +65,11 @@ void	apply_lldi(t_data *data, t_list *elem, unsigned int *param_types,
 		value_two = (short)params[1];
 	else if (param_types[1] == REG_CODE)
 		value_two = elem->reg_number[params[1]];
-	store = value_one + value_two;
-	elem->reg_number[params[2]] = store;
-	if (store == 0)
-		elem->carry = 1;
+	s = value_one + value_two;
+	elem->reg_number[params[2]] = recup_ind(data, (short)s, elem->pc);
+//	printf("LDI : par[0] = %d, par[1] = %d, par[2] = %d\n",params[0],params[1],params[2]);
+//	printf("LDI : store = %d, val 1 = %d, val 2 = %d\n", s, value_one, value_two);
+	}
 	else
-		elem->carry = 0;
+		elem->pc = (elem->pc - 1) % MEM_SIZE;
 }
