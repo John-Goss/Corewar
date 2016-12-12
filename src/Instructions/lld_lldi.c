@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:33 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 17:48:03 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/12 19:43:11 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,6 @@
 /*
 ** param[0] is the first parameter.
 */
-
-void	apply_lld(t_data *data, t_list *elem, unsigned int *param_types,
-		unsigned int *params)
-{
-	int	i;
-
-	i = 0;
-	if (param_types[0] == DIR_CODE)
-		i = (int)params[0];
-	else if (param_types[0] == IND_CODE)
-		i = (short)recup_ind(data, params[0], elem->pc);
-	else if (param_types[0] == REG_CODE)
-		i = elem->reg_number[params[0]];
-	elem->reg_number[params[1]] = i;
-	if (elem->reg_number[params[1]] == 0)
-		elem->carry = 1;
-	else
-		elem->carry = 0;
-}
 
 void	apply_lldi(t_data *data, t_list *elem, unsigned int *param_types,
 		unsigned int *params)
@@ -45,31 +26,45 @@ void	apply_lldi(t_data *data, t_list *elem, unsigned int *param_types,
 	value_one = 0;
 	value_two = 0;
 	s = 0;
-	if (params[2] > 15)
+	if (((param_types[0] == DIR_CODE || param_types[0] == IND_CODE ||
+					param_types[0] == REG_CODE) &&
+				(param_types[1] == DIR_CODE ||
+				 param_types[1] == REG_CODE)) && params[2] < 16)
 	{
-		elem->pc = (elem->pc - 1) % MEM_SIZE;
-		return;
+		if (param_types[0] == DIR_CODE)
+			value_one = (short)params[0];
+		else if (param_types[0] == IND_CODE)
+			value_one = recup_ind(data, (short)params[0], elem->pc);
+		else if (param_types[0] == REG_CODE && params[0] < 16)
+			value_one = elem->reg_number[params[0]];
+		if (param_types[1] == DIR_CODE)
+			value_two = (short)params[1];
+		else if (param_types[1] == REG_CODE && params[1] < 16)
+			value_two = elem->reg_number[params[1]];
+		s = (value_one + value_two);
+		elem->reg_number[params[2]] = recup_ind(data, (short)s, elem->pc);
+		printf("LLDI : par[0] = %d, par[1] = %d, par[2] = %d\n",params[0],params[1],params[2]);
+		printf("LLDI : store = %d, val 1 = %d, val 2 = %d\n", s, value_one, value_two);
 	}
-	if ((param_types[0] == DIR_CODE || param_types[0] == IND_CODE ||
-				param_types[0] == REG_CODE) &&
-			(param_types[1] == DIR_CODE ||
-			param_types[1] == REG_CODE))
+}
+
+void	apply_lld(t_data *data, t_list *elem, unsigned int *param_type,
+		unsigned int *params)
+{
+	int	i;
+
+	i = 0;
+	if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
 	{
-	if (param_types[0] == DIR_CODE)
-		value_one = (short)params[0];
-	else if (param_types[0] == IND_CODE)
-		value_one = recup_ind(data, (short)params[0], elem->pc);
-	else if (param_types[0] == REG_CODE)
-		value_one = elem->reg_number[params[0]];
-	if (param_types[1] == DIR_CODE)
-		value_two = (short)params[1];
-	else if (param_types[1] == REG_CODE)
-		value_two = elem->reg_number[params[1]];
-	s = value_one + value_two;
-	elem->reg_number[params[2]] = recup_ind(data, (short)s, elem->pc);
-//	printf("LDI : par[0] = %d, par[1] = %d, par[2] = %d\n",params[0],params[1],params[2]);
-//	printf("LDI : store = %d, val 1 = %d, val 2 = %d\n", s, value_one, value_two);
+		i = (int)params[0];
+		if (param_type[0] == IND_CODE)
+			i = recup_ind(data ,((short)(params[0])), elem->pc);
+		if (params[1] < 16)
+			elem->reg_number[params[1]] = i;
+		if (i == 0)
+			elem->carry = 1;
+		else
+			elem->carry = 0;
 	}
-	else
-		elem->pc = (elem->pc - 1) % MEM_SIZE;
+	printf("LLD : reg = %d -- store = %d -- cycle = %d\n",params[0], params[1], data->cycle);
 }

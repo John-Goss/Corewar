@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:52:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/12/12 15:41:12 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/12 19:49:34 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		end(t_data *data)
 	{
 		while (elem && elem->nb_champ != data->last_live_nb_champ)
 			elem = elem->next;
-//		ft_printf("Le joueur %d (%s) a gagne\n", elem->nb_champ, elem->name);
+		ft_printf("Le joueur %d (%s) a gagne\n", elem->nb_champ, elem->name);
 		printf("cycle : %d\n", data->cycle);
 	}
 	else
@@ -40,7 +40,7 @@ int			verif_end(t_data *data)
 	if (data->check == (MAX_CHECKS - 1) || (int)data->live_cpt >= NBR_LIVE)
 	{
 		data->cycle_to_die = CYCLE_TO_DIE - (CYCLE_DELTA * data->ctd_nbr);
-			data->check = 0;
+		data->check = 0;
 		data->ctd_nbr++;
 	}
 	else

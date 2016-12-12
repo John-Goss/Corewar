@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 17:31:26 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/12 19:48:10 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 		value_one = recup_ind(data, (short)params[1], elem->pc);
 	else if (param_types[1] == DIR_CODE)
 		value_one = (short)params[1];
-	else if (param_types[1] == REG_CODE)
+	else if (param_types[1] == REG_CODE && params[1] < 16)
 		value_one = elem->reg_number[params[1]];
 	if (param_types[2] == DIR_CODE)
 		value_two = (short)params[2];
-	else if (param_types[2] == REG_CODE)
+	else if (param_types[2] == REG_CODE && params[2] < 16)
 		value_two = elem->reg_number[params[2]];
 	address = (value_one + value_two) % IDX_MOD;
 	if (address < 0)
@@ -90,21 +90,18 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 		unsigned int *param_types)
 {
 	int		i;
-	if (params[0] > 15)
-		return;
 	if (param_types[1] == IND_CODE)
 	{
-		i = (short)params[1];
+		i = ((short)params[1]) % IDX_MOD;
 		if (i < 0)
 		{
 			i %= MEM_SIZE;
 			i = MEM_SIZE + i;
 		}
-		put_in_bytes(data, elem, i,
-				elem->reg_number[params[0]]);
+		put_in_bytes(data, elem, i, elem->reg_number[params[0]]);
 	printf("ST : address = %d regnb = %d, contenue de reg = %d cycle = %d\n", i, params[0],elem->reg_number[params[0]],data->cycle);
 	}
-	else if (param_types[1] == REG_CODE)
+	else if (param_types[1] == REG_CODE && params[0] < 16 && params[1] < 16)
 	{
 		elem->reg_number[params[1]] = elem->reg_number[params[0]];
 	printf("ST : registre 1 :%d -- registre 2 : %d -- cycle : %d\n ", params[0],params[1],data->cycle);
