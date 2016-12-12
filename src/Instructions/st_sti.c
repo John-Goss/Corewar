@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 16:12:03 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:21:14 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 		address = MEM_SIZE + address;
 	}
 	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);
-	printf("STI : params[0] = %d-- val 1= %d-- val 2 =  %d\n", params[0], value_one,value_two);
+//	printf("STI : params[0] = %d-- val 1= %d-- val 2 =  %d\n", params[0], value_one,value_two);
 //	printf("STI : add = %d -- regnb = %d contenue de reg_nb = %d, cycle = %d\n",address, params[0], elem->reg_number[params[0]], data->cycle);
-	printf("\n");
+//	printf("\n");
 
 }
 
@@ -90,7 +90,6 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 		unsigned int *param_types)
 {
 	int		i;
-	
 	if (params[0] > 15)
 		return;
 	if (param_types[1] == IND_CODE)
@@ -103,12 +102,12 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 		}
 		put_in_bytes(data, elem, i,
 				elem->reg_number[params[0]]);
-	printf("ST : address = %d regnb = %d, contenue de reg = %d cycle = %d\n", i, params[0],elem->reg_number[params[0]],data->cycle);
+//	printf("ST : address = %d regnb = %d, contenue de reg = %d cycle = %d\n", i, params[0],elem->reg_number[params[0]],data->cycle);
 	}
 	else if (param_types[1] == REG_CODE)
 	{
 		elem->reg_number[params[1]] = elem->reg_number[params[0]];
-	printf("ST : registre 1 :%d -- registre 2 : %d -- cycle : %d\n ", params[0],params[1],data->cycle);
+//	printf("ST : registre 1 :%d -- registre 2 : %d -- cycle : %d\n ", params[0],params[1],data->cycle);
 	}
 }
 
@@ -127,8 +126,5 @@ int		recup_ind(t_data *data, short tmp, int pc)
 	(data->map[(tmp + 1) % MEM_SIZE] << 16 & 0xff0000) |
 	(data->map[(tmp + 2) % MEM_SIZE] << 8 & 0xff00) |
 	(data->map[(tmp + 3) % MEM_SIZE] & 0xff);
-	return(i);
-
+	return (i);
 }
-
-
