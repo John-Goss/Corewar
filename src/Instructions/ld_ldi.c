@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:53 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 17:20:06 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:41:42 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 	value_two = 0;
 	s = 0;
 	if (params[2] > 15)
+	{
+		elem->pc = (elem->pc - 1) % MEM_SIZE;
 		return;
+	}
 	if ((param_types[0] == DIR_CODE || param_types[0] == IND_CODE ||
 				param_types[0] == REG_CODE) &&
 			(param_types[1] == DIR_CODE ||
