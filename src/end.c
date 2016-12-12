@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:52:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/12/08 18:27:24 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/12 15:41:12 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		end(t_data *data)
 	{
 		while (elem && elem->nb_champ != data->last_live_nb_champ)
 			elem = elem->next;
-		ft_printf("Le joueur %d (%s) a gagne\n", elem->nb_champ, elem->name);
+//		ft_printf("Le joueur %d (%s) a gagne\n", elem->nb_champ, elem->name);
 		printf("cycle : %d\n", data->cycle);
 	}
 	else

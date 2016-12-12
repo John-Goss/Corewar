@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/11 18:59:43 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/12 16:12:03 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 		unsigned int *param_types)
 {
 	int		i;
+	
+	if (params[0] > 15)
+		return;
 	if (param_types[1] == IND_CODE)
 	{
 		i = (short)params[1];
@@ -105,6 +108,7 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 	else if (param_types[1] == REG_CODE)
 	{
 		elem->reg_number[params[1]] = elem->reg_number[params[0]];
+	printf("ST : registre 1 :%d -- registre 2 : %d -- cycle : %d\n ", params[0],params[1],data->cycle);
 	}
 }
 

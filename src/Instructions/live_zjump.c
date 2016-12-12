@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:16 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/11 19:13:10 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/12 15:23:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ void		apply_zjmp(t_data *data, t_list *elem, unsigned int *params)
 {
 	short	i;
 
-	i = (short)params[0];
+	i = ((short)params[0]) % IDX_MOD;
 	(void)data;
 	if (i < 0)
 	{
 		i %= MEM_SIZE;
 		i = MEM_SIZE + i;
 	}
-printf("ZJUMP : pc = %d -- carry = %d -- dist = %d, cycle : %d\n",elem->pc, elem->carry, i  % IDX_MOD, data->cycle);
+printf("ZJUMP : pc = %d -- carry = %d -- dist = %d, cycle : %d\n",elem->pc, elem->carry, i, data->cycle);
 	if (elem->carry == 1)
-		elem->pc = (elem->pc + (i % IDX_MOD)) % MEM_SIZE;
+		elem->pc = (elem->pc + i) % MEM_SIZE;
 }

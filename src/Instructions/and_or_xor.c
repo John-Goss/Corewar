@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:19:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/11 19:07:33 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/12 15:24:47 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	apply_or(t_data *data, t_list *elem, unsigned int *params,
 	else if (param_type[1] == IND_CODE)
 		value_two = recup_ind(data, (short)params[0], elem->pc);
 	elem->reg_number[params[2]] = value_one | value_two;
+	printf ("OR : \n");
 	if (elem->reg_number[params[2]] == 0)
 		elem->carry = 1;
 	else
