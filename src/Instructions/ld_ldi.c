@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:53 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 20:23:55 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/13 14:35:29 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,19 @@ void	apply_ldi(t_data *data, t_list *elem, unsigned int *param_types,
 				 param_types[1] == REG_CODE)) && params[2] < 16)
 	{
 		if (param_types[0] == DIR_CODE)
-			value_one = (int)params[0];
+			value_one = (short)params[0];
 		else if (param_types[0] == IND_CODE)
 			value_one = recup_ind(data, (short)params[0], elem->pc);
 		else if (param_types[0] == REG_CODE && params[0] < 16)
 			value_one = elem->reg_number[params[0]];
 		if (param_types[1] == DIR_CODE)
-			value_two = (int)params[1];
+			value_two = (short)params[1];
 		else if (param_types[1] == REG_CODE && params[1] < 16)
 			value_two = elem->reg_number[params[1]];
 		s = (value_one + value_two) % IDX_MOD;
 		elem->reg_number[params[2]] = recup_ind(data, (short)s, elem->pc);
-		printf("LDI : par[0] = %d, par[1] = %d, par[2] = %d\n",params[0],params[1],params[2]);
-		printf("LDI : store = %d, val 1 = %d, val 2 = %d\n", s, value_one, value_two);
+//		printf("LDI : par[0] = %d, par[1] = %d, par[2] = %d\n",params[0],params[1],params[2]);
+//		printf("LDI : store = %d, val 1 = %d, val 2 = %d\n", s, value_one, value_two);
 	}
 }
 
@@ -78,12 +78,13 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 	i = 0;
 	if (param_type[0] == DIR_CODE || param_type[0] == IND_CODE)
 	{
-		i = (int)params[0];
+		if (param_type[0] == DIR_CODE)
+			i = (int)params[0];
 		//		printf("data = %d\n", elem->carry);
 		//		printf("i = %d, params[0] = %d\n",i,params[0]);
 		if (param_type[0] == IND_CODE)
 			i = recup_ind(data ,((short)(params[0])) % IDX_MOD, elem->pc);
-		//		printf("LD : i = %d --- params[1] = %d -- pc = %d\n", i, params[1] + 1, elem->pc);
+//		printf("LD : i = %d --- params[1] = %d -- pc = %d\n", i, params[1] + 1, elem->pc);
 		if (params[1] < 16)
 			elem->reg_number[params[1]] = i;
 		if (params[0] == 0)
@@ -91,5 +92,5 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 		else
 			elem->carry = 0;
 	}
-	printf("LD : reg = %d -- store = %d -- cycle = %d\n",params[0], params[1], data->cycle);
+//	printf("LD : reg = %d -- store = %d -- cycle = %d\n",params[0], params[1], data->cycle);
 }

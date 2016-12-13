@@ -39,3 +39,6 @@ remplacer x par le cycle voulu + remplacer y par un champion et regler la taille
 a lancer a la racine de notre corewar;
 
 ./corewar -dump x test_corewar/y.cor > mine.txt;./Corewar_ZAZ_Test/corewar -d x test_corewar/y > mine2.txt; diff mine.txt mine2.txt;
+
+
+casimir : 2520  exactement le meme comportement;

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 20:16:19 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/13 14:38:19 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	put_in_bytes(t_data *data, t_list *elem, int address, int reg_value)
 	byte_array[2] = (reg_value >> 8) & 0xFF;
 	byte_array[3] = reg_value & 0xFF;
 	tmp = (elem->pc + address) % MEM_SIZE;
-	data->map[tmp] = byte_array[0];
+	data->map[tmp % MEM_SIZE] = byte_array[0];
 	data->map[(tmp + 1) % MEM_SIZE] = byte_array[1];
 	data->map[(tmp + 2) % MEM_SIZE] = byte_array[2];
 	data->map[(tmp + 3) % MEM_SIZE] = byte_array[3];
@@ -76,8 +76,8 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 	}
 	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);
 //	printf("STI : params[0] = %d-- val 1= %d-- val 2 =  %d\n", params[0], value_one,value_two);
-	printf("STI : add = %d -- regnb = %d contenue de reg_nb = %d, cycle = %d\n",address, params[0], elem->reg_number[params[0]], data->cycle);
-	printf("\n");
+//	printf("STI : add = %d -- regnb = %d contenue de reg_nb = %d, cycle = %d\n",address, params[0], elem->reg_number[params[0]], data->cycle);
+//	printf("\n");
 
 }
 
@@ -92,19 +92,19 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 	int		i;
 	if (param_types[1] == IND_CODE)
 	{
-		i = ((short)params[1]);
+		i = ((short)params[1]) % IDX_MOD;
 		if (i < 0)
 		{
 			i %= MEM_SIZE;
 			i = MEM_SIZE + i;
 		}
 		put_in_bytes(data, elem, i, elem->reg_number[params[0]]);
-	printf("ST : address = %d regnb = %d, contenue de reg = %d cycle = %d\n", i, params[0],elem->reg_number[params[0]],data->cycle);
+//	printf("ST : address = %d regnb = %d, contenue de reg = %d cycle = %d\n", i, params[0],elem->reg_number[params[0]],data->cycle);
 	}
 	else if (param_types[1] == REG_CODE && params[0] < 16 && params[1] < 16)
 	{
 		elem->reg_number[params[1]] = elem->reg_number[params[0]];
-	printf("ST : registre 1 :%d -- registre 2 : %d -- cycle : %d\n ", params[0],params[1],data->cycle);
+//	printf("ST : registre 1 :%d -- registre 2 : %d -- cycle : %d\n ", params[0],params[1],data->cycle);
 	}
 }
 

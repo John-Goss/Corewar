@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:49:30 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/25 19:17:52 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/13 14:26:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void		parse_map(int argc, char **argv, t_data *data)
 		data->nb_champ -= 2;
 		i += 2;
 	}
+	if (data->nb_champ > MAX_PLAYERS)
+		exit(ft_printf("TOO MUCH CHAMPIONS\n"));
 	if (i == argc)
 		exit(ft_printf("NO CHAMPIONS\n"));
 	while (i < argc)

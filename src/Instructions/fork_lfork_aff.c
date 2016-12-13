@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:20:51 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 19:56:40 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/13 12:12:51 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		apply_fork(t_data *data, t_list *elem, unsigned int *params)
 		i %= MEM_SIZE;
 		i = MEM_SIZE + i;
 	}
-	printf("FORK : pc = %d -- address = %d -- new pc = %d -- cycle = %d\n", elem->pc, i, ((elem->pc + i) % MEM_SIZE), data->cycle);
+//	printf("FORK : pc = %d -- address = %d -- new pc = %d -- cycle = %d\n", elem->pc, i, ((elem->pc + i) % MEM_SIZE), data->cycle);
 	data->begin = copy_elem(data->begin, elem,
 		(elem->pc + i) % MEM_SIZE);
 	elem->pc = (elem->pc + 3) % MEM_SIZE;
