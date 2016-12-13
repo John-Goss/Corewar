@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 16:22:28 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:06:15 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 		address %= MEM_SIZE;
 		address = MEM_SIZE + address;
 	}
-	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);
+	if (params[0] < 16)
+		put_in_bytes(data, elem, address, elem->reg_number[params[0]]);
 //	printf("STI : Reg = %d-- val 1= %d-- val 2 =  %d\n", params[0] + 1, value_one, value_two);
 //	printf("-> : add = %d -- regnb = %d contenue de reg_nb = %d, cycle = %d\n",address, params[0] + 1, elem->reg_number[params[0]], data->cycle);
-
 }
 
 /*
