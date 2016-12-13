@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/14 12:15:43 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/12/10 16:48:09 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:59:05 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,14 @@ void						end(t_data *data);
 */
 
 void						instruction_exec(t_data *data, t_list *elem);
+void						free_params(unsigned int *to_free,
+		unsigned int *to_free_2);
+void						move_pc_bad_registers(t_data *data, t_list *elem,
+		unsigned int *params, unsigned int *param_types);
+void						exec_no_ocp(t_data *data, t_list *elem,
+		unsigned int *params, unsigned int *param_types);
+void						instr_no_ocp(t_data *data, t_list *elem,
+		unsigned int *params);
 unsigned int				get_dir_value(t_data *data, t_list *elem,
 		int *prm_pos);
 unsigned int				get_ind_value(t_data *data, t_list *elem,

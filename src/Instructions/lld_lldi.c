@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:33 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 16:22:15 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:18:29 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	apply_lldi(t_data *data, t_list *elem, unsigned int *param_types,
 	if (((param_types[0] == DIR_CODE || param_types[0] == IND_CODE ||
 					param_types[0] == REG_CODE) &&
 				(param_types[1] == DIR_CODE ||
-				 param_types[1] == REG_CODE)) && params[2] < 16)
+				param_types[1] == REG_CODE)) && params[2] < 16)
 	{
 		if (param_types[0] == DIR_CODE)
 			value_one = (short)params[0];
@@ -58,7 +58,7 @@ void	apply_lld(t_data *data, t_list *elem, unsigned int *param_type,
 	{
 		i = (int)params[0];
 		if (param_type[0] == IND_CODE)
-			i = recup_ind(data ,((short)(params[0])), elem->pc);
+			i = recup_ind(data, ((short)(params[0])), elem->pc);
 		if (params[1] < 16)
 			elem->reg_number[params[1]] = i;
 		if (i == 0)

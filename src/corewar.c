@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:55:01 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/12/11 17:14:51 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:11:59 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,8 @@ void		turn(t_data *data)
 	elem = data->begin;
 	while (elem)
 	{
-//		printf("pc = %d nb = %d\n",elem->pc, elem->process_nb );
 		process_action(data, elem);
 		elem = elem->next;
 	}
-//	printf("cycle = %d\n\n", data->cycle);
 	return ;
 }

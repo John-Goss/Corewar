@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:07:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/11/25 19:17:44 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:14:59 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			is_used(int nb, int *tab)
 	while (tab[i] != 0 && i < 4)
 	{
 		if (tab[i] == nb)
-			exit(write(1, "numero de champion deja utilise\n", 31));
+			exit(write(1, "Numero de champion deja utilise\n", 31));
 		i++;
 	}
 	tab[i] = nb;

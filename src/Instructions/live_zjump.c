@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:16 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 16:22:08 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:16:44 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		apply_live(t_data *data, t_list *elem)
 //	printf("live -- cycle : %d nb_champ = %d\n", data->cycle, nb_champ);
 	while (desc)
 	{
-	(desc->live)++;
+		(desc->live)++;
 		if (desc->nb_champ && nb_champ && nb_champ == desc->nb_champ &&
 				!desc->dead)
 		{
@@ -49,16 +49,14 @@ void		apply_zjmp(t_data *data, t_list *elem, unsigned int *params)
 {
 	short	i;
 
-	i = ((short)params[0]) % IDX_MOD;
 	(void)data;
+	i = ((short)params[0]) % IDX_MOD;
 	if (i < 0)
 	{
 		i %= MEM_SIZE;
 		i = MEM_SIZE + i;
 //		printf("ZJUMP : pc = %d -- carry = %d -- dist = %d, cycle : %d\n",elem->pc, elem->carry, ((short)params[0]) % IDX_MOD, data->cycle);
 	}
-	else
-//		printf("ZJUMP : pc = %d -- carry = %d -- dist = %d, cycle : %d\n",elem->pc, elem->carry, i, data->cycle);
 	if (elem->carry == 1)
 		elem->pc = (elem->pc + i) % MEM_SIZE;
 }

@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/12 19:28:40 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:06:34 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,35 +75,37 @@ int		protect_registers(unsigned int *params, unsigned int *param_types)
 
 void	instruction_exec(t_data *data, t_list *elem)
 {
-	unsigned int	*param_types;
-	unsigned int	*params;
+	unsigned int	*parameters[2];
 	char			opc;
 	int				tmp;
 
 	tmp = elem->pc;
 	data->dep = 0;
 	opc = data->map[(elem->pc) % MEM_SIZE];
-	param_types = det_types(data, elem, data->map[(elem->pc + 1) % MEM_SIZE]);
-	params = get_params(param_types, data, elem);
-	if ((int)param_types[0] == -1)
+	parameters[0] = det_types(data, elem, data->map[(elem->pc + 1) % MEM_SIZE]);
+	parameters[1] = get_params(parameters[0], data, elem);
+	if ((int)parameters[0][0] == -1)
 		return ;
-	if (protect_registers(params, param_types) == 0)
+	if (protect_registers(parameters[1], parameters[0]) == 0)
 	{
-		elem->pc = (elem->pc + data->dep) % MEM_SIZE;
-		free(params);
-		free(param_types);
+		move_pc_bad_registers(data, elem, parameters[1], parameters[0]);
 		return ;
 	}
 	if (opc == 0x0C || opc == 0x09 || opc == 0x01 || opc == 0x10 || opc == 0x0F)
 	{
-		instr_no_ocp(data, elem, params);
+		exec_no_ocp(data, elem, parameters[1], parameters[0]);
 		tmp == elem->pc ? (elem->pc = (elem->pc + data->dep) % MEM_SIZE) : 0;
-		free(params);
-		free(param_types);
 		return ;
 	}
-	instr_w_ocp(data, elem, params, param_types);
+	instr_w_ocp(data, elem, parameters[1], parameters[0]);
 	elem->pc = (elem->pc + data->dep) % MEM_SIZE;
-	free(params);
-	free(param_types);
+	free_params(parameters[1], parameters[0]);
+}
+
+void	free_params(unsigned int *to_free, unsigned int *to_free_2)
+{
+	if (to_free)
+		free(to_free);
+	if (to_free_2)
+		free(to_free_2);
 }

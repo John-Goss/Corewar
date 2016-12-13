@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:49:30 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/12/13 14:26:07 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/13 19:22:20 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			stock_desc(t_data *data, char *buf, int nb)
 	i = (buf[0] << 24 & 0xff000000) | (buf[1] << 16 & 0xff0000) |
 		(buf[2] << 8 & 0xff00) | (buf[3] & 0xff);
 	if (i != COREWAR_EXEC_MAGIC)
-		exit(write(1, "magic invalid\n", 14));
+		exit(write(1, "Magic invalid\n", 14));
 	ft_strncpy(elem->name, buf + 4, 128);
 	elem->size = (buf[136] << 24 & 0xff000000) | (buf[137] << 16 & 0xff0000) |
 		(buf[138] << 8 & 0xff00) | (buf[139] & 0xff);
@@ -100,10 +100,8 @@ void		parse_map(int argc, char **argv, t_data *data)
 		data->nb_champ -= 2;
 		i += 2;
 	}
-	if (data->nb_champ > MAX_PLAYERS)
-		exit(ft_printf("TOO MUCH CHAMPIONS\n"));
-	if (i == argc)
-		exit(ft_printf("NO CHAMPIONS\n"));
+	data->nb_champ > MAX_PLAYERS ? exit(ft_printf("TOO MUCH CHAMPIONS\n")) : 0;
+	i == argc ? exit(ft_printf("NO CHAMPIONS\n")) : 0;
 	while (i < argc)
 	{
 		if (!(ft_strcmp(argv[i], "-n")))

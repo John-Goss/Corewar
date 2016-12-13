@@ -6,7 +6,7 @@
 #    By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/25 18:08:17 by jle-quer          #+#    #+#              #
-#    Updated: 2016/12/13 17:01:24 by jle-quer         ###   ########.fr        #
+#    Updated: 2016/12/13 18:57:41 by jle-quer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = corewar.c \
 	fork_lfork_aff.c \
 	indirect_value.c \
 	instruction.c \
+	instruction_2.c \
 	ld_ldi.c \
 	live_zjump.c \
 	lld_lldi.c \
