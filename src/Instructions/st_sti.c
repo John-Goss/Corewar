@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 14:47:28 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:06:15 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,10 @@ void	apply_sti(t_data *data, t_list *elem, unsigned int *param_types,
 		address %= MEM_SIZE;
 		address = MEM_SIZE + address;
 	}
-	put_in_bytes(data, elem, address, elem->reg_number[params[0]]);
-//	printf("STI : params[0] = %d-- val 1= %d-- val 2 =  %d\n", params[0], value_one,value_two);
-//	printf("STI : add = %d -- regnb = %d contenue de reg_nb = %d, cycle = %d\n",address, params[0], elem->reg_number[params[0]], data->cycle);
-//	printf("\n");
-
+	if (params[0] < 16)
+		put_in_bytes(data, elem, address, elem->reg_number[params[0]]);
+//	printf("STI : Reg = %d-- val 1= %d-- val 2 =  %d\n", params[0] + 1, value_one, value_two);
+//	printf("-> : add = %d -- regnb = %d contenue de reg_nb = %d, cycle = %d\n",address, params[0] + 1, elem->reg_number[params[0]], data->cycle);
 }
 
 /*
@@ -99,12 +98,12 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 			i = MEM_SIZE + i;
 		}
 		put_in_bytes(data, elem, i, elem->reg_number[params[0]]);
-//	printf("ST : address = %d regnb = %d, contenue de reg = %d cycle = %d\n", i, params[0],elem->reg_number[params[0]],data->cycle);
+//	printf("ST : Reg = %d Value ind = %d, cycle = %d\n", params[0] + 1, ((short)params[1]) % IDX_MOD,data->cycle);
 	}
 	else if (param_types[1] == REG_CODE && params[0] < 16 && params[1] < 16)
 	{
 		elem->reg_number[params[1]] = elem->reg_number[params[0]];
-//	printf("ST : registre 1 :%d -- registre 2 : %d -- cycle : %d\n ", params[0],params[1],data->cycle);
+//	printf("ST : registre 1 :%d -- registre 2 : %d -- cycle : %d\n ", params[1] + 1, elem->reg_number[params[0]],data->cycle);
 	}
 }
 

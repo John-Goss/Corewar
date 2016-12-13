@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:18:48 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 12:12:29 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:46:50 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void		apply_add(t_data *data, t_list *elem, unsigned int *params,
 	i = 0;
 	store = 0;
 	(void)data;
-	if (params[0] > 15 || params[1] > 15 || params[2] > 15)
+	if (param_types[0] != REG_CODE || param_types[1] != REG_CODE ||
+			param_types[2] != REG_CODE || params[0] > 15 ||
+			params[1] > 15 || params[2] > 15)
 		return ;
 	while (param_types[i] != 0)
 	{
@@ -34,7 +36,7 @@ void		apply_add(t_data *data, t_list *elem, unsigned int *params,
 		elem->carry = 1;
 	else
 		elem->carry = 0;
-//	printf("ADD :%d = %d + %d re_nb  = %d -- pc = %d --cycle = %d\n", store,params[0], params[1] , params[2],elem->pc,data->cycle);
+//	printf("ADD : R%d / R%d / R%d -- pc = %d -- cycle = %d\n", params[0] + 1, params[1] + 1 , params[2] + 1, elem->pc, data->cycle);
 	elem->reg_number[params[2]] = store;
 }
 
@@ -47,7 +49,9 @@ void		apply_sub(t_data *data, t_list *elem, unsigned int *params,
 	i = 0;
 	store = 0;
 	(void)data;
-	if (params[0] > 15 || params[1] > 15 || params[2] > 15)
+	if (param_types[0] != REG_CODE || param_types[1] != REG_CODE ||
+			param_types[2] != REG_CODE || params[0] > 15 ||
+			params[1] > 15 || params[2] > 15)
 		return ;
 	while (param_types[i] != 0)
 	{
@@ -56,8 +60,7 @@ void		apply_sub(t_data *data, t_list *elem, unsigned int *params,
 		i++;
 	}
 	store = elem->reg_number[params[0]] - elem->reg_number[params[1]];
-//	printf("carry = %d -- cycle == %d\n", elem->carry,data->cycle);
-//	printf("SUB :%d = %d - %d re_nb  = %d -- cycle = %d\n", store,params[0], params[1] , params[2],data->cycle);
+//	printf("SUB : R%d / R%d / R%d -- pc = %d -- cycle = %d\n", params[0] + 1, params[1] + 1 , params[2] + 1, elem->pc, data->cycle);
 	if (store == 0)
 		elem->carry = 1;
 	else
