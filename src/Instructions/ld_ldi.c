@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:21:53 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 14:35:29 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:21:58 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,8 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 	{
 		if (param_type[0] == DIR_CODE)
 			i = (int)params[0];
-		//		printf("data = %d\n", elem->carry);
-		//		printf("i = %d, params[0] = %d\n",i,params[0]);
 		if (param_type[0] == IND_CODE)
 			i = recup_ind(data ,((short)(params[0])) % IDX_MOD, elem->pc);
-//		printf("LD : i = %d --- params[1] = %d -- pc = %d\n", i, params[1] + 1, elem->pc);
 		if (params[1] < 16)
 			elem->reg_number[params[1]] = i;
 		if (params[0] == 0)
@@ -92,5 +89,5 @@ void	apply_ld(t_data *data, t_list *elem, unsigned int *params,
 		else
 			elem->carry = 0;
 	}
-//	printf("LD : reg = %d -- store = %d -- cycle = %d\n",params[0], params[1], data->cycle);
+//	printf("LD : store = %d -- reg = %d -- cycle = %d\n", i, params[1] + 1, data->cycle);
 }
