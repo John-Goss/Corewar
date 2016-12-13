@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:23:17 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 14:38:19 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/12/13 14:47:28 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	apply_st(t_data *data, t_list *elem, unsigned int *params,
 		unsigned int *param_types)
 {
 	int		i;
-	if (param_types[1] == IND_CODE)
+	if (param_types[1] == IND_CODE && params[0] < 16)
 	{
 		i = ((short)params[1]) % IDX_MOD;
 		if (i < 0)
