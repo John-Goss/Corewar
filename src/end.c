@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 16:52:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/12/12 19:49:34 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/13 15:15:16 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			verif_end(t_data *data)
 	check_who_is_alive(data);
 	check_who_is_alive_champ(data);
 	data->live_cpt = 0;
-	if (data->begin)
+	if (data->begin && data->cycle_to_die > 0)
 		return (0);
 	return (1);
 }
