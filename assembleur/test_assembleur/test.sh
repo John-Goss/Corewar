@@ -81,71 +81,71 @@ echo "\033[0m\n\n\n"
 
 echo "\033[38;42m//                fait des hexdumps               \\\\\\\\\\033[0m"
 
-hexdump Our_Corewar/result/Asombra.cor > Our_Corewar/hexdump/Asombra
-hexdump Our_Corewar/result/Kappa.cor > Our_Corewar/hexdump/Kappa
-hexdump Our_Corewar/result/Machine-gun.cor > Our_Corewar/hexdump/Machine-gun
-hexdump Our_Corewar/result/MarineKing.cor > Our_Corewar/hexdump/MarineKing
-hexdump Our_Corewar/result/Rainbow_dash.cor > Our_Corewar/hexdump/Rainbow_dash
-hexdump Our_Corewar/result/THUNDER.cor > Our_Corewar/hexdump/THUNDER
-hexdump Our_Corewar/result/Varimathras.cor > Our_Corewar/hexdump/Varimathras
-hexdump Our_Corewar/result/_honeybadger.cor > Our_Corewar/hexdump/_honeybadger
-hexdump Our_Corewar/result/big_feet.cor > Our_Corewar/hexdump/big_feet
-hexdump Our_Corewar/result/casimir.cor > Our_Corewar/hexdump/casimir
-hexdump Our_Corewar/result/corelol.cor > Our_Corewar/hexdump/corelol
-hexdump Our_Corewar/result/champ.cor > Our_Corewar/hexdump/champ 
-hexdump Our_Corewar/result/darksasuke.cor > Our_Corewar/hexdump/darksasuke
-hexdump Our_Corewar/result/dubo.cor > Our_Corewar/hexdump/dubo
-hexdump Our_Corewar/result/gedeon.cor > Our_Corewar/hexdump/gedeon
-hexdump Our_Corewar/result/jinx.cor > Our_Corewar/hexdump/jinx
-hexdump Our_Corewar/result/justin_bee.cor > Our_Corewar/hexdump/justin_bee
-hexdump Our_Corewar/result/littlepuppy.cor > Our_Corewar/hexdump/littlepuppy
-hexdump Our_Corewar/result/live.cor > Our_Corewar/hexdump/live
-hexdump Our_Corewar/result/loose.cor > Our_Corewar/hexdump/loose
-hexdump Our_Corewar/result/mandragore.cor > Our_Corewar/hexdump/mandragore
-hexdump Our_Corewar/result/meowluigi.cor > Our_Corewar/hexdump/meowluigi
-hexdump Our_Corewar/result/skynet.cor > Our_Corewar/hexdump/skynet
-hexdump Our_Corewar/result/terminator.cor > Our_Corewar/hexdump/terminator
-hexdump Our_Corewar/result/youforkmytralala.cor > Our_Corewar/hexdump/youforkmytralala
-hexdump Our_Corewar/result/bee_gees.cor > Our_Corewar/hexdump/bee_gees
-hexdump Our_Corewar/result/bigzork.cor > Our_Corewar/hexdump/bigzork
-hexdump Our_Corewar/result/fluttershy.cor > Our_Corewar/hexdump/fluttershy
-hexdump Our_Corewar/result/helltrain.cor > Our_Corewar/hexdump/helltrain
-hexdump Our_Corewar/result/turtle.cor > Our_Corewar/hexdump/turtle
-hexdump Our_Corewar/result/zork.cor > Our_Corewar/hexdump/zork
-hexdump Our_Corewar/result/the_professor.cor > Our_Corewar/hexdump/the_professor
+hexdump -vC Our_Corewar/result/Asombra.cor > Our_Corewar/hexdump/Asombra
+hexdump -vC Our_Corewar/result/Kappa.cor > Our_Corewar/hexdump/Kappa
+hexdump -vC Our_Corewar/result/Machine-gun.cor > Our_Corewar/hexdump/Machine-gun
+hexdump -vC Our_Corewar/result/MarineKing.cor > Our_Corewar/hexdump/MarineKing
+hexdump -vC Our_Corewar/result/Rainbow_dash.cor > Our_Corewar/hexdump/Rainbow_dash
+hexdump -vC Our_Corewar/result/THUNDER.cor > Our_Corewar/hexdump/THUNDER
+hexdump -vC Our_Corewar/result/Varimathras.cor > Our_Corewar/hexdump/Varimathras
+hexdump -vC Our_Corewar/result/_honeybadger.cor > Our_Corewar/hexdump/_honeybadger
+hexdump -vC Our_Corewar/result/big_feet.cor > Our_Corewar/hexdump/big_feet
+hexdump -vC Our_Corewar/result/casimir.cor > Our_Corewar/hexdump/casimir
+hexdump -vC Our_Corewar/result/corelol.cor > Our_Corewar/hexdump/corelol
+hexdump -vC Our_Corewar/result/champ.cor > Our_Corewar/hexdump/champ 
+hexdump -vC Our_Corewar/result/darksasuke.cor > Our_Corewar/hexdump/darksasuke
+hexdump -vC Our_Corewar/result/dubo.cor > Our_Corewar/hexdump/dubo
+hexdump -vC Our_Corewar/result/gedeon.cor > Our_Corewar/hexdump/gedeon
+hexdump -vC Our_Corewar/result/jinx.cor > Our_Corewar/hexdump/jinx
+hexdump -vC Our_Corewar/result/justin_bee.cor > Our_Corewar/hexdump/justin_bee
+hexdump -vC Our_Corewar/result/littlepuppy.cor > Our_Corewar/hexdump/littlepuppy
+hexdump -vC Our_Corewar/result/live.cor > Our_Corewar/hexdump/live
+hexdump -vC Our_Corewar/result/loose.cor > Our_Corewar/hexdump/loose
+hexdump -vC Our_Corewar/result/mandragore.cor > Our_Corewar/hexdump/mandragore
+hexdump -vC Our_Corewar/result/meowluigi.cor > Our_Corewar/hexdump/meowluigi
+hexdump -vC Our_Corewar/result/skynet.cor > Our_Corewar/hexdump/skynet
+hexdump -vC Our_Corewar/result/terminator.cor > Our_Corewar/hexdump/terminator
+hexdump -vC Our_Corewar/result/youforkmytralala.cor > Our_Corewar/hexdump/youforkmytralala
+hexdump -vC Our_Corewar/result/bee_gees.cor > Our_Corewar/hexdump/bee_gees
+hexdump -vC Our_Corewar/result/bigzork.cor > Our_Corewar/hexdump/bigzork
+hexdump -vC Our_Corewar/result/fluttershy.cor > Our_Corewar/hexdump/fluttershy
+hexdump -vC Our_Corewar/result/helltrain.cor > Our_Corewar/hexdump/helltrain
+hexdump -vC Our_Corewar/result/turtle.cor > Our_Corewar/hexdump/turtle
+hexdump -vC Our_Corewar/result/zork.cor > Our_Corewar/hexdump/zork
+hexdump -vC Our_Corewar/result/the_professor.cor > Our_Corewar/hexdump/the_professor
 
-hexdump Corewar_Zaz/result/Asombra.cor > Corewar_Zaz/hexdump/Asombra
-hexdump Corewar_Zaz/result/Kappa.cor > Corewar_Zaz/hexdump/Kappa
-hexdump Corewar_Zaz/result/Machine-gun.cor > Corewar_Zaz/hexdump/Machine-gun
-hexdump Corewar_Zaz/result/MarineKing.cor > Corewar_Zaz/hexdump/MarineKing
-hexdump Corewar_Zaz/result/Rainbow_dash.cor > Corewar_Zaz/hexdump/Rainbow_dash
-hexdump Corewar_Zaz/result/THUNDER.cor > Corewar_Zaz/hexdump/THUNDER
-hexdump Corewar_Zaz/result/Varimathras.cor > Corewar_Zaz/hexdump/Varimathras
-hexdump Corewar_Zaz/result/_honeybadger.cor > Corewar_Zaz/hexdump/_honeybadger
-hexdump Corewar_Zaz/result/big_feet.cor > Corewar_Zaz/hexdump/big_feet
-hexdump Corewar_Zaz/result/casimir.cor > Corewar_Zaz/hexdump/casimir
-hexdump Corewar_Zaz/result/corelol.cor > Corewar_Zaz/hexdump/corelol
-hexdump Corewar_Zaz/result/champ.cor > Corewar_Zaz/hexdump/champ
-hexdump Corewar_Zaz/result/darksasuke.cor > Corewar_Zaz/hexdump/darksasuke
-hexdump Corewar_Zaz/result/dubo.cor > Corewar_Zaz/hexdump/dubo
-hexdump Corewar_Zaz/result/gedeon.cor > Corewar_Zaz/hexdump/gedeon
-hexdump Corewar_Zaz/result/jinx.cor > Corewar_Zaz/hexdump/jinx
-hexdump Corewar_Zaz/result/justin_bee.cor > Corewar_Zaz/hexdump/justin_bee
-hexdump Corewar_Zaz/result/littlepuppy.cor > Corewar_Zaz/hexdump/littlepuppy
-hexdump Corewar_Zaz/result/live.cor > Corewar_Zaz/hexdump/live
-hexdump Corewar_Zaz/result/loose.cor > Corewar_Zaz/hexdump/loose
-hexdump Corewar_Zaz/result/mandragore.cor > Corewar_Zaz/hexdump/mandragore
-hexdump Corewar_Zaz/result/meowluigi.cor > Corewar_Zaz/hexdump/meowluigi
-hexdump Corewar_Zaz/result/skynet.cor > Corewar_Zaz/hexdump/skynet
-hexdump Corewar_Zaz/result/terminator.cor > Corewar_Zaz/hexdump/terminator
-hexdump Corewar_Zaz/result/youforkmytralala.cor > Corewar_Zaz/hexdump/youforkmytralala
-hexdump Corewar_Zaz/result/bee_gees.cor > Corewar_Zaz/hexdump/bee_gees
-hexdump Corewar_Zaz/result/bigzork.cor > Corewar_Zaz/hexdump/bigzork
-hexdump Corewar_Zaz/result/fluttershy.cor > Corewar_Zaz/hexdump/fluttershy
-hexdump Corewar_Zaz/result/helltrain.cor > Corewar_Zaz/hexdump/helltrain
-hexdump Corewar_Zaz/result/turtle.cor > Corewar_Zaz/hexdump/turtle
-hexdump Corewar_Zaz/result/zork.cor > Corewar_Zaz/hexdump/zork
-hexdump Corewar_Zaz/result/the_professor.cor > Corewar_Zaz/hexdump/the_professor
+hexdump -vC Corewar_zaz/result/Asombra.cor > Corewar_Zaz/hexdump/Asombra
+hexdump -vC Corewar_zaz/result/Kappa.cor > Corewar_Zaz/hexdump/Kappa
+hexdump -vC Corewar_zaz/result/Machine-gun.cor > Corewar_Zaz/hexdump/Machine-gun
+hexdump -vC Corewar_zaz/result/MarineKing.cor > Corewar_Zaz/hexdump/MarineKing
+hexdump -vC Corewar_zaz/result/Rainbow_dash.cor > Corewar_Zaz/hexdump/Rainbow_dash
+hexdump -vC Corewar_zaz/result/THUNDER.cor > Corewar_Zaz/hexdump/THUNDER
+hexdump -vC Corewar_zaz/result/Varimathras.cor > Corewar_Zaz/hexdump/Varimathras
+hexdump -vC Corewar_zaz/result/_honeybadger.cor > Corewar_Zaz/hexdump/_honeybadger
+hexdump -vC Corewar_zaz/result/big_feet.cor > Corewar_Zaz/hexdump/big_feet
+hexdump -vC Corewar_zaz/result/casimir.cor > Corewar_Zaz/hexdump/casimir
+hexdump -vC Corewar_zaz/result/corelol.cor > Corewar_Zaz/hexdump/corelol
+hexdump -vC Corewar_zaz/result/champ.cor > Corewar_Zaz/hexdump/champ
+hexdump -vC Corewar_zaz/result/darksasuke.cor > Corewar_Zaz/hexdump/darksasuke
+hexdump -vC Corewar_zaz/result/dubo.cor > Corewar_Zaz/hexdump/dubo
+hexdump -vC Corewar_zaz/result/gedeon.cor > Corewar_Zaz/hexdump/gedeon
+hexdump -vC Corewar_zaz/result/jinx.cor > Corewar_Zaz/hexdump/jinx
+hexdump -vC Corewar_zaz/result/justin_bee.cor > Corewar_Zaz/hexdump/justin_bee
+hexdump -vC Corewar_zaz/result/littlepuppy.cor > Corewar_Zaz/hexdump/littlepuppy
+hexdump -vC Corewar_zaz/result/live.cor > Corewar_Zaz/hexdump/live
+hexdump -vC Corewar_zaz/result/loose.cor > Corewar_Zaz/hexdump/loose
+hexdump -vC Corewar_zaz/result/mandragore.cor > Corewar_Zaz/hexdump/mandragore
+hexdump -vC Corewar_zaz/result/meowluigi.cor > Corewar_Zaz/hexdump/meowluigi
+hexdump -vC Corewar_zaz/result/skynet.cor > Corewar_Zaz/hexdump/skynet
+hexdump -vC Corewar_zaz/result/terminator.cor > Corewar_Zaz/hexdump/terminator
+hexdump -vC Corewar_zaz/result/youforkmytralala.cor > Corewar_Zaz/hexdump/youforkmytralala
+hexdump -vC Corewar_zaz/result/bee_gees.cor > Corewar_Zaz/hexdump/bee_gees
+hexdump -vC Corewar_zaz/result/bigzork.cor > Corewar_Zaz/hexdump/bigzork
+hexdump -vC Corewar_zaz/result/fluttershy.cor > Corewar_Zaz/hexdump/fluttershy
+hexdump -vC Corewar_zaz/result/helltrain.cor > Corewar_Zaz/hexdump/helltrain
+hexdump -vC Corewar_zaz/result/turtle.cor > Corewar_Zaz/hexdump/turtle
+hexdump -vC Corewar_zaz/result/zork.cor > Corewar_Zaz/hexdump/zork
+hexdump -vC Corewar_zaz/result/the_professor.cor > Corewar_Zaz/hexdump/the_professor
 
 echo "\033[31;46m                  ON FAIT DES DIFFS                 "
 
