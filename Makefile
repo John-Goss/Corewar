@@ -6,7 +6,7 @@
 #    By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/25 18:08:17 by jle-quer          #+#    #+#              #
-#    Updated: 2016/12/13 18:57:41 by jle-quer         ###   ########.fr        #
+#    Updated: 2016/12/14 18:21:55 by jle-quer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,23 +49,23 @@ O2		= $(addprefix $(OPATH), $(OBJS))
 LIBFT	= ./Libft/
 OPATH	= ./obj/
 INC		= ./src/Header/
-LIBINC	= $(LIBFT)/INCLUDES/
+LINC	= INCLUDES/
+LIBINC	= $(LIBFT)$(LINC)
 LIB		= $(LIBFT)libft.a
 
 # PROCESS
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIB)
-	@gcc $(FLAGS) $(O2) -L$(LIBFT) -lft -lncurses -I$(INC) -o $(NAME)
+$(NAME): $(LIB) $(O2)
+	@gcc $(FLAGS) $(O2) -L$(LIBFT) -lft -lncurses -I$(INC) -o $@
 	@echo "\033[0;32mCorewar compilation done !\033[0;m"
 
 $(LIB):
 	@echo "\033[0;32mWaiting, libft is in compilation...\033[0;m"
 	@make -C $(LIBFT)
 
-%.o: %.c
-	@gcc $(FLAGS) -c $< -I $(INC) -I $(LIBINC) -o $@
-	@mv $@ $(OPATH)
+$(OPATH)%.o: %.c
+	@gcc $(FLAGS) -I $(INC) -I $(LIBINC) -o $@ -c $<
 
 clean:
 	@rm -f $(O2)
@@ -74,7 +74,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@echo "\033[0;32mExecutable deleted !\033[0;m"
-	-@make fclean -C $(LIBFT)
+	@make fclean -C $(LIBFT)
 	@echo "\033[0;32mLibft cleaned.\033[0;m"
 
 re: fclean all
