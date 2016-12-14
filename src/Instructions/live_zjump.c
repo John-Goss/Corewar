@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:16 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 19:16:44 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/14 13:28:39 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void		apply_live(t_data *data, t_list *elem)
 				!desc->dead)
 		{
 			data->last_live_nb_champ = nb_champ;
-//			if (data->flag_visu == 0)
-//				ft_printf("Un processus dit que le joueur %d (%s) est en vie\n",
-//						nb_champ, desc->name);
+			if (data->flag_visu == 0)
+				ft_printf("Un processus dit que le joueur %d (%s) est en vie\n",
+						nb_champ, desc->name);
 		}
 		desc = desc->next;
 	}
