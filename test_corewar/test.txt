@@ -1,1 +1,0 @@
-dans le cas ou aucun champion ne live (avec les tests simples type aff.cor) notre corewar renvoit simplement qu'aucun live n'as ete fait alors que celui de zaz designe un gagnant.
