@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:33 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 19:18:29 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:29:27 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	apply_lldi(t_data *data, t_list *elem, unsigned int *param_types,
 			value_two = elem->reg_number[params[1]];
 		s = (value_one + value_two);
 		elem->reg_number[params[2]] = recup_ind(data, (short)s, elem->pc);
-//		printf("LLDI : par[0] = %d, par[1] = %d, par[2] = %d\n",params[0],params[1],params[2]);
-//		printf("LLDI : store = %d, val 1 = %d, val 2 = %d\n", s, value_one, value_two);
 	}
 }
 
@@ -66,5 +64,4 @@ void	apply_lld(t_data *data, t_list *elem, unsigned int *param_type,
 		else
 			elem->carry = 0;
 	}
-//	printf("LLD : reg = %d -- store = %d -- cycle = %d\n",params[0], params[1], data->cycle);
 }

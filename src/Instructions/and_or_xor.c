@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:19:25 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 16:21:36 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:28:04 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	apply_and(t_data *data, t_list *elem, unsigned int *params,
 	else if (param_type[1] == IND_CODE)
 		value_two = recup_ind(data, (short)params[1], elem->pc);
 	elem->reg_number[params[2]] = value_one & value_two;
-//	printf("AND : store = %d, val 1  = %d, val 2 = %d, params[2] = %d\n",elem->reg_number[params[2]], value_one, value_two, params[2]);
 	if (elem->reg_number[params[2]] == 0)
 		elem->carry = 1;
 	else
@@ -65,7 +64,6 @@ void	apply_or(t_data *data, t_list *elem, unsigned int *params,
 	else if (param_type[1] == IND_CODE)
 		value_two = recup_ind(data, (short)params[1], elem->pc);
 	elem->reg_number[params[2]] = value_one | value_two;
-//	printf("OR : store = %d, val 1  = %d, val 2 = %d, params[2] = %d\n",elem->reg_number[params[2]], value_one, value_two, params[2]);
 	if (elem->reg_number[params[2]] == 0)
 		elem->carry = 1;
 	else
@@ -95,7 +93,6 @@ void	apply_xor(t_data *data, t_list *elem, unsigned int *params,
 	else if (param_type[1] == IND_CODE)
 		value_two = recup_ind(data, (short)params[1], elem->pc);
 	elem->reg_number[params[2]] = value_one ^ value_two;
-//	printf("XOR : store = %d, val 1  = %d, val 2 = %d, params[2] = %d\n",elem->reg_number[params[2]], value_one, value_two, params[2]);
 	if (elem->reg_number[params[2]] == 0)
 		elem->carry = 1;
 	else

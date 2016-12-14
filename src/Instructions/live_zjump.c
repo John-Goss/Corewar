@@ -6,7 +6,7 @@
 /*   By: jle-quer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 19:22:16 by jle-quer          #+#    #+#             */
-/*   Updated: 2016/12/13 19:16:44 by jle-quer         ###   ########.fr       */
+/*   Updated: 2016/12/14 16:29:19 by jle-quer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void		apply_live(t_data *data, t_list *elem)
 	elem->pc = ((elem->pc + 5) % MEM_SIZE);
 	(elem->live)++;
 	(data->live_cpt)++;
-//	printf("live -- cycle : %d nb_champ = %d\n", data->cycle, nb_champ);
 	while (desc)
 	{
 		(desc->live)++;
@@ -37,9 +36,9 @@ void		apply_live(t_data *data, t_list *elem)
 				!desc->dead)
 		{
 			data->last_live_nb_champ = nb_champ;
-//			if (data->flag_visu == 0)
-//				ft_printf("Un processus dit que le joueur %d (%s) est en vie\n",
-//						nb_champ, desc->name);
+			if (data->flag_visu == 0)
+				ft_printf("Un processus dit que le joueur %d (%s) est en vie\n",
+						nb_champ, desc->name);
 		}
 		desc = desc->next;
 	}
@@ -55,7 +54,6 @@ void		apply_zjmp(t_data *data, t_list *elem, unsigned int *params)
 	{
 		i %= MEM_SIZE;
 		i = MEM_SIZE + i;
-//		printf("ZJUMP : pc = %d -- carry = %d -- dist = %d, cycle : %d\n",elem->pc, elem->carry, ((short)params[0]) % IDX_MOD, data->cycle);
 	}
 	if (elem->carry == 1)
 		elem->pc = (elem->pc + i) % MEM_SIZE;
